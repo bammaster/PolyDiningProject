@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class SandwichActivity extends Activity {
@@ -33,7 +34,7 @@ public class SandwichActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         moneyView = (TextView) findViewById(R.id.moneyView);
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }
@@ -47,7 +48,7 @@ public class SandwichActivity extends Activity {
     {
         super.onResume();
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }

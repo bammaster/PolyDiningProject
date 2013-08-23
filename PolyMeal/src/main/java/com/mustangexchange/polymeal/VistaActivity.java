@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 public class VistaActivity extends Activity {
 
 
@@ -25,7 +27,7 @@ public class VistaActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         moneyView = (TextView) findViewById(R.id.money);
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }
@@ -39,7 +41,7 @@ public class VistaActivity extends Activity {
     {
         super.onResume();
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }

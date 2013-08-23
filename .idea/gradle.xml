@@ -7,7 +7,7 @@
         <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
     </option>
-    <option name="serviceDirectoryPath" value="$USER_HOME$/SkyDrive/General/Programming/Android/.gradle" />
+    <option name="serviceDirectoryPath" value="$PROJECT_DIR$/../.gradle" />
   </component>
 </project>
 

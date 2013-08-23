@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 public class CartActivity extends Activity {
 
     private static TextView moneyView;
@@ -25,7 +27,7 @@ public class CartActivity extends Activity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         moneyView = (TextView)findViewById(R.id.moneyView);
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }
@@ -49,7 +51,7 @@ public class CartActivity extends Activity {
     public static void setTextMoney()
     {
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }
@@ -62,7 +64,7 @@ public class CartActivity extends Activity {
     {
         super.onResume();
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney()<0)
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }

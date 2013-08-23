@@ -81,8 +81,8 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    Connection one = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1014&name=VG%20Cafe").timeout(2000);
-                    Connection two = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1012&name=Sandwich%20Factory").timeout(2000);
+                    Connection one = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1014&name=VG%20Cafe").timeout(10000);
+                    Connection two = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1012&name=Sandwich%20Factory").timeout(10000);
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {

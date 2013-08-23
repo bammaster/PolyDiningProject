@@ -3,6 +3,7 @@ package com.mustangexchange.polymeal;
 import android.text.format.Time;
 import android.util.Log;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 /**
@@ -12,13 +13,13 @@ public class MoneyTime
 {
     public static double moneySpent;
     public static Time today = today = new Time(Time.getCurrentTimezone());
-    public static DecimalFormat df = new DecimalFormat("#.##");
     public static double money;
+    public static BigDecimal bd;
     //gets time, calculates monetary value of a meal then returns that value
-    public static double calcTotalMoney()
+    public static BigDecimal calcTotalMoney()
     {
-        df.setMinimumFractionDigits(2);
-        df.setMaximumFractionDigits(2);
+        bd = new BigDecimal(money+"");
+        bd.setScale(2,BigDecimal.ROUND_HALF_EVEN);
         today.setToNow();
         int minutes = (today.hour*60)+today.minute;
         if(minutes>=420&&minutes<=599)
@@ -37,6 +38,6 @@ public class MoneyTime
         {
             money = 8.75;
         }
-        return new Double(MoneyTime.df.format(money-moneySpent));
+        return bd.subtract(new BigDecimal(moneySpent));
     }
 }
