@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidDesignerProfile">
+    <option name="fullProfile">
+      <profile>
+        <option name="device" value="2.7in QVGA" />
+        <option name="deviceConfiguration" value="Portrait" />
+        <option name="targetHashString" value="android-17" />
+        <option name="theme" value="CalPolyHolo" />
+      </profile>
+    </option>
+    <option name="selection" value="[Full]" />
+  </component>
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
-      <GlobalState />
+      <GlobalState>
+        <option name="device" value="2.7in QVGA" />
+        <option name="dockMode" value="" />
+        <option name="nightMode" value="notnight" />
+        <option name="targetHashString" value="android-17" />
+        <option name="theme" value="CalPolyHolo" />
+        <option name="visible" value="false" />
+      </GlobalState>
     </option>
   </component>
   <component name="AndroidLayouts">
@@ -12,47 +30,451 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Blake\SkyDrive\General\Programming\Android\PolyMealProject\PolyMeal\src\main\java\com\mustangexchange\polymeal\Loader.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/build/source/buildConfig/debug/com/mustangexchange/polymeal/BuildConfig.java" afterPath="$PROJECT_DIR$/PolyMeal/build/source/buildConfig/debug/com/mustangexchange/polymeal/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-hdpi/btn_content_new.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-mdpi/btn_content_new.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-xhdpi/btn_content_new.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable/bg_card.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/main_fragment.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/apk/PolyMeal-debug-unaligned.apk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/aidl/debug/dependency.store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/aidl/debug/inputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/aidl/debug/outputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/dex/debug/inputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/dex/debug/outputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeAssets/debug/inputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeAssets/debug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeAssets/debug/outputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeResources/debug/inputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeResources/debug/merger.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/incremental/mergeResources/debug/outputs.data" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/libs/PolyMeal-debug.ap_" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/libs/PolyMeal-debug.dex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/manifests/debug/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_check_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_default_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_default_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_default_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_default_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_default_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_radio_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_off_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_on_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_rating_star_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_off_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_off_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_off_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_off_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_off_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_on_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_on_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_on_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_on_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/btn_toggle_on_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/content_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/fastscroll_thumb_default_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/fastscroll_thumb_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/list_activated_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progress_bg_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progress_primary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progress_secondary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/progressbar_indeterminate_holo8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_big_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_big_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_big_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_small_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_small_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/rate_star_small_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_control_disabled_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_control_focused_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_control_normal_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_control_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_primary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_secondary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/scrubber_track_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/spinner_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/spinner_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/spinner_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/spinner_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_selected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_selected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_selected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_unselected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_unselected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/tab_unselected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/textfield_activated_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/textfield_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/textfield_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/textfield_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-hdpi/textfield_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_check_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_default_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_default_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_default_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_default_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_default_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_radio_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_off_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_on_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_rating_star_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_off_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_off_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_off_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_off_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_off_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_on_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_on_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_on_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_on_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/btn_toggle_on_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/content_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/fastscroll_thumb_default_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/fastscroll_thumb_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/list_activated_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progress_bg_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progress_primary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progress_secondary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/progressbar_indeterminate_holo8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_big_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_big_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_big_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_small_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_small_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/rate_star_small_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_control_disabled_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_control_focused_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_control_normal_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_control_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_primary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_secondary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/scrubber_track_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/spinner_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/spinner_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/spinner_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/spinner_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_selected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_selected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_selected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_unselected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_unselected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/tab_unselected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/textfield_activated_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/textfield_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/textfield_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/textfield_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-mdpi/textfield_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_check_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_default_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_default_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_default_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_default_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_default_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_radio_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_off_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_on_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_rating_star_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_off_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_off_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_off_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_off_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_off_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_on_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_on_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_on_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_on_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/btn_toggle_on_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/content_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/fastscroll_thumb_default_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/fastscroll_thumb_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/list_activated_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progress_bg_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progress_primary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progress_secondary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/progressbar_indeterminate_holo8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_big_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_big_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_big_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_small_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_small_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/rate_star_small_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_control_disabled_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_control_focused_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_control_normal_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_control_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_primary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_secondary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/scrubber_track_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/spinner_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/spinner_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/spinner_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/spinner_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_selected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_selected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_selected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_unselected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_unselected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/tab_unselected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/textfield_activated_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/textfield_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/textfield_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/textfield_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xhdpi/textfield_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_check_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_default_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_default_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_default_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_default_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_default_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_off_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_off_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_on_disabled_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_on_disabled_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_radio_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_off_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_off_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_off_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_on_focused_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_on_normal_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_rating_star_on_pressed_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_off_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_off_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_off_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_off_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_off_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_on_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_on_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_on_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_on_normal_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/btn_toggle_on_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/content_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/fastscroll_thumb_default_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/fastscroll_thumb_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/list_activated_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progress_bg_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progress_primary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progress_secondary_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/progressbar_indeterminate_holo8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_big_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_big_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_big_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_small_half_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_small_off_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/rate_star_small_on_holo_light.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_control_disabled_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_control_focused_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_control_normal_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_control_pressed_holo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_primary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_secondary_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/scrubber_track_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/spinner_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/spinner_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/spinner_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/spinner_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_selected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_selected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_selected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_unselected_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_unselected_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/tab_unselected_pressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/textfield_activated_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/textfield_default_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/textfield_disabled_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/textfield_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable-xxhdpi/textfield_focused_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/activated_background_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/btn_check_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/btn_default_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/btn_radio_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/btn_toggle_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/cart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/content_remove.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/edit_text_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/fastscroll_thumb_holo.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/item_background_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/list_selector_background_transition_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/list_selector_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/progress_horizontal_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/progress_indeterminate_horizontal_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ratingbar_full_empty_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ratingbar_full_filled_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ratingbar_full_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ratingbar_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/ratingbar_small_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/scrubber_control_selector_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/scrubber_progress_horizontal_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/spinner_background_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/drawable/tab_indicator_holo.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/activity_cart.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/activity_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/activity_main.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/activity_sandwich.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/activity_vista.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/list_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/list_text_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/layout/number_picker.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/menu/cart.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/menu/main.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/menu/restaurant.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/menu/sandwich.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/menu/vg.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/values-sw720dp-land/values.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/values-v11/values.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/values-v14/values.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/res/all/debug/values/values.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/source/buildConfig/debug/com/mustangexchange/polymeal/BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/PolyMeal/build/source/r/debug/com/mustangexchange/polymeal/R.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" afterPath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_list.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-sw600dp/dimens.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-sw600dp/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-sw720dp-land/dimens.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-sw720dp-land/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew" afterPath="$PROJECT_DIR$/gradlew" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/list_item.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/list_text_view.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/list_text_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/number_picker.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/number_picker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/restaurant.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/restaurant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/sandwich.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/sandwich.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/styles_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/styles_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/themes_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/themes_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/themes_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/themes_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/themes_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/themes_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/vg.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/vg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377279985401" ignored="false" />
+    <file path="/SandwichActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377277569663" ignored="false" />
+    <file path="/MyPagerAdapter.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377276999777" ignored="false" />
+    <file path="/FoodItemAdapter.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377278427369" ignored="false" />
+    <file path="$PROJECT_DIR$/../CardUI/src/com/jamireh/CardUI/ItemAdapter.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377243398549" ignored="false" />
+    <file path="/row_item.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377278888039" ignored="false" />
+    <file path="$PROJECT_DIR$/../CardUI/res/layout/row_item.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377245417220" ignored="false" />
+    <file path="/activity_sandwich.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377246884484" ignored="false" />
+    <file path="/VistaActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377277724135" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +489,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -104,6 +525,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -113,10 +535,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
+      <file leaf-file-name="SandwichActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="45" selection-start="2606" selection-end="2606" vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="2822">
+            <state line="101" column="13" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -125,72 +547,72 @@
       <file leaf-file-name="Cart.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="38" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="867">
+            <state line="13" column="38" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CartActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
+      <file leaf-file-name="row_item.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="9" selection-start="1776" selection-end="1776" vertical-scroll-proportion="0.112128146" vertical-offset="684" max-vertical-offset="1581">
+            <state line="12" column="2" selection-start="534" selection-end="534" vertical-scroll-proportion="0.17056856">
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SandwichActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="72" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="1445">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Parser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1428">
-              <folding />
-            </state>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="VistaActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="33" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1462">
+            <state line="92" column="16" selection-start="3333" selection-end="3562" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompleteorActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
+      <file leaf-file-name="activity_sandwich.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="21" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1071">
+            <state line="19" column="51" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FoodItemAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="37" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoneyTime.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java">
+      <file leaf-file-name="LoadListActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="9" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="833">
+            <state line="142" column="56" selection-start="5986" selection-end="5986" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemSet.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java">
+      <file leaf-file-name="activity_vista.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="13" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="731">
+            <state line="27" column="51" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0">
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -202,9 +624,15 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Jon Amireh" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
     <option name="myDateState">
       <MyDateState />
     </option>
@@ -251,23 +679,27 @@
       <list>
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/drawable/item_background_holo_light.xml" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_completeor.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/drawable/bg_card.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
+        <option value="$USER_HOME$/.IdeaIC12/system/compile-server/polymeal_435b24e9/targets/java-production/PolyMeal/android/generated_sources/aapt/com/mustangexchange/polymeal/R.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="y" value="24" />
+    <option name="width" value="1366" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -295,6 +727,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -374,6 +808,160 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-v14" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-v11" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-sw720dp-land" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values-sw600dp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -427,6 +1015,152 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-xxhdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-mdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable-hdpi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -435,27 +1169,113 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android-support-v4.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polymeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wrapper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="reference.settingsdialog.project.gradle" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="FullScreen" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="settings.github" />
+    <property name="AndroidLayoutSelectedEditor" value="text-editor" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RunManager" selected="Android Application.PolyMeal">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -493,6 +1313,33 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -559,20 +1406,13 @@
       <option name="NETWORK_SPEED" value="full" />
       <option name="NETWORK_LATENCY" value="none" />
       <option name="CLEAR_LOGCAT" value="false" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
     </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Android Application.PolyMeal" />
     </list>
-    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-    </configuration>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -605,34 +1445,35 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="0" y="24" width="1366" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34349918" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24973261" sideWeight="0.6703786" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.670947" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272727" sideWeight="0.6741573" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32473445" sideWeight="0.6741573" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -640,134 +1481,187 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
     </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ViewPager for SF and VGs. Fixed Cart icon inflation in SFActivity." />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Added ViewPager for SF and VGs. Fixed Cart icon inflation in SFActivity." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/drawable/item_background_holo_light.xml">
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+        <state line="29" column="43" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.IdeaIC12/system/compile-server/polymeal_435b24e9/targets/java-production/PolyMeal/android/generated_sources/aapt/com/mustangexchange/polymeal/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="234" selection-end="234" vertical-scroll-proportion="-0.23859648" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="33" selection-start="782" selection-end="787" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles_calpolyholo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="70" selection-start="1635" selection-end="1635" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="103" selection-start="710" selection-end="710" vertical-scroll-proportion="0.3877193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="40" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="442">
+        <state line="27" column="51" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="442">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/list_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="847">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ListViewArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="13" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_completeor.xml">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="220" selection-end="220" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="9" selection-start="784" selection-end="784" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="72" selection-start="1185" selection-end="1185" vertical-scroll-proportion="0.0" vertical-offset="297" max-vertical-offset="1173">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="33" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="21" selection-start="899" selection-end="899" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="45" selection-start="2606" selection-end="2606" vertical-scroll-proportion="0.0" vertical-offset="1334" max-vertical-offset="2210">
+        <state line="92" column="16" selection-start="3333" selection-end="3562" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="38" selection-start="260" selection-end="260" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+        <state line="13" column="38" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.1141553" vertical-offset="2728" max-vertical-offset="5542" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="9" selection-start="1776" selection-end="1776" vertical-scroll-proportion="0.112128146" vertical-offset="684" max-vertical-offset="1581">
+        <state line="142" column="56" selection-start="5986" selection-end="5986" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="13" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="37" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="51" selection-start="950" selection-end="950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="2" selection-start="534" selection-end="534" vertical-scroll-proportion="0.17056856">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>
