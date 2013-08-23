@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\Users\Blake\SkyDrive\General\Programming\Android\PolyMealProject\PolyMeal\src\main\assets" />
+        <source path="C:\Users\Blake\AndroidStudioProjects\PolyMealProject\PolyMeal\src\main\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\Users\Blake\SkyDrive\General\Programming\Android\PolyMealProject\PolyMeal\src\debug\assets" />
+        <source path="C:\Users\Blake\AndroidStudioProjects\PolyMealProject\PolyMeal\src\debug\assets" />
     </dataSet>
 
 </merger>

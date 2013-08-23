@@ -8,10 +8,5 @@
     <string name="title_activity_restaurant">Select Category</string>
     <string name="title_activity_cart">Cart</string>
     <string name="title_activity_sandwich">Select Category</string>
-    <string name="title_activity_tab">Selector</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_activity_selector">Selector</string>
 
 </resources>

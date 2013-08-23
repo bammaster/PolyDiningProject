@@ -31,8 +31,6 @@ public class SandwichActivity extends Activity {
         setContentView(R.layout.activity_sandwich);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        parseHtmlSand = new Parser(MainActivity.names,MainActivity.prices);
-        parseHtmlSand.parse(MainActivity.docSand);
         moneyView = (TextView) findViewById(R.id.moneyView);
         moneyView.setText("$"+MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney()<0)
@@ -57,49 +55,6 @@ public class SandwichActivity extends Activity {
         {
             moneyView.setTextColor(Color.GREEN);
         }
-    }
-
-    public void spec(View v)
-    {
-        LoadListActivity.whichToLoad = "spec";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    public void breakfast(View v)
-    {
-        LoadListActivity.whichToLoad = "breakfast";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    public void specSand(View v)
-    {
-        LoadListActivity.whichToLoad = "specSand";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    public void addOn(View v)
-    {
-        LoadListActivity.whichToLoad = "addOn";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    public void grab(View v)
-    {
-        LoadListActivity.whichToLoad = "grab";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    public void all(View v)
-    {
-        LoadListActivity.whichToLoad = "all";
-        startActivity(new Intent(this,LoadListActivity.class));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sandwich, menu);
-        return true;
     }
 
     @Override

@@ -145,7 +145,6 @@ public class MainActivity extends Activity {
 
     public void sandwich(View v)
     {
-        LoadListActivity.whichToLoad = "sandFac";
         startActivity(new Intent(this,SandwichActivity.class));
         vgOrSand = 2;
     }

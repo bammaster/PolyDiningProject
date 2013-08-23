@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.LoadListActivity"
+            android:name=".LoadListActivity"
             android:label="@string/title_activity_vg" >
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.VistaActivity"
+            android:name=".VistaActivity"
             android:label="@string/title_activity_restaurant" >
         </activity>
         <activity
@@ -38,14 +38,6 @@
         <activity
             android:name="com.mustangexchange.polymeal.SandwichActivity"
             android:label="@string/title_activity_sandwich" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.TabActivity"
-            android:label="@string/title_activity_tab" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.SelectorActivity"
-            android:label="@string/title_activity_selector" >
         </activity>
     </application>
 
