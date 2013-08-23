@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mustangexchange.polymeal"
+    android:versionCode="2"
+    android:versionName="1.0.3 BETA" >
+
+    <uses-sdk
+        android:minSdkVersion="13"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/CalPolyHolo" >
+        <activity
+            android:name="com.mustangexchange.polymeal.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.LoadListActivity"
+            android:label="@string/title_activity_vg" >
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.VistaActivity"
+            android:label="@string/title_activity_restaurant" >
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.CartActivity"
+            android:label="@string/title_activity_cart" >
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.SandwichActivity"
+            android:label="@string/title_activity_sandwich" >
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.TabActivity"
+            android:label="@string/title_activity_tab" >
+        </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.SelectorActivity"
+            android:label="@string/title_activity_selector" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

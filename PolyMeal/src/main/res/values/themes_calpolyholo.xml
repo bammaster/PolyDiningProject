@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="CalPolyHolo" parent="android:Theme.Light">
+
+    <item name="android:actionBarStyle">@style/ActionBarCalPolyHolo</item>
+
+    <item name="android:editTextStyle">@style/EditTextCalPolyHolo</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxCalPolyHolo</item>
+
+    <item name="android:buttonStyle">@style/ButtonCalPolyHolo</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonCalPolyHolo</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerCalPolyHolo</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerCalPolyHolo.DropDown</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemCalPolyHolo</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarCalPolyHolo</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleCalPolyHolo</item>
+
+    <item name="android:listViewStyle">@style/ListViewCalPolyHolo</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewCalPolyHolo.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemCalPolyHolo</item>
+
+  </style>
+
+</resources>
