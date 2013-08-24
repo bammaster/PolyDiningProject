@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -25,9 +26,10 @@ public class Parser
     //receives doc to parse and a boolean that determines whether breakfast is valid or not.
     public void parse(Document doc,boolean breakfast)
     {
-            Elements h2Eles = doc.getElementsByTag("h2");
-            Elements tables = doc.select("table");
-            String tempH2;
+        Elements h2Eles = doc.getElementsByTag("h2");
+        Elements tables = doc.select("table");
+        String tempH2;
+        DecimalFormat df = new DecimalFormat("#.##");
             //parses html with tag hierarchy starting with each table the moving to each table row, then table data and then each strong tag
             for(Element table : tables)
             {
@@ -83,7 +85,7 @@ public class Parser
                                 {
                                     strongName = strongName.replace(" plus tax","");
                                     strongName = strongName.replace("$","");
-                                    set.getPrices().add(new Double(strongName)+new Double(strongName)*.08+"");
+                                    set.getPrices().add(df.format(new Double(strongName)+new Double(strongName)*.08)+"");
                                 }
                                 //gets proper values for anything per oz items by substringing them out.
                                 else if(strongName.contains("per oz"))
