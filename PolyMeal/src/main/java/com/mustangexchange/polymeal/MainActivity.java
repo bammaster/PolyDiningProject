@@ -93,11 +93,29 @@ public class MainActivity extends Activity {
                         }
                     });
                     Document docVg = one.get();
+                    uiUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            download.setText("Parsing Downloaded Menu Data...");
+                        }
+                    });
                     parseHtml = new Parser(vgItems);
-                    parseHtml.parse(docVg);
+                    parseHtml.parse(docVg,false);
+                    uiUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            download.setText("Downloading Menu Data...");
+                        }
+                    });
                     Document docSand = two.get();
+                    uiUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            download.setText("Parsing Downloaded Menu Data...");
+                        }
+                    });
                     parseHtml = new Parser(sandItems);
-                    parseHtml.parse(docSand);
+                    parseHtml.parse(docSand,true);
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
@@ -108,6 +126,7 @@ public class MainActivity extends Activity {
                         }
                     });
                 } catch (Exception e) {
+                    e.printStackTrace();
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
@@ -132,8 +151,6 @@ public class MainActivity extends Activity {
     public void onResume()
     {
         super.onResume();
-        vgItems = new ArrayList<ItemSet>();
-        sandItems= new ArrayList<ItemSet>();
         Cart.clear();
     }
 

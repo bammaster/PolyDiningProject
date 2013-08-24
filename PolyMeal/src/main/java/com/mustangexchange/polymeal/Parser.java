@@ -1,5 +1,7 @@
 package com.mustangexchange.polymeal;
 
+import android.util.Log;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,17 +21,19 @@ public class Parser
     {
         this.sets = sets;
     }
-    public void parse(Document doc)
+    //receives doc to parse and a boolean that determines whether breakfast is valid or not.
+    public void parse(Document doc,boolean breakfast)
     {
             Elements h2Eles = doc.getElementsByTag("h2");
             Elements tables = doc.select("table");
             String tempH2;
+            //parses html with tag hierarchy starting with each table the moving to each table row, then table data and then each strong tag
             for(Element table : tables)
             {
                 set = new ItemSet();
                 String h2 = h2Eles.get(counter).text();
                 tempH2 = h2;
-                set.setTitle("h2!#$"+h2);
+                set.setTitle(h2);
                 for(Element tr : table.select("tr"))
                 {
                     for(Element td : tr.select("td"))
@@ -40,9 +44,10 @@ public class Parser
                             strongName = strongName.replace("$","");
                             set.getPrices().add(strongName);
                         }
-                        else if(!tempH2.equals("Breakfast")&&!strongName.equals("")
-                                &&!strongName.contains("Sandwich Factory"))
+                        //handle special cases and remove unnecessary part of string for looks.
+                        else if(!strongName.equals("")&&!tempH2.equals("Breakfast"))
                         {
+                            //Log.e("Blake,strongName:", strongName);
                             if(strongName.contains("Combos - "))
                             {
                                 strongName = strongName.replace("Combos - ","");
@@ -68,11 +73,21 @@ public class Parser
                                 set.getNames().add(strongName);
                             }
                         }
+                        else if(tempH2.equals("Breakfast")&&breakfast)
+                        {
+                            //Log.e("Blake,strongName:", strongName);
+                            set.getNames().add(strongName);
+                        }
                     }
                 }
+                //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
                 sets.add(set);
                 counter++;
             }
+        for(int i = 0;i<sets.size();i++)
+        {
+            Log.e("Blake: "+sets.get(i).getTitle(),sets.get(i).getNames().size()+"");
+        }
 
     }
 }

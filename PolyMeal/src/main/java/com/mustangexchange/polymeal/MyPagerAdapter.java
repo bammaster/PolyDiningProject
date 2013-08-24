@@ -34,7 +34,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return foodAdapterList.get(position).getTitle().replace("h2!#$","");
+        return foodAdapterList.get(position).getTitle();
     }
     @Override
     public int getItemPosition(Object object){

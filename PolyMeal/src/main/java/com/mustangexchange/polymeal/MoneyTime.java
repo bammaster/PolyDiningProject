@@ -15,7 +15,7 @@ public class MoneyTime
     public static Time today = today = new Time(Time.getCurrentTimezone());
     public static double money;
     public static BigDecimal bd;
-    //gets time, calculates monetary value of a meal then returns that value
+    //gets time, calculates monetary value of a meal minus whatever has been spent then returns that value
     public static BigDecimal calcTotalMoney()
     {
         bd = new BigDecimal(money+"");
