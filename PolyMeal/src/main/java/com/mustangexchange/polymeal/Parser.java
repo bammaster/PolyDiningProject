@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -77,6 +78,26 @@ public class Parser
                         {
                             if(strongName.contains("$"))
                             {
+                                //automatically calculates tax if any.
+                                if(strongName.contains("plus tax"))
+                                {
+                                    strongName = strongName.replace(" plus tax","");
+                                    strongName = strongName.replace("$","");
+                                    set.getPrices().add(new Double(strongName)+new Double(strongName)*.08+"");
+                                }
+                                //gets proper values for anything per oz items by substringing them out.
+                                else if(strongName.contains("per oz"))
+                                {
+                                    String one = strongName.substring(0,5);
+                                    String two = strongName.substring(20,24);
+                                    String priceOne = strongName.substring(8,11);
+                                    String priceTwo = strongName.substring(26,29);
+                                    set.getNames().add(one);
+                                    set.getNames().add(two);
+                                    set.getPrices().add(priceOne);
+                                    set.getPrices().add(priceTwo);
+
+                                }
                                 strongName = strongName.replace("$","");
                                 set.getPrices().add(strongName);
                             }
