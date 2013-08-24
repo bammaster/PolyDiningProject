@@ -24,20 +24,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Blake" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
-    <list id="07f0808c-304d-4367-ad20-6dd8bcf2918c" name="Failed commit: Default" comment="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" afterPath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -153,7 +145,7 @@
       <file leaf-file-name="Parser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="26" selection-start="3710" selection-end="3710" vertical-scroll-proportion="0.7860412" vertical-offset="707" max-vertical-offset="1581">
+            <state line="23" column="27" selection-start="451" selection-end="451" vertical-scroll-proportion="0.26086956" vertical-offset="61" max-vertical-offset="1717">
               <folding />
             </state>
           </provider>
@@ -162,7 +154,7 @@
       <file leaf-file-name="FoodItemAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1360">
+            <state line="63" column="0" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="537" max-vertical-offset="1360">
               <folding />
             </state>
           </provider>
@@ -494,6 +486,7 @@
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
@@ -647,6 +640,15 @@
       <created>1377234227469</created>
       <updated>1377234227469</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;">
+      <created>1377378500105</created>
+      <updated>1377378500105</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;">
+      <created>1377378569347</created>
+      <updated>1377378569347</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -766,13 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="1360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -823,9 +818,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="537" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="26" selection-start="3710" selection-end="3710" vertical-scroll-proportion="0.7860412" vertical-offset="707" max-vertical-offset="1581">
+        <state line="23" column="27" selection-start="451" selection-end="451" vertical-scroll-proportion="0.26086956" vertical-offset="61" max-vertical-offset="1717">
           <folding />
         </state>
       </provider>

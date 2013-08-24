@@ -39,13 +39,8 @@ public class Parser
                     for(Element td : tr.select("td"))
                     {
                         String strongName = td.select("strong").text();
-                        if(strongName.contains("$"))
-                        {
-                            strongName = strongName.replace("$","");
-                            set.getPrices().add(strongName);
-                        }
                         //handle special cases and remove unnecessary part of string for looks.
-                        else if(!strongName.equals("")&&!tempH2.equals("Breakfast"))
+                        if(!strongName.equals("")&&!tempH2.equals("Breakfast"))
                         {
                             //Log.e("Blake,strongName:", strongName);
                             if(strongName.contains("Combos - "))
@@ -68,6 +63,11 @@ public class Parser
                                 strongName = strongName.replace("Just Sandwiches- ","");
                                 set.getNames().add(strongName);
                             }
+                            else if(strongName.contains("$"))
+                            {
+                                strongName = strongName.replace("$","");
+                                set.getPrices().add(strongName);
+                            }
                             else
                             {
                                 set.getNames().add(strongName);
@@ -75,8 +75,16 @@ public class Parser
                         }
                         else if(tempH2.equals("Breakfast")&&breakfast)
                         {
-                            //Log.e("Blake,strongName:", strongName);
-                            set.getNames().add(strongName);
+                            if(strongName.contains("$"))
+                            {
+                                strongName = strongName.replace("$","");
+                                set.getPrices().add(strongName);
+                            }
+                            else
+                            {
+                                //Log.e("Blake,strongName:", strongName);
+                                set.getNames().add(strongName);
+                            }
                         }
                     }
                 }
@@ -84,10 +92,10 @@ public class Parser
                 sets.add(set);
                 counter++;
             }
-        for(int i = 0;i<sets.size();i++)
-        {
-            Log.e("Blake: "+sets.get(i).getTitle(),sets.get(i).getNames().size()+"");
-        }
+        //for(int i = 0;i<sets.size();i++)
+        //{
+            //Log.e("Blake: "+sets.get(i).getTitle(),sets.get(i).getNames().size()+"");
+        //}
 
     }
 }
