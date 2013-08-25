@@ -17,39 +17,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ListViewArrayAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ListViewArrayAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyPagerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" afterPath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMealProject.iml" afterPath="$PROJECT_DIR$/PolyMealProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable/bg_card.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable/bg_card.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradlew.bat" afterPath="$PROJECT_DIR$/gradlew.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/main_fragment.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/main_fragment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item_cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v11/styles_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles_calpolyholo.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles_calpolyholo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
@@ -150,7 +117,7 @@
       <file leaf-file-name="Parser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="67" selection-start="4298" selection-end="4298" vertical-scroll-proportion="0.49427918" vertical-offset="1132" max-vertical-offset="2380">
+            <state line="92" column="67" selection-start="4298" selection-end="4298" vertical-scroll-proportion="0.7487002" vertical-offset="1132" max-vertical-offset="2380">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -600,14 +567,19 @@
       <created>1377234227469</created>
       <updated>1377234227469</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fixed salad bar parser. Updated colors.">
+      <created>1377425168389</created>
+      <updated>1377425168389</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928848" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -641,6 +613,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Fixed salad bar parser. Updated colors." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed salad bar parser. Updated colors." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -757,7 +731,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="67" selection-start="4298" selection-end="4298" vertical-scroll-proportion="0.49427918" vertical-offset="1132" max-vertical-offset="2380">
+        <state line="92" column="67" selection-start="4298" selection-end="4298" vertical-scroll-proportion="0.7487002" vertical-offset="1132" max-vertical-offset="2380">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
