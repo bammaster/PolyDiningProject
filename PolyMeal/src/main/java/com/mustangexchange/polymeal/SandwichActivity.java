@@ -1,25 +1,21 @@
 package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.*;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class SandwichActivity extends FragmentActivity {
@@ -32,7 +28,10 @@ public class SandwichActivity extends FragmentActivity {
 
     private ViewPager vp;
     private PagerTabStrip myPagerTabStrip;
-    private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
+    private static ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
+    public static ActionBar mActionBar;
+    public static BigDecimal totalAmount;
+    public static BigDecimal diff = new BigDecimal(0.00);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +39,16 @@ public class SandwichActivity extends FragmentActivity {
         setContentView(R.layout.activity_sandwich);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        moneyView = (TextView) findViewById(R.id.moneyView);
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
-        {
-            moneyView.setTextColor(Color.RED);
-        }
-        else
-        {
-            moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }
+
+        totalAmount = MoneyTime.calcTotalMoney();
+        totalAmount.setScale(2, RoundingMode.CEILING);
         /* The next couple lines of code dynamically sets up an ArrayList of FoodItemAdapters.
            One for each tab in the ViewPager. FoodItemAdapters are Adapters for the Card ListViews
            of each ViewPager Fragment. It gets passed in with the ViewPager adapter because the ViewPager Adapter
            will draw each fragment. MyPagerAdapter is the single adapter for the ViewPager which also uses a custom
            Fragment inner class called MyFragment.
          */
+
         foodAdapterList.clear();
         for(int i = 0;i<MainActivity.sandItems.size();i++)
         {
@@ -72,25 +65,36 @@ public class SandwichActivity extends FragmentActivity {
         }
 
         vp = (ViewPager) findViewById(R.id.pager);
-        vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), foodAdapterList));
+        vp.setAdapter(new SandwichPagerAdapter(getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
-        myPagerTabStrip.setTabIndicatorColor(Color.parseColor("#C6930A"));
+        myPagerTabStrip.setTabIndicatorColor(0xC6930A);
+
+        mActionBar = getActionBar();
+        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
     public void onResume()
     {
         super.onResume();
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
+        /*moneyView.setText("$"+MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
         }
         else
         {
-            moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }
+            moneyView.setTextColor(Color.GREEN);
+        }*/
+    }
+
+
+
+    public void setNegative() {
+        int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+        TextView yourTextView = (TextView)findViewById(titleId);
+        yourTextView.setTextColor(0xffcc0000);
     }
 
     @Override
@@ -124,6 +128,75 @@ public class SandwichActivity extends FragmentActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
+        private Context context;
+
+        private ArrayList<String> names;
+        private ArrayList<String> prices;
+        private String title;
+
+        public FoodItemAdapter(Context context, String title, ArrayList<String> names, ArrayList<String> prices) {
+            this.context = context;
+            this.names = names;
+            this.prices = prices;
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getCount() {
+            return names.size();
+        }
+
+        public Object getItem(int position) {
+            return names.get(position);
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
+            //ItemSet entry = setList.get(position);
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.row_item, null);
+            }
+            TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            tvName.setText(names.get(position));
+
+            TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
+            if(prices.size() != 0)
+            {
+                tvPrice.setText("$" + prices.get(position));
+            }
+
+            //Set the onClick Listener on this button
+            ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
+            btnAdd.setFocusableInTouchMode(false);
+            btnAdd.setFocusable(false);
+            btnAdd.setOnClickListener(this);
+            btnAdd.setTag(new Integer(position));
+
+            return convertView;
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = (Integer) view.getTag();
+            diff = new BigDecimal(prices.get(position));
+            totalAmount = totalAmount.subtract(diff);
+            if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+            {
+                setNegative();
+            }
+            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         }
     }
     

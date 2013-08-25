@@ -11,12 +11,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class VistaPagerAdapter extends FragmentPagerAdapter {
 
     //ArrayList<ItemSet> foodList;
-    static ArrayList<FoodItemAdapter> foodAdapterList;
+    static ArrayList<VistaActivity.FoodItemAdapter> foodAdapterList;
 
-    public MyPagerAdapter(FragmentManager fm, ArrayList<FoodItemAdapter> foodAdapterList) {
+    public VistaPagerAdapter(FragmentManager fm, ArrayList<VistaActivity.FoodItemAdapter> foodAdapterList) {
         super(fm);
         //this.foodList = foodList;
         this.foodAdapterList = foodAdapterList;

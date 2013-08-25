@@ -28,11 +28,16 @@
     <style name="ActionBarCalPolyHolo" parent="android:Widget.Holo.Light.ActionBar">
         <item name="android:background">#1E4D2B</item>
         <item name="android:titleTextStyle">@style/TextColor</item>
+        <item name="android:subtitleTextStyle">@style/SubTextColor</item>
     </style>
 
     <style name="TextColor" parent="ActionBarCalPolyHolo">
         <item name="android:textColor">#ffffff</item>
         <item name ="android:textSize">20sp</item>
+    </style>
+
+    <style name="SubTextColor" parent="ActionBarCalPolyHolo">
+        <item name="android:textColor">#ffffff</item>
     </style>
 
 </resources>

@@ -1,12 +1,5 @@
-package com.mustangexchange.polymeal;
+/*package com.mustangexchange.polymeal;
 
-/**
- * Created with IntelliJ IDEA.
- * User: jon
- * Date: 8/23/13
- * Time: 12:33 AM
- * To change this template use File | Settings | File Templates.
- */
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -20,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class FoodItemAdapter extends BaseAdapter /*implements OnClickListener*/ {
+public class FoodItemAdapter extends BaseAdapter implements OnClickListener {
     private Context context;
 
     private ArrayList<String> names;
@@ -66,24 +59,28 @@ public class FoodItemAdapter extends BaseAdapter /*implements OnClickListener*/ 
             tvPrice.setText("$" + prices.get(position));
         }
 
-        /* Set the onClick Listener on this button
+        //Set the onClick Listener on this button
         ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
-        btnRemove.setFocusableInTouchMode(false);
-        btnRemove.setFocusable(false);
-        btnAdd.setOnClickListener(this);*/
-
-
+        btnAdd.setFocusableInTouchMode(false);
+        btnAdd.setFocusable(false);
+        btnAdd.setOnClickListener(this);
+        btnAdd.setTag(new Integer(position));
 
         return convertView;
     }
 
-    /*@Override
+    @Override
     public void onClick(View view) {
-        view.
-        Item entry = (Item) view.getTag();
-        listItem.remove(entry);
+        int position = (Integer) view.getTag();
+        if(context.getClass().equals(SandwichActivity.class))
+        {
+            SandwichActivity.mActionBar.setSubtitle("$" + SandwichActivity.totalAmount + "Remaining");
+        } else if(context.getClass().equals(VistaActivity.class))
+        {
+            VistaActivity.mActionBar.setSubtitle("");
+        }
+        //listItem.remove(entry);
         // listPhonebook.remove(view.getId());
-        notifyDataSetChanged();
-
-    }*/
-}
+        //notifyDataSetChanged();
+    }
+}*/
