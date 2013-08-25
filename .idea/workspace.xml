@@ -669,7 +669,11 @@
       <created>1377395975316</created>
       <updated>1377395975316</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed parser.">
+      <created>1377395995426</created>
+      <updated>1377395995427</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -719,7 +723,8 @@
     <MESSAGE value="Used DecimalFormat to reduce size of stored string after computing tax." />
     <MESSAGE value="Added meal completeor layout file." />
     <MESSAGE value="Added gitignore." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added gitignore." />
+    <MESSAGE value="Fixed parser." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed parser." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
