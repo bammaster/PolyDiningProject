@@ -32,7 +32,10 @@ public class VistaActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista);
-        invalidateOptionsMenu();
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        moneyView = (TextView) findViewById(R.id.money);
+        moneyView.setText("$" + MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
@@ -49,9 +52,9 @@ public class VistaActivity extends FragmentActivity {
            Fragment inner class called MyFragment.
          */
         foodAdapterList.clear();
-        for(int i = 0;i<MainActivity.sandItems.size();i++)
+        for(int i = 0;i<MainActivity.vgItems.size();i++)
         {
-            if(MainActivity.sandItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
+            if(MainActivity.vgItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
             {
             /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
                get what is applicable at this time period rather than the whole thing. This prevents
@@ -74,7 +77,15 @@ public class VistaActivity extends FragmentActivity {
     public void onResume()
     {
         super.onResume();
-        invalidateOptionsMenu();
+        moneyView.setText("$" + MoneyTime.calcTotalMoney());
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
+        {
+            moneyView.setTextColor(Color.RED);
+        }
+        else
+        {
+            moneyView.setTextColor(Color.GREEN);
+        }
     }
 
 
@@ -111,5 +122,4 @@ public class VistaActivity extends FragmentActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    
 }

@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +23,10 @@ public class CartActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        invalidateOptionsMenu();
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        moneyView = (TextView)findViewById(R.id.moneyView);
+        moneyView.setText("$"+MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
@@ -34,9 +36,8 @@ public class CartActivity extends Activity {
             moneyView.setTextColor(Color.GREEN);
         }
         lv = (ListView)findViewById(R.id.listView);
-        ListViewArrayAdapter adapter = new ListViewArrayAdapter(this,Cart.get());
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
+        /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
@@ -44,32 +45,40 @@ public class CartActivity extends Activity {
 
             }
 
-        });
+        });*/
+    }
+    public static void setTextMoney()
+    {
+        moneyView.setText("$"+MoneyTime.calcTotalMoney());
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
+        {
+            moneyView.setTextColor(Color.RED);
+        }
+        else
+        {
+            moneyView.setTextColor(Color.GREEN);
+        }
     }
     public void onResume()
     {
         super.onResume();
-        invalidateOptionsMenu();
+        moneyView.setText("$"+MoneyTime.calcTotalMoney());
+        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
+        {
+            moneyView.setTextColor(Color.RED);
+        }
+        else
+        {
+            moneyView.setTextColor(Color.GREEN);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$" + MoneyTime.calcTotalMoney());
-        return super.onPrepareOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.cart, menu);
+        return true;
     }
 
     @Override

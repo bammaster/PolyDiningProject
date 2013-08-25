@@ -61,7 +61,10 @@ public class FoodItemAdapter extends BaseAdapter /*implements OnClickListener*/ 
         tvName.setText(names.get(position));
 
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-        tvPrice.setText("$" + prices.get(position));
+        if(prices.size() != 0)
+        {
+            tvPrice.setText("$" + prices.get(position));
+        }
 
         /* Set the onClick Listener on this button
         ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);

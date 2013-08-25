@@ -39,9 +39,9 @@
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_add" android:layout_alignParentRight="true"
+                android:id="@+id/btn_rmv" android:layout_alignParentRight="true"
                 android:layout_centerInParent="true" android:layout_marginLeft="4dp"
-                android:src="@drawable/btn_content_new"
+                android:src="@drawable/btn_navigation_cancel"
                 android:background="@null"/>
     </RelativeLayout>
 

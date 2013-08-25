@@ -23,9 +23,13 @@ public class Cart
         cartMoney.remove(index);
     }
     //returns cart
-    public static ArrayList<String> get()
+    public static ArrayList<String> getCart()
     {
         return cart;
+    }
+    public static ArrayList<String> getCartMoney()
+    {
+        return cartMoney;
     }
     public static void clear()
     {
