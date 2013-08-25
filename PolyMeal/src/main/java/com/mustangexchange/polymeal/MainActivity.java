@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -99,8 +100,23 @@ public class MainActivity extends Activity {
                             download.setText("Parsing Downloaded Menu Data...");
                         }
                     });
-                    parseHtml = new Parser(vgItems);
-                    parseHtml.parse(docVg,false);
+                    try
+                    {
+                        parseHtml = new Parser(vgItems);
+                        parseHtml.parse(docVg,false);
+                    }
+                    catch(Exception e)
+                    {
+                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                        onErrorConn.setTitle("Error Parsing!");
+                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
+                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                finish();
+                            }
+                        });
+                        onErrorConn.show();
+                    }
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
@@ -114,8 +130,29 @@ public class MainActivity extends Activity {
                             download.setText("Parsing Downloaded Menu Data...");
                         }
                     });
-                    parseHtml = new Parser(sandItems);
-                    parseHtml.parse(docSand,true);
+                    try
+                    {
+                        parseHtml = new Parser(sandItems);
+                        parseHtml.parse(docSand,true);
+                    }
+                    catch(Exception e)
+                    {
+                        Log.e("Blake",e.getMessage());
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                                onErrorConn.setTitle("Error Parsing!");
+                                onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
+                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+                                        finish();
+                                    }
+                                });
+                                onErrorConn.show();
+                            }
+                        });
+                    }
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {

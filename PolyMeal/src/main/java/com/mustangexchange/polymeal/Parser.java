@@ -1,6 +1,7 @@
 package com.mustangexchange.polymeal;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -45,7 +46,6 @@ public class Parser
                         //handle special cases and remove unnecessary part of string for looks.
                         if(!strongName.equals("")&&!tempH2.equals("Breakfast"))
                         {
-                            //Log.e("Blake,strongName:", strongName);
                             if(strongName.contains("Combos - "))
                             {
                                 strongName = strongName.replace("Combos - ","");
@@ -67,18 +67,6 @@ public class Parser
                                 set.getNames().add(strongName);
                             }
                             else if(strongName.contains("$"))
-                            {
-                                strongName = strongName.replace("$","");
-                                set.getPrices().add(strongName);
-                            }
-                            else
-                            {
-                                set.getNames().add(strongName);
-                            }
-                        }
-                        else if(tempH2.equals("Breakfast")&&breakfast)
-                        {
-                            if(strongName.contains("$"))
                             {
                                 //automatically calculates tax if any.
                                 if(strongName.contains("plus tax"))
@@ -102,6 +90,20 @@ public class Parser
                                 }
                                 strongName = strongName.replace("$","");
                                 set.getPrices().add(strongName);
+                                strongName = strongName.replace("$","");
+                                set.getPrices().add(strongName);
+                            }
+                            else
+                            {
+                                set.getNames().add(strongName);
+                            }
+                        }
+                        else if(tempH2.equals("Breakfast")&&breakfast)
+                        {
+                            if(strongName.contains("$"))
+                            {
+                                strongName = strongName.replace("$","");
+                                set.getPrices().add(strongName);
                             }
                             else
                             {
@@ -114,11 +116,18 @@ public class Parser
                 //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
                 sets.add(set);
                 counter++;
-            }
-        //for(int i = 0;i<sets.size();i++)
-        //{
-            //Log.e("Blake: "+sets.get(i).getTitle(),sets.get(i).getNames().size()+"");
-        //}
 
+            }
+        /*Log.e("Blake",sets.size()+"");
+        for(int i = 0;i<sets.size();i++)
+        {
+            for(int j = 0;j<sets.get(i).getNames().size();i++)
+            {
+                if(sets.get(i).getNames().size()>0&&sets.get(i).getPrices().size()>0)
+                {
+                    Log.e("Blake: "+sets.get(i).getTitle(),"Names: "+sets.get(i).getNames().get(j)+" Prices: "+sets.get(i).getPrices().get(j));
+                }
+            }
+        }*/
     }
 }
