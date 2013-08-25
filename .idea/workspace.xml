@@ -575,7 +575,11 @@
       <created>1377425181216</created>
       <updated>1377425181216</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed salad bar parser. Updated colors.">
+      <created>1377425190129</created>
+      <updated>1377425190129</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
