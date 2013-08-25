@@ -33,7 +33,7 @@ public class CartActivity extends Activity {
         }
         else
         {
-            moneyView.setTextColor(Color.GREEN);
+            moneyView.setTextColor(Color.parseColor("#C6930A"));
         }
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
@@ -56,7 +56,7 @@ public class CartActivity extends Activity {
         }
         else
         {
-            moneyView.setTextColor(Color.GREEN);
+            moneyView.setTextColor(Color.parseColor("#C6930A"));
         }
     }
     public void onResume()
@@ -69,7 +69,7 @@ public class CartActivity extends Activity {
         }
         else
         {
-            moneyView.setTextColor(Color.GREEN);
+            moneyView.setTextColor(Color.parseColor("#C6930A"));
         }
     }
 

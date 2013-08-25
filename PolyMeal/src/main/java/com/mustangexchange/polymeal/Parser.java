@@ -78,20 +78,21 @@ public class Parser
                                 //gets proper values for anything per oz items by substringing them out.
                                 else if(strongName.contains("per oz"))
                                 {
-                                    String one = strongName.substring(0,5);
-                                    String two = strongName.substring(20,24);
-                                    String priceOne = strongName.substring(8,11);
-                                    String priceTwo = strongName.substring(26,29);
-                                    set.getNames().add(one);
-                                    set.getNames().add(two);
+                                    String priceOne = strongName.substring(7,11);
+                                    String priceTwo = strongName.substring(26,30);
                                     set.getPrices().add(priceOne);
                                     set.getPrices().add(priceTwo);
 
                                 }
                                 strongName = strongName.replace("$","");
                                 set.getPrices().add(strongName);
-                                strongName = strongName.replace("$","");
-                                set.getPrices().add(strongName);
+                            }
+                            else if(strongName.contains("Soup and Salad"))
+                            {
+                                String one = strongName.substring(0,5);
+                                String two = strongName.substring(9,14);
+                                set.getNames().add(one);
+                                set.getNames().add(two);
                             }
                             else
                             {

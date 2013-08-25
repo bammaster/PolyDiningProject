@@ -48,7 +48,7 @@ public class SandwichActivity extends FragmentActivity {
         }
         else
         {
-            moneyView.setTextColor(Color.GREEN);
+            moneyView.setTextColor(Color.parseColor("#C6930A"));
         }
         /* The next couple lines of code dynamically sets up an ArrayList of FoodItemAdapters.
            One for each tab in the ViewPager. FoodItemAdapters are Adapters for the Card ListViews
@@ -76,7 +76,7 @@ public class SandwichActivity extends FragmentActivity {
         vp.getAdapter().notifyDataSetChanged();
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
-        myPagerTabStrip.setTabIndicatorColor(0x29551A);
+        myPagerTabStrip.setTabIndicatorColor(Color.parseColor("#C6930A"));
     }
 
     public void onResume()
@@ -89,7 +89,7 @@ public class SandwichActivity extends FragmentActivity {
         }
         else
         {
-            moneyView.setTextColor(Color.GREEN);
+            moneyView.setTextColor(Color.parseColor("#C6930A"));
         }
     }
 

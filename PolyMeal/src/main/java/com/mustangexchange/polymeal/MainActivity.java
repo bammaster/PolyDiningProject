@@ -109,15 +109,21 @@ public class MainActivity extends Activity {
                     }
                     catch(Exception e)
                     {
-                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                        onErrorConn.setTitle("Error Parsing!");
-                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
-                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                                finish();
-                            }
-                        });
-                        onErrorConn.show();
+                       Log.e("Blake",e.getMessage());
+                       uiUpdate.post(new Runnable() {
+                           @Override
+                           public void run() {
+                               AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                               onErrorConn.setTitle("Error Parsing!");
+                               onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
+                               onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                   public void onClick(DialogInterface dialog, int button) {
+                                       finish();
+                                   }
+                               });
+                               onErrorConn.show();
+                           }
+                       });
                     }
                     uiUpdate.post(new Runnable() {
                         @Override
@@ -139,7 +145,6 @@ public class MainActivity extends Activity {
                     }
                     catch(Exception e)
                     {
-                        Log.e("Blake",e.getMessage());
                         uiUpdate.post(new Runnable() {
                             @Override
                             public void run() {
@@ -165,7 +170,7 @@ public class MainActivity extends Activity {
                         }
                     });
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e("Blake", e.getMessage());
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
