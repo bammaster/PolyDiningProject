@@ -25,16 +25,6 @@ public class CartActivity extends Activity {
         setContentView(R.layout.activity_cart);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        moneyView = (TextView)findViewById(R.id.moneyView);
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
-        {
-            moneyView.setTextColor(Color.RED);
-        }
-        else
-        {
-            moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
         /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
