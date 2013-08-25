@@ -24,11 +24,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Blake" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
+    <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
@@ -145,7 +145,27 @@
       <file leaf-file-name="Parser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="27" selection-start="451" selection-end="451" vertical-scroll-proportion="0.26086956" vertical-offset="61" max-vertical-offset="1717">
+            <state line="123" column="28" selection-start="5641" selection-end="5641" vertical-scroll-proportion="1.6338673" vertical-offset="510" max-vertical-offset="2210">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cart.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+              <folding>
+                <element signature="e#132#157#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoadListActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="194" column="84" selection-start="8776" selection-end="8810" vertical-scroll-proportion="0.0" vertical-offset="3111" max-vertical-offset="5542">
               <folding />
             </state>
           </provider>
@@ -163,23 +183,30 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="50" selection-start="3691" selection-end="3691" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2737">
+            <state line="139" column="54" selection-start="5716" selection-end="5716" vertical-scroll-proportion="0.0" vertical-offset="2458" max-vertical-offset="3349">
               <folding>
-                <element signature="e#2809#6105#0" expanded="true" />
-                <element signature="e#3199#3590#0" expanded="true" />
-                <element signature="e#3567#3568#0" expanded="true" />
-                <element signature="e#3875#3876#0" expanded="true" />
-                <element signature="e#4038#4254#0" expanded="true" />
-                <element signature="e#4231#4232#0" expanded="true" />
-                <element signature="e#4341#4564#0" expanded="true" />
-                <element signature="e#4541#4542#0" expanded="true" />
-                <element signature="e#4707#5100#0" expanded="true" />
-                <element signature="e#5077#5078#0" expanded="true" />
-                <element signature="e#5218#6061#0" expanded="true" />
-                <element signature="e#5724#5963#0" expanded="true" />
-                <element signature="e#5932#5933#0" expanded="true" />
-                <element signature="e#6038#6039#0" expanded="true" />
-                <element signature="e#6094#6095#0" expanded="true" />
+                <element signature="e#2834#8110#0" expanded="true" />
+                <element signature="e#3224#3615#0" expanded="true" />
+                <element signature="e#3592#3593#0" expanded="true" />
+                <element signature="e#3700#3923#0" expanded="true" />
+                <element signature="e#3900#3901#0" expanded="true" />
+                <element signature="e#4564#4787#0" expanded="true" />
+                <element signature="e#4760#4761#0" expanded="true" />
+                <element signature="e#4890#5106#0" expanded="true" />
+                <element signature="e#5083#5084#0" expanded="true" />
+                <element signature="e#5193#5416#0" expanded="true" />
+                <element signature="e#5393#5394#0" expanded="true" />
+                <element signature="e#5755#6653#0" expanded="true" />
+                <element signature="e#6288#6543#0" expanded="true" />
+                <element signature="e#6508#6509#0" expanded="true" />
+                <element signature="e#6626#6627#0" expanded="true" />
+                <element signature="e#6712#7105#0" expanded="true" />
+                <element signature="e#7082#7083#0" expanded="true" />
+                <element signature="e#7223#8066#0" expanded="true" />
+                <element signature="e#7729#7968#0" expanded="true" />
+                <element signature="e#7937#7938#0" expanded="true" />
+                <element signature="e#8043#8044#0" expanded="true" />
+                <element signature="e#8099#8100#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -414,7 +441,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="menu" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,37 +471,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PolyMeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PolyMealProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PolyMeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="polymeal" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -648,7 +645,31 @@
       <created>1377378569347</created>
       <updated>1377378569347</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update parse slightly to not grab empty money values.">
+      <created>1377379318063</created>
+      <updated>1377379318063</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Made parser parse tax automatically and fixed per oz items. Added Meal Completeor">
+      <created>1377387818579</created>
+      <updated>1377387818579</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Used DecimalFormat to reduce size of stored string after computing tax.">
+      <created>1377388122171</created>
+      <updated>1377388122171</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added meal completeor layout file.">
+      <created>1377388266163</created>
+      <updated>1377388266163</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added gitignore.">
+      <created>1377388318295</created>
+      <updated>1377388318295</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added gitignore.">
+      <created>1377395975316</created>
+      <updated>1377395975316</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -666,7 +687,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32444444" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32333332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3211111" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -693,7 +714,12 @@
     </option>
     <MESSAGE value="Added ViewPager for SF and VGs. Fixed Cart icon inflation in SFActivity." />
     <MESSAGE value="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed parser not parsing breakfast for sandwich factory and lists not getting populated.&#10;" />
+    <MESSAGE value="Update parse slightly to not grab empty money values." />
+    <MESSAGE value="Made parser parse tax automatically and fixed per oz items. Added Meal Completeor" />
+    <MESSAGE value="Used DecimalFormat to reduce size of stored string after computing tax." />
+    <MESSAGE value="Added meal completeor layout file." />
+    <MESSAGE value="Added gitignore." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added gitignore." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -703,21 +729,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PolyMealProject.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="581" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="581" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="581" />
@@ -768,16 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_sandwich.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -795,29 +796,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="50" selection-start="3691" selection-end="3691" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2737">
-          <folding>
-            <element signature="e#2809#6105#0" expanded="true" />
-            <element signature="e#3199#3590#0" expanded="true" />
-            <element signature="e#3567#3568#0" expanded="true" />
-            <element signature="e#3875#3876#0" expanded="true" />
-            <element signature="e#4038#4254#0" expanded="true" />
-            <element signature="e#4231#4232#0" expanded="true" />
-            <element signature="e#4341#4564#0" expanded="true" />
-            <element signature="e#4541#4542#0" expanded="true" />
-            <element signature="e#4707#5100#0" expanded="true" />
-            <element signature="e#5077#5078#0" expanded="true" />
-            <element signature="e#5218#6061#0" expanded="true" />
-            <element signature="e#5724#5963#0" expanded="true" />
-            <element signature="e#5932#5933#0" expanded="true" />
-            <element signature="e#6038#6039#0" expanded="true" />
-            <element signature="e#6094#6095#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="0" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="537" max-vertical-offset="1360">
@@ -825,9 +803,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="20" selection-start="1021" selection-end="1021" vertical-scroll-proportion="0.42791763" vertical-offset="0" max-vertical-offset="986">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/LoadListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="84" selection-start="8776" selection-end="8810" vertical-scroll-proportion="0.0" vertical-offset="3111" max-vertical-offset="5542">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="874">
+          <folding>
+            <element signature="e#132#157#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="54" selection-start="5716" selection-end="5716" vertical-scroll-proportion="0.0" vertical-offset="2458" max-vertical-offset="3349">
+          <folding>
+            <element signature="e#2834#8110#0" expanded="true" />
+            <element signature="e#3224#3615#0" expanded="true" />
+            <element signature="e#3592#3593#0" expanded="true" />
+            <element signature="e#3700#3923#0" expanded="true" />
+            <element signature="e#3900#3901#0" expanded="true" />
+            <element signature="e#4564#4787#0" expanded="true" />
+            <element signature="e#4760#4761#0" expanded="true" />
+            <element signature="e#4890#5106#0" expanded="true" />
+            <element signature="e#5083#5084#0" expanded="true" />
+            <element signature="e#5193#5416#0" expanded="true" />
+            <element signature="e#5393#5394#0" expanded="true" />
+            <element signature="e#5755#6653#0" expanded="true" />
+            <element signature="e#6288#6543#0" expanded="true" />
+            <element signature="e#6508#6509#0" expanded="true" />
+            <element signature="e#6626#6627#0" expanded="true" />
+            <element signature="e#6712#7105#0" expanded="true" />
+            <element signature="e#7082#7083#0" expanded="true" />
+            <element signature="e#7223#8066#0" expanded="true" />
+            <element signature="e#7729#7968#0" expanded="true" />
+            <element signature="e#7937#7938#0" expanded="true" />
+            <element signature="e#8043#8044#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="27" selection-start="451" selection-end="451" vertical-scroll-proportion="0.26086956" vertical-offset="61" max-vertical-offset="1717">
+        <state line="123" column="28" selection-start="5641" selection-end="5641" vertical-scroll-proportion="1.6338673" vertical-offset="510" max-vertical-offset="2210">
           <folding />
         </state>
       </provider>
