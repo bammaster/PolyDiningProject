@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -31,10 +32,7 @@ public class VistaActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista);
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        moneyView = (TextView) findViewById(R.id.money);
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
+        invalidateOptionsMenu();
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
@@ -76,23 +74,28 @@ public class VistaActivity extends FragmentActivity {
     public void onResume()
     {
         super.onResume();
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
-        {
-            moneyView.setTextColor(Color.RED);
-        }
-        else
-        {
-            moneyView.setTextColor(Color.GREEN);
-        }
+        invalidateOptionsMenu();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.restaurant, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem money = menu.findItem(R.id.money_left);
+        money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        menu.clear();
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem money = menu.findItem(R.id.money_left);
+        money.setTitle("$" + MoneyTime.calcTotalMoney());
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -100,13 +103,9 @@ public class VistaActivity extends FragmentActivity {
     {
         switch (item.getItemId())
         {
-            case R.id.action_cart:
+            case R.id.money_left:
                 Intent intent = new Intent(this, CartActivity.class);
                 startActivity(intent);
-                return true;
-            case android.R.id.home:
-                Intent home = new Intent(this, MainActivity.class);
-                startActivity(home);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

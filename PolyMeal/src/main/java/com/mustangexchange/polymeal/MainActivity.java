@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -23,6 +24,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -182,7 +184,6 @@ public class MainActivity extends Activity {
             }
         });
         internet.start();
-
     }
 
     public void onResume()
@@ -209,7 +210,31 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem money = menu.findItem(R.id.money_left);
+        money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
         return super.onCreateOptionsMenu(menu);
     }
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        menu.clear();
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem money = menu.findItem(R.id.money_left);
+        money.setTitle("$"+MoneyTime.calcTotalMoney());
+        return super.onPrepareOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.money_left:
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
