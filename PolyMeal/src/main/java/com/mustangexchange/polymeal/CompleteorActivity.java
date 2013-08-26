@@ -1,8 +1,8 @@
 package com.mustangexchange.polymeal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,41 +12,48 @@ import java.util.ArrayList;
 
 public class CompleteorActivity extends Activity {
 
-    ItemSet possibleItems;
+    private ItemSet possibleItems;
+    private Thread calcCompleteor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completeor);
         possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
-        if(MainActivity.vgOrSand==1)
-        {
-            for(int i = 0;i<MainActivity.vgItems.size();i++)
-            {
-                for(int j = 0;j<MainActivity.vgItems.get(i).getNames().size();j++)
+        calcCompleteor = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(MainActivity.vgOrSand==1)
                 {
-                    if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))<=0)
+                    for(int i = 0;i<MainActivity.vgItems.size();i++)
                     {
-                        possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                        possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
+                        for(int j = 0;j<MainActivity.vgItems.get(i).getNames().size();j++)
+                        {
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))<=0)
+                            {
+                                possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
+                                possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
+                            }
+                        }
+                    }
+                }
+                else if(MainActivity.vgOrSand==2)
+                {
+                    for(int i = 0;i<MainActivity.sandItems.size();i++)
+                    {
+                        for(int j = 0;j<MainActivity.sandItems.get(i).getNames().size();j++)
+                        {
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))<=0)
+                            {
+                                possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
+                                possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
+                            }
+                        }
                     }
                 }
             }
-        }
-        else if(MainActivity.vgOrSand==2)
-        {
-            for(int i = 0;i<MainActivity.sandItems.size();i++)
-            {
-                for(int j = 0;j<MainActivity.sandItems.get(i).getNames().size();j++)
-                {
-                    if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))<=0)
-                    {
-                        possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                        possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
-                    }
-                }
-            }
-        }
+        });
+        calcCompleteor.start();
     }
 
 
