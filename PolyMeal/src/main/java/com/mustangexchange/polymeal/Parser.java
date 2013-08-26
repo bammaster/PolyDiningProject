@@ -1,13 +1,9 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -91,8 +87,8 @@ public class Parser
                             {
                                 String one = strongName.substring(0,5);
                                 String two = strongName.substring(9,14);
-                                set.getNames().add(one);
-                                set.getNames().add(two);
+                                set.getNames().add("@#$"+one);
+                                set.getNames().add("@#$"+two);
                             }
                             else
                             {
