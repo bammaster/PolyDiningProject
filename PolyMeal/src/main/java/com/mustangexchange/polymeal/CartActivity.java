@@ -1,14 +1,12 @@
 package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +16,7 @@ public class CartActivity extends Activity {
 
     private static TextView moneyView;
     private ListView lv;
+    private String parentActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,11 @@ public class CartActivity extends Activity {
         setContentView(R.layout.activity_cart);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        Bundle bundle = getIntent().getExtras();
+        parentActivity = bundle.getString("PARENT");
+        System.out.println(parentActivity);
         lv = (ListView)findViewById(R.id.listView);
-        lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
+        lv.setAdapter(new CartItemAdapter(this, parentActivity, Cart.getCart(), Cart.getCartMoney()));
         /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -52,7 +54,7 @@ public class CartActivity extends Activity {
     public void onResume()
     {
         super.onResume();
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
+/*      moneyView.setText("$"+MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
             moneyView.setTextColor(Color.RED);
@@ -60,7 +62,7 @@ public class CartActivity extends Activity {
         else
         {
             moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }
+        }*/
     }
 
 

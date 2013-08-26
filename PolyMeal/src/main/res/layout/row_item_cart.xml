@@ -33,7 +33,7 @@
                 android:paddingRight="5dp"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
-                android:id="@+id/divider" android:layout_toLeftOf="@+id/btn_add"
+                android:id="@+id/divider" android:layout_toLeftOf="@+id/btn_rmv"
                 android:background="#e2e2e2"
                 android:layout_weight="1"/>
         <ImageButton

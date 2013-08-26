@@ -1,10 +1,11 @@
 package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.view.*;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -68,16 +70,17 @@ public class VistaActivity extends FragmentActivity {
         vp.getAdapter().notifyDataSetChanged();
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
-        myPagerTabStrip.setTabIndicatorColor(Color.parseColor("#C6930A"));
+        myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
         mActionBar = getActionBar();
-
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        Cart.clear();
     }
 
     public void onResume()
     {
         super.onResume();
+        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         /*moneyView.setText("$" + MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
@@ -102,8 +105,8 @@ public class VistaActivity extends FragmentActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
+        MenuItem money = menu.findItem(R.id.cart);
+        //money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -111,8 +114,8 @@ public class VistaActivity extends FragmentActivity {
     {
         menu.clear();
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$" + MoneyTime.calcTotalMoney());
+        MenuItem money = menu.findItem(R.id.cart);
+        //money.setTitle("$" + MoneyTime.calcTotalMoney());
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -121,8 +124,9 @@ public class VistaActivity extends FragmentActivity {
     {
         switch (item.getItemId())
         {
-            case R.id.money_left:
+            case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
+                intent.putExtra("PARENT", "VistaActivity.class");
                 startActivity(intent);
                 return true;
             default:
@@ -188,14 +192,57 @@ public class VistaActivity extends FragmentActivity {
 
         @Override
         public void onClick(View view) {
-            int position = (Integer) view.getTag();
-            diff = new BigDecimal(prices.get(position));
-            totalAmount = totalAmount.subtract(diff);
+            final int position = (Integer) view.getTag();
+            AlertDialog.Builder onListClick= new AlertDialog.Builder(VistaActivity.this);
+            onListClick.setTitle("Add to Cart?");
+            onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
+            onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    //money = boundPrices.get(tempIndex);
+                    if (names.get(position).contains("Soup") || names.get(position).contains("Salad")) {
+                        AlertDialog.Builder onYes = new AlertDialog.Builder(VistaActivity.this);
+                        onYes.setTitle("How much?");
+                        onYes.setMessage("Estimated Number of Ounces: ");
+                        LayoutInflater inflater = VistaActivity.this.getLayoutInflater();
+                        View DialogView = inflater.inflate(R.layout.number_picker, null);
+                        final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
+                        np.setMinValue(1);
+                        np.setMaxValue(50);
+                        np.setWrapSelectorWheel(false);
+                        np.setValue(1);
+                        onYes.setView(DialogView);
+                        onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
+                                diff = new BigDecimal(prices.get(position)).multiply(new BigDecimal(np.getValue()));
+                                totalAmount = totalAmount.subtract(diff);
+                                mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+                                Cart.add(names.get(position), prices.get(position));
+                            }
+                        });
+                        onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                            }
+                        });
+                        onYes.show();
+                    } else {
+                        //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
+                        diff = new BigDecimal(prices.get(position));
+                        totalAmount = totalAmount.subtract(diff);
+                        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+                        Cart.add(names.get(position), prices.get(position));
+                    }
+                }
+            });
+            onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                }
+            });
+            onListClick.show();
             if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
             {
                 setNegative();
             }
-            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         }
     }
 }

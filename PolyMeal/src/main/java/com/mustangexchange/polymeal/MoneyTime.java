@@ -1,10 +1,8 @@
 package com.mustangexchange.polymeal;
 
 import android.text.format.Time;
-import android.util.Log;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 /**
  * Created by Blake on 8/7/13.
@@ -12,7 +10,7 @@ import java.text.DecimalFormat;
 public class MoneyTime
 {
     public static double moneySpent;
-    public static Time today = today = new Time(Time.getCurrentTimezone());
+    public static Time today = new Time(Time.getCurrentTimezone());
     public static double money;
     public static BigDecimal bd;
     //gets time, calculates monetary value of a meal minus whatever has been spent then returns that value
@@ -38,6 +36,8 @@ public class MoneyTime
         {
             money = 8.75;
         }
-        return bd.subtract(new BigDecimal(moneySpent));
+        //return bd.subtract(new BigDecimal(moneySpent));
+        System.out.println(money);
+        return new BigDecimal(money);
     }
 }

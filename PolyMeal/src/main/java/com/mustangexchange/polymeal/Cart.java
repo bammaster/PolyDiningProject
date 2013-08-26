@@ -1,7 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -15,6 +13,7 @@ public class Cart
     {
         cart.add(item);
         cartMoney.add(price);
+        MoneyTime.moneySpent += new Double(price);
     }
     public static void remove(int index)
     {

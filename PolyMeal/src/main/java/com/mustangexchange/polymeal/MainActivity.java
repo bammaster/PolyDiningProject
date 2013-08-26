@@ -1,12 +1,11 @@
 package com.mustangexchange.polymeal;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,14 +16,10 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.os.Handler;
-
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -216,8 +211,8 @@ public class MainActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
+        MenuItem money = menu.findItem(R.id.cart);
+        //money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -225,8 +220,8 @@ public class MainActivity extends Activity {
     {
         menu.clear();
         getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.money_left);
-        money.setTitle("$"+MoneyTime.calcTotalMoney());
+        MenuItem money = menu.findItem(R.id.cart);
+        //money.setTitle("$"+MoneyTime.calcTotalMoney());
         return super.onPrepareOptionsMenu(menu);
     }
     @Override
@@ -234,7 +229,7 @@ public class MainActivity extends Activity {
     {
         switch (item.getItemId())
         {
-            case R.id.money_left:
+            case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
                 startActivity(intent);
                 return true;
