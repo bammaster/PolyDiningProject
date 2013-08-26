@@ -5,9 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_vg">Vista Grande</string>
-    <string name="title_activity_restaurant">Select Category</string>
+    <string name="title_activity_restaurant">Item Selector</string>
     <string name="title_activity_cart">Cart</string>
-    <string name="title_activity_sandwich">Select Category</string>
+    <string name="title_activity_sandwich">Sandwich Factory</string>
     <string name="title_activity_completeor">Meal Completor</string>
 
 </resources>
