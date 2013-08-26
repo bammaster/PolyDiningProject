@@ -30,21 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" afterPath="$PROJECT_DIR$/PolyMeal/PolyMeal.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/row_item_cart.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-hdpi/ic_cart.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-mdpi/ic_cart.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/drawable-xhdpi/ic_cart.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377498805005" ignored="false" />
+    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377508867714" ignored="false" />
     <file path="/row_item_cart.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377504001492" ignored="false" />
     <file path="/.gitignore" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377423556030" ignored="false" />
     <file path="/VistaActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377506515255" ignored="false" />
@@ -126,17 +119,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="VistaActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="VistaActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="18" selection-start="4883" selection-end="4949" vertical-scroll-proportion="0.0">
+            <state line="132" column="37" selection-start="5044" selection-end="5044" vertical-scroll-proportion="3.0481927">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#979#996#0" expanded="true" />
-                <element signature="e#7500#9990#0" expanded="true" />
-                <element signature="e#8576#9238#0" expanded="true" />
-                <element signature="e#9211#9212#0" expanded="true" />
-                <element signature="e#9975#9976#0" expanded="true" />
+                <element signature="e#948#965#0" expanded="true" />
+                <element signature="e#7469#9959#0" expanded="true" />
+                <element signature="e#8545#9207#0" expanded="true" />
+                <element signature="e#9180#9181#0" expanded="true" />
+                <element signature="e#9944#9945#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,16 +138,18 @@
       <file leaf-file-name="CartActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="42" selection-start="895" selection-end="895" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="27" column="42" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SandwichActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SandwichActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="51" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.64888126">
+            <state line="126" column="51" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#908#925#0" expanded="true" />
@@ -170,7 +165,7 @@
       <file leaf-file-name="CartItemAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="11" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0">
+            <state line="24" column="11" selection-start="637" selection-end="637" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -375,11 +370,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="polymeal" />
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMealProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PolyMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -592,7 +643,11 @@
       <created>1377465921675</created>
       <updated>1377465921675</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Cart implemented more">
+      <created>1377508884033</created>
+      <updated>1377508884033</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -671,7 +726,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="PagerAdapter overhaul and ItemAdapter inner classing (ALPHA). Changes made to the theme for proper subtitling." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cart implemented more" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -695,6 +750,7 @@
     <MESSAGE value="Fixed parser." />
     <MESSAGE value="Fixed VG layout. Started on Cart implementation." />
     <MESSAGE value="PagerAdapter overhaul and ItemAdapter inner classing (ALPHA). Changes made to the theme for proper subtitling." />
+    <MESSAGE value="Cart implemented more" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -736,31 +792,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="211" column="63" selection-start="8840" selection-end="8840" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2893#8461#0" expanded="true" />
-            <element signature="e#3283#3674#0" expanded="true" />
-            <element signature="e#3651#3652#0" expanded="true" />
-            <element signature="e#3759#3984#0" expanded="true" />
-            <element signature="e#3961#3962#0" expanded="true" />
-            <element signature="e#4318#5203#0" expanded="true" />
-            <element signature="e#4845#5096#0" expanded="true" />
-            <element signature="e#5062#5063#0" expanded="true" />
-            <element signature="e#5177#5178#0" expanded="true" />
-            <element signature="e#5262#5495#0" expanded="true" />
-            <element signature="e#5472#5473#0" expanded="true" />
-            <element signature="e#5582#5811#0" expanded="true" />
-            <element signature="e#5788#5789#0" expanded="true" />
-            <element signature="e#6095#6993#0" expanded="true" />
-            <element signature="e#6628#6883#0" expanded="true" />
-            <element signature="e#6848#6849#0" expanded="true" />
-            <element signature="e#6966#6967#0" expanded="true" />
-            <element signature="e#7052#7445#0" expanded="true" />
-            <element signature="e#7422#7423#0" expanded="true" />
-            <element signature="e#7574#8417#0" expanded="true" />
-            <element signature="e#8080#8319#0" expanded="true" />
-            <element signature="e#8288#8289#0" expanded="true" />
-            <element signature="e#8394#8395#0" expanded="true" />
-            <element signature="e#8450#8451#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2774#8342#0" expanded="true" />
+            <element signature="e#3164#3555#0" expanded="true" />
+            <element signature="e#3532#3533#0" expanded="true" />
+            <element signature="e#3640#3865#0" expanded="true" />
+            <element signature="e#3842#3843#0" expanded="true" />
+            <element signature="e#4199#5084#0" expanded="true" />
+            <element signature="e#4726#4977#0" expanded="true" />
+            <element signature="e#4943#4944#0" expanded="true" />
+            <element signature="e#5058#5059#0" expanded="true" />
+            <element signature="e#5143#5376#0" expanded="true" />
+            <element signature="e#5353#5354#0" expanded="true" />
+            <element signature="e#5463#5692#0" expanded="true" />
+            <element signature="e#5669#5670#0" expanded="true" />
+            <element signature="e#5976#6874#0" expanded="true" />
+            <element signature="e#6509#6764#0" expanded="true" />
+            <element signature="e#6729#6730#0" expanded="true" />
+            <element signature="e#6847#6848#0" expanded="true" />
+            <element signature="e#6933#7326#0" expanded="true" />
+            <element signature="e#7303#7304#0" expanded="true" />
+            <element signature="e#7455#8298#0" expanded="true" />
+            <element signature="e#7961#8200#0" expanded="true" />
+            <element signature="e#8169#8170#0" expanded="true" />
+            <element signature="e#8275#8276#0" expanded="true" />
+            <element signature="e#8331#8332#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -769,7 +825,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="72" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -825,37 +881,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="42" selection-start="895" selection-end="895" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="18" selection-start="4883" selection-end="4949" vertical-scroll-proportion="0.0">
+        <state line="27" column="42" selection-start="834" selection-end="834" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#979#996#0" expanded="true" />
-            <element signature="e#7500#9990#0" expanded="true" />
-            <element signature="e#8576#9238#0" expanded="true" />
-            <element signature="e#9211#9212#0" expanded="true" />
-            <element signature="e#9975#9976#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="51" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.64888126">
+        <state line="126" column="51" selection-start="4791" selection-end="4791" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#908#925#0" expanded="true" />
@@ -863,6 +900,27 @@
             <element signature="e#8445#9107#0" expanded="true" />
             <element signature="e#9080#9081#0" expanded="true" />
             <element signature="e#9844#9845#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="11" selection-start="637" selection-end="637" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="37" selection-start="5044" selection-end="5044" vertical-scroll-proportion="3.0481927">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#948#965#0" expanded="true" />
+            <element signature="e#7469#9959#0" expanded="true" />
+            <element signature="e#8545#9207#0" expanded="true" />
+            <element signature="e#9180#9181#0" expanded="true" />
+            <element signature="e#9944#9945#0" expanded="true" />
           </folding>
         </state>
       </provider>
