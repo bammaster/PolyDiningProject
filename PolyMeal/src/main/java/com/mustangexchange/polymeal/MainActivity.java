@@ -99,7 +99,7 @@ public class MainActivity extends Activity {
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
-                            download.setText("Parsing Downloaded Menu Data...");
+                            download.setText("Parsing Vista Grande Menu Data...");
                         }
                     });
                     try
@@ -128,14 +128,14 @@ public class MainActivity extends Activity {
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
-                            download.setText("Downloading Menu Data...");
+                            download.setText("Downloading Sandwich Factory Menu Data...");
                         }
                     });
                     Document docSand = two.get();
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
-                            download.setText("Parsing Downloaded Menu Data...");
+                            download.setText("Parsing Sandwich Factory Menu Data...");
                         }
                     });
                     try

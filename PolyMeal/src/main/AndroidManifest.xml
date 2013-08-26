@@ -24,13 +24,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.LoadListActivity"
-            android:label="@string/title_activity_vg" >
-        </activity>
-        <activity
             android:name="com.mustangexchange.polymeal.VistaActivity"
-            android:label="@string/title_activity_restaurant" >
-        </activity>
+            android:label="@string/title_activity_vg" >
+    </activity>
         <activity
             android:name="com.mustangexchange.polymeal.CartActivity"
             android:label="@string/title_activity_cart" >

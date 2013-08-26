@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Downloading Menu Data..."
+            android:text="Downloading Vista Grande Menu Data..."
             android:id="@+id/textDownload"
             android:layout_above="@+id/progressBar"
             android:layout_centerHorizontal="true"/>
