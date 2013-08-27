@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -98,29 +100,6 @@ public class CartActivity extends Activity {
         {
             moneyView.setTextColor(Color.parseColor("#C6930A"));
         }*/
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.cart, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        /*switch (item.getItemId())
-        {
-            case android.R.id.home:
-                Intent home = new Intent(this, MainActivity.class);
-                startActivity(home);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }*/
-        return super.onOptionsItemSelected(item);
     }
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {

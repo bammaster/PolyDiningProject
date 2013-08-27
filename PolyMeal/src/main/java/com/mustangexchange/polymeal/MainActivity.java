@@ -7,14 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -201,39 +200,5 @@ public class MainActivity extends Activity {
     {
         startActivity(new Intent(this,SandwichActivity.class));
         vgOrSand = 2;
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        /*MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);*/
-        //money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        /*menu.clear();
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);*/
-        //money.setTitle("$"+MoneyTime.calcTotalMoney());
-        return super.onPrepareOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.cart:
-                Intent intent = new Intent(this, CartActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }
