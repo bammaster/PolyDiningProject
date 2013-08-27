@@ -14,7 +14,6 @@ import android.view.*;
 import android.widget.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class SandwichActivity extends FragmentActivity {
@@ -30,7 +29,6 @@ public class SandwichActivity extends FragmentActivity {
     private static ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
     public static BigDecimal totalAmount;
-    public static BigDecimal diff = new BigDecimal(0.00);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,6 @@ public class SandwichActivity extends FragmentActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         totalAmount = MoneyTime.calcTotalMoney();
-        totalAmount.setScale(2, RoundingMode.CEILING);
         /* The next couple lines of code dynamically sets up an ArrayList of FoodItemAdapters.
            One for each tab in the ViewPager. FoodItemAdapters are Adapters for the Card ListViews
            of each ViewPager Fragment. It gets passed in with the ViewPager adapter because the ViewPager Adapter
@@ -71,13 +68,14 @@ public class SandwichActivity extends FragmentActivity {
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
         mActionBar = getActionBar();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        updateBalance();
         Cart.clear();
     }
 
     public void onResume()
     {
         super.onResume();
+        updateBalance();
         /*moneyView.setText("$"+MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
@@ -95,6 +93,15 @@ public class SandwichActivity extends FragmentActivity {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
         yourTextView.setTextColor(0xffcc0000);
+    }
+
+    public void updateBalance() {
+        totalAmount = MoneyTime.calcTotalMoney();
+        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        {
+            setNegative();
+        }
+        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
     @Override
@@ -212,10 +219,8 @@ public class SandwichActivity extends FragmentActivity {
                         onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
                                 //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                diff = new BigDecimal(prices.get(position)).multiply(new BigDecimal(np.getValue()));
-                                totalAmount = totalAmount.subtract(diff);
-                                mActionBar.setSubtitle("$" + totalAmount + " Remaining");
                                 Cart.add(names.get(position), prices.get(position));
+                                updateBalance();
                             }
                         });
                         onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -225,10 +230,8 @@ public class SandwichActivity extends FragmentActivity {
                         onYes.show();
                     } else {
                         //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                        diff = new BigDecimal(prices.get(position));
-                        totalAmount = totalAmount.subtract(diff);
-                        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
                         Cart.add(names.get(position), prices.get(position));
+                        updateBalance();
                     }
                 }
             });
@@ -237,10 +240,6 @@ public class SandwichActivity extends FragmentActivity {
                 }
             });
             onListClick.show();
-            if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
-            {
-                setNegative();
-            }
         }
     }
 }

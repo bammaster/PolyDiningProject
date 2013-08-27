@@ -18,7 +18,7 @@ public class Cart
     public static void remove(int index)
     {
         cart.remove(index);
-        MoneyTime.moneySpent-= new Double(cartMoney.get(index));
+        MoneyTime.moneySpent -= new Double(cartMoney.get(index));
         cartMoney.remove(index);
     }
     //returns cart

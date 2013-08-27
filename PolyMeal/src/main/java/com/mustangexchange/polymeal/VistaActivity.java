@@ -17,7 +17,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 
 
@@ -42,7 +41,6 @@ public class VistaActivity extends FragmentActivity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         totalAmount = MoneyTime.calcTotalMoney();
-        totalAmount.setScale(2, RoundingMode.CEILING);
 
         /* The next couple lines of code dynamically sets up an ArrayList of FoodItemAdapters.
            One for each tab in the ViewPager. FoodItemAdapters are Adapters for the Card ListViews
@@ -73,14 +71,14 @@ public class VistaActivity extends FragmentActivity {
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
         mActionBar = getActionBar();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        updateBalance();
         Cart.clear();
     }
 
     public void onResume()
     {
         super.onResume();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        updateBalance();
         /*moneyView.setText("$" + MoneyTime.calcTotalMoney());
         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
         {
@@ -96,6 +94,15 @@ public class VistaActivity extends FragmentActivity {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
         yourTextView.setTextColor(0xffcc0000);
+    }
+
+    public void updateBalance() {
+        totalAmount = MoneyTime.calcTotalMoney();
+        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        {
+            setNegative();
+        }
+        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
 
@@ -126,7 +133,6 @@ public class VistaActivity extends FragmentActivity {
         {
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
-                intent.putExtra("PARENT", "VistaActivity.class");
                 startActivity(intent);
                 return true;
             default:
@@ -165,14 +171,22 @@ public class VistaActivity extends FragmentActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup viewGroup) {
-            //ItemSet entry = setList.get(position);
+            String temp;
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.row_item, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(names.get(position));
+            temp = names.get(position);
+            if(temp.contains("@#$"))
+            {
+                System.out.println(temp);
+                tvName.setText(temp.substring(3));
+            } else
+            {
+                tvName.setText(temp);
+            }
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             if(prices.size() != 0)
@@ -199,7 +213,7 @@ public class VistaActivity extends FragmentActivity {
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     //money = boundPrices.get(tempIndex);
-                    if (names.get(position).contains("Soup") || names.get(position).contains("Salad")) {
+                    if (names.get(position).contains("@#$")) {
                         AlertDialog.Builder onYes = new AlertDialog.Builder(VistaActivity.this);
                         onYes.setTitle("How much?");
                         onYes.setMessage("Estimated Number of Ounces: ");
@@ -213,11 +227,8 @@ public class VistaActivity extends FragmentActivity {
                         onYes.setView(DialogView);
                         onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
-                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                diff = new BigDecimal(prices.get(position)).multiply(new BigDecimal(np.getValue()));
-                                totalAmount = totalAmount.subtract(diff);
-                                mActionBar.setSubtitle("$" + totalAmount + " Remaining");
-                                Cart.add(names.get(position), prices.get(position));
+                                Cart.add(names.get(position),  Double.toString(np.getValue()*new Double(prices.get(position))));
+                                updateBalance();
                             }
                         });
                         onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -226,11 +237,8 @@ public class VistaActivity extends FragmentActivity {
                         });
                         onYes.show();
                     } else {
-                        //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                        diff = new BigDecimal(prices.get(position));
-                        totalAmount = totalAmount.subtract(diff);
-                        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
                         Cart.add(names.get(position), prices.get(position));
+                        updateBalance();
                     }
                 }
             });
@@ -239,10 +247,6 @@ public class VistaActivity extends FragmentActivity {
                 }
             });
             onListClick.show();
-            if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
-            {
-                setNegative();
-            }
         }
     }
 }

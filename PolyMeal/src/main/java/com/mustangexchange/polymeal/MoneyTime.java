@@ -37,7 +37,6 @@ public class MoneyTime
             money = 8.75;
         }
         //return bd.subtract(new BigDecimal(moneySpent));
-        System.out.println(money);
-        return new BigDecimal(money);
+        return new BigDecimal(money - moneySpent).setScale(2, BigDecimal.ROUND_CEILING);
     }
 }
