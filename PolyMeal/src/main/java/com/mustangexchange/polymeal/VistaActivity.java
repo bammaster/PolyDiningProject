@@ -2,12 +2,14 @@ package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +32,10 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -39,7 +45,9 @@ public class VistaActivity extends FragmentActivity {
 
     private int minutes;
     private TextView moneyView;
-    private Parser parseHtmlVg;
+    private Parser parseHtml;
+    private Handler uiUpdate= new Handler();
+    private ProgressDialog status;
 
     private ViewPager vp;
     private PagerTabStrip myPagerTabStrip;
@@ -183,19 +191,7 @@ public class VistaActivity extends FragmentActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);
-        //money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
         return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);
-        //money.setTitle("$" + MoneyTime.calcTotalMoney());
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -209,6 +205,97 @@ public class VistaActivity extends FragmentActivity {
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.refresh:
+                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
+                status.setMessage("Downloading and Parsing...");
+                status.setTitle("Refreshing Menu Data");
+                status.setIndeterminate(true);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            uiUpdate.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    status.show();
+                                }
+                            });
+                            Connection one = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1014&name=VG%20Cafe").timeout(10000);
+                            Connection two = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1012&name=Sandwich%20Factory").timeout(10000);
+                            Document docVg = one.get();
+                            try
+                            {
+                                parseHtml = new Parser(MainActivity.vgItems);
+                                parseHtml.parse(docVg,false);
+                            }
+                            catch(Exception e)
+                            {
+                                uiUpdate.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
+                                        onErrorConn.setTitle("Error Parsing!");
+                                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
+                                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int button) {
+                                                finish();
+                                            }
+                                        });
+                                        onErrorConn.show();
+                                    }
+                                });
+                            }
+                            Document docSand = two.get();
+                            try
+                            {
+                                parseHtml = new Parser(MainActivity.sandItems);
+                                parseHtml.parse(docSand,true);
+                            }
+                            catch(Exception e)
+                            {
+                                uiUpdate.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
+                                        onErrorConn.setTitle("Error Parsing!");
+                                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
+                                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int button) {
+                                                finish();
+                                            }
+                                        });
+                                        onErrorConn.show();
+                                    }
+                                });
+                            }
+                        }
+                        catch (Exception e){
+                            uiUpdate.post(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
+                                    onErrorConn.setTitle("Error Connecting!");
+                                    onErrorConn.setMessage("There was an error connecting to the website to download the menu. Please check your data connection and try again.");
+                                    onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int button) {
+                                            finish();
+                                        }
+                                    });
+                                    onErrorConn.show();
+                                }
+                            });
+                        }
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                status.dismiss();
+                                vp.getAdapter().notifyDataSetChanged();
+                            }
+                        });
+                    }
+                }).start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
