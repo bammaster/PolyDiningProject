@@ -9,5 +9,13 @@
     <string name="title_activity_cart">Cart</string>
     <string name="title_activity_sandwich">Sandwich Factory</string>
     <string name="title_activity_completeor">Meal Completor</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string-array name="drawerItems">
+        <item>Home</item>
+        <item>Sandwich Factory</item>
+        <item>Vista Grande</item>
+        <item>Meal Completer</item>
+    </string-array>
 
 </resources>

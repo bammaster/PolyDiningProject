@@ -3,7 +3,6 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -112,7 +111,7 @@ public class CartActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch (item.getItemId())
+        /*switch (item.getItemId())
         {
             case android.R.id.home:
                 Intent home = new Intent(this, MainActivity.class);
@@ -120,7 +119,8 @@ public class CartActivity extends Activity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
+        }*/
+        return super.onOptionsItemSelected(item);
     }
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
