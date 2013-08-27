@@ -14,8 +14,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -207,9 +218,9 @@ public class SandwichActivity extends FragmentActivity {
 
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        View view;
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            System.out.println(position);
             switch (position)
             {
                 case 0:

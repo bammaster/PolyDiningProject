@@ -80,8 +80,11 @@ public class Parser
                                     set.getPrices().add(priceTwo);
 
                                 }
-                                strongName = strongName.replace("$","");
-                                set.getPrices().add(strongName);
+                                else
+                                {
+                                    strongName = strongName.replace("$","");
+                                    set.getPrices().add(strongName);
+                                }
                             }
                             else if(strongName.contains("Soup and Salad"))
                             {
