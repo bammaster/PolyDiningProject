@@ -14,8 +14,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.*;
-import android.widget.*;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -206,22 +219,32 @@ public class VistaActivity extends FragmentActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            System.out.println(position);
-            switch (position)
+            Log.e("Blake",parent.getPositionForView(view)+"");
+            if(parent.getPositionForView(view)==0)
             {
-                case 0:
-                    Intent intentHome = new Intent(mContext, MainActivity.class);
-                    startActivity(intentHome);
-                case 1:
-                    Intent intentSF = new Intent(mContext, SandwichActivity.class);
-                    startActivity(intentSF);
-                case 2:
-                    Intent intentVG = new Intent(mContext, VistaActivity.class);
-                    startActivity(intentVG);
-                case 3:
-                    Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                    startActivity(intentCP);
-                default:
+                Intent intentHome = new Intent(mContext, MainActivity.class);
+                startActivity(intentHome);
+            }
+            else if(parent.getPositionForView(view)==1)
+            {
+                MainActivity.vgOrSand=2;
+                Intent intentSF = new Intent(mContext, SandwichActivity.class);
+                startActivity(intentSF);
+            }
+            else if(parent.getPositionForView(view)==2)
+            {
+                MainActivity.vgOrSand=1;
+                Intent intentVG = new Intent(mContext, VistaActivity.class);
+                startActivity(intentVG);
+            }
+            else if(parent.getPositionForView(view)==3)
+            {
+                Intent intentCP = new Intent(mContext, CompleteorActivity.class);
+                startActivity(intentCP);
+            }
+            else
+            {
+                Toast.makeText(mContext,"Invalid Selection!",Toast.LENGTH_SHORT);
             }
         }
     }

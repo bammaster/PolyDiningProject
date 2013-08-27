@@ -64,6 +64,10 @@ public class Parser
                             }
                             else if(strongName.contains("$"))
                             {
+                                if(strongName.contains(","))
+                                {
+                                    strongName = strongName.replace(",",".");
+                                }
                                 //automatically calculates tax if any.
                                 if(strongName.contains("plus tax"))
                                 {

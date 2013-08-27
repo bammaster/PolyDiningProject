@@ -2,7 +2,6 @@ package com.mustangexchange.polymeal;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 
 import java.math.BigDecimal;
@@ -27,8 +26,6 @@ public class CompleteorActivity extends Activity {
                     {
                         for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
                         {
-                            Log.e("Blake",MainActivity.vgItems.get(i).getTitle()+" Size Prices: "+MainActivity.vgItems.get(i).getPrices().size()+ " Size Names: "+MainActivity.vgItems.get(i).getNames().size());
-                            Log.e("Blake","Prices: "+MainActivity.vgItems.get(i).getPrices().get(j));
                             if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))<=0)
                             {
                                 possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
