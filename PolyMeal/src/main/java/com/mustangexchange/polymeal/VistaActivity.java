@@ -17,21 +17,8 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -60,6 +47,8 @@ public class VistaActivity extends FragmentActivity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private String[]  mDrawerItems;
+
+    public static boolean clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +123,10 @@ public class VistaActivity extends FragmentActivity {
 
         mActionBar = getActionBar();
         updateBalance();
-        Cart.clear();
+        if(clear)
+        {
+            Cart.clear();
+        }
     }
 
     public void onResume()
