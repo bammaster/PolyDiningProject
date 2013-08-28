@@ -75,7 +75,13 @@ public class CompleteorActivity extends Activity {
                         }
                     }
                 }
-                ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        lv.invalidate();
+                        ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
+                    }
+                });
             }
         });
         calcCompleteor.start();
@@ -172,7 +178,7 @@ public class CompleteorActivity extends Activity {
                 convertView = inflater.inflate(R.layout.row_item, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(possibleItems.getNames().get(position));
+            tvName.setText(possibleItems.getNames().get(position).replace("@#$",""));
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             if(possibleItems.getPrices().size() != 0)
@@ -195,11 +201,11 @@ public class CompleteorActivity extends Activity {
             final int position = (Integer) view.getTag();
             AlertDialog.Builder onListClick= new AlertDialog.Builder(CompleteorActivity.this);
             onListClick.setTitle("Add to Cart?");
-            onListClick.setMessage("Would you like to add " + possibleItems.getNames().get(position) + " to your cart? Price: " + "$" + possibleItems.getPrices().get(position));
+            onListClick.setMessage("Would you like to add " + possibleItems.getNames().get(position).replace("@#$","") + " to your cart? Price: " + "$" + possibleItems.getPrices().get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     //money = boundPrices.get(tempIndex);
-                    if (possibleItems.getNames().get(position).contains("Soup") || possibleItems.getNames().get(position).contains("Salad")) {
+                    if (possibleItems.getNames().get(position).contains("@#$")) {
                         AlertDialog.Builder onYes = new AlertDialog.Builder(CompleteorActivity.this);
                         onYes.setTitle("How much?");
                         onYes.setMessage("Estimated Number of Ounces: ");
@@ -214,7 +220,7 @@ public class CompleteorActivity extends Activity {
                         onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
                                 //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
+                                Cart.add(possibleItems.getNames().get(position), (new BigDecimal(possibleItems.getPrices().get(position)).multiply(new BigDecimal(np.getValue() + ""))).setScale(2)+"");
                                 updateBalance();
                             }
                         });

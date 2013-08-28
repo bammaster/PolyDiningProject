@@ -320,7 +320,7 @@ public class VistaActivity extends FragmentActivity {
             {
                 mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentHome = new Intent(mContext, MainActivity.class);
-                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intentHome);
             }
             else if(parent.getPositionForView(view)==1)
