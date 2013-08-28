@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class CompleteorActivity extends Activity {
 
     private ItemSet possibleItems;
+    private ItemSet dummyItems;
     private Thread calcCompleteor;
 
     private ActionBar mActionBar;
@@ -25,6 +27,7 @@ public class CompleteorActivity extends Activity {
     private static Context mContext;
 
     public ListView lv;
+    public CompleteorItemAdapter dummyAdapter;
     public CompleteorItemAdapter lvAdapter;
 
     @Override
@@ -33,12 +36,14 @@ public class CompleteorActivity extends Activity {
         setContentView(R.layout.activity_completeor);
 
         possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>()); 
         lv = (ListView) findViewById(R.id.listView);
 
-        initializeThread(calcCompleteor);
-        calcCompleteor.start();
+        dummyAdapter = new CompleteorItemAdapter(this, dummyItems);
         lvAdapter = new CompleteorItemAdapter(this, possibleItems);
-        lv.setAdapter(lvAdapter);
+        lv.setAdapter(dummyAdapter);
+
+        new calcCompleteor().execute("");
 
         mContext = this;
 
@@ -54,58 +59,15 @@ public class CompleteorActivity extends Activity {
         }
     }
 
-    public void initializeThread(Thread thread) {
-        calcCompleteor = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if(MainActivity.vgOrSand==1)
-                {
-                    for(int i = 0;i<MainActivity.vgItems.size();i++)
-                    {
-                        for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
-                        {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
-                            {
-                                possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                                possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
-                            }
-                        }
-                    }
-                }
-                else if(MainActivity.vgOrSand==2)
-                {
-                    for(int i = 0;i<MainActivity.sandItems.size();i++)
-                    {
-                        for(int j = 0;j<MainActivity.sandItems.get(i).getPrices().size();j++)
-                        {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
-                            {
-                                possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
-                                possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
-                            }
-                        }
-                    }
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        lv.invalidate();
-                        lvAdapter.notifyDataSetChanged();
-                        checkLayout();
-                    }
-                });
-            }
-        });
+
+    public void onResume()
+    {
+        super.onResume();
+        Toast.makeText(mContext, "onResume triggered", Toast.LENGTH_SHORT);
     }
 
     public void updateList() {
-        ItemSet updatedList;
-        calcCompleteor = null;
-        updatedList = lvAdapter.getPossibleItems();
-        updatedList.clear();
-        updatedList = possibleItems;
-        initializeThread(calcCompleteor);
-        calcCompleteor.start();
+        new calcCompleteor().execute("");
     }
 
     public void setSubtitleColor() {
@@ -262,6 +224,73 @@ public class CompleteorActivity extends Activity {
                 }
             });
             onListClick.show();
+        }
+    }
+
+    private class calcCompleteor extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            System.out.println("JON LOOK HERE, DO IN BACKGROUND");
+            if(MainActivity.vgOrSand==1)
+            {
+                System.out.println("JON LOOK HERE, DO IN BACKGROUND, VGs");
+                System.out.println(MainActivity.vgItems.get(0).getTitle());
+                for(int i = 0;i<MainActivity.vgItems.size();i++)
+                {
+                    
+                    System.out.println("JON LOOK HERE, DO IN BACKGROUND, GOT SIZE" + i);
+                    for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
+                    {
+                        
+                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
+                        {
+                            System.out.println("JON LOOK HERE, DO IN BACKGROUND, ABOUT TO ADD NAME" + i + j);
+                            possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
+                            
+                            System.out.println("JON LOOK HERE, DO IN BACKGROUND, ABOUT TO ADD PICE" + i + j);
+                            possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
+                            
+                        }
+                    }
+                }
+            }
+            else if(MainActivity.vgOrSand==2)
+            {
+                for(int i = 0;i<MainActivity.sandItems.size();i++)
+                {
+                    for(int j = 0;j<MainActivity.sandItems.get(i).getPrices().size();j++)
+                    {
+                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
+                        {
+                            possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
+                            
+                            possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
+                            
+                        }
+                    }
+                }
+            }
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            System.out.println("POST EXECUTE DONE");
+            lvAdapter.notifyDataSetChanged();
+            lv.setAdapter(lvAdapter);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            lv.setAdapter(dummyAdapter);
+            possibleItems.clear();
+            lvAdapter.getPossibleItems().clear();
+            System.out.println("PRE EXECUTE DONE");
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
         }
     }
 }
