@@ -9,8 +9,17 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -44,7 +53,7 @@ public class CompleteorActivity extends Activity {
                     {
                         for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
                         {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))<=0)
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
                             {
                                 possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
                                 possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
@@ -58,10 +67,10 @@ public class CompleteorActivity extends Activity {
                     {
                         for(int j = 0;j<MainActivity.sandItems.get(i).getPrices().size();j++)
                         {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))<=0)
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
                             {
-                                possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                                possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
+                                possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
+                                possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
                             }
                         }
                     }

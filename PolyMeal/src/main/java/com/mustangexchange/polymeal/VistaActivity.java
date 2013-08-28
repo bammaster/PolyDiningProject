@@ -18,8 +18,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -406,7 +419,7 @@ public class VistaActivity extends FragmentActivity {
             final int position = (Integer) view.getTag();
             AlertDialog.Builder onListClick= new AlertDialog.Builder(VistaActivity.this);
             onListClick.setTitle("Add to Cart?");
-            onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
+            onListClick.setMessage("Would you like to add " + names.get(position).replace("@#$","") + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     //money = boundPrices.get(tempIndex);
