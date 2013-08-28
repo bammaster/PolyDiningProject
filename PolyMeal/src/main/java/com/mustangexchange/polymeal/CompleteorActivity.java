@@ -53,7 +53,7 @@ public class CompleteorActivity extends Activity {
                     {
                         for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
                         {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))<=0)
                             {
                                 possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
                                 possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
@@ -67,7 +67,7 @@ public class CompleteorActivity extends Activity {
                     {
                         for(int j = 0;j<MainActivity.sandItems.get(i).getPrices().size();j++)
                         {
-                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
+                            if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))<=0)
                             {
                                 possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
                                 possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
