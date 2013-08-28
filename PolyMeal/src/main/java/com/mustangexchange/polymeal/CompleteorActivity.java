@@ -9,17 +9,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -80,6 +71,7 @@ public class CompleteorActivity extends Activity {
                     public void run() {
                         lv.invalidate();
                         ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
+                        checkLayout();
                     }
                 });
             }
@@ -92,6 +84,12 @@ public class CompleteorActivity extends Activity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
         updateBalance();
+    }
+
+    public void checkLayout() {
+        if(lv.getAdapter().getCount() == 0) {
+            setContentView(R.layout.empty_completeor);
+        }
     }
 
     public void setSubtitleColor() {
@@ -220,7 +218,8 @@ public class CompleteorActivity extends Activity {
                         onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
                                 //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                Cart.add(possibleItems.getNames().get(position), (new BigDecimal(possibleItems.getPrices().get(position)).multiply(new BigDecimal(np.getValue() + ""))).setScale(2)+"");
+                                //Cart.add(possibleItems.getNames().get(position), (new BigDecimal(possibleItems.getPrices().get(position)).multiply(new BigDecimal(np.getValue() + ""))).setScale(2)+"");
+                                Cart.add(possibleItems.getNames().get(position),  Double.toString(np.getValue()*new Double(possibleItems.getPrices().get(position))));
                                 updateBalance();
                             }
                         });

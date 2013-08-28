@@ -7,12 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -117,11 +112,10 @@ public class CartActivity extends Activity {
             case R.id.menuCom:
                 Intent intent = new Intent(this, CompleteorActivity.class);
                 startActivity(intent);
-                break;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
