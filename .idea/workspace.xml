@@ -33,24 +33,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/menu/completeor.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_cart.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/empty_cart.xml" afterPath="$PROJECT_DIR$/PolyMeal/src/main/res/layout/empty_cart.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377631618479" ignored="false" />
+    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377648290438" ignored="false" />
     <file path="/row_item_cart.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377504001492" ignored="false" />
     <file path="/.gitignore" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377423556030" ignored="false" />
-    <file path="/VistaActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377631919483" ignored="false" />
+    <file path="/VistaActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377648840546" ignored="false" />
     <file path="/FoodItemAdapter.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377461387686" ignored="false" />
-    <file path="/SandwichActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377632999169" ignored="false" />
+    <file path="/SandwichActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377648807694" ignored="false" />
     <file path="/styles_calpolyholo.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377456947355" ignored="false" />
     <file path="/themes_calpolyholo.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377456090203" ignored="false" />
     <file path="/styles.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377456548422" ignored="false" />
@@ -136,16 +130,16 @@
       <file leaf-file-name="VistaActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="337" column="5" selection-start="14810" selection-end="14810" vertical-scroll-proportion="0.0">
+            <state line="412" column="20" selection-start="17605" selection-end="17647" vertical-scroll-proportion="-5.5555553">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SandwichActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SandwichActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="17" selection-start="2785" selection-end="2785" vertical-scroll-proportion="34.88889">
+            <state line="398" column="62" selection-start="17356" selection-end="17356" vertical-scroll-proportion="0.35849056">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1333#1350#0" expanded="true" />
@@ -157,18 +151,16 @@
       <file leaf-file-name="CartActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="0" selection-start="2722" selection-end="3018" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="99" column="0" selection-start="2643" selection-end="2939" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompleteorActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CompleteorActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="130" column="51" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.9102334">
+            <state line="126" column="17" selection-start="4687" selection-end="4687" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -297,12 +289,12 @@
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/activity_vista.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/layout/empty_cart.xml" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/menu/cart.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/res/menu/completeor.xml" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
       </list>
     </option>
   </component>
@@ -704,7 +696,11 @@
       <created>1377595633710</created>
       <updated>1377595633710</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="App navigation finalized">
+      <created>1377648300898</created>
+      <updated>1377648300898</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -783,7 +779,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completeor Cherrypick [part 2]" />
+    <option name="LAST_COMMIT_MESSAGE" value="App navigation finalized" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -811,6 +807,7 @@
     <MESSAGE value="Jon's stupid and forgot to include ic_cart" />
     <MESSAGE value="Finished integrating cart into both SF and VGs. Added alert layout if cart is empty. Integrated MoneyTime for control over balance." />
     <MESSAGE value="Completeor Cherrypick [part 2]" />
+    <MESSAGE value="App navigation finalized" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -903,13 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="337" column="5" selection-start="14810" selection-end="14810" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/res/menu/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="309" vertical-scroll-proportion="0.0">
@@ -931,29 +921,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="17" selection-start="2785" selection-end="2785" vertical-scroll-proportion="34.88889">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1333#1350#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="2722" selection-end="3018" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="99" column="0" selection-start="2643" selection-end="2939" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="130" column="51" selection-start="4875" selection-end="4875" vertical-scroll-proportion="0.9102334">
+        <state line="126" column="17" selection-start="4687" selection-end="4687" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="412" column="20" selection-start="17605" selection-end="17647" vertical-scroll-proportion="-5.5555553">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="398" column="62" selection-start="17356" selection-end="17356" vertical-scroll-proportion="0.35849056">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1333#1350#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

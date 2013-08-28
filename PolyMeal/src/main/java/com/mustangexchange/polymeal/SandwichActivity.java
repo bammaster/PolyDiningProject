@@ -313,6 +313,7 @@ public class SandwichActivity extends FragmentActivity {
             {
                 MainActivity.vgOrSand = 1;
                 mDrawerLayout.closeDrawer(mDrawerList);
+                VistaActivity.clear = true;
                 SandwichActivity.mActivity.finish();
                 Intent intentVG = new Intent(mContext, VistaActivity.class);
                 startActivity(intentVG);
@@ -395,7 +396,7 @@ public class SandwichActivity extends FragmentActivity {
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     //money = boundPrices.get(tempIndex);
-                    if (names.get(position).contains("Soup") || names.get(position).contains("Salad")) {
+                    if (names.get(position).contains("@#$")) {
                         AlertDialog.Builder onYes = new AlertDialog.Builder(SandwichActivity.this);
                         onYes.setTitle("How much?");
                         onYes.setMessage("Estimated Number of Ounces: ");

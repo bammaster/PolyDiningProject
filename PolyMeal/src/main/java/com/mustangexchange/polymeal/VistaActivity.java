@@ -314,6 +314,7 @@ public class VistaActivity extends FragmentActivity {
             {
                 MainActivity.vgOrSand = 2;
                 mDrawerLayout.closeDrawer(mDrawerList);
+                SandwichActivity.clear = true;
                 VistaActivity.mActivity.finish();
                 Intent intentSF = new Intent(mContext, SandwichActivity.class);
                 startActivity(intentSF);
