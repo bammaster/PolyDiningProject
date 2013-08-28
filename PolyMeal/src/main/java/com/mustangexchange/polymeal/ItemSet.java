@@ -33,5 +33,9 @@ public class ItemSet
     {
         this.title = title;
     }
+    public void clear() {
+        names.clear();
+        prices.clear();
+    }
 
 }

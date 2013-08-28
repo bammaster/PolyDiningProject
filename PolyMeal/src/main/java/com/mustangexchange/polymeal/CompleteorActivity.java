@@ -25,6 +25,7 @@ public class CompleteorActivity extends Activity {
     private static Context mContext;
 
     public ListView lv;
+    public CompleteorItemAdapter lvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,27 @@ public class CompleteorActivity extends Activity {
 
         possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
         lv = (ListView) findViewById(R.id.listView);
-        lv.setAdapter(new CompleteorItemAdapter(this, possibleItems));
 
+        initializeThread(calcCompleteor);
+        calcCompleteor.start();
+        lvAdapter = new CompleteorItemAdapter(this, possibleItems);
+        lv.setAdapter(lvAdapter);
+
+        mContext = this;
+
+        mActionBar = getActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
+        updateBalance();
+    }
+
+    public void checkLayout() {
+        if(lv.getAdapter().getCount() == 0) {
+            setContentView(R.layout.empty_completeor);
+        }
+    }
+
+    public void initializeThread(Thread thread) {
         calcCompleteor = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -70,26 +90,22 @@ public class CompleteorActivity extends Activity {
                     @Override
                     public void run() {
                         lv.invalidate();
-                        ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
+                        lvAdapter.notifyDataSetChanged();
                         checkLayout();
                     }
                 });
             }
         });
-        calcCompleteor.start();
-
-        mContext = this;
-
-        mActionBar = getActionBar();
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        updateBalance();
     }
 
-    public void checkLayout() {
-        if(lv.getAdapter().getCount() == 0) {
-            setContentView(R.layout.empty_completeor);
-        }
+    public void updateList() {
+        ItemSet updatedList;
+        calcCompleteor = null;
+        updatedList = lvAdapter.getPossibleItems();
+        updatedList.clear();
+        updatedList = possibleItems;
+        initializeThread(calcCompleteor);
+        calcCompleteor.start();
     }
 
     public void setSubtitleColor() {
@@ -156,6 +172,10 @@ public class CompleteorActivity extends Activity {
             this.possibleItems = possibleItems;
         }
 
+        public ItemSet getPossibleItems() {
+            return possibleItems;
+        }
+
         public int getCount() {
             return possibleItems.getNames().size();
         }
@@ -219,8 +239,9 @@ public class CompleteorActivity extends Activity {
                             public void onClick(DialogInterface dialog, int button) {
                                 //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
                                 //Cart.add(possibleItems.getNames().get(position), (new BigDecimal(possibleItems.getPrices().get(position)).multiply(new BigDecimal(np.getValue() + ""))).setScale(2)+"");
-                                Cart.add(possibleItems.getNames().get(position),  Double.toString(np.getValue()*new Double(possibleItems.getPrices().get(position))));
+                                Cart.add(possibleItems.getNames().get(position), Double.toString(np.getValue() * new Double(possibleItems.getPrices().get(position))));
                                 updateBalance();
+                                updateList();
                             }
                         });
                         onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -232,6 +253,7 @@ public class CompleteorActivity extends Activity {
                         //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
                         Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
                         updateBalance();
+                        updateList();
                     }
                 }
             });
