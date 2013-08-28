@@ -395,36 +395,9 @@ public class SandwichActivity extends FragmentActivity {
             onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    //money = boundPrices.get(tempIndex);
-                    if (names.get(position).contains("@#$")) {
-                        AlertDialog.Builder onYes = new AlertDialog.Builder(SandwichActivity.this);
-                        onYes.setTitle("How much?");
-                        onYes.setMessage("Estimated Number of Ounces: ");
-                        LayoutInflater inflater = SandwichActivity.this.getLayoutInflater();
-                        View DialogView = inflater.inflate(R.layout.number_picker, null);
-                        final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
-                        np.setMinValue(1);
-                        np.setMaxValue(50);
-                        np.setWrapSelectorWheel(false);
-                        np.setValue(1);
-                        onYes.setView(DialogView);
-                        onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                Cart.add(names.get(position), prices.get(position));
-                                updateBalance();
-                            }
-                        });
-                        onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                            }
-                        });
-                        onYes.show();
-                    } else {
-                        //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                        Cart.add(names.get(position), prices.get(position));
-                        updateBalance();
-                    }
+                //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
+                Cart.add(names.get(position), prices.get(position));
+                updateBalance();
                 }
             });
             onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
