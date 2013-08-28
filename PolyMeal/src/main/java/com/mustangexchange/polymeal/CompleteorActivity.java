@@ -54,7 +54,7 @@ public class CompleteorActivity extends Activity {
     }
 
     public void checkLayout() {
-        if(lv.getAdapter().getCount() == 0) {
+        if((lv.getAdapter().getCount() == 0) && (lv.getAdapter() == lvAdapter)) {
             setContentView(R.layout.empty_completeor);
         }
     }
@@ -279,6 +279,7 @@ public class CompleteorActivity extends Activity {
             System.out.println("POST EXECUTE DONE");
             lvAdapter.notifyDataSetChanged();
             lv.setAdapter(lvAdapter);
+            checkLayout();
         }
 
         @Override

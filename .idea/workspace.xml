@@ -32,19 +32,19 @@
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="INFO/System" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="Fixed CartActivity having an empty drawer when filled with items">
+    <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolyMeal.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377711877703" ignored="false" />
+    <file path="/Dummy.txt" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377717669760" ignored="false" />
     <file path="$PROJECT_DIR$/PolyMeal/src/main/res/values-v14/styles_calpolyholo.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377656579558" ignored="false" />
     <file path="$PROJECT_DIR$/PolyMeal/src/main/res/values-sw720dp-land/dimens.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377656579560" ignored="false" />
     <file path="$PROJECT_DIR$/PolyMeal/src/main/res/values/strings.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377656579561" ignored="false" />
     <file path="$PROJECT_DIR$/PolyMeal/src/main/res/values/themes_calpolyholo.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377656579562" ignored="false" />
     <file path="$PROJECT_DIR$/PolyMeal/src/main/res/values/styles.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377656579562" ignored="false" />
-    <file path="/CompleteorActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377717518849" ignored="false" />
+    <file path="/CompleteorActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377717982548" ignored="false" />
     <file path="/empty_completeor.xml" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377657111705" ignored="false" />
     <file path="/CartActivity.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377657819477" ignored="false" />
     <file path="/ItemSet.java" changelist="3673586d-345e-44e8-90ef-a49e855c0184" time="1377662634492" ignored="false" />
@@ -133,13 +133,13 @@
       <file leaf-file-name="CompleteorActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1269" selection-end="1269" vertical-scroll-proportion="-3.3648882">
+            <state line="281" column="26" selection-start="11713" selection-end="11713" vertical-scroll-proportion="0.5925926">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6420#8897#0" expanded="true" />
-                <element signature="e#7483#8245#0" expanded="true" />
-                <element signature="e#8218#8219#0" expanded="true" />
-                <element signature="e#8882#8883#0" expanded="true" />
+                <element signature="e#6456#8933#0" expanded="true" />
+                <element signature="e#7519#8281#0" expanded="true" />
+                <element signature="e#8254#8255#0" expanded="true" />
+                <element signature="e#8918#8919#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -673,7 +673,11 @@
       <created>1377711869359</created>
       <updated>1377711869359</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fixed CompleteorActivity crashes using ASyncTask">
+      <created>1377717675206</created>
+      <updated>1377717675206</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -695,8 +699,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18409091" sideWeight="0.21669342" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258427" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18409091" sideWeight="0.6741573" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3258427" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="110" y="404" width="1166" height="544" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32348484" sideWeight="0.6741573" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -752,7 +756,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed CartActivity having an empty drawer when filled with items" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed CompleteorActivity crashes using ASyncTask" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -787,6 +791,7 @@
     <MESSAGE value="Fixed CompleteorActivity nav drawer bug" />
     <MESSAGE value="CompleteorActivity updates after adding something to the cart" />
     <MESSAGE value="Fixed CartActivity having an empty drawer when filled with items" />
+    <MESSAGE value="Fixed CompleteorActivity crashes using ASyncTask" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -914,13 +919,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1269" selection-end="1269" vertical-scroll-proportion="-3.3648882">
+        <state line="281" column="26" selection-start="11713" selection-end="11713" vertical-scroll-proportion="0.5925926">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6420#8897#0" expanded="true" />
-            <element signature="e#7483#8245#0" expanded="true" />
-            <element signature="e#8218#8219#0" expanded="true" />
-            <element signature="e#8882#8883#0" expanded="true" />
+            <element signature="e#6456#8933#0" expanded="true" />
+            <element signature="e#7519#8281#0" expanded="true" />
+            <element signature="e#8254#8255#0" expanded="true" />
+            <element signature="e#8918#8919#0" expanded="true" />
           </folding>
         </state>
       </provider>
