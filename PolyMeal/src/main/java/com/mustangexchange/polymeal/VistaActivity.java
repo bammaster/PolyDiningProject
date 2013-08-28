@@ -1,6 +1,7 @@
 package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -16,7 +18,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import org.jsoup.Connection;
@@ -47,7 +48,7 @@ public class VistaActivity extends FragmentActivity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private String[]  mDrawerItems;
-
+    public static Activity mActivity;
     public static boolean clear;
 
     @Override
@@ -56,7 +57,7 @@ public class VistaActivity extends FragmentActivity {
         setContentView(R.layout.activity_vista);
 
         mContext = this;
-
+        mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItems);
@@ -144,18 +145,22 @@ public class VistaActivity extends FragmentActivity {
         }*/
     }
 
-    public void setNegative() {
+    public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
-        yourTextView.setTextColor(0xffcc0000);
+        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        {
+            yourTextView.setTextColor(Color.RED);
+        }
+        else
+        {
+            yourTextView.setTextColor(Color.WHITE);
+        }
     }
 
     public void updateBalance() {
         totalAmount = MoneyTime.calcTotalMoney();
-        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
-        {
-            setNegative();
-        }
+        setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
@@ -298,32 +303,35 @@ public class VistaActivity extends FragmentActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("Blake",parent.getPositionForView(view)+"");
             if(parent.getPositionForView(view)==0)
             {
+                mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentHome = new Intent(mContext, MainActivity.class);
+                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentHome);
             }
             else if(parent.getPositionForView(view)==1)
             {
-                MainActivity.vgOrSand=2;
+                MainActivity.vgOrSand = 2;
+                mDrawerLayout.closeDrawer(mDrawerList);
+                VistaActivity.mActivity.finish();
                 Intent intentSF = new Intent(mContext, SandwichActivity.class);
                 startActivity(intentSF);
             }
             else if(parent.getPositionForView(view)==2)
             {
-                MainActivity.vgOrSand=1;
-                Intent intentVG = new Intent(mContext, VistaActivity.class);
-                startActivity(intentVG);
+                MainActivity.vgOrSand = 1;
+                mDrawerLayout.closeDrawer(mDrawerList);
             }
             else if(parent.getPositionForView(view)==3)
             {
+                mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentCP = new Intent(mContext, CompleteorActivity.class);
                 startActivity(intentCP);
             }
             else
             {
-                Toast.makeText(mContext,"Invalid Selection!",Toast.LENGTH_SHORT);
+                Toast.makeText(mContext, "Invalid Selection!", Toast.LENGTH_SHORT);
             }
         }
     }

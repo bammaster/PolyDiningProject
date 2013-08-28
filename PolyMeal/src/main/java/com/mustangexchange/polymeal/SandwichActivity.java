@@ -1,6 +1,7 @@
 package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -39,13 +41,15 @@ public class SandwichActivity extends FragmentActivity {
     private PagerTabStrip myPagerTabStrip;
     private static ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
-    public static BigDecimal totalAmount;
+    public static BigDecimal totalAmount;                   public final Activity activity = this;
+
     private static Context mContext;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private String[]  mDrawerItems;
+    public static Activity mActivity;
     public static boolean clear;
 
     @Override
@@ -54,7 +58,7 @@ public class SandwichActivity extends FragmentActivity {
         setContentView(R.layout.activity_sandwich);
 
         mContext = this;
-
+        mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItems);
@@ -133,15 +137,6 @@ public class SandwichActivity extends FragmentActivity {
     {
         super.onResume();
         updateBalance();
-        /*moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
-        {
-            moneyView.setTextColor(Color.RED);
-        }
-        else
-        {
-            moneyView.setTextColor(Color.GREEN);
-        }*/
     }
 
     /**
@@ -163,18 +158,22 @@ public class SandwichActivity extends FragmentActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void setNegative() {
+    public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
-        yourTextView.setTextColor(0xffcc0000);
+        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        {
+            yourTextView.setTextColor(Color.RED);
+        }
+        else
+        {
+            yourTextView.setTextColor(Color.WHITE);
+        }
     }
 
     public void updateBalance() {
         totalAmount = MoneyTime.calcTotalMoney();
-        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
-        {
-            setNegative();
-        }
+        setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
@@ -300,23 +299,27 @@ public class SandwichActivity extends FragmentActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(parent.getPositionForView(view)==0)
             {
+                mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentHome = new Intent(mContext, MainActivity.class);
+                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentHome);
             }
             else if(parent.getPositionForView(view)==1)
             {
-                MainActivity.vgOrSand=2;
-                Intent intentSF = new Intent(mContext, SandwichActivity.class);
-                startActivity(intentSF);
+                MainActivity.vgOrSand = 2;
+                mDrawerLayout.closeDrawer(mDrawerList);
             }
             else if(parent.getPositionForView(view)==2)
             {
-                MainActivity.vgOrSand=1;
+                MainActivity.vgOrSand = 1;
+                mDrawerLayout.closeDrawer(mDrawerList);
+                SandwichActivity.mActivity.finish();
                 Intent intentVG = new Intent(mContext, VistaActivity.class);
                 startActivity(intentVG);
             }
             else if(parent.getPositionForView(view)==3)
             {
+                mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentCP = new Intent(mContext, CompleteorActivity.class);
                 startActivity(intentCP);
             }

@@ -6,13 +6,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.*;
 import android.widget.*;
 
@@ -24,10 +20,6 @@ public class CompleteorActivity extends Activity {
     private ItemSet possibleItems;
     private Thread calcCompleteor;
 
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private String[]  mDrawerItems;
     private ActionBar mActionBar;
     private static BigDecimal totalAmount;
     private static Context mContext;
@@ -82,43 +74,9 @@ public class CompleteorActivity extends Activity {
         mContext = this;
 
         mActionBar = getActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
         updateBalance();
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItems);
-
-        // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                //getActionBar().setTitle(mTitle);
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                //getActionBar().setTitle(mDrawerTitle);
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     public void setSubtitleColor() {
@@ -140,100 +98,39 @@ public class CompleteorActivity extends Activity {
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);
-        //money.setTitle("$"+MoneyTime.calcTotalMoney()+"");
+        inflater.inflate(R.menu.completeor, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        menu.clear();
-        getMenuInflater().inflate(R.menu.main, menu);
-        MenuItem money = menu.findItem(R.id.cart);
-        //money.setTitle("$" + MoneyTime.calcTotalMoney());
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         switch (item.getItemId())
         {
-            case R.id.cart:
-                Intent intent = new Intent(this, CartActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(parent.getPositionForView(view)==0)
-            {
-                Intent intentHome = new Intent(mContext, MainActivity.class);
-                startActivity(intentHome);
-            }
-            else if(parent.getPositionForView(view)==1)
-            {
-                if(MainActivity.vgOrSand == 2)
-                {
-                    SandwichActivity.clear = false;
-                } else
-                {
-                    MainActivity.vgOrSand = 2;
-                }
-                Intent intentSF = new Intent(mContext, SandwichActivity.class);
-                startActivity(intentSF);
-            }
-            else if(parent.getPositionForView(view)==2)
-            {
+            case android.R.id.home:
                 if(MainActivity.vgOrSand == 1)
                 {
-                    VistaActivity.clear = false;
-                } else
-                {
-                    MainActivity.vgOrSand = 1;
+                    Intent intent = new Intent(this, VistaActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    return true;
                 }
-                Intent intentVG = new Intent(mContext, VistaActivity.class);
-                startActivity(intentVG);
-            }
-            else if(parent.getPositionForView(view)==3)
-            {
-                Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                startActivity(intentCP);
-            }
-            else
-            {
-                Toast.makeText(mContext, "Invalid Selection!", Toast.LENGTH_SHORT);
-            }
+                else
+                {
+                    Intent intent = new Intent(this, SandwichActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    return true;
+                }
+            case R.id.cart:
+                Intent intent = new Intent(this, CartActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

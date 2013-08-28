@@ -3,12 +3,11 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -24,30 +23,25 @@ public class CartActivity extends Activity {
     private static BigDecimal totalAmount;
     private static ActionBar mActionBar;
 
+    private static Context mContext;
+    public static Activity mActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_cart);
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
+
+        mContext = this;
+        mActivity = this;
+
         mActionBar = getActionBar();
         updateBalance();
 
-        if(isCartEmpty())
-        {
-            setContentView(R.layout.empty_cart);
-        }
-        /*lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v,int index, long id)
-            {
-
-            }
-
-        });*/
+        isCartEmpty();
     }
 
     public static void setTextMoney()
@@ -63,43 +57,66 @@ public class CartActivity extends Activity {
         }
     }
 
-    public boolean isCartEmpty()
+    public void isCartEmpty()
     {
         if(lv.getAdapter().getCount() > 0) {
-            return false;
         }
         else
         {
-            return true;
+            setContentView(R.layout.empty_cart);
         }
     }
 
-    public void setNegative() {
+    /*public void onResume()
+    {
+        super.onResume();
+        updateBalance();
+        ViewGroup view = (ViewGroup)getWindow().getDecorView();
+        if(view.getChildAt(0) == findViewById(R.layout.activity_cart))
+        {
+            ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
+        }
+    }*/
+
+    public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
-        yourTextView.setTextColor(0xffcc0000);
+        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        {
+            yourTextView.setTextColor(Color.RED);
+        }
+        else
+        {
+            yourTextView.setTextColor(Color.WHITE);
+        }
     }
 
     public void updateBalance() {
         totalAmount = MoneyTime.calcTotalMoney();
-        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
-        {
-            setNegative();
-        }
+        setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
-    public void onResume()
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cart, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
     {
-        super.onResume();
-/*      moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
+        switch (item.getItemId())
         {
-            moneyView.setTextColor(Color.RED);
+            case R.id.menuCom:
+                Intent intent = new Intent(this, CompleteorActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        else
-        {
-            moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }*/
+        return true;
     }
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
@@ -147,8 +164,6 @@ public class CartActivity extends Activity {
             btnRemove.setOnClickListener(this);
             btnRemove.setTag(entry);
 
-
-
             return convertView;
         }
 
@@ -159,10 +174,7 @@ public class CartActivity extends Activity {
             cart.remove(entry);
             cartMoney.remove(entry);
             updateBalance();
-            if(isCartEmpty())
-            {
-                setContentView(R.layout.empty_cart);
-            }
+            isCartEmpty();
             // listPhonebook.remove(view.getId());
             notifyDataSetChanged();
         }
