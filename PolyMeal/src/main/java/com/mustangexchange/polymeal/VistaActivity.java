@@ -122,7 +122,7 @@ public class VistaActivity extends FragmentActivity {
                get what is applicable at this time period rather than the whole thing. This prevents
                ArrayOutOfBoundsExceptions later on.
             */
-                foodAdapterList.add(new FoodItemAdapter(this, MainActivity.vgItems.get(i).getTitle(), MainActivity.vgItems.get(i).getNames(),
+                foodAdapterList.add(new FoodItemAdapter(this, MainActivity.vgItems.get(i).getTitle(),MainActivity.vgItems.get(i).getDesc(), MainActivity.vgItems.get(i).getNames(),
                         MainActivity.vgItems.get(i).getPrices()));
             }
 
@@ -334,6 +334,7 @@ public class VistaActivity extends FragmentActivity {
                     notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
                             Cart.clear();
+                            Toast.makeText(mContext,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                             MainActivity.vgOrSand = 2;
                             mDrawerLayout.closeDrawer(mDrawerList);
                             SandwichActivity.clear = true;
@@ -381,12 +382,14 @@ public class VistaActivity extends FragmentActivity {
         private ArrayList<String> names;
         private ArrayList<String> prices;
         private String title;
+        private ArrayList<String> desc;
 
-        public FoodItemAdapter(Context context, String title, ArrayList<String> names, ArrayList<String> prices) {
+        public FoodItemAdapter(Context context, String title, ArrayList<String> desc, ArrayList<String> names, ArrayList<String> prices) {
             this.context = context;
             this.names = names;
             this.prices = prices;
             this.title = title;
+            this.desc = desc;
         }
 
         public String getTitle() {
@@ -416,7 +419,6 @@ public class VistaActivity extends FragmentActivity {
             temp = names.get(position);
             if(temp.contains("@#$"))
             {
-                System.out.println(temp);
                 tvName.setText(temp.substring(3));
             } else
             {
@@ -442,7 +444,8 @@ public class VistaActivity extends FragmentActivity {
         @Override
         public void onClick(View view) {
             final int position = (Integer) view.getTag();
-            AlertDialog.Builder onListClick= new AlertDialog.Builder(VistaActivity.this);
+            final AlertDialog.Builder onListClick= new AlertDialog.Builder(VistaActivity.this);
+            onListClick.setCancelable(false);
             onListClick.setTitle("Add to Cart?");
             onListClick.setMessage("Would you like to add " + names.get(position).replace("@#$","") + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -479,6 +482,24 @@ public class VistaActivity extends FragmentActivity {
             });
             onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
+                }
+            });
+            onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    AlertDialog.Builder onDialogClick= new AlertDialog.Builder(VistaActivity.this);
+                    onDialogClick.setTitle("Description");
+                    onDialogClick.setMessage(desc.get(position));
+                    onDialogClick.setPositiveButton("Ok",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int button){
+
+                        }
+                    });
+                    onDialogClick.setNegativeButton("Back",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int button){
+                            onListClick.show();
+                        }
+                    });
+                    onDialogClick.show();
                 }
             });
             onListClick.show();

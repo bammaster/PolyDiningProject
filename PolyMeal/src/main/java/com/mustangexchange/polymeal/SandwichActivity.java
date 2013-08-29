@@ -113,7 +113,7 @@ public class SandwichActivity extends FragmentActivity {
                get what is applicable at this time period rather than the whole thing. This prevents
                ArrayOutOfBoundsExceptions later on.
              */
-            foodAdapterList.add(new FoodItemAdapter(this, MainActivity.sandItems.get(i).getTitle(), MainActivity.sandItems.get(i).getNames(),
+            foodAdapterList.add(new FoodItemAdapter(this, MainActivity.sandItems.get(i).getTitle(),MainActivity.sandItems.get(i).getDesc(), MainActivity.sandItems.get(i).getNames(),
                     MainActivity.sandItems.get(i).getPrices()));
             }
 
@@ -321,6 +321,7 @@ public class SandwichActivity extends FragmentActivity {
                     notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
                             Cart.clear();
+                            Toast.makeText(mContext,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                             MainActivity.vgOrSand = 1;
                             mDrawerLayout.closeDrawer(mDrawerList);
                             VistaActivity.clear = true;
@@ -361,13 +362,15 @@ public class SandwichActivity extends FragmentActivity {
 
         private ArrayList<String> names;
         private ArrayList<String> prices;
+        private ArrayList<String> desc;
         private String title;
 
-        public FoodItemAdapter(Context context, String title, ArrayList<String> names, ArrayList<String> prices) {
+        public FoodItemAdapter(Context context, String title, ArrayList<String> desc, ArrayList<String> names, ArrayList<String> prices) {
             this.context = context;
             this.names = names;
             this.prices = prices;
             this.title = title;
+            this.desc = desc;
         }
 
         public String getTitle() {
@@ -415,7 +418,7 @@ public class SandwichActivity extends FragmentActivity {
         @Override
         public void onClick(View view) {
             final int position = (Integer) view.getTag();
-            AlertDialog.Builder onListClick= new AlertDialog.Builder(SandwichActivity.this);
+            final AlertDialog.Builder onListClick= new AlertDialog.Builder(SandwichActivity.this);
             onListClick.setTitle("Add to Cart?");
             onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -427,6 +430,24 @@ public class SandwichActivity extends FragmentActivity {
             });
             onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
+                }
+            });
+            onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    AlertDialog.Builder onDialogClick= new AlertDialog.Builder(SandwichActivity.this);
+                    onDialogClick.setTitle("Description");
+                    onDialogClick.setMessage(desc.get(position));
+                    onDialogClick.setPositiveButton("Ok",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int button){
+
+                        }
+                    });
+                    onDialogClick.setNegativeButton("Back",new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int button){
+                            onListClick.show();
+                        }
+                    });
+                    onDialogClick.show();
                 }
             });
             onListClick.show();

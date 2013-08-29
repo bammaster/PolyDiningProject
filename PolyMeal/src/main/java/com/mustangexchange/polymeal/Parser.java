@@ -1,7 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -155,11 +153,11 @@ public class Parser
             description = description.replace("$","");
             if(description.equals(" "))
             {
-                set.setDesc("No Description Available!");
+                set.addDesc("No Description Available!");
             }
             else
             {
-                set.setDesc(description);
+                set.addDesc(description);
             }
         }
     }

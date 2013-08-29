@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,6 +15,9 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -20,7 +25,7 @@ import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
 
     public static ArrayList<ItemSet> vgItems;
     public static ArrayList<ItemSet> sandItems;
@@ -101,7 +106,6 @@ public class MainActivity extends Activity {
                     }
                     catch(Exception e)
                     {
-                       Log.e("Blake",e.getMessage());
                        uiUpdate.post(new Runnable() {
                            @Override
                            public void run() {
@@ -162,7 +166,6 @@ public class MainActivity extends Activity {
                         }
                     });
                 } catch (Exception e) {
-                    Log.e("Blake", e.getMessage());
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
@@ -178,6 +181,14 @@ public class MainActivity extends Activity {
                         }
                     });
                 }
+                SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+                Gson gson = new Gson();
+                String sand = gson.toJson(sandItems);
+                String vg = gson.toJson(vgItems);
+                prefsEditor.putString("Sandwich Factory Items", sand);
+                prefsEditor.putString("Vista Grande Items", vg);
+                prefsEditor.commit();
             }
         });
         internet.start();
@@ -199,6 +210,7 @@ public class MainActivity extends Activity {
             notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     Cart.clear();
+                    Toast.makeText(MainActivity.this, "Cart Cleared!", Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
                 }
@@ -228,6 +240,7 @@ public class MainActivity extends Activity {
             notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     Cart.clear();
+                    Toast.makeText(MainActivity.this,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
                 }
