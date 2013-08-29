@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ItemSet
 {
     private String title;
+    private String desc;
     private ArrayList<String> names = new ArrayList<String>();
     private ArrayList<String> prices = new ArrayList<String>();
     public ItemSet(String title,ArrayList<String> names,ArrayList<String> prices)
@@ -33,6 +34,15 @@ public class ItemSet
     {
         this.title = title;
     }
+    public String getDesc()
+    {
+        return desc;
+    }
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
+    }
+
     public void clear() {
         names.clear();
         prices.clear();

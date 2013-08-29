@@ -41,7 +41,8 @@ public class SandwichActivity extends FragmentActivity {
     private PagerTabStrip myPagerTabStrip;
     private static ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
-    public static BigDecimal totalAmount;                   public final Activity activity = this;
+    public static BigDecimal totalAmount;
+    public final Activity activity = this;
 
     private static Context mContext;
 
@@ -301,7 +302,7 @@ public class SandwichActivity extends FragmentActivity {
             {
                 mDrawerLayout.closeDrawer(mDrawerList);
                 Intent intentHome = new Intent(mContext, MainActivity.class);
-                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intentHome);
             }
             else if(parent.getPositionForView(view)==1)
@@ -311,12 +312,36 @@ public class SandwichActivity extends FragmentActivity {
             }
             else if(parent.getPositionForView(view)==2)
             {
-                MainActivity.vgOrSand = 1;
-                mDrawerLayout.closeDrawer(mDrawerList);
-                VistaActivity.clear = true;
-                SandwichActivity.mActivity.finish();
-                Intent intentVG = new Intent(mContext, VistaActivity.class);
-                startActivity(intentVG);
+                final Intent intentVG = new Intent(mContext, VistaActivity.class);
+                if(Cart.getCart().size()>0)
+                {
+                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
+                    notifyClear.setTitle("Warning!");
+                    notifyClear.setMessage("Your cart contains Sandwich Factory items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
+                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                            Cart.clear();
+                            MainActivity.vgOrSand = 1;
+                            mDrawerLayout.closeDrawer(mDrawerList);
+                            VistaActivity.clear = true;
+                            SandwichActivity.mActivity.finish();
+                            startActivity(intentVG);
+                        }
+                    });
+                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                        }
+                    });
+                    notifyClear.show();
+                }
+                else
+                {
+                    MainActivity.vgOrSand = 1;
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    VistaActivity.clear = true;
+                    SandwichActivity.mActivity.finish();
+                    startActivity(intentVG);
+                }
             }
             else if(parent.getPositionForView(view)==3)
             {

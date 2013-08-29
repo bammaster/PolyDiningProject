@@ -325,12 +325,37 @@ public class VistaActivity extends FragmentActivity {
             }
             else if(parent.getPositionForView(view)==1)
             {
-                MainActivity.vgOrSand = 2;
-                mDrawerLayout.closeDrawer(mDrawerList);
-                SandwichActivity.clear = true;
-                VistaActivity.mActivity.finish();
-                Intent intentSF = new Intent(mContext, SandwichActivity.class);
-                startActivity(intentSF);
+                final Intent intentSF = new Intent(mContext, SandwichActivity.class);
+                if(Cart.getCart().size()>0)
+                {
+                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
+                    notifyClear.setTitle("Warning!");
+                    notifyClear.setMessage("Your cart contains Vista Grande items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
+                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                            Cart.clear();
+                            MainActivity.vgOrSand = 2;
+                            mDrawerLayout.closeDrawer(mDrawerList);
+                            SandwichActivity.clear = true;
+                            VistaActivity.mActivity.finish();
+                            startActivity(intentSF);
+                        }
+                    });
+                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                        }
+                    });
+                    notifyClear.show();
+                }
+                else
+                {
+                    MainActivity.vgOrSand = 2;
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    SandwichActivity.clear = true;
+                    VistaActivity.mActivity.finish();
+                    startActivity(intentSF);
+                }
+
             }
             else if(parent.getPositionForView(view)==2)
             {

@@ -27,3 +27,7 @@ proguard/
 *.ipr
 *.iws
 .idea/
+# problematic xml files
+gradle.xml
+misc.xml
+workspace.xml

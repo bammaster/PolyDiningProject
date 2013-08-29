@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
         final TextView select = (TextView)findViewById(R.id.selectText);
         final Button sandwich = (Button)findViewById(R.id.buttonSand);
         final Button vista = (Button)findViewById(R.id.buttonVista);
-        Cart.clear();
         vgItems = new ArrayList<ItemSet>();
         sandItems = new ArrayList<ItemSet>();
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
@@ -187,18 +186,63 @@ public class MainActivity extends Activity {
     public void onResume()
     {
         super.onResume();
-        Cart.clear();
     }
 
     public void vg(View v)
     {
-        startActivity(new Intent(this,VistaActivity.class));
-        vgOrSand = 1;
+        final Intent i = new Intent(this,VistaActivity.class);
+        if(vgOrSand==2&&Cart.getCart().size()>0)
+        {
+            AlertDialog.Builder notifyClear = new AlertDialog.Builder(MainActivity.this);
+            notifyClear.setTitle("Warning!");
+            notifyClear.setMessage("Your cart contains Sandwich Factory items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
+            notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    Cart.clear();
+                    startActivity(i);
+
+                }
+            });
+            notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                }
+            });
+            notifyClear.show();
+        }
+        else
+        {
+            vgOrSand = 1;
+            startActivity(i);
+        }
+
     }
 
     public void sandwich(View v)
     {
-        startActivity(new Intent(this,SandwichActivity.class));
-        vgOrSand = 2;
+        final Intent i = new Intent(this,SandwichActivity.class);
+        if(vgOrSand==1&&Cart.getCart().size()>0)
+        {
+            AlertDialog.Builder notifyClear = new AlertDialog.Builder(MainActivity.this);
+            notifyClear.setTitle("Warning!");
+            notifyClear.setMessage("Your cart contains Vista Grande items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
+            notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    Cart.clear();
+                    startActivity(i);
+
+                }
+            });
+            notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                }
+            });
+            notifyClear.show();
+        }
+        else
+        {
+            vgOrSand = 2;
+            startActivity(i);
+        }
+
     }
 }
