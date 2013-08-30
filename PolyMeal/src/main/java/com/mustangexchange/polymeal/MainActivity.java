@@ -18,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity{
@@ -35,6 +37,7 @@ public class MainActivity extends Activity{
     private Handler uiUpdate= new Handler();
     private TextView download;
     private ProgressBar downloadProgress;
+    Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,26 +169,42 @@ public class MainActivity extends Activity{
                         }
                     });
                 } catch (Exception e) {
-                    uiUpdate.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                            onErrorConn.setTitle("Error Connecting!");
-                            onErrorConn.setMessage("There was an error connecting to the website to download the menu. Please check your data connection and try again.");
-                            onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int button) {
-                                    finish();
-                                }
-                            });
-                            onErrorConn.show();
-                        }
-                    });
+                    if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
+                    {
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                                onErrorConn.setTitle("Error Connecting!");
+                                onErrorConn.setMessage("There was an error connecting to the website to download the menu and no previous menu data was found. Please check your data connection and try again.");
+                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+                                        finish();
+                                    }
+                                });
+                                onErrorConn.show();
+                            }
+                        });
+                    }
+                    else
+                    {
+                        SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
+                        Gson gson = new Gson();
+                        String sand = appSharedPrefs.getString("Sandwich Factory Items", "");
+                        sandItems = gson.fromJson(sand, gsonType);
+                        String vg = appSharedPrefs.getString("Vista Grande Items", "");
+                        vgItems = gson.fromJson(vg,gsonType);
+                        vista.setEnabled(true);
+                        sandwich.setEnabled(true);
+                        download.setVisibility(View.INVISIBLE);
+                        downloadProgress.setVisibility(View.INVISIBLE);
+                    }
                 }
                 SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
                 Gson gson = new Gson();
-                String sand = gson.toJson(sandItems);
-                String vg = gson.toJson(vgItems);
+                String sand = gson.toJson(sandItems,gsonType);
+                String vg = gson.toJson(vgItems,gsonType);
                 prefsEditor.putString("Sandwich Factory Items", sand);
                 prefsEditor.putString("Vista Grande Items", vg);
                 prefsEditor.commit();
