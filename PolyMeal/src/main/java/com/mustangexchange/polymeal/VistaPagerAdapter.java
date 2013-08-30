@@ -1,4 +1,4 @@
-package com.mustangexchange.polymeal;
+/*package com.mustangexchange.polymeal;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,4 +59,4 @@ public class VistaPagerAdapter extends FragmentPagerAdapter {
             return rootView;
         }
     }
-}
+}*/

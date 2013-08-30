@@ -12,8 +12,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.*;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -45,7 +44,7 @@ public class SandwichActivity extends FragmentActivity {
     public static BigDecimal totalAmount;
     public final Activity activity = this;
 
-    private static Context mContext;
+    public static Context mContext;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -179,6 +178,7 @@ public class SandwichActivity extends FragmentActivity {
         setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -412,6 +412,18 @@ public class SandwichActivity extends FragmentActivity {
             this.desc = desc;
         }
 
+        public ArrayList<String> getNames() {
+            return names;
+        }
+
+        public ArrayList<String> getPrices() {
+            return prices;
+        }
+
+        public ArrayList<String> getDesc() {
+            return desc;
+        }
+
         public String getTitle() {
             return title;
         }
@@ -457,39 +469,103 @@ public class SandwichActivity extends FragmentActivity {
         @Override
         public void onClick(View view) {
             final int position = (Integer) view.getTag();
-            final AlertDialog.Builder onListClick= new AlertDialog.Builder(SandwichActivity.this);
-            onListClick.setTitle("Add to Cart?");
-            onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
-            onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                    //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                    Cart.add(names.get(position), prices.get(position));
-                    updateBalance();
-                }
-            });
-            onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                }
-            });
-            onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                    AlertDialog.Builder onDialogClick = new AlertDialog.Builder(SandwichActivity.this);
-                    onDialogClick.setTitle("Description");
-                    onDialogClick.setMessage(desc.get(position));
-                    onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
+            Cart.add(names.get(position), prices.get(position));
+            updateBalance();
+            Toast.makeText(mContext, names.get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-                        }
-                    });
-                    onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            onListClick.show();
-                        }
-                    });
-                    onDialogClick.show();
-                }
-            });
-            onListClick.show();
+    public class SandwichPagerAdapter extends FragmentPagerAdapter {
+
+        //ArrayList<ItemSet> foodList;
+        ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList;
+
+        public SandwichPagerAdapter(FragmentManager fm, ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList) {
+            super(fm);
+            //this.foodList = foodList;
+            this.foodAdapterList = foodAdapterList;
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return new MyFragment(i);
+        }
+
+        @Override
+        public int getCount() {
+            return foodAdapterList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return foodAdapterList.get(position).getTitle();
+        }
+        @Override
+        public int getItemPosition(Object object){
+            return POSITION_NONE;
+        }
+
+        private class MyFragment extends Fragment {
+
+            private int position;
+
+            public MyFragment(int position) {
+                this.position = position;
+            }
+
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
+
+                View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+                //Actual Fragment inflating happens in the next line.
+                ListView lv = ((ListView) rootView.findViewById(R.id.list));
+                lv.setAdapter(foodAdapterList.get(position));
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
+                        //Log.i(TAG, "onListItemClick: " + position);
+                        final AlertDialog.Builder onListClick= new AlertDialog.Builder(SandwichActivity.this);
+                        final int fPos = pos;
+                        onListClick.setTitle("Add to Cart?");
+                        onListClick.setMessage("Would you like to add " + foodAdapterList.get(position).getNames().get(pos) + " to your cart? Price: " + "$" + foodAdapterList.get(position).getPrices().get(pos));
+                        onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
+                                Cart.add(foodAdapterList.get(position).getNames().get(fPos), foodAdapterList.get(position).getPrices().get(fPos));
+                                updateBalance();
+                            }
+                        });
+                        onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                            }
+                        });
+                        onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(SandwichActivity.this);
+                                onDialogClick.setTitle("Description");
+                                onDialogClick.setMessage(foodAdapterList.get(position).getDesc().get(fPos));
+                                onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+
+                                    }
+                                });
+                                onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+                                        onListClick.show();
+                                    }
+                                });
+                                onDialogClick.show();
+                            }
+                        });
+                        onListClick.show();
+
+                    }
+
+                });
+
+            return rootView;
+            }
         }
     }
 }
