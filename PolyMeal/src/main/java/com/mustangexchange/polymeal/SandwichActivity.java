@@ -26,6 +26,7 @@ import org.jsoup.nodes.Document;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SandwichActivity extends FragmentActivity {
 
@@ -67,8 +68,9 @@ public class SandwichActivity extends FragmentActivity {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));
+        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mDrawerItems));*/
+        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList(Arrays.asList(mDrawerItems))));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -301,9 +303,21 @@ public class SandwichActivity extends FragmentActivity {
             if(parent.getPositionForView(view)==0)
             {
                 mDrawerLayout.closeDrawer(mDrawerList);
-                Intent intentHome = new Intent(mContext, MainActivity.class);
-                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intentHome);
+                Thread threadHome = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        Intent intentHome = new Intent(mContext, MainActivity.class);
+                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentHome);
+                    }
+                });
+                threadHome.start();
             }
             else if(parent.getPositionForView(view)==1)
             {
@@ -312,7 +326,22 @@ public class SandwichActivity extends FragmentActivity {
             }
             else if(parent.getPositionForView(view)==2)
             {
-                final Intent intentVG = new Intent(mContext, VistaActivity.class);
+                final Thread threadVG = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        final Intent intentVG = new Intent(mContext, VistaActivity.class);
+                        intentVG.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentVG);
+                        SandwichActivity.mActivity.finish();
+                    }
+                });
+                mDrawerLayout.closeDrawer(mDrawerList);
                 if(Cart.getCart().size()>0)
                 {
                     AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
@@ -323,10 +352,8 @@ public class SandwichActivity extends FragmentActivity {
                             Cart.clear();
                             Toast.makeText(mContext,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                             MainActivity.vgOrSand = 1;
-                            mDrawerLayout.closeDrawer(mDrawerList);
                             VistaActivity.clear = true;
-                            SandwichActivity.mActivity.finish();
-                            startActivity(intentVG);
+                            threadVG.start();
                         }
                     });
                     notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -340,15 +367,27 @@ public class SandwichActivity extends FragmentActivity {
                     MainActivity.vgOrSand = 1;
                     mDrawerLayout.closeDrawer(mDrawerList);
                     VistaActivity.clear = true;
-                    SandwichActivity.mActivity.finish();
-                    startActivity(intentVG);
+                    threadVG.start();
                 }
             }
             else if(parent.getPositionForView(view)==3)
             {
                 mDrawerLayout.closeDrawer(mDrawerList);
-                Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                startActivity(intentCP);
+                final Thread threadCP = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
+                        intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentCP);
+                    }
+                });
+                threadCP.start();
             }
             else
             {
@@ -423,9 +462,9 @@ public class SandwichActivity extends FragmentActivity {
             onListClick.setMessage("Would you like to add " + names.get(position) + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                Cart.add(names.get(position), prices.get(position));
-                updateBalance();
+                    //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
+                    Cart.add(names.get(position), prices.get(position));
+                    updateBalance();
                 }
             });
             onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -434,16 +473,16 @@ public class SandwichActivity extends FragmentActivity {
             });
             onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    AlertDialog.Builder onDialogClick= new AlertDialog.Builder(SandwichActivity.this);
+                    AlertDialog.Builder onDialogClick = new AlertDialog.Builder(SandwichActivity.this);
                     onDialogClick.setTitle("Description");
                     onDialogClick.setMessage(desc.get(position));
-                    onDialogClick.setPositiveButton("Ok",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int button){
+                    onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
 
                         }
                     });
-                    onDialogClick.setNegativeButton("Back",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int button){
+                    onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
                             onListClick.show();
                         }
                     });

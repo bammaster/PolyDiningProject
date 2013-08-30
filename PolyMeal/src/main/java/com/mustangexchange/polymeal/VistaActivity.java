@@ -18,27 +18,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class VistaActivity extends FragmentActivity {
@@ -78,8 +66,9 @@ public class VistaActivity extends FragmentActivity {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));
+        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mDrawerItems));*/
+        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList(Arrays.asList(mDrawerItems))));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -319,13 +308,39 @@ public class VistaActivity extends FragmentActivity {
             if(parent.getPositionForView(view)==0)
             {
                 mDrawerLayout.closeDrawer(mDrawerList);
-                Intent intentHome = new Intent(mContext, MainActivity.class);
-                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intentHome);
+                Thread threadHome = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        Intent intentHome = new Intent(mContext, MainActivity.class);
+                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentHome);
+                    }
+                });
+                threadHome.start();
             }
             else if(parent.getPositionForView(view)==1)
             {
-                final Intent intentSF = new Intent(mContext, SandwichActivity.class);
+                final Thread threadSF = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        final Intent intentSF = new Intent(mContext, SandwichActivity.class);
+                        intentSF.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentSF);
+                        VistaActivity.mActivity.finish();
+                    }
+                });
                 if(Cart.getCart().size()>0)
                 {
                     AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
@@ -338,8 +353,7 @@ public class VistaActivity extends FragmentActivity {
                             MainActivity.vgOrSand = 2;
                             mDrawerLayout.closeDrawer(mDrawerList);
                             SandwichActivity.clear = true;
-                            VistaActivity.mActivity.finish();
-                            startActivity(intentSF);
+                            threadSF.start();
                         }
                     });
                     notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -353,8 +367,7 @@ public class VistaActivity extends FragmentActivity {
                     MainActivity.vgOrSand = 2;
                     mDrawerLayout.closeDrawer(mDrawerList);
                     SandwichActivity.clear = true;
-                    VistaActivity.mActivity.finish();
-                    startActivity(intentSF);
+                    threadSF.start();
                 }
 
             }
@@ -365,9 +378,22 @@ public class VistaActivity extends FragmentActivity {
             }
             else if(parent.getPositionForView(view)==3)
             {
+                final Thread threadCP = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
+                        intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentCP);
+                    }
+                });
                 mDrawerLayout.closeDrawer(mDrawerList);
-                Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                startActivity(intentCP);
+                threadCP.start();
             }
             else
             {
@@ -447,7 +473,7 @@ public class VistaActivity extends FragmentActivity {
             final AlertDialog.Builder onListClick= new AlertDialog.Builder(VistaActivity.this);
             onListClick.setCancelable(false);
             onListClick.setTitle("Add to Cart?");
-            onListClick.setMessage("Would you like to add " + names.get(position).replace("@#$","") + " to your cart? Price: " + "$" + prices.get(position));
+            onListClick.setMessage("Would you like to add " + names.get(position).replace("@#$", "") + " to your cart? Price: " + "$" + prices.get(position));
             onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     //money = boundPrices.get(tempIndex);
@@ -465,7 +491,7 @@ public class VistaActivity extends FragmentActivity {
                         onYes.setView(DialogView);
                         onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
-                                Cart.add(names.get(position),  Double.toString(np.getValue()*new Double(prices.get(position))));
+                                Cart.add(names.get(position), Double.toString(np.getValue() * new Double(prices.get(position))));
                                 updateBalance();
                             }
                         });
@@ -486,16 +512,16 @@ public class VistaActivity extends FragmentActivity {
             });
             onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    AlertDialog.Builder onDialogClick= new AlertDialog.Builder(VistaActivity.this);
+                    AlertDialog.Builder onDialogClick = new AlertDialog.Builder(VistaActivity.this);
                     onDialogClick.setTitle("Description");
                     onDialogClick.setMessage(desc.get(position));
-                    onDialogClick.setPositiveButton("Ok",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int button){
+                    onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
 
                         }
                     });
-                    onDialogClick.setNegativeButton("Back",new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int button){
+                    onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
                             onListClick.show();
                         }
                     });
