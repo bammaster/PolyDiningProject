@@ -110,7 +110,17 @@ public class VistaActivity extends FragmentActivity {
             /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
                get what is applicable at this time period rather than the whole thing. This prevents
                ArrayOutOfBoundsExceptions later on.
-            */
+            */  if(MainActivity.vgItems.get(i).getTitle().equals("Salad Bar"))
+                {
+                    if(MainActivity.vgItems.get(i).getNames().get(0).equals("@#$Soup"))
+                    {
+                        String soup = MainActivity.vgItems.get(i).getDesc().get(0);
+                        soup = "Daily soups available";
+                    } else if(MainActivity.vgItems.get(i).getNames().get(1).equals("@#$Salad"))
+                    {
+                        MainActivity.vgItems.get(i).addDesc("Build Your Own Salad from a variety of fresh toppings.");
+                    }
+                }
                 foodAdapterList.add(new FoodItemAdapter(this, MainActivity.vgItems.get(i).getTitle(),MainActivity.vgItems.get(i).getDesc(), MainActivity.vgItems.get(i).getNames(),
                         MainActivity.vgItems.get(i).getPrices()));
             }

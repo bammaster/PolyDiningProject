@@ -157,6 +157,7 @@ public class Parser
             }
             else
             {
+                description = description.replaceFirst(" ", "");
                 set.addDesc(description);
             }
         }

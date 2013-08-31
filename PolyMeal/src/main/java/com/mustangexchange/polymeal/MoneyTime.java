@@ -3,40 +3,40 @@ package com.mustangexchange.polymeal;
 import android.text.format.Time;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by Blake on 8/7/13.
  */
 public class MoneyTime
 {
-    public static double moneySpent;
+    public static BigDecimal moneySpent = new BigDecimal("0.00");
     public static Time today = new Time(Time.getCurrentTimezone());
-    public static double money;
-    public static BigDecimal bd;
+    public static BigDecimal money;
+
     //gets time, calculates monetary value of a meal minus whatever has been spent then returns that value
     public static BigDecimal calcTotalMoney()
     {
-        bd = new BigDecimal(money+"");
-        bd.setScale(2,BigDecimal.ROUND_HALF_EVEN);
         today.setToNow();
         int minutes = (today.hour*60)+today.minute;
         if(minutes>=420&&minutes<=599)
         {
-             money = 7.90;
+             money = new BigDecimal("7.90");
         }
         else if(minutes>=600&&minutes<=1019)
         {
-             money = 9.00;
+             money = new BigDecimal("9.00");
         }
         else if(minutes>=1020&&minutes<=1214)
         {
-             money = 10.75;
+             money = new BigDecimal("10.75");
         }
         else
         {
-            money = 8.75;
+            money = new BigDecimal("8.75");
         }
         //return bd.subtract(new BigDecimal(moneySpent));
-        return new BigDecimal(money - moneySpent).setScale(2, BigDecimal.ROUND_CEILING);
+        return money.subtract(moneySpent).setScale(2, RoundingMode.HALF_EVEN);
+        //return  moneyFormat(new BigDecimal(Double.toString(Double.valueOf(money.toString()) - Double.valueOf(moneySpent.toString()))));
     }
 }
