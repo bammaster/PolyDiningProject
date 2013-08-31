@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -37,7 +35,7 @@ public class MainActivity extends Activity{
     private Handler uiUpdate= new Handler();
     private TextView download;
     private ProgressBar downloadProgress;
-    Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
+    private Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
