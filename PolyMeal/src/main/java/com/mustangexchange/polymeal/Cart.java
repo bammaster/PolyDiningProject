@@ -1,12 +1,11 @@
 package com.mustangexchange.polymeal;
 
-import java.math.BigDecimal;
 import android.content.SharedPreferences;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
