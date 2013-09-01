@@ -20,12 +20,11 @@ public class CompleteorActivity extends Activity {
 
     private ItemSet possibleItems;
     private ItemSet dummyItems;
-    private Thread calcCompleteor;
 
     private ActionBar mActionBar;
     private static BigDecimal totalAmount;
     private static Context mContext;
-
+    private static Activity activity;
     public ListView lv;
     public CompleteorItemAdapter dummyAdapter;
     public CompleteorItemAdapter lvAdapter;
@@ -35,21 +34,87 @@ public class CompleteorActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completeor);
 
-        possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
-        dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>()); 
-        lv = (ListView) findViewById(R.id.listView);
-
-        dummyAdapter = new CompleteorItemAdapter(this, dummyItems);
-        lvAdapter = new CompleteorItemAdapter(this, possibleItems);
-        lv.setAdapter(dummyAdapter);
-
-        new calcCompleteor().execute("");
-
         mContext = this;
-
+        activity = this;
         mActionBar = getActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
+
+        possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        dummyAdapter = new CompleteorItemAdapter(this, dummyItems);
+        lvAdapter = new CompleteorItemAdapter(this, possibleItems);
+
+        lv = (ListView) findViewById(R.id.listView);
+        lv.setAdapter(dummyAdapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
+                final int fPos = pos;
+                final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+                onListClick.setCancelable(false);
+                onListClick.setTitle("Add to Cart?");
+                onListClick.setMessage("Would you like to add " + possibleItems.getNames().get(pos).replace("@#$", "") + " to your cart? Price: " + "$" + possibleItems.getPrices().get(pos));
+                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                        //money = boundPrices.get(tempIndex);
+                        if (possibleItems.getNames().get(fPos).contains("@#$")) {
+                            AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
+                            onYes.setTitle("How much?");
+                            onYes.setMessage("Estimated Number of Ounces: ");
+                            LayoutInflater inflater = activity.getLayoutInflater();
+                            View DialogView = inflater.inflate(R.layout.number_picker, null);
+                            final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
+                            np.setMinValue(1);
+                            np.setMaxValue(50);
+                            np.setWrapSelectorWheel(false);
+                            np.setValue(1);
+                            onYes.setView(DialogView);
+                            onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int button) {
+                                    Cart.add(possibleItems.getNames().get(fPos), Double.toString(np.getValue() * new Double(possibleItems.getPrices().get(fPos))));
+                                    updateBalance();
+                                }
+                            });
+                            onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int button) {
+                                }
+                            });
+                            onYes.show();
+                        } else {
+                            Cart.add(possibleItems.getNames().get(fPos), possibleItems.getPrices().get(fPos));
+                            updateBalance();
+                        }
+                    }
+                });
+                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                    }
+                });
+                onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                        AlertDialog.Builder onDialogClick = new AlertDialog.Builder(activity);
+                        onDialogClick.setTitle("Description");
+                        onDialogClick.setMessage(possibleItems.getDesc().get(fPos));
+                        onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+
+                            }
+                        });
+                        onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                onListClick.show();
+                            }
+                        });
+                        onDialogClick.show();
+                    }
+                });
+                onListClick.show();
+            }
+        });
+
+        new calcCompleteor().execute("");
+
         updateBalance();
     }
 
@@ -91,7 +156,6 @@ public class CompleteorActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.completeor, menu);
         return super.onCreateOptionsMenu(menu);
@@ -231,26 +295,18 @@ public class CompleteorActivity extends Activity {
 
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("JON LOOK HERE, DO IN BACKGROUND");
             if(MainActivity.vgOrSand==1)
             {
-                System.out.println("JON LOOK HERE, DO IN BACKGROUND, VGs");
                 System.out.println(MainActivity.vgItems.get(0).getTitle());
                 for(int i = 0;i<MainActivity.vgItems.size();i++)
                 {
-                    
-                    System.out.println("JON LOOK HERE, DO IN BACKGROUND, GOT SIZE" + i);
                     for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
                     {
-                        
                         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
                         {
-                            System.out.println("JON LOOK HERE, DO IN BACKGROUND, ABOUT TO ADD NAME" + i + j);
                             possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                            
-                            System.out.println("JON LOOK HERE, DO IN BACKGROUND, ABOUT TO ADD PICE" + i + j);
                             possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
-                            
+                            possibleItems.getDesc().add(MainActivity.vgItems.get(i).getDesc().get(j));
                         }
                     }
                 }
@@ -264,9 +320,8 @@ public class CompleteorActivity extends Activity {
                         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
                         {
                             possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
-                            
                             possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
-                            
+                            possibleItems.getDesc().add(MainActivity.sandItems.get(i).getDesc().get(j));
                         }
                     }
                 }
@@ -276,7 +331,6 @@ public class CompleteorActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            System.out.println("POST EXECUTE DONE");
             lvAdapter.notifyDataSetChanged();
             lv.setAdapter(lvAdapter);
             checkLayout();
@@ -287,7 +341,6 @@ public class CompleteorActivity extends Activity {
             lv.setAdapter(dummyAdapter);
             possibleItems.clear();
             lvAdapter.getPossibleItems().clear();
-            System.out.println("PRE EXECUTE DONE");
         }
 
         @Override

@@ -35,6 +35,8 @@ public class CartActivity extends Activity {
         SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
+        lv.setFocusable(false);
+        lv.setFocusableInTouchMode(false);
 
         mContext = this;
         mActivity = this;

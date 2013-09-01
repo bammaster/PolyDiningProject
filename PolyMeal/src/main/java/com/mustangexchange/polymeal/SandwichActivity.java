@@ -12,13 +12,20 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.*;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.*;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,18 +38,14 @@ public class SandwichActivity extends FragmentActivity {
 
     Parser parseHtml;
     Handler uiUpdate= new Handler();
-    private ListView lv;
-    private TextView moneyView;
-    private String money;
-    private int tempIndex;
     private ProgressDialog status;
 
     private ViewPager vp;
     private PagerTabStrip myPagerTabStrip;
-    private static ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
+    private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
     public static BigDecimal totalAmount;
-    public final Activity activity = this;
+    public static Activity mActivity;
 
     public static Context mContext;
 
@@ -50,7 +53,6 @@ public class SandwichActivity extends FragmentActivity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private String[]  mDrawerItems;
-    public static Activity mActivity;
     public static boolean clear;
 
     @Override
@@ -121,7 +123,7 @@ public class SandwichActivity extends FragmentActivity {
         }
 
         vp = (ViewPager) findViewById(R.id.pager);
-        vp.setAdapter(new SandwichPagerAdapter(getSupportFragmentManager(), foodAdapterList));
+        vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
@@ -141,28 +143,25 @@ public class SandwichActivity extends FragmentActivity {
         updateBalance();
     }
 
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(Configuration newConfig)
+    {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void setSubtitleColor() {
+    public static void setSubtitleColor()
+    {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-        TextView yourTextView = (TextView)findViewById(titleId);
+        TextView yourTextView = (TextView) mActivity.findViewById(titleId);
         if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
         {
             yourTextView.setTextColor(Color.RED);
@@ -173,7 +172,7 @@ public class SandwichActivity extends FragmentActivity {
         }
     }
 
-    public void updateBalance() {
+    public static void updateBalance() {
         totalAmount = MoneyTime.calcTotalMoney();
         setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
@@ -182,7 +181,6 @@ public class SandwichActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
@@ -309,7 +307,6 @@ public class SandwichActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         Intent intentHome = new Intent(mContext, MainActivity.class);
@@ -332,7 +329,6 @@ public class SandwichActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         final Intent intentVG = new Intent(mContext, VistaActivity.class);
@@ -379,7 +375,6 @@ public class SandwichActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
@@ -392,179 +387,6 @@ public class SandwichActivity extends FragmentActivity {
             else
             {
                 Toast.makeText(mContext, "Invalid Selection!", Toast.LENGTH_SHORT);
-            }
-        }
-    }
-
-    public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
-        private Context context;
-
-        private ArrayList<String> names;
-        private ArrayList<String> prices;
-        private ArrayList<String> desc;
-        private String title;
-
-        public FoodItemAdapter(Context context, String title, ArrayList<String> desc, ArrayList<String> names, ArrayList<String> prices) {
-            this.context = context;
-            this.names = names;
-            this.prices = prices;
-            this.title = title;
-            this.desc = desc;
-        }
-
-        public ArrayList<String> getNames() {
-            return names;
-        }
-
-        public ArrayList<String> getPrices() {
-            return prices;
-        }
-
-        public ArrayList<String> getDesc() {
-            return desc;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public int getCount() {
-            return names.size();
-        }
-
-        public Object getItem(int position) {
-            return names.get(position);
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
-            //ItemSet entry = setList.get(position);
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.row_item, null);
-            }
-            TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(names.get(position));
-
-            TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            if(prices.size() != 0)
-            {
-                tvPrice.setText("$" + prices.get(position));
-            }
-
-            //Set the onClick Listener on this button
-            ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
-            btnAdd.setFocusableInTouchMode(false);
-            btnAdd.setFocusable(false);
-            btnAdd.setOnClickListener(this);
-            btnAdd.setTag(new Integer(position));
-
-            return convertView;
-        }
-
-        @Override
-        public void onClick(View view) {
-            final int position = (Integer) view.getTag();
-            Cart.add(names.get(position), prices.get(position));
-            updateBalance();
-            Toast.makeText(mContext, names.get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public class SandwichPagerAdapter extends FragmentPagerAdapter {
-
-        //ArrayList<ItemSet> foodList;
-        ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList;
-
-        public SandwichPagerAdapter(FragmentManager fm, ArrayList<SandwichActivity.FoodItemAdapter> foodAdapterList) {
-            super(fm);
-            //this.foodList = foodList;
-            this.foodAdapterList = foodAdapterList;
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            return new MyFragment(i);
-        }
-
-        @Override
-        public int getCount() {
-            return foodAdapterList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return foodAdapterList.get(position).getTitle();
-        }
-        @Override
-        public int getItemPosition(Object object){
-            return POSITION_NONE;
-        }
-
-        private class MyFragment extends Fragment {
-
-            private int position;
-
-            public MyFragment(int position) {
-                this.position = position;
-            }
-
-            @Override
-            public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                     Bundle savedInstanceState) {
-
-                View rootView = inflater.inflate(R.layout.main_fragment, container, false);
-                //Actual Fragment inflating happens in the next line.
-                ListView lv = ((ListView) rootView.findViewById(R.id.list));
-                lv.setAdapter(foodAdapterList.get(position));
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
-                        //Log.i(TAG, "onListItemClick: " + position);
-                        final AlertDialog.Builder onListClick= new AlertDialog.Builder(SandwichActivity.this);
-                        final int fPos = pos;
-                        onListClick.setTitle("Add to Cart?");
-                        onListClick.setMessage("Would you like to add " + foodAdapterList.get(position).getNames().get(pos) + " to your cart? Price: " + "$" + foodAdapterList.get(position).getPrices().get(pos));
-                        onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                                Cart.add(foodAdapterList.get(position).getNames().get(fPos), foodAdapterList.get(position).getPrices().get(fPos));
-                                updateBalance();
-                            }
-                        });
-                        onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                            }
-                        });
-                        onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(SandwichActivity.this);
-                                onDialogClick.setTitle("Description");
-                                onDialogClick.setMessage(foodAdapterList.get(position).getDesc().get(fPos));
-                                onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
-
-                                    }
-                                });
-                                onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
-                                        onListClick.show();
-                                    }
-                                });
-                                onDialogClick.show();
-                            }
-                        });
-                        onListClick.show();
-
-                    }
-
-                });
-
-            return rootView;
             }
         }
     }

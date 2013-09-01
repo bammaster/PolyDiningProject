@@ -8,9 +8,6 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-/**
- * Created by Blake on 8/9/13.
- */
 public class Cart
 {
     private static ArrayList<String> cart = new ArrayList<String>();
