@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
@@ -130,8 +129,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             onYes.setView(DialogView);
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    DecimalFormat twoDForm = new DecimalFormat("#.##");
-                    Cart.add(names.get(position), twoDForm.format(np.getValue() * new Double(prices.get(position))));
+                    Cart.add(names.get(position), Double.toString(np.getValue() * new Double(prices.get(position))));
                     StringBuilder sb = new StringBuilder(names.get(position) + " added to Cart!");
                     sb.replace(0,3,"");
                     Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();

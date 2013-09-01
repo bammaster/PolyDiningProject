@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cart
@@ -13,11 +15,15 @@ public class Cart
     private static ArrayList<String> cart = new ArrayList<String>();
     private static ArrayList<String> cartMoney = new ArrayList<String>();
     private static Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
+    public static BigDecimal bdPrice = new BigDecimal("0.00");
+
     public static void add(String item,String price)
     {
         cart.add(item);
-        cartMoney.add(price);
-        System.out.println("item: " + item + "price: " + price);
+        bdPrice = new BigDecimal(price);
+        bdPrice.setScale(2, RoundingMode.HALF_EVEN);
+        cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
+        System.out.println("item: " + item + " price: " + price);
         MoneyTime.moneySpent = MoneyTime.moneySpent.add(new BigDecimal(price));
     }
     public static void remove(int index)

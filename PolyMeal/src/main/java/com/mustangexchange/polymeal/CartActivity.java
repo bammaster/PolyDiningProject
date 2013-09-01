@@ -2,17 +2,16 @@ package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,43 +20,51 @@ public class CartActivity extends Activity {
 
     private static TextView moneyView;
     private ListView lv;
+    private CartItemAdapter cartAdapter;
     private static BigDecimal totalAmount;
     private static ActionBar mActionBar;
 
     private static Context mContext;
-    public static Activity mActivity;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_cart);
+
         SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
-        lv = (ListView)findViewById(R.id.listView);
-        lv.setAdapter(new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney()));
-        lv.setFocusable(false);
-        lv.setFocusableInTouchMode(false);
+        cartAdapter = new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney());
 
         mContext = this;
-        mActivity = this;
+        activity = this;
+
+        lv = (ListView)findViewById(R.id.listView);
+        lv.setAdapter(cartAdapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
+                final int fPos = pos;
+                final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+                onListClick.setCancelable(false);
+                onListClick.setTitle("Remove to Cart?");
+                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).replace("@#$", "") + " to your cart? \nPrice: " + "$" +  Cart.getCartMoney().get(pos));
+                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                        removeFromCart(fPos);
+                    }
+                });
+                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                    }
+                });
+                onListClick.show();
+            }
+        });
 
         mActionBar = getActionBar();
         updateBalance();
 
         isCartEmpty();
-    }
-
-    public static void setTextMoney()
-    {
-        moneyView.setText("$"+MoneyTime.calcTotalMoney());
-        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal("0"))==-1)
-        {
-            moneyView.setTextColor(Color.RED);
-        }
-        else
-        {
-            moneyView.setTextColor(Color.parseColor("#C6930A"));
-        }
     }
 
     public void isCartEmpty()
@@ -70,16 +77,14 @@ public class CartActivity extends Activity {
         }
     }
 
-    /*public void onResume()
-    {
-        super.onResume();
+    public void removeFromCart(int position) {
+        Cart.remove(position);
+        cartAdapter.cart.remove(position);
+        cartAdapter.cartMoney.remove(position);
         updateBalance();
-        ViewGroup view = (ViewGroup)getWindow().getDecorView();
-        if(view.getChildAt(0) == findViewById(R.layout.activity_cart))
-        {
-            ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
-        }
-    }*/
+        isCartEmpty();
+        cartAdapter.notifyDataSetChanged();
+    }
 
     public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
@@ -116,6 +121,15 @@ public class CartActivity extends Activity {
                 Intent intent = new Intent(this, CompleteorActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.clrCart:
+                Cart.clear();
+                cartAdapter.clearCart();
+                cartAdapter.clearCartMoney();
+                cartAdapter.notifyDataSetChanged();
+                isCartEmpty();
+                updateBalance();
+                Toast.makeText(this, "Cart Cleared!", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -126,26 +140,40 @@ public class CartActivity extends Activity {
         private ArrayList<String> cart;
         private ArrayList<String> cartMoney;
 
-        public CartItemAdapter(Context context, ArrayList<String> cart, ArrayList<String> cartMoney) {
+        public CartItemAdapter(Context context, ArrayList<String> cart, ArrayList<String> cartMoney)
+        {
             this.context = context;
             this.cart = cart;
             this.cartMoney = cartMoney;
         }
 
+        public void clearCart()
+        {
+            cart.clear();
+        }
 
-        public int getCount() {
+        public void clearCartMoney()
+        {
+            cartMoney.clear();
+        }
+
+        public int getCount()
+        {
             return cart.size();
         }
 
-        public Object getItem(int position) {
+        public Object getItem(int position)
+        {
             return cart.get(position);
         }
 
-        public long getItemId(int position) {
+        public long getItemId(int position)
+        {
             return position;
         }
 
-        public View getView(int position, View convertView, ViewGroup viewGroup) {
+        public View getView(int position, View convertView, ViewGroup viewGroup)
+        {
             Integer entry = position;
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) context
@@ -170,14 +198,14 @@ public class CartActivity extends Activity {
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View view)
+        {
             Integer entry = (Integer) view.getTag();
             Cart.remove(entry);
             cart.remove(entry);
             cartMoney.remove(entry);
             updateBalance();
             isCartEmpty();
-            // listPhonebook.remove(view.getId());
             notifyDataSetChanged();
         }
     }
