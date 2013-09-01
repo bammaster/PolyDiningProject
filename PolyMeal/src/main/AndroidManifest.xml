@@ -25,19 +25,23 @@
         </activity>
         <activity
             android:name="com.mustangexchange.polymeal.VistaActivity"
-            android:label="@string/title_activity_vg" >
+            android:label="@string/title_activity_vg"
+            android:screenOrientation="portrait">
     </activity>
         <activity
             android:name="com.mustangexchange.polymeal.CartActivity"
-            android:label="@string/title_activity_cart" >
+            android:label="@string/title_activity_cart"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.mustangexchange.polymeal.SandwichActivity"
-            android:label="@string/title_activity_sandwich" >
+            android:label="@string/title_activity_sandwich"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.mustangexchange.polymeal.CompleteorActivity"
-            android:label="@string/title_activity_completeor" >
+            android:label="@string/title_activity_completeor"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

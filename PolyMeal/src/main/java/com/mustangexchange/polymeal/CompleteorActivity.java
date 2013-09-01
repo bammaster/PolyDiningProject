@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -75,6 +76,7 @@ public class CompleteorActivity extends Activity {
                                 public void onClick(DialogInterface dialog, int button) {
                                     Cart.add(possibleItems.getNames().get(fPos), Double.toString(np.getValue() * new Double(possibleItems.getPrices().get(fPos))));
                                     updateBalance();
+                                    updateList();
                                 }
                             });
                             onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -85,6 +87,7 @@ public class CompleteorActivity extends Activity {
                         } else {
                             Cart.add(possibleItems.getNames().get(fPos), possibleItems.getPrices().get(fPos));
                             updateBalance();
+                            updateList();
                         }
                     }
                 });
@@ -160,6 +163,12 @@ public class CompleteorActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.completeor, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        //mDrawerToggle.onConfigurationChanged(newConfig);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -264,6 +273,7 @@ public class CompleteorActivity extends Activity {
                         sb.replace(0,3,"");
                         Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();
                         updateBalance();
+                        updateList();
                     }
                 });
                 onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -277,6 +287,7 @@ public class CompleteorActivity extends Activity {
                 Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
                 updateBalance();
                 Toast.makeText(activity, possibleItems.getNames().get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+                updateList();
             }
         }
     }
