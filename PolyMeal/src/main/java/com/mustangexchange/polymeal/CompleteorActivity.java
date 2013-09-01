@@ -14,6 +14,7 @@ import android.view.*;
 import android.widget.*;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CompleteorActivity extends Activity {
@@ -243,51 +244,40 @@ public class CompleteorActivity extends Activity {
         @Override
         public void onClick(View view) {
             final int position = (Integer) view.getTag();
-            AlertDialog.Builder onListClick= new AlertDialog.Builder(CompleteorActivity.this);
-            onListClick.setTitle("Add to Cart?");
-            onListClick.setMessage("Would you like to add " + possibleItems.getNames().get(position).replace("@#$","") + " to your cart? Price: " + "$" + possibleItems.getPrices().get(position));
-            onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                    //money = boundPrices.get(tempIndex);
-                    if (possibleItems.getNames().get(position).contains("@#$")) {
-                        AlertDialog.Builder onYes = new AlertDialog.Builder(CompleteorActivity.this);
-                        onYes.setTitle("How much?");
-                        onYes.setMessage("Estimated Number of Ounces: ");
-                        LayoutInflater inflater = CompleteorActivity.this.getLayoutInflater();
-                        View DialogView = inflater.inflate(R.layout.number_picker, null);
-                        final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
-                        np.setMinValue(1);
-                        np.setMaxValue(50);
-                        np.setWrapSelectorWheel(false);
-                        np.setValue(1);
-                        onYes.setView(DialogView);
-                        onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                                //MoneyTime.moneySpent = MoneyTime.moneySpent + (np.getValue()*new Double(money));
-                                //Cart.add(possibleItems.getNames().get(position), (new BigDecimal(possibleItems.getPrices().get(position)).multiply(new BigDecimal(np.getValue() + ""))).setScale(2)+"");
-                                Cart.add(possibleItems.getNames().get(position), Double.toString(np.getValue() * new Double(possibleItems.getPrices().get(position))));
-                                updateBalance();
-                                updateList();
-                            }
-                        });
-                        onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int button) {
-                            }
-                        });
-                        onYes.show();
-                    } else {
-                        //MoneyTime.moneySpent = MoneyTime.moneySpent + (new Double(money));
-                        Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
+            if (possibleItems.getNames().get(position).contains("@#$")) {
+                AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
+                onYes.setTitle("How much?");
+                onYes.setMessage("Estimated Number of Ounces: ");
+                LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
+                View DialogView = inflater.inflate(R.layout.number_picker, null);
+                final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
+                np.setMinValue(1);
+                np.setMaxValue(50);
+                np.setWrapSelectorWheel(false);
+                np.setValue(1);
+                onYes.setView(DialogView);
+                onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                        DecimalFormat twoDForm = new DecimalFormat("#.##");
+                        Cart.add(possibleItems.getNames().get(position), twoDForm.format(np.getValue() * new Double(possibleItems.getPrices().get(position))));
+                        StringBuilder sb = new StringBuilder(possibleItems.getNames().get(position) + " added to Cart!");
+                        sb.replace(0,3,"");
+                        Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();
                         updateBalance();
-                        updateList();
                     }
-                }
-            });
-            onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                }
-            });
-            onListClick.show();
+                });
+                onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                    }
+                });
+                onYes.show();
+            }
+            else
+            {
+                Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
+                updateBalance();
+                Toast.makeText(activity, possibleItems.getNames().get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
