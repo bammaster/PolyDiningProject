@@ -1,6 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

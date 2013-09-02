@@ -25,8 +25,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity{
 
-    public static ArrayList<ItemSet> vgItems;
-    public static ArrayList<ItemSet> sandItems;
     private Parser parseHtml;
     private Thread internet;
     public static int vgOrSand;
@@ -45,8 +43,8 @@ public class MainActivity extends Activity{
         final TextView select = (TextView)findViewById(R.id.selectText);
         final Button sandwich = (Button)findViewById(R.id.buttonSand);
         final Button vista = (Button)findViewById(R.id.buttonVista);
-        vgItems = new ArrayList<ItemSet>();
-        sandItems = new ArrayList<ItemSet>();
+        ItemListContainer.vgItems = new ArrayList<ItemSet>();
+        ItemListContainer.sandItems = new ArrayList<ItemSet>();
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         final Animation in2 = new AlphaAnimation(0.0f, 1.0f);
         select.setVisibility(View.INVISIBLE);
@@ -100,7 +98,7 @@ public class MainActivity extends Activity{
                     });
                     try
                     {
-                        parseHtml = new Parser(vgItems);
+                        parseHtml = new Parser(ItemListContainer.vgItems);
                         parseHtml.parse(docVg,false);
                     }
                     catch(Exception e)
@@ -135,7 +133,7 @@ public class MainActivity extends Activity{
                     });
                     try
                     {
-                        parseHtml = new Parser(sandItems);
+                        parseHtml = new Parser(ItemListContainer.sandItems);
                         parseHtml.parse(docSand,true);
                     }
                     catch(Exception e)
@@ -187,9 +185,9 @@ public class MainActivity extends Activity{
                         SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
                         Gson gson = new Gson();
                         String sand = appSharedPrefs.getString("Sandwich Factory Items", "");
-                        sandItems = gson.fromJson(sand, gsonType);
+                        ItemListContainer.sandItems = gson.fromJson(sand, gsonType);
                         String vg = appSharedPrefs.getString("Vista Grande Items", "");
-                        vgItems = gson.fromJson(vg,gsonType);
+                        ItemListContainer.vgItems = gson.fromJson(vg,gsonType);
                         vista.setEnabled(true);
                         sandwich.setEnabled(true);
                         download.setVisibility(View.INVISIBLE);
@@ -199,19 +197,14 @@ public class MainActivity extends Activity{
                 SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
                 Gson gson = new Gson();
-                String sand = gson.toJson(sandItems,gsonType);
-                String vg = gson.toJson(vgItems,gsonType);
+                String sand = gson.toJson(ItemListContainer.sandItems,gsonType);
+                String vg = gson.toJson(ItemListContainer.vgItems,gsonType);
                 prefsEditor.putString("Sandwich Factory Items", sand);
                 prefsEditor.putString("Vista Grande Items", vg);
                 prefsEditor.commit();
             }
         });
         internet.start();
-    }
-
-    public void onResume()
-    {
-        super.onResume();
     }
 
     public void vg(View v)
@@ -225,6 +218,7 @@ public class MainActivity extends Activity{
             notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     Cart.clear();
+                    vgOrSand = 1;
                     Toast.makeText(MainActivity.this, "Cart Cleared!", Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
@@ -255,6 +249,7 @@ public class MainActivity extends Activity{
             notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     Cart.clear();
+                    vgOrSand = 2;
                     Toast.makeText(MainActivity.this,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                     startActivity(i);
 

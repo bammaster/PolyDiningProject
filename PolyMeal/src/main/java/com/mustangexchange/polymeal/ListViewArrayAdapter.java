@@ -30,20 +30,9 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.drawer_list_item, parent, false);
-
         TextView drawerItem = (TextView) convertView.findViewById(R.id.text1);
         drawerItem.setText(strings.get(position));
         drawerItem.setTypeface(font);
-        /*titleTextView.setTag(new Integer(position));
-        titleTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Cart.remove(new Integer(view.getTag().toString()));
-                CartActivity.setTextMoney();
-                notifyDataSetChanged();
-            }
-        });*/
-
         return convertView;
 
     }

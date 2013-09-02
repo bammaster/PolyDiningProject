@@ -23,7 +23,6 @@ public class Cart
         bdPrice = new BigDecimal(price);
         bdPrice.setScale(2, RoundingMode.HALF_EVEN);
         cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
-        System.out.println("item: " + item + " price: " + price);
         MoneyTime.moneySpent = MoneyTime.moneySpent.add(new BigDecimal(price));
     }
     public static void remove(int index)

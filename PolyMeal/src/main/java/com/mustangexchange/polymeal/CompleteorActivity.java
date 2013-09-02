@@ -298,31 +298,31 @@ public class CompleteorActivity extends Activity {
         protected String doInBackground(String... params) {
             if(MainActivity.vgOrSand==1)
             {
-                System.out.println(MainActivity.vgItems.get(0).getTitle());
-                for(int i = 0;i<MainActivity.vgItems.size();i++)
+                System.out.println(ItemListContainer.vgItems.get(0).getTitle());
+                for(int i = 0;i<ItemListContainer.vgItems.size();i++)
                 {
-                    for(int j = 0;j<MainActivity.vgItems.get(i).getPrices().size();j++)
+                    for(int j = 0;j<ItemListContainer.vgItems.get(i).getPrices().size();j++)
                     {
-                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.vgItems.get(i).getPrices().get(j)))>=0)
+                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(ItemListContainer.vgItems.get(i).getPrices().get(j)))>=0)
                         {
-                            possibleItems.getNames().add(MainActivity.vgItems.get(i).getNames().get(j));
-                            possibleItems.getPrices().add(MainActivity.vgItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(MainActivity.vgItems.get(i).getDesc().get(j));
+                            possibleItems.getNames().add(ItemListContainer.vgItems.get(i).getNames().get(j));
+                            possibleItems.getPrices().add(ItemListContainer.vgItems.get(i).getPrices().get(j));
+                            possibleItems.getDesc().add(ItemListContainer.vgItems.get(i).getDesc().get(j));
                         }
                     }
                 }
             }
             else if(MainActivity.vgOrSand==2)
             {
-                for(int i = 0;i<MainActivity.sandItems.size();i++)
+                for(int i = 0;i<ItemListContainer.sandItems.size();i++)
                 {
-                    for(int j = 0;j<MainActivity.sandItems.get(i).getPrices().size();j++)
+                    for(int j = 0;j<ItemListContainer.sandItems.get(i).getPrices().size();j++)
                     {
-                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(MainActivity.sandItems.get(i).getPrices().get(j)))>=0)
+                        if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(ItemListContainer.sandItems.get(i).getPrices().get(j)))>=0)
                         {
-                            possibleItems.getNames().add(MainActivity.sandItems.get(i).getNames().get(j));
-                            possibleItems.getPrices().add(MainActivity.sandItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(MainActivity.sandItems.get(i).getDesc().get(j));
+                            possibleItems.getNames().add(ItemListContainer.sandItems.get(i).getNames().get(j));
+                            possibleItems.getPrices().add(ItemListContainer.sandItems.get(i).getPrices().get(j));
+                            possibleItems.getDesc().add(ItemListContainer.sandItems.get(i).getDesc().get(j));
                         }
                     }
                 }

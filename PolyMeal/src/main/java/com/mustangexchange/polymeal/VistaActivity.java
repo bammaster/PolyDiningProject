@@ -7,11 +7,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
@@ -26,9 +26,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,16 +34,15 @@ import java.util.Arrays;
 
 public class VistaActivity extends FragmentActivity {
 
-    private Parser parseHtml;
-    private Handler uiUpdate= new Handler();
     private ProgressDialog status;
-
     private ViewPager vp;
     private PagerTabStrip myPagerTabStrip;
     private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
     public static BigDecimal totalAmount;
     private static Context mContext;
+    private ItemListContainer data = new ItemListContainer();
+    private SharedPreferences sp;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -59,7 +55,7 @@ public class VistaActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista);
-
+        sp = getSharedPreferences("PolyMeal",MODE_PRIVATE);
         mContext = this;
         mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,34 +100,42 @@ public class VistaActivity extends FragmentActivity {
            Fragment inner class called MyFragment.
         */
         foodAdapterList.clear();
-        for(int i = 0;i<MainActivity.vgItems.size();i++)
+        for(int i = 0;i<ItemListContainer.vgItems.size();i++)
         {
-            if(MainActivity.vgItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
+            if(ItemListContainer.vgItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
             {
             /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
                get what is applicable at this time period rather than the whole thing. This prevents
                ArrayOutOfBoundsExceptions later on.
-            */  if(MainActivity.vgItems.get(i).getTitle().equals("Salad Bar"))
-                {
-                    if(MainActivity.vgItems.get(i).getNames().get(0).equals("@#$Soup"))
-                    {
-                        String soup = MainActivity.vgItems.get(i).getDesc().get(0);
-                        soup = "Daily soups available";
-                    } else if(MainActivity.vgItems.get(i).getNames().get(1).equals("@#$Salad"))
-                    {
-                        MainActivity.vgItems.get(i).addDesc("Build Your Own Salad from a variety of fresh toppings.");
-                    }
-                }
-                foodAdapterList.add(new FoodItemAdapter(this, MainActivity.vgItems.get(i).getTitle(),MainActivity.vgItems.get(i).getDesc(), MainActivity.vgItems.get(i).getNames(),
-                        MainActivity.vgItems.get(i).getPrices()));
+            */
+                foodAdapterList.add(new FoodItemAdapter(this, ItemListContainer.vgItems.get(i).getTitle(),ItemListContainer.vgItems.get(i).getDesc(), ItemListContainer.vgItems.get(i).getNames(),
+                        ItemListContainer.vgItems.get(i).getPrices()));
             }
-
         }
 
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
+        if(ItemListContainer.vgItems.size()==0)
+        {
+            try
+            {
+                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
+                status.setMessage("Downloading and Parsing...");
+                status.setTitle("Refreshing Menu Data");
+                status.setIndeterminate(true);
+                data.refresh(mContext,mActivity,status,vp);
+            }
+            catch(Exception e)
+            {
+                if(status.isShowing())
+                {
+                    status.dismiss();
+                }
+                data.loadFromCache(sp,vp);
+            }
+            updateBalance();
+        }
         vp.getAdapter().notifyDataSetChanged();
-
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
@@ -146,6 +150,50 @@ public class VistaActivity extends FragmentActivity {
     public void onResume()
     {
         super.onResume();
+        if(ItemListContainer.vgItems.size()==0)
+        {
+            try
+            {
+                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
+                status.setMessage("Downloading and Parsing...");
+                status.setTitle("Refreshing Menu Data");
+                status.setIndeterminate(true);
+                data.refresh(mContext,mActivity,status,vp);
+            }
+            catch(Exception e)
+            {
+                if(status.isShowing())
+                {
+                    status.dismiss();
+                }
+                data.loadFromCache(sp,vp);
+            }
+        }
+        updateBalance();
+    }
+
+    public void onStart()
+    {
+        super.onStart();
+        if(ItemListContainer.vgItems.size()==0)
+        {
+            try
+            {
+                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
+                status.setMessage("Downloading and Parsing...");
+                status.setTitle("Refreshing Menu Data");
+                status.setIndeterminate(true);
+                data.refresh(mContext,mActivity,status,vp);
+            }
+            catch(Exception e)
+            {
+                if(status.isShowing())
+                {
+                    status.dismiss();
+                }
+                data.loadFromCache(sp,vp);
+            }
+        }
         updateBalance();
     }
 
@@ -207,91 +255,8 @@ public class VistaActivity extends FragmentActivity {
                 status.setMessage("Downloading and Parsing...");
                 status.setTitle("Refreshing Menu Data");
                 status.setIndeterminate(true);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            uiUpdate.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    status.show();
-                                }
-                            });
-                            Connection one = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1014&name=VG%20Cafe").timeout(10000);
-                            Connection two = Jsoup.connect("http://dining.calpoly.edu/menus/?lid=1012&name=Sandwich%20Factory").timeout(10000);
-                            Document docVg = one.get();
-                            try
-                            {
-                                parseHtml = new Parser(MainActivity.vgItems);
-                                parseHtml.parse(docVg,false);
-                            }
-                            catch(Exception e)
-                            {
-                                uiUpdate.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
-                                        onErrorConn.setTitle("Error Parsing!");
-                                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
-                                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int button) {
-                                                finish();
-                                            }
-                                        });
-                                        onErrorConn.show();
-                                    }
-                                });
-                            }
-                            Document docSand = two.get();
-                            try
-                            {
-                                parseHtml = new Parser(MainActivity.sandItems);
-                                parseHtml.parse(docSand,true);
-                            }
-                            catch(Exception e)
-                            {
-                                uiUpdate.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
-                                        onErrorConn.setTitle("Error Parsing!");
-                                        onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
-                                        onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int button) {
-                                                finish();
-                                            }
-                                        });
-                                        onErrorConn.show();
-                                    }
-                                });
-                            }
-                        }
-                        catch (Exception e){
-                            uiUpdate.post(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    AlertDialog.Builder onErrorConn= new AlertDialog.Builder(VistaActivity.this);
-                                    onErrorConn.setTitle("Error Connecting!");
-                                    onErrorConn.setMessage("There was an error connecting to the website to download the menu. Please check your data connection and try again.");
-                                    onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int button) {
-                                            finish();
-                                        }
-                                    });
-                                    onErrorConn.show();
-                                }
-                            });
-                        }
-                        uiUpdate.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                status.dismiss();
-                                vp.getAdapter().notifyDataSetChanged();
-                            }
-                        });
-                    }
-                }).start();
+                ItemListContainer data = new ItemListContainer();
+                data.refresh(mContext,mActivity,status,vp);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

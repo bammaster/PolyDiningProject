@@ -142,11 +142,23 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             });
             onYes.show();
         }
+        else if(prices.size()==0)
+        {
+            AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
+            invalidItem.setTitle("Invalid Item!");
+            invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
+            invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button){
+
+                }
+            });
+            invalidItem.show();
+        }
         else
         {
             Cart.add(names.get(position), prices.get(position));
             updateBalance();
-            Toast.makeText(activity, names.get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,names.get(position) + " added to Cart!",Toast.LENGTH_SHORT).show();
         }
     }
 }

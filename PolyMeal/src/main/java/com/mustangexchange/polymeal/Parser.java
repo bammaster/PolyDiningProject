@@ -17,6 +17,7 @@ public class Parser
     private ArrayList<ItemSet> sets;
     private int counter;
     private boolean money;
+    private boolean soupAndSalad = false;
     public Parser(ArrayList<ItemSet> sets)
     {
         this.sets = sets;
@@ -74,6 +75,7 @@ public class Parser
                                 }
                                 else if(strongName.contains("Soup and Salad"))
                                 {
+                                    soupAndSalad = true;
                                     String one = strongName.substring(0,5);
                                     String two = strongName.substring(9,14);
                                     set.getNames().add("@#$"+one);
@@ -143,7 +145,7 @@ public class Parser
             }
 
     }
-    public void descParse(boolean money,String tempName,String tempPrice,String description)
+    private void descParse(boolean money,String tempName,String tempPrice,String description)
     {
         if(money)
         {
@@ -157,8 +159,18 @@ public class Parser
             }
             else
             {
-                description = description.replaceFirst(" ", "");
-                set.addDesc(description);
+                if(!soupAndSalad)
+                {
+                    description = description.replaceFirst(" ", "");
+                    set.addDesc(description);
+                }
+                else
+                {
+                    description = description.replaceFirst(" ", "");
+                    set.addDesc(description);
+                    set.addDesc(description);
+                    soupAndSalad = false;
+                }
             }
         }
     }

@@ -3,7 +3,6 @@ package com.mustangexchange.polymeal;
 import android.text.format.Time;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * Created by Blake on 8/7/13.
@@ -35,8 +34,6 @@ public class MoneyTime
         {
             money = new BigDecimal("8.75");
         }
-        //return bd.subtract(new BigDecimal(moneySpent));
-        return money.subtract(moneySpent).setScale(2, RoundingMode.HALF_EVEN);
-        //return  moneyFormat(new BigDecimal(Double.toString(Double.valueOf(money.toString()) - Double.valueOf(moneySpent.toString()))));
+        return money.subtract(moneySpent).setScale(2);
     }
 }

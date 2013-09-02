@@ -67,7 +67,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
     private class MyFragment extends Fragment {
 
         private int position;
-
+        public MyFragment()
+        {
+            //empty contructor required for fragment subclasses
+        }
         public MyFragment(int position) {
             this.position = position;
         }
@@ -84,65 +87,80 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 @Override
                 public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                     final int fPos = pos;
-                    final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
-                    onListClick.setCancelable(false);
-                    onListClick.setTitle("Add to Cart?");
-                    onListClick.setMessage("Would you like to add " + foodAdapterList.get(position).getNames().get(pos).replace("@#$", "") + " to your cart? Price: " + "$" + foodAdapterList.get(position).getPrices().get(pos));
-                    onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            //money = boundPrices.get(tempIndex);
-                            if (foodAdapterList.get(position).getNames().get(fPos).contains("@#$")) {
-                                AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
-                                onYes.setTitle("How much?");
-                                onYes.setMessage("Estimated Number of Ounces: ");
-                                LayoutInflater inflater = activity.getLayoutInflater();
-                                View DialogView = inflater.inflate(R.layout.number_picker, null);
-                                final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
-                                np.setMinValue(1);
-                                np.setMaxValue(50);
-                                np.setWrapSelectorWheel(false);
-                                np.setValue(1);
-                                onYes.setView(DialogView);
-                                onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
-                                        Cart.add(foodAdapterList.get(position).getNames().get(fPos), Double.toString(np.getValue() * new Double(foodAdapterList.get(position).getPrices().get(fPos))));
-                                        updateBalance();
-                                    }
-                                });
-                                onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
-                                    }
-                                });
-                                onYes.show();
-                            } else {
-                                Cart.add(foodAdapterList.get(position).getNames().get(position), foodAdapterList.get(position).getPrices().get(fPos));
-                                updateBalance();
+                    if(foodAdapterList.get(position).getPrices().size()>0)
+                    {
+                        final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+                        onListClick.setCancelable(false);
+                        onListClick.setTitle("Add to Cart?");
+                        onListClick.setMessage("Would you like to add " + foodAdapterList.get(position).getNames().get(pos).replace("@#$", "") + " to your cart? Price: " + "$" + foodAdapterList.get(position).getPrices().get(pos));
+                        onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                //money = boundPrices.get(tempIndex);
+                                if (foodAdapterList.get(position).getNames().get(fPos).contains("@#$")) {
+                                    AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
+                                    onYes.setTitle("How much?");
+                                    onYes.setMessage("Estimated Number of Ounces: ");
+                                    LayoutInflater inflater = activity.getLayoutInflater();
+                                    View DialogView = inflater.inflate(R.layout.number_picker, null);
+                                    final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
+                                    np.setMinValue(1);
+                                    np.setMaxValue(50);
+                                    np.setWrapSelectorWheel(false);
+                                    np.setValue(1);
+                                    onYes.setView(DialogView);
+                                    onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int button) {
+                                            Cart.add(foodAdapterList.get(position).getNames().get(fPos), Double.toString(np.getValue() * new Double(foodAdapterList.get(position).getPrices().get(fPos))));
+                                            updateBalance();
+                                        }
+                                    });
+                                    onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int button) {
+                                        }
+                                    });
+                                    onYes.show();
+                                } else {
+                                    Cart.add(foodAdapterList.get(position).getNames().get(position), foodAdapterList.get(position).getPrices().get(fPos));
+                                    updateBalance();
+                                }
                             }
-                        }
-                    });
-                    onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                        }
-                    });
-                    onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            AlertDialog.Builder onDialogClick = new AlertDialog.Builder(activity);
-                            onDialogClick.setTitle("Description");
-                            onDialogClick.setMessage(foodAdapterList.get(position).getDesc().get(fPos));
-                            onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int button) {
+                        });
+                        onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                            }
+                        });
+                        onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button) {
+                                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(activity);
+                                onDialogClick.setTitle("Description");
+                                onDialogClick.setMessage(foodAdapterList.get(position).getDesc().get(fPos));
+                                onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
 
-                                }
-                            });
-                            onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int button) {
-                                    onListClick.show();
-                                }
-                            });
-                            onDialogClick.show();
-                        }
-                    });
-                    onListClick.show();
+                                    }
+                                });
+                                onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+                                        onListClick.show();
+                                    }
+                                });
+                                onDialogClick.show();
+                            }
+                        });
+                        onListClick.show();
+                    }
+                    else
+                    {
+                        AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
+                        invalidItem.setTitle("Invalid Item!");
+                        invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
+                        invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int button){
+
+                            }
+                        });
+                        invalidItem.show();
+                    }
                 }
             });
             return rootView;
