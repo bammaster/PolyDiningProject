@@ -279,7 +279,6 @@ public class VistaActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         Intent intentHome = new Intent(mContext, MainActivity.class);
@@ -297,7 +296,6 @@ public class VistaActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         final Intent intentSF = new Intent(mContext, SandwichActivity.class);
@@ -349,7 +347,6 @@ public class VistaActivity extends FragmentActivity {
                         try {
                             Thread.sleep(400);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
@@ -359,6 +356,24 @@ public class VistaActivity extends FragmentActivity {
                 });
                 mDrawerLayout.closeDrawer(mDrawerList);
                 threadCP.start();
+            }
+            else if(parent.getPositionForView(view)==4)
+            {
+                final Thread threadST = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final Intent intentST = new Intent(mContext, SettingsActivity.class);
+                        intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentST);
+                    }
+                });
+                mDrawerLayout.closeDrawer(mDrawerList);
+                threadST.start();
             }
             else
             {

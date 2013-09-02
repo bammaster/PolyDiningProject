@@ -26,7 +26,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -364,6 +363,24 @@ public class SandwichActivity extends FragmentActivity {
                     }
                 });
                 threadCP.start();
+            }
+            else if(parent.getPositionForView(view)==4)
+            {
+                final Thread threadST = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final Intent intentST = new Intent(mContext, SettingsActivity.class);
+                        intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentST);
+                    }
+                });
+                mDrawerLayout.closeDrawer(mDrawerList);
+                threadST.start();
             }
             else
             {

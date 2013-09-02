@@ -43,6 +43,7 @@
             android:label="@string/title_activity_completeor"
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name=".SettingsActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
