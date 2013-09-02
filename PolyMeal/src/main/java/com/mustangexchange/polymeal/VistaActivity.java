@@ -100,6 +100,9 @@ public class VistaActivity extends FragmentActivity {
            Fragment inner class called MyFragment.
         */
         foodAdapterList.clear();
+        if(ItemListContainer.vgItems != null) {
+            System.out.println("not null");
+        }
         for(int i = 0;i<ItemListContainer.vgItems.size();i++)
         {
             if(ItemListContainer.vgItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
