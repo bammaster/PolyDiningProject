@@ -80,8 +80,8 @@ public class CartActivity extends Activity {
 
     public void removeFromCart(int position) {
         Cart.remove(position);
-        cartAdapter.cart.remove(position);
-        cartAdapter.cartMoney.remove(position);
+        //cartAdapter.cart.remove(position);
+        //cartAdapter.cartMoney.remove(position);
         updateBalance();
         isCartEmpty();
         cartAdapter.notifyDataSetChanged();
