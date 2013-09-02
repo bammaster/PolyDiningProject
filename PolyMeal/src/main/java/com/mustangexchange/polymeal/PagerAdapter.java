@@ -2,7 +2,6 @@ package com.mustangexchange.polymeal;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -36,11 +35,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i)
     {
-        Fragment fragment = new MyFragment();
-        Bundle args = new Bundle();
-        args.putInt(MyFragment.ARG_POSITION, i);
-        fragment.setArguments(args);
-        return fragment;
+        return new MyFragment(i);
     }
 
     @Override

@@ -28,13 +28,15 @@ public class MyFragment extends Fragment {
         //empty contructor required for fragment subclasses
     }
 
+    public MyFragment(int position) {
+        this.position = position;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.main_fragment, container, false);
-        position = getArguments().getInt(ARG_POSITION);
-
         //Actual Fragment inflating happens in the next line.
         ListView lv = ((ListView) rootView.findViewById(R.id.list));
         lv.setAdapter(PagerAdapter.foodAdapterList.get(position));
