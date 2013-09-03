@@ -152,25 +152,6 @@ public class VistaActivity extends FragmentActivity {
     public void onResume()
     {
         super.onResume();
-        if(ItemListContainer.vgItems.size()==0)
-        {
-            try
-            {
-                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
-                status.setMessage("Downloading and Parsing...");
-                status.setTitle("Refreshing Menu Data");
-                status.setIndeterminate(true);
-                data.refresh(mContext,mActivity,status,vp);
-            }
-            catch(Exception e)
-            {
-                if(status.isShowing())
-                {
-                    status.dismiss();
-                }
-                data.loadFromCache(sp,vp);
-            }
-        }
         updateBalance();
     }
 
