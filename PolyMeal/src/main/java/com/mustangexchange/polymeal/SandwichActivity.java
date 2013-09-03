@@ -123,6 +123,7 @@ public class SandwichActivity extends FragmentActivity {
         }
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
+        mActionBar = getActionBar();
         if(ItemListContainer.sandItems.size()==0)
         {
             try
@@ -148,7 +149,6 @@ public class SandwichActivity extends FragmentActivity {
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
-        mActionBar = getActionBar();
         updateBalance();
         if(clear)
         {
@@ -177,9 +177,8 @@ public class SandwichActivity extends FragmentActivity {
                 }
                 data.loadFromCache(sp,vp);
             }
-            updateBalance();
         }
-
+        updateBalance();
     }
     public void onStart()
     {
@@ -202,8 +201,8 @@ public class SandwichActivity extends FragmentActivity {
                 }
                 data.loadFromCache(sp,vp);
             }
-            updateBalance();
         }
+        updateBalance();
     }
 
 

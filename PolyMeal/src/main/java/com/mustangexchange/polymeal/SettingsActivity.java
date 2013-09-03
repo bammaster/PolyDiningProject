@@ -10,16 +10,19 @@ import android.view.View;
 import android.widget.TextView;
 
 public class SettingsActivity extends Activity {
+
     private SharedPreferences sp;
     private SharedPreferences.Editor spe;
     private AlertDialog.Builder displayTimes;
     private int checked;
     private String[] mealTimes = {"Breakfast","Lunch","Dinner","Late Night","Automatic"};
+    private TextView current;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        TextView current = (TextView)findViewById(R.id.textCurrent);
+        current = (TextView)findViewById(R.id.textCurrent);
         current.setText(mealTimes[MoneyTime.whichTime]);
     }
 
@@ -49,6 +52,16 @@ public class SettingsActivity extends Activity {
             }
         });
         displayTimes.show();
+    }
+    public void onResume()
+    {
+        super.onResume();
+        current.setText(mealTimes[MoneyTime.whichTime]);
+    }
+    public void onStart()
+    {
+        super.onStart();
+        current.setText(mealTimes[MoneyTime.whichTime]);
     }
 
     @Override

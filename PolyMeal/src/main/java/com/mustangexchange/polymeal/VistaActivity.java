@@ -118,6 +118,7 @@ public class VistaActivity extends FragmentActivity {
 
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
+        mActionBar = getActionBar();
         if(ItemListContainer.vgItems.size()==0)
         {
             try
@@ -142,7 +143,6 @@ public class VistaActivity extends FragmentActivity {
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
 
-        mActionBar = getActionBar();
         updateBalance();
         if(clear)
         {

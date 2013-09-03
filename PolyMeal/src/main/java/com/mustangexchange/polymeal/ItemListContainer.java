@@ -40,6 +40,8 @@ public class ItemListContainer
             @Override
             public void run() {
                 try {
+                    vgItems.clear();
+                    sandItems.clear();
                     uiUpdate.post(new Runnable() {
                         @Override
                         public void run() {
