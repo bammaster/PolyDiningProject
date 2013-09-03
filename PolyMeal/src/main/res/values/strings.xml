@@ -11,6 +11,7 @@
     <string name="title_activity_completeor">Meal Completor</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
     <string-array name="drawerItems">
         <item>Home</item>
         <item>Sandwich Factory</item>
@@ -18,5 +19,7 @@
         <item>Meal Completer</item>
         <item>Settings</item>
     </string-array>
+
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

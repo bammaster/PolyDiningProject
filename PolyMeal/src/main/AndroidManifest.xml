@@ -26,8 +26,8 @@
         <activity
             android:name="com.mustangexchange.polymeal.VistaActivity"
             android:label="@string/title_activity_vg"
-            android:screenOrientation="portrait">
-    </activity>
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name="com.mustangexchange.polymeal.CartActivity"
             android:label="@string/title_activity_cart"
@@ -43,7 +43,10 @@
             android:label="@string/title_activity_completeor"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".SettingsActivity"/>
+        <activity
+            android:name="com.mustangexchange.polymeal.SettingsActivity"
+            android:label="Settings" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

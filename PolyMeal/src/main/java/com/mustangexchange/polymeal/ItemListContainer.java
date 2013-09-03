@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 
@@ -25,8 +24,8 @@ import java.util.ArrayList;
  */
 public class ItemListContainer
 {
-    public static ArrayList<ItemSet> vgItems;
-    public static ArrayList<ItemSet> sandItems;
+    public static ArrayList<ItemSet> vgItems = new ArrayList<ItemSet>();
+    public static ArrayList<ItemSet> sandItems = new ArrayList<ItemSet>();
     private Parser parseHtml;
     private Handler uiUpdate= new Handler();
     private Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
