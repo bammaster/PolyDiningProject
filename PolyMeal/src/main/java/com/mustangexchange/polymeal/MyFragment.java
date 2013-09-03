@@ -21,7 +21,7 @@ import android.widget.NumberPicker;
 public class MyFragment extends Fragment {
 
     public static final String ARG_POSITION = "position";
-    public static int position;
+    public int position;
 
     public MyFragment()
     {
