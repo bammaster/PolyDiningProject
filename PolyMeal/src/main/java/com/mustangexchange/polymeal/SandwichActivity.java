@@ -59,13 +59,33 @@ public class SandwichActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sandwich);
-        sp = getSharedPreferences("PolyMeal",MODE_PRIVATE);
-        mContext = this;
-        mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItems);
-
+        sp = getSharedPreferences("PolyMeal",MODE_PRIVATE);
+        mContext = this;
+        mActivity = this;
+        mActionBar = getActionBar();
+        if(ItemListContainer.sandItems.size()==0)
+        {
+            try
+            {
+                status = new ProgressDialog(SandwichActivity.this,ProgressDialog.STYLE_SPINNER);
+                status.setMessage("Downloading and Parsing...");
+                status.setTitle("Refreshing Menu Data");
+                status.setIndeterminate(true);
+                data.refresh(mContext,mActivity,status,vp);
+            }
+            catch(Exception e)
+            {
+                if(status.isShowing())
+                {
+                    status.dismiss();
+                }
+                data.loadFromCache(sp,vp);
+            }
+            updateBalance();
+        }
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
@@ -123,27 +143,6 @@ public class SandwichActivity extends FragmentActivity {
         }
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
-        mActionBar = getActionBar();
-        if(ItemListContainer.sandItems.size()==0)
-        {
-            try
-            {
-                status = new ProgressDialog(SandwichActivity.this,ProgressDialog.STYLE_SPINNER);
-                status.setMessage("Downloading and Parsing...");
-                status.setTitle("Refreshing Menu Data");
-                status.setIndeterminate(true);
-                data.refresh(mContext,mActivity,status,vp);
-            }
-            catch(Exception e)
-            {
-                if(status.isShowing())
-                {
-                    status.dismiss();
-                }
-                data.loadFromCache(sp,vp);
-            }
-            updateBalance();
-        }
         vp.getAdapter().notifyDataSetChanged();
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
@@ -180,31 +179,6 @@ public class SandwichActivity extends FragmentActivity {
         }
         updateBalance();
     }
-    public void onStart()
-    {
-        super.onStart();
-        if(ItemListContainer.sandItems.size()==0)
-        {
-            try
-            {
-                status = new ProgressDialog(SandwichActivity.this,ProgressDialog.STYLE_SPINNER);
-                status.setMessage("Downloading and Parsing...");
-                status.setTitle("Refreshing Menu Data");
-                status.setIndeterminate(true);
-                data.refresh(mContext,mActivity,status,vp);
-            }
-            catch(Exception e)
-            {
-                if(status.isShowing())
-                {
-                    status.dismiss();
-                }
-                data.loadFromCache(sp,vp);
-            }
-        }
-        updateBalance();
-    }
-
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
