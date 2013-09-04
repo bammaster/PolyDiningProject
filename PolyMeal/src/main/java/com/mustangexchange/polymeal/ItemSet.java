@@ -17,6 +17,13 @@ public class ItemSet
         this.names = names;
         this.prices = prices;
     }
+    public ItemSet(String title,ArrayList<String> names,ArrayList<String> prices, ArrayList<String> desc)
+    {
+        this.title = title;
+        this.names = names;
+        this.prices = prices;
+        this.desc = desc;
+    }
     public ItemSet(){}
     public ArrayList<String> getNames()
     {
