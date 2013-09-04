@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
-public class SettingsActivity extends Activity {
+public class SettingsActivity extends PreferenceActivity {
 
     private SharedPreferences sp;
     private SharedPreferences.Editor spe;
@@ -17,16 +19,21 @@ public class SettingsActivity extends Activity {
     private int checked;
     private String[] mealTimes = {"Breakfast","Lunch","Dinner","Late Night","Automatic"};
     private TextView current;
+    public Preference timePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        addPreferencesFromResource(R.xml.settings);
+        timePref = findPreference("currentTime");
+        timePref.setTitle(mealTimes[MoneyTime.whichTime]);
+        timePref.setSelectable(false);
+        /*setContentView(R.layout.activity_settings);
         current = (TextView)findViewById(R.id.textCurrent);
-        current.setText(mealTimes[MoneyTime.whichTime]);
+        current.setText(mealTimes[MoneyTime.whichTime]);*/
     }
 
-    public void select(View v)
+    /*public void select(View v)
     {
         sp = getSharedPreferences("PolyMeal",MODE_PRIVATE);
         spe = sp.edit();
@@ -68,6 +75,6 @@ public class SettingsActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         return true;
-    }
+    }*/
     
 }

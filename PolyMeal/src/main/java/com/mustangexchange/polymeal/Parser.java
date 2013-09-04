@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -113,8 +114,11 @@ public class Parser
                                 }
                                 else
                                 {
+                                    NumberFormat nm = NumberFormat.getCurrencyInstance();
                                     strongName = strongName.replace("$","");
-                                    set.getPrices().add(strongName);
+                                    String formattedPrice = nm.format(Double.valueOf(strongName));
+                                    formattedPrice = formattedPrice.replace("$","");
+                                    set.getPrices().add(formattedPrice);
                                 }
                             }
                             descParse(money,tempName,tempPrice,description);
@@ -125,8 +129,11 @@ public class Parser
                             {
                                 money = true;
                                 tempPrice = strongName;
+                                NumberFormat nm = NumberFormat.getCurrencyInstance();
                                 strongName = strongName.replace("$","");
-                                set.getPrices().add(strongName);
+                                String formattedPrice = nm.format(Double.valueOf(strongName));
+                                formattedPrice = formattedPrice.replace("$","");
+                                set.getPrices().add(formattedPrice);
                             }
                             else
                             {
