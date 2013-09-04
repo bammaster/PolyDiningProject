@@ -96,10 +96,14 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
 
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-        if(prices.size() != 0)
+        try
         {
-            tvPrice.setText("$" + prices.get(position));
+            if(prices.size() != 0)
+            {
+                tvPrice.setText("$" + prices.get(position));
+            }
         }
+        catch(IndexOutOfBoundsException e){}
 
         //Set the onClick Listener on this button
         ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
@@ -142,17 +146,27 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             });
             onYes.show();
         }
-        else if(prices.size()==0)
+        else if(prices.size()!=names.size())
         {
-            AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
-            invalidItem.setTitle("Invalid Item!");
-            invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
-            invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button){
+            try
+            {
+                Cart.add(names.get(position), prices.get(position));
+                updateBalance();
+                Toast.makeText(context,names.get(position) + " added to Cart!",Toast.LENGTH_SHORT).show();
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
+                invalidItem.setTitle("Invalid Item!");
+                invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
+                invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button){
 
-                }
-            });
-            invalidItem.show();
+                    }
+                });
+                invalidItem.show();
+            }
+
         }
         else
         {

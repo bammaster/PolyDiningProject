@@ -182,12 +182,9 @@ public class MainActivity extends Activity{
                     }
                     else
                     {
-                        SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
-                        Gson gson = new Gson();
-                        String sand = appSharedPrefs.getString("Sandwich Factory Items", "");
-                        ItemListContainer.sandItems = gson.fromJson(sand, gsonType);
-                        String vg = appSharedPrefs.getString("Vista Grande Items", "");
-                        ItemListContainer.vgItems = gson.fromJson(vg,gsonType);
+                        SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal", MODE_PRIVATE);
+                        ItemListContainer ilc = new ItemListContainer();
+                        ilc.loadFromCache(appSharedPrefs);
                         vista.setEnabled(true);
                         sandwich.setEnabled(true);
                         download.setVisibility(View.INVISIBLE);

@@ -62,26 +62,6 @@ public class VistaActivity extends FragmentActivity {
         mContext = this;
         mActivity = this;
         mActionBar = getActionBar();
-        if(ItemListContainer.vgItems.size()==0)
-        {
-            try
-            {
-                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
-                status.setMessage("Downloading and Parsing...");
-                status.setTitle("Refreshing Menu Data");
-                status.setIndeterminate(true);
-                data.refresh(mContext,mActivity,status,vp);
-            }
-            catch(Exception e)
-            {
-                if(status.isShowing())
-                {
-                    status.dismiss();
-                }
-                data.loadFromCache(sp,vp);
-            }
-            updateBalance();
-        }
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
@@ -207,14 +187,6 @@ public class VistaActivity extends FragmentActivity {
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
                 startActivity(intent);
-                return true;
-            case R.id.refresh:
-                status = new ProgressDialog(VistaActivity.this,ProgressDialog.STYLE_SPINNER);
-                status.setMessage("Downloading and Parsing...");
-                status.setTitle("Refreshing Menu Data");
-                status.setIndeterminate(true);
-                ItemListContainer data = new ItemListContainer();
-                data.refresh(mContext,mActivity,status,vp);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
