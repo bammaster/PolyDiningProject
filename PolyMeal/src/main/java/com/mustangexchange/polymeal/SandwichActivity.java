@@ -108,6 +108,15 @@ public class SandwichActivity extends FragmentActivity {
          */
 
         foodAdapterList.clear();
+        System.out.println(ItemListContainer.sandItems.get(0).size());
+        System.out.println(ItemListContainer.sandItems.get(0).getNames().size());
+        System.out.println(ItemListContainer.sandItems.get(0).getPrices().size());
+        for(int i = 0;i<ItemListContainer.sandItems.size();i++)
+        {
+            for(int j = 0;j<ItemListContainer.sandItems.get(i).getNames().size();j++) {
+                System.out.println(ItemListContainer.sandItems.get(i).getNames().get(j) + " " + ItemListContainer.sandItems.get(i).getPrices().get(j));
+            }
+        }
         for(int i = 0;i<ItemListContainer.sandItems.size();i++)
         {
             if(ItemListContainer.sandItems.get(i).getNames().size() != 0) //check in case it's not the right time of day

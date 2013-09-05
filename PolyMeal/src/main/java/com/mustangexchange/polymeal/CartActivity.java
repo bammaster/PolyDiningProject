@@ -34,8 +34,8 @@ public class CartActivity extends Activity {
         setContentView(R.layout.activity_cart);
 
         SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
-        cartAdapter = new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney());
-
+        //cartAdapter = new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney());
+        cartAdapter = new CartItemAdapter(this, Cart.getCart());
         mContext = this;
         activity = this;
 
@@ -48,7 +48,7 @@ public class CartActivity extends Activity {
                 final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
-                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).replace("@#$", "") + " to your cart? \nPrice: " + "$" +  Cart.getCartMoney().get(pos));
+                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName().replace("@#$", "") + " to your cart? \nPrice: " + "$" +  Cart.getCart().get(pos).getPrice());
                 onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int button) {
                         removeFromCart(fPos);
@@ -131,7 +131,7 @@ public class CartActivity extends Activity {
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();
-                cartAdapter.clearCartMoney();
+                //cartAdapter.clearCartMoney();
                 cartAdapter.notifyDataSetChanged();
                 isCartEmpty();
                 updateBalance();
@@ -144,14 +144,14 @@ public class CartActivity extends Activity {
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
         private Context context;
-        private ArrayList<String> cart;
-        private ArrayList<String> cartMoney;
+        private ArrayList<ItemSet.Item> cart;
+        //private ArrayList<String> cartMoney;
 
-        public CartItemAdapter(Context context, ArrayList<String> cart, ArrayList<String> cartMoney)
+        public CartItemAdapter(Context context, ArrayList<ItemSet.Item> cart)
         {
             this.context = context;
             this.cart = cart;
-            this.cartMoney = cartMoney;
+            //this.cartMoney = cartMoney;
         }
 
         public void clearCart()
@@ -159,10 +159,10 @@ public class CartActivity extends Activity {
             cart.clear();
         }
 
-        public void clearCartMoney()
+        /*public void clearCartMoney()
         {
             cartMoney.clear();
-        }
+        }*/
 
         public int getCount()
         {
@@ -188,10 +188,10 @@ public class CartActivity extends Activity {
                 convertView = inflater.inflate(R.layout.row_item_cart, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(cart.get(position).replace("@#$",""));
+            tvName.setText(cart.get(position).getName().replace("@#$",""));
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            tvPrice.setText("$" + cartMoney.get(position));
+            tvPrice.setText("$" + cart.get(position).getPrice());
 
 
             //Set the onClick Listener on this button
@@ -210,7 +210,7 @@ public class CartActivity extends Activity {
             Integer entry = (Integer) view.getTag();
             Cart.remove(entry);
             cart.remove(entry);
-            cartMoney.remove(entry);
+            //cartMoney.remove(entry);
             updateBalance();
             isCartEmpty();
             notifyDataSetChanged();

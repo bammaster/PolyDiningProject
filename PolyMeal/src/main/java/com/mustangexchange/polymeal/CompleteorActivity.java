@@ -42,8 +42,10 @@ public class CompleteorActivity extends Activity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
 
-        possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
-        dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        //possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        //dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
+        possibleItems = new ItemSet();
+        dummyItems = new ItemSet();
         dummyAdapter = new CompleteorItemAdapter(this, dummyItems);
         lvAdapter = new CompleteorItemAdapter(this, possibleItems);
 
@@ -305,9 +307,12 @@ public class CompleteorActivity extends Activity {
                     {
                         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(ItemListContainer.vgItems.get(i).getPrices().get(j)))>=0)
                         {
-                            possibleItems.getNames().add(ItemListContainer.vgItems.get(i).getNames().get(j));
+                            /*possibleItems.getNames().add(ItemListContainer.vgItems.get(i).getNames().get(j));
                             possibleItems.getPrices().add(ItemListContainer.vgItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(ItemListContainer.vgItems.get(i).getDesc().get(j));
+                            possibleItems.getDesc().add(ItemListContainer.vgItems.get(i).getDesc().get(j));*/
+                            possibleItems.getItems().add(new ItemSet.Item(ItemListContainer.vgItems.get(i).getNames().get(j),
+                                    new BigDecimal(ItemListContainer.vgItems.get(i).getPrices().get(j)),
+                                        ItemListContainer.vgItems.get(i).getDesc().get(j)));
                         }
                     }
                 }
@@ -320,9 +325,12 @@ public class CompleteorActivity extends Activity {
                     {
                         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(ItemListContainer.sandItems.get(i).getPrices().get(j)))>=0)
                         {
-                            possibleItems.getNames().add(ItemListContainer.sandItems.get(i).getNames().get(j));
+                            /*possibleItems.getNames().add(ItemListContainer.sandItems.get(i).getNames().get(j));
                             possibleItems.getPrices().add(ItemListContainer.sandItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(ItemListContainer.sandItems.get(i).getDesc().get(j));
+                            possibleItems.getDesc().add(ItemListContainer.sandItems.get(i).getDesc().get(j));*/
+                            possibleItems.getItems().add(new ItemSet.Item(ItemListContainer.sandItems.get(i).getNames().get(j),
+                                    new BigDecimal(ItemListContainer.sandItems.get(i).getPrices().get(j)),
+                                        ItemListContainer.sandItems.get(i).getDesc().get(j)));
                         }
                     }
                 }

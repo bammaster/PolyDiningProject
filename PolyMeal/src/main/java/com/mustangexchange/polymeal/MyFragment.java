@@ -77,7 +77,7 @@ public class MyFragment extends Fragment {
                                 });
                                 onYes.show();
                             } else {
-                                Cart.add(PagerAdapter.foodAdapterList.get(position).getNames().get(position), PagerAdapter.foodAdapterList.get(position).getPrices().get(fPos));
+                                Cart.add(PagerAdapter.foodAdapterList.get(position).getNames().get(fPos), PagerAdapter.foodAdapterList.get(position).getPrices().get(fPos));
                                 PagerAdapter.updateBalance();
                             }
                         }

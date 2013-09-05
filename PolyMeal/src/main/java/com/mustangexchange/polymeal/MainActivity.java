@@ -103,7 +103,11 @@ public class MainActivity extends Activity{
                     }
                     catch(Exception e)
                     {
-                       uiUpdate.post(new Runnable() {
+                        System.out.println(e.toString());
+                        for(int i = 0;i<e.getStackTrace().length;i++) {
+                            System.out.println(e.getStackTrace()[i]);
+                        }
+                       /*uiUpdate.post(new Runnable() {
                            @Override
                            public void run() {
                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
@@ -116,7 +120,7 @@ public class MainActivity extends Activity{
                                });
                                onErrorConn.show();
                            }
-                       });
+                       });*/
                     }
                     uiUpdate.post(new Runnable() {
                         @Override
@@ -138,6 +142,10 @@ public class MainActivity extends Activity{
                     }
                     catch(Exception e)
                     {
+                        System.out.println(e.toString());
+                        for(int i = 0;i<e.getStackTrace().length;i++) {
+                            System.out.println(e.getStackTrace()[i]);
+                        }
                         uiUpdate.post(new Runnable() {
                             @Override
                             public void run() {
@@ -165,6 +173,7 @@ public class MainActivity extends Activity{
                 } catch (Exception e) {
                     if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
                     {
+                        System.out.println("168");
                         uiUpdate.post(new Runnable() {
                             @Override
                             public void run() {

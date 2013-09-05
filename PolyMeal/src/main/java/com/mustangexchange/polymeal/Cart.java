@@ -12,46 +12,47 @@ import java.util.ArrayList;
 
 public class Cart
 {
-    private static ArrayList<String> cart = new ArrayList<String>();
-    private static ArrayList<String> cartMoney = new ArrayList<String>();
+    private static ArrayList<ItemSet.Item> cart = new ArrayList<ItemSet.Item>();
+    //private static ArrayList<String> cartMoney = new ArrayList<String>();
     private static Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
     public static BigDecimal bdPrice = new BigDecimal("0.00");
 
     public static void add(String item,String price)
     {
-        cart.add(item);
-        bdPrice = new BigDecimal(price);
-        bdPrice.setScale(2, RoundingMode.HALF_EVEN);
-        cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
-        MoneyTime.moneySpent = MoneyTime.moneySpent.add(new BigDecimal(price));
+
+        cart.add(new ItemSet.Item(item, new BigDecimal(price)));
+        //bdPrice = new BigDecimal(price);
+        //bdPrice.setScale(2, RoundingMode.HALF_EVEN);
+        //cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
+        MoneyTime.moneySpent = MoneyTime.moneySpent.add(cart.get(cart.size() - 1).getPriceBD());
     }
     public static void remove(int index)
     {
+        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(cart.size() - 1).getPriceBD());
         cart.remove(index);
-        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(new BigDecimal(cartMoney.get(index)));
-        cartMoney.remove(index);
+        //cartMoney.remove(index);
     }
     //returns cart
-    public static ArrayList<String> getCart()
+    public static ArrayList<ItemSet.Item> getCart()
     {
         return cart;
     }
-    public static ArrayList<String> getCartMoney()
+    /*public static ArrayList<String> getCartMoney()
     {
         return cartMoney;
-    }
+    }*/
     public static void clear()
     {
         int i = cart.size()-1;
         while(cart.size()>0)
         {
-            MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(new BigDecimal(cartMoney.get(i)));
+            MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(i).getPriceBD());
             cart.remove(i);
-            cartMoney.remove(i);
+            //cartMoney.remove(i);
             i--;
         }
     }
-    public static void saveCart(SharedPreferences sp)
+    /*public static void saveCart(SharedPreferences sp)
     {
         int slot = sp.getInt("slot",0);
         SharedPreferences.Editor prefsEditor = sp.edit();
@@ -91,6 +92,6 @@ public class Cart
         slot--;
         prefsEditor.putInt("slot",slot);
         prefsEditor.commit();
-    }
+    }*/
 
 }

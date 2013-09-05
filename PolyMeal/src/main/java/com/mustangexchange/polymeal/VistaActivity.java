@@ -105,6 +105,12 @@ public class VistaActivity extends FragmentActivity {
         }
         for(int i = 0;i<ItemListContainer.vgItems.size();i++)
         {
+            for(int j = 0;j<ItemListContainer.vgItems.get(i).getNames().size();j++) {
+                System.out.println(ItemListContainer.vgItems.get(i).getNames().get(j) + " " + ItemListContainer.vgItems.get(i).getPrices().get(j));
+            }
+        }
+        for(int i = 0;i<ItemListContainer.vgItems.size();i++)
+        {
             if(ItemListContainer.vgItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
             {
             /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only

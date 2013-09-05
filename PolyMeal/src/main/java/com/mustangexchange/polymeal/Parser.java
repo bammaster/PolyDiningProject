@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Parser
     private int counter;
     private boolean money;
     private boolean soupAndSalad = false;
+    private NumberFormat currency = NumberFormat.getCurrencyInstance();
     public Parser(ArrayList<ItemSet> sets)
     {
         this.sets = sets;
@@ -57,34 +59,41 @@ public class Parser
                                 {
                                     tempName = strongName;
                                     strongName = strongName.replace("Combos - ","");
-                                    set.getNames().add(strongName);
+                                    //set.getNames().add(strongName);
+                                    set.setLastItemName(strongName);
                                 }
                                 else if(strongName.contains("Just Burgers - "))
                                 {
                                     strongName = strongName.replace("Just Burgers - ","");
-                                    set.getNames().add(strongName);
+                                    //set.getNames().add(strongName);
+                                    set.setLastItemName(strongName);
                                 }
                                 else if(strongName.contains("Just Sandwiches - "))
                                 {
                                     strongName = strongName.replace("Just Sandwiches - ","");
-                                    set.getNames().add(strongName);
+                                    //set.getNames().add(strongName);
+                                    set.setLastItemName(strongName);
                                 }
                                 else if(strongName.contains("Just Sandwiches - "))
                                 {
                                     strongName = strongName.replace("Just Sandwiches- ","");
-                                    set.getNames().add(strongName);
+                                    //set.getNames().add(strongName);
+                                    set.setLastItemName(strongName);
                                 }
                                 else if(strongName.contains("Soup and Salad"))
                                 {
                                     soupAndSalad = true;
                                     String one = strongName.substring(0,5);
                                     String two = strongName.substring(9,14);
-                                    set.getNames().add("@#$"+one);
-                                    set.getNames().add("@#$"+two);
+                                    //set.getNames().add("@#$"+one);
+                                    set.setLastItemName("@#$"+one);
+                                    //set.getNames().add("@#$"+two);
+                                    set.setLastItemName("@#$"+two);
                                 }
                                 else
                                 {
-                                    set.getNames().add(strongName);
+                                    //set.getNames().add(strongName);
+                                    set.setLastItemName(strongName);
                                 }
 
                             }
@@ -101,24 +110,28 @@ public class Parser
                                 {
                                     strongName = strongName.replace(" plus tax","");
                                     strongName = strongName.replace("$","");
-                                    set.getPrices().add(df.format(new Double(strongName)+new Double(strongName)*.08)+"");
+                                    //set.getPrices().add(df.format(new Double(strongName)+new Double(strongName)*.08)+"");
+                                    set.setLastItemPrice(currency.format(new Double(strongName)+new Double(strongName)*.08));
                                 }
                                 //gets proper values for anything per oz items by substringing them out.
                                 else if(strongName.contains("per oz"))
                                 {
                                     String priceOne = strongName.substring(7,11);
                                     String priceTwo = strongName.substring(26,30);
-                                    set.getPrices().add(priceOne);
-                                    set.getPrices().add(priceTwo);
+                                    //set.getPrices().add(priceOne);
+                                    set.setItemPrice(currency.format(Double.valueOf(priceOne)), 0);
+                                    //set.getPrices().add(priceTwo);
+                                    set.setItemPrice(currency.format(Double.valueOf(priceTwo)), 1);
 
                                 }
                                 else
                                 {
-                                    NumberFormat nm = NumberFormat.getCurrencyInstance();
+                                    //NumberFormat nm = NumberFormat.getCurrencyInstance();
                                     strongName = strongName.replace("$","");
-                                    String formattedPrice = nm.format(Double.valueOf(strongName));
-                                    formattedPrice = formattedPrice.replace("$","");
-                                    set.getPrices().add(formattedPrice);
+                                    //String formattedPrice = nm.format(Double.valueOf(strongName));
+                                    //formattedPrice = formattedPrice.replace("$","");
+                                    //set.getPrices().add(formattedPrice);
+                                    set.setLastItemPrice(currency.format(Double.valueOf(strongName)));
                                 }
                             }
                             descParse(money,tempName,tempPrice,description);
@@ -129,17 +142,18 @@ public class Parser
                             {
                                 money = true;
                                 tempPrice = strongName;
-                                NumberFormat nm = NumberFormat.getCurrencyInstance();
                                 strongName = strongName.replace("$","");
-                                String formattedPrice = nm.format(Double.valueOf(strongName));
-                                formattedPrice = formattedPrice.replace("$","");
-                                set.getPrices().add(formattedPrice);
+                                //String formattedPrice = nm.format(Double.valueOf(strongName));
+                                //formattedPrice = formattedPrice.replace("$","");
+                                //set.getPrices().add(formattedPrice);
+                                set.setLastItemPrice(currency.format(Double.valueOf(strongName)));
                             }
                             else
                             {
                                 tempName = strongName;
                                 money = false;
-                                set.getNames().add(strongName);
+                                //set.getNames().add(strongName);
+                                set.setLastItemName(strongName);
                             }
                             descParse(money,tempName,tempPrice,description);
                         }
@@ -147,6 +161,7 @@ public class Parser
                 }
                 //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
                 sets.add(set);
+                System.out.println(sets.get(counter).getTitle());
                 counter++;
 
             }
@@ -162,20 +177,24 @@ public class Parser
             description = description.replace("$","");
             if(description.equals(" "))
             {
-                set.addDesc("No Description Available!");
+                //set.addDesc("No Description Available!");
+                set.setLastItemDesc("No Description Available!");
             }
             else
             {
                 if(!soupAndSalad)
                 {
                     description = description.replaceFirst(" ", "");
-                    set.addDesc(description);
+                    //set.addDesc(description);
+                    set.setLastItemDesc(description);
                 }
                 else
                 {
                     description = description.replaceFirst(" ", "");
-                    set.addDesc(description);
-                    set.addDesc(description);
+                    //set.addDesc(description);
+                    set.setLastItemDesc(description);
+                    //set.addDesc(description);
+                    set.setItemDesc(description, 1);
                     soupAndSalad = false;
                 }
             }
