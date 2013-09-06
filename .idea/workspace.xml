@@ -13,10 +13,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Blake" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -85,8 +87,23 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="14" selection-start="1956" selection-end="1956" vertical-scroll-proportion="0.0" vertical-offset="1413" max-vertical-offset="3825">
-              <folding />
+            <state line="104" column="0" selection-start="4166" selection-end="4166" vertical-scroll-proportion="0.0" vertical-offset="1049" max-vertical-offset="4539">
+              <folding>
+                <element signature="e#2946#11723#0" expanded="true" />
+                <element signature="e#6028#6261#0" expanded="true" />
+                <element signature="e#6238#6239#0" expanded="true" />
+                <element signature="e#6348#6577#0" expanded="true" />
+                <element signature="e#6554#6555#0" expanded="true" />
+                <element signature="e#7483#8343#0" expanded="true" />
+                <element signature="e#8308#8309#0" expanded="true" />
+                <element signature="e#9279#10396#0" expanded="true" />
+                <element signature="e#9963#10286#0" expanded="true" />
+                <element signature="e#10251#10252#0" expanded="true" />
+                <element signature="e#10369#10370#0" expanded="true" />
+                <element signature="e#10619#11111#0" expanded="true" />
+                <element signature="e#11084#11085#0" expanded="true" />
+                <element signature="e#11712#11713#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,7 +122,7 @@
       <file leaf-file-name="VistaActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="74" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="4794">
+            <state line="96" column="0" selection-start="4225" selection-end="4225" vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="5117">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,7 +182,7 @@
       <file leaf-file-name="Parser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="29" selection-start="4491" selection-end="4491" vertical-scroll-proportion="-0.6784897" vertical-offset="2463" max-vertical-offset="3366">
+            <state line="30" column="23" selection-start="746" selection-end="746" vertical-scroll-proportion="-1.1395881" vertical-offset="1506" max-vertical-offset="3349">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -245,13 +262,13 @@
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemListContainer.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSetContainer.java" />
-        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Item.java" />
+        <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java" />
         <option value="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
       </list>
     </option>
@@ -466,17 +483,7 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="false" />
             <option name="myId" value="UPDATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Cart.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CompleteorActivity.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/FoodItemAdapter.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Item.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/ItemSet.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MoneyTime.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MyFragment.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SettingsActivity.java</PATH>
+            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Created" />
@@ -484,8 +491,6 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="false" />
             <option name="myId" value="CREATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Sorting/ItemNameComparator.java</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Sorting/ItemPriceComparator.java</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Deleted" />
@@ -493,7 +498,6 @@
             <option name="mySupportsDeletion" value="false" />
             <option name="myCanBeAbsent" value="true" />
             <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/PolyMeal/libs/guava-14.0.1.jar</PATH>
           </FILE-GROUP>
           <FILE-GROUP>
             <option name="myUpdateName" value="Restored" />
@@ -753,7 +757,11 @@
       <created>1378448206608</created>
       <updated>1378448206608</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fixed descriptions, broke app in process.">
+      <created>1378449576360</created>
+      <updated>1378449576360</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -777,7 +785,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.5011111" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.67" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -802,7 +810,8 @@
     <MESSAGE value="Fixed a bug with list prices size being less then names which caused a crash." />
     <MESSAGE value="ALPHA: Reworked parser and objectified items." />
     <MESSAGE value="Fixed parser saving empty(null) items." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed parser saving empty(null) items." />
+    <MESSAGE value="Fixed descriptions, broke app in process." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed descriptions, broke app in process." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -846,15 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="74" selection-start="1930" selection-end="1930" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="4794">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/CartActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="154" selection-start="1949" selection-end="1949" vertical-scroll-proportion="0.0" vertical-offset="344" max-vertical-offset="3502">
@@ -885,13 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="14" selection-start="1956" selection-end="1956" vertical-scroll-proportion="0.0" vertical-offset="1413" max-vertical-offset="3825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Item.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="22" selection-start="1119" selection-end="1119" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1666">
@@ -917,9 +910,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/VistaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="0" selection-start="4225" selection-end="4225" vertical-scroll-proportion="0.0" vertical-offset="1491" max-vertical-offset="5117">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="0" selection-start="4166" selection-end="4166" vertical-scroll-proportion="0.0" vertical-offset="1049" max-vertical-offset="4539">
+          <folding>
+            <element signature="e#2946#11723#0" expanded="true" />
+            <element signature="e#6028#6261#0" expanded="true" />
+            <element signature="e#6238#6239#0" expanded="true" />
+            <element signature="e#6348#6577#0" expanded="true" />
+            <element signature="e#6554#6555#0" expanded="true" />
+            <element signature="e#7483#8343#0" expanded="true" />
+            <element signature="e#8308#8309#0" expanded="true" />
+            <element signature="e#9279#10396#0" expanded="true" />
+            <element signature="e#9963#10286#0" expanded="true" />
+            <element signature="e#10251#10252#0" expanded="true" />
+            <element signature="e#10369#10370#0" expanded="true" />
+            <element signature="e#10619#11111#0" expanded="true" />
+            <element signature="e#11084#11085#0" expanded="true" />
+            <element signature="e#11712#11713#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="29" selection-start="4491" selection-end="4491" vertical-scroll-proportion="-0.6784897" vertical-offset="2463" max-vertical-offset="3366">
+        <state line="30" column="23" selection-start="746" selection-end="746" vertical-scroll-proportion="-1.1395881" vertical-offset="1506" max-vertical-offset="3349">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

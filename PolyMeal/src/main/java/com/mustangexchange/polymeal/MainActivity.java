@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -31,7 +32,6 @@ public class MainActivity extends Activity{
     private Handler uiUpdate= new Handler();
     private TextView download;
     private ProgressBar downloadProgress;
-    private int whichError;
     private Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
 
     @Override
@@ -106,11 +106,30 @@ public class MainActivity extends Activity{
                     }
                     catch(Exception e)
                     {
-                        System.out.println(e.toString());
-                        for(int i = 0;i<e.getStackTrace().length;i++) {
-                            System.out.println(e.getStackTrace()[i]);
-                        }
-                        whichError = 1;
+                        Log.e("Blake","exception", e);
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                                onErrorConn.setCancelable(false);
+                                onErrorConn.setTitle("Error Parsing!");
+                                onErrorConn.setMessage("There was an error parsing menu data. We will now attempt to load data from cache. If the issue persists contact the developer.");
+                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+                                        if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||
+                                                getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
+                                        {
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            isc.loadFromCache(getSharedPreferences("PolyMeal",MODE_PRIVATE));
+                                        }
+                                    }
+                                });
+                                onErrorConn.show();
+                            }
+                        });
                     }
                     uiUpdate.post(new Runnable() {
                         @Override
@@ -132,7 +151,30 @@ public class MainActivity extends Activity{
                     }
                     catch(Exception e)
                     {
-                        whichError = 1;
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                                onErrorConn.setCancelable(false);
+                                onErrorConn.setTitle("Error Parsing!");
+                                onErrorConn.setMessage("There was an error parsing menu data. We will now attempt to load data from cache. If the issue persists contact the developer.");
+                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int button) {
+
+                                        if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||
+                                           getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
+                                        {
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            isc.loadFromCache(getSharedPreferences("PolyMeal",MODE_PRIVATE));
+                                        }
+                                    }
+                                });
+                                onErrorConn.show();
+                            }
+                        });
                     }
                     uiUpdate.post(new Runnable() {
                         @Override
@@ -146,17 +188,24 @@ public class MainActivity extends Activity{
                 }
                 catch (Exception e)
                 {
-                    whichError = 2;
-                    if(whichError==1)
+
+                    if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||
+                       getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
                     {
-                        uiUpdate.post(new Runnable() {
+
+                        uiUpdate.post(new Runnable()
+                        {
                             @Override
-                            public void run() {
+                            public void run()
+                            {
                                 AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                                onErrorConn.setTitle("Error Parsing!");
-                                onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
-                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
+                                onErrorConn.setCancelable(false);
+                                onErrorConn.setTitle("Error Connecting!");
+                                onErrorConn.setMessage("There was an error connecting to the website to download the menu and no previous menu data was found. Please check your data connection and try again.");
+                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int button)
+                                    {
                                         finish();
                                     }
                                 });
@@ -166,34 +215,17 @@ public class MainActivity extends Activity{
                     }
                     else
                     {
-                        if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||
-                           getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
-                        {
-
-                            uiUpdate.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                                    onErrorConn.setTitle("Error Connecting!");
-                                    onErrorConn.setMessage("There was an error connecting to the website to download the menu and no previous menu data was found. Please check your data connection and try again.");
-                                    onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int button) {
-                                            finish();
-                                        }
-                                    });
-                                    onErrorConn.show();
-                                }
-                            });
-                        }
-                        else
-                        {
-                            SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal", MODE_PRIVATE);
-                            isc.loadFromCache(appSharedPrefs);
-                            vista.setEnabled(true);
-                            sandwich.setEnabled(true);
-                            download.setVisibility(View.INVISIBLE);
-                            downloadProgress.setVisibility(View.INVISIBLE);
-                        }
+                        final SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal", MODE_PRIVATE);
+                        uiUpdate.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                isc.loadFromCache(appSharedPrefs);
+                                vista.setEnabled(true);
+                                sandwich.setEnabled(true);
+                                download.setVisibility(View.INVISIBLE);
+                                downloadProgress.setVisibility(View.INVISIBLE);
+                            }
+                        });
                     }
                 }
                 SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);

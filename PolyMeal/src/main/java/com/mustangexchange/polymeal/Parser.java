@@ -1,6 +1,5 @@
 package com.mustangexchange.polymeal;
 
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -49,6 +48,8 @@ public class Parser
                 BigDecimal itemPrice = null;
                 String itemDesc = null;
 
+                String tempName = "";
+
                 //for storing each part of soup and salad
                 String one = null;
                 String two = null;
@@ -64,7 +65,7 @@ public class Parser
                     {
                         if(!strongName.contains("$"))
                         {
-
+                            tempName = strongName;
                             name = true;
                             parseDesc = false;
                             if(strongName.contains("Combos - "))
@@ -121,9 +122,7 @@ public class Parser
                                 itemPrice = new BigDecimal(strongName);
                             }
                         }
-                        itemDesc = descParse(itemName,itemPrice.toString(),description);
                     }
-
                     else if(h2.equals("Breakfast")&&breakfast)
                     {
                         if(strongName.contains("$"))
@@ -136,7 +135,11 @@ public class Parser
                             parseDesc = false;
                             itemName = strongName;
                         }
-                        itemDesc = descParse(itemName,itemPrice.toString(),description);
+                    }
+                    if(parseDesc)
+                    {
+                        Log.e("Blake",itemPrice+"");
+                        itemDesc = descParse(tempName,strongName,description);
                     }
                 }
                 if(itemName!=null)
@@ -172,21 +175,17 @@ public class Parser
     }
     private String descParse(String tempName,String tempPrice,String description)
     {
-        if(parseDesc)
+        //if it is a price value remove both the name and price from the description string.
+        description = description.replace(tempName,"");
+        description = description.replace(tempPrice,"");
+        description = description.replace("$","");
+        if(description.equals(" "))
         {
-            //if it is a price value remove both the name and price from the description string.
-            description = description.replace(tempName,"");
-            description = description.replace(tempPrice,"");
-            description = description.replace("$","");
-            if(description.equals(" "))
-            {
-                return "No Description Available!";
-            }
-            else
-            {
-               return description.replaceFirst(" ", "");
-            }
+            return "No Description Available!";
         }
-        return "";
+        else
+        {
+            return description.replaceFirst(" ", "");
+        }
     }
 }
