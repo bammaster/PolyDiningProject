@@ -138,7 +138,6 @@ public class Parser
                     }
                     if(parseDesc)
                     {
-                        Log.e("Blake",itemPrice+"");
                         itemDesc = descParse(tempName,strongName,description);
                     }
                 }

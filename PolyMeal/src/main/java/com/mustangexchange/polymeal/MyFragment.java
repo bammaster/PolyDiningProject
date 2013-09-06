@@ -48,6 +48,8 @@ public class MyFragment extends Fragment {
                 final int fPos = pos;
                 //if(PagerAdapter.foodAdapterList.get(position).getPrices().size()==PagerAdapter.foodAdapterList.get(position).getNames().size())
                 //{
+                if(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getValid())
+                {
                     final AlertDialog.Builder onListClick= new AlertDialog.Builder(PagerAdapter.activity);
                     onListClick.setCancelable(false);
                     onListClick.setTitle("Add to Cart?");
@@ -81,7 +83,8 @@ public class MyFragment extends Fragment {
                                     }
                                 });
                                 onYes.show();
-                            } else {
+                            }
+                            else {
                                 Cart.add(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))));
                                 PagerAdapter.updateBalance();
                             }
@@ -110,6 +113,19 @@ public class MyFragment extends Fragment {
                         }
                     });
                     onListClick.show();
+                }
+                else
+                {
+                    AlertDialog.Builder invalidItem = new AlertDialog.Builder(PagerAdapter.activity);
+                    invalidItem.setTitle("Invalid Item!");
+                    invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
+                    invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button){
+
+                        }
+                    });
+                    invalidItem.show();
+                }
                 //}
                 /*else
                 {

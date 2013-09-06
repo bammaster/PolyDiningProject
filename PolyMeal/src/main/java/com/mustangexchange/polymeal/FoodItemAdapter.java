@@ -109,28 +109,18 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             });
             onYes.show();
         }
-        /*else if(size()!=names.size())
+        else if(!itemset.getItem(position).getValid())
         {
-            try
-            {
-                Cart.add(itemset.getItem(position));
-                updateBalance();
-                Toast.makeText(context, itemset.getItem(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
-            }
-            catch(IndexOutOfBoundsException e)
-            {
-                AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
-                invalidItem.setTitle("Invalid Item!");
-                invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
-                invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int button){
+            AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
+            invalidItem.setTitle("Invalid Item!");
+            invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
+            invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
+             public void onClick(DialogInterface dialog, int button){
 
-                    }
-                });
-                invalidItem.show();
-            }
-
-        }*/
+             }
+             });
+             invalidItem.show();
+        }
         else
         {
             Cart.add(itemset.getItem(position));
