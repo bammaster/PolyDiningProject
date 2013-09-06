@@ -37,8 +37,6 @@ public class Parser
     {
         Elements h2Eles = doc.getElementsByTag("h2");
         Elements tables = doc.select("table");
-        String tempName = "";
-        String tempPrice = "";
             //parses html with tag hierarchy starting with each table the moving to each table row, then table data and then each strong tag
         for(Element table : tables)
         {
@@ -123,7 +121,7 @@ public class Parser
                                 itemPrice = new BigDecimal(strongName);
                             }
                         }
-                        itemDesc = descParse(tempName,tempPrice,description);
+                        itemDesc = descParse(itemName,itemPrice.toString(),description);
                     }
 
                     else if(h2.equals("Breakfast")&&breakfast)
@@ -138,7 +136,7 @@ public class Parser
                             parseDesc = false;
                             itemName = strongName;
                         }
-                        itemDesc = descParse(tempName,tempPrice,description);
+                        itemDesc = descParse(itemName,itemPrice.toString(),description);
                     }
                 }
                 if(itemName!=null)
