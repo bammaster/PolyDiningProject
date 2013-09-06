@@ -46,7 +46,14 @@ public class Item
 
     public String getPriceString()
     {
-        return "$"+price;
+        if(price!=null)
+        {
+            return "$"+price;
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public void setPrice(BigDecimal price)

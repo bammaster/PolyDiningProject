@@ -1,12 +1,10 @@
 package com.mustangexchange.polymeal;
 
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -143,27 +141,30 @@ public class Parser
                         itemDesc = descParse(tempName,tempPrice,description);
                     }
                 }
-                if(soupAndSalad)
+                if(itemName!=null)
                 {
-                    Item itemOne = new Item(one,priceOne,itemDesc,true);
-                    Item itemTwo = new Item(two,priceTwo,itemDesc,true);
-                    itemOne.setOunces(true);
-                    itemTwo.setOunces(true);
-                    items.add(itemOne);
-                    items.add(itemTwo);
-                    soupAndSalad = false;
-                }
-                else if(price&&name)
-                {
-                    items.add(new Item(itemName,itemPrice,itemDesc,true));
-                    price = false;
-                    name = false;
-                }
-                else
-                {
-                    items.add(new Item(itemName,itemPrice,itemDesc,false));
-                    price = false;
-                    name = false;
+                    if(soupAndSalad)
+                    {
+                        Item itemOne = new Item(one,priceOne,itemDesc,true);
+                        Item itemTwo = new Item(two,priceTwo,itemDesc,true);
+                        itemOne.setOunces(true);
+                        itemTwo.setOunces(true);
+                        items.add(itemOne);
+                        items.add(itemTwo);
+                        soupAndSalad = false;
+                    }
+                    else if(price&&name)
+                    {
+                        items.add(new Item(itemName,itemPrice,itemDesc,true));
+                        price = false;
+                        name = false;
+                    }
+                    else
+                    {
+                        items.add(new Item(itemName,itemPrice,itemDesc,false));
+                        price = false;
+                        name = false;
+                    }
                 }
             }
                 //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
