@@ -94,6 +94,25 @@ public class VistaActivity extends FragmentActivity {
            Fragment inner class called MyFragment.
         */
         foodAdapterList.clear();
+        System.out.println(ItemSetContainer.vgItems.get(0).size());
+        for(int i = 0;i<ItemSetContainer.vgItems.size();i++)
+        {
+            for(int j = 0;j<ItemSetContainer.vgItems.get(i).size();j++) {
+                System.out.println(ItemSetContainer.vgItems.get(i).getItem(j).getName() + " " + ItemSetContainer.vgItems.get(i).getItem(j).getPriceString());
+            }
+        }
+        for(int i = 0;i<ItemSetContainer.vgItems.size();i++)
+        {
+            if(ItemSetContainer.vgItems.get(i).size() != 0) //check in case it's not the right time of day
+            {
+            /* Each of the components of vgItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                foodAdapterList.add(new FoodItemAdapter(this, ItemSetContainer.vgItems.get(i)));
+            }
+        }
+
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();
