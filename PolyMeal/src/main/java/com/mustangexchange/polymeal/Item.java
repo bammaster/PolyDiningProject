@@ -1,6 +1,7 @@
 package com.mustangexchange.polymeal;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 /**
  * Created by Blake on 9/4/13.
@@ -12,6 +13,7 @@ public class Item
     private String description;
     private boolean isValid;
     private boolean ounces = false;
+    private NumberFormat currency = NumberFormat.getCurrencyInstance();
     public Item(String name, BigDecimal price, String description, boolean isValid)
     {
         this.name = name;
@@ -43,7 +45,7 @@ public class Item
     {
         if(price != null)
         {
-            return price;
+            return format(price);
         }
         else
         {
@@ -55,7 +57,7 @@ public class Item
     {
         if(price!=null)
         {
-            return "$"+price;
+            return "$"+ format(price);
         }
         else
         {
@@ -96,5 +98,17 @@ public class Item
     public boolean getOunces()
     {
         return ounces;
+    }
+    private String format(String price)
+    {
+        price = currency.format(price);
+        return price.substring(1);
+    }
+
+    private BigDecimal format(BigDecimal price)
+    {
+        String priceString = price.toString();
+        priceString = currency.format(Double.valueOf(priceString));
+        return new BigDecimal(priceString.substring(1));
     }
 }
