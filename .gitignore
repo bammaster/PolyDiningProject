@@ -27,7 +27,25 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
 # problematic xml files
 gradle.xml
 misc.xml
 workspace.xml
+
+#Android Studio
+.idea/
+.gradle
+gradle/
+*.gradle
+gradlew
+gradlew.bat
+local.properties
+/*/out
+/*/*/build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
