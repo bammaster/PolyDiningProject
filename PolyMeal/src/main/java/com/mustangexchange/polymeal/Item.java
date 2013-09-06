@@ -41,7 +41,14 @@ public class Item
 
     public BigDecimal getPrice()
     {
-        return price;
+        if(price != null)
+        {
+            return price;
+        }
+        else
+        {
+            return new BigDecimal("0.00");
+        }
     }
 
     public String getPriceString()

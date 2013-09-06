@@ -304,7 +304,7 @@ public class CompleteorActivity extends Activity {
                 {
                     for(int j = 0;j<ItemSetContainer.vgItems.get(i).size();j++)
                     {
-                        if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.vgItems.get(i).getItem(j).getPrice())>=0)
+                        if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.vgItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.vgItems.get(i).getItem(j).getPriceString().equals(""))
                         {
                             /*possibleItems.getNames().add(ItemSetContainer.vgItems.get(i).getNames().get(j));
                             possibleItems.getPrices().add(ItemSetContainer.vgItems.get(i).getPrices().get(j));
@@ -320,7 +320,8 @@ public class CompleteorActivity extends Activity {
                 {
                     for(int j = 0;j<ItemSetContainer.sandItems.get(i).size();j++)
                     {
-                        if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.sandItems.get(i).getItem(j).getPrice())>=0)
+                        System.out.println(i + " ," + j);
+                        if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.sandItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.sandItems.get(i).getItem(j).getPriceString().equals(""))
                         {
                             /*possibleItems.getNames().add(ItemSetContainer.sandItems.get(i).getNames().get(j));
                             possibleItems.getPrices().add(ItemSetContainer.sandItems.get(i).getPrices().get(j));
