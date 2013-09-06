@@ -20,6 +20,13 @@ public class Item
         this.isValid = isValid;
     }
 
+    public Item(Item item, BigDecimal price) {
+        this.name = item.getName();
+        this.price = price;
+        this.description = item.getDescription();
+        this.isValid = item.getValid();
+    }
+
     public Item(){}
 
     public void setName(String title)

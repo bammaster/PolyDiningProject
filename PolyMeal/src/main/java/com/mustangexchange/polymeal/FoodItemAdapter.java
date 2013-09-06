@@ -9,44 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private Activity activity;
-    private ArrayList<String> names;
-    private ArrayList<String> prices;
-    private String title;
-    private ArrayList<String> desc;
+    private ItemSet itemset;
 
-    public FoodItemAdapter(Context context, String title, ArrayList<String> desc, ArrayList<String> names, ArrayList<String> prices)
+    public FoodItemAdapter(Context context, ItemSet itemset)
     {
         this.context = context;
         activity = (Activity) context;
-        this.names = names;
-        this.prices = prices;
-        this.title = title;
-        this.desc = desc;
-    }
-
-    public ArrayList<String> getNames()
-    {
-        return names;
-    }
-
-    public ArrayList<String> getPrices()
-    {
-        return prices;
-    }
-
-    public ArrayList<String> getDesc()
-    {
-        return desc;
-    }
-
-    public String getTitle()
-    {
-        return title;
+        this.itemset = itemset;
     }
 
     public void updateBalance()
@@ -62,14 +37,19 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
     }
 
+    public String getTitle()
+    {
+        return itemset.getTitle();
+    }
+
     public int getCount()
     {
-        return names.size();
+        return itemset.size();
     }
 
     public Object getItem(int position)
     {
-        return names.get(position);
+        return itemset.getItem(position);
     }
 
     public long getItemId(int position)
@@ -79,31 +59,16 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
 
     public View getView(int position, View convertView, ViewGroup viewGroup)
     {
-        String temp;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.row_item, null);
         }
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-        temp = names.get(position);
-        if(temp.contains("@#$"))
-        {
-            tvName.setText(temp.substring(3));
-        } else
-        {
-            tvName.setText(temp);
-        }
+        tvName.setText(itemset.getItem(position).getName());
 
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-        try
-        {
-            if(prices.size() != 0)
-            {
-                tvPrice.setText("$" + prices.get(position));
-            }
-        }
-        catch(IndexOutOfBoundsException e){}
+        tvPrice.setText(itemset.getItem(position).getPriceString());
 
         //Set the onClick Listener on this button
         ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
@@ -119,7 +84,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
     public void onClick(View view)
     {
         final int position = (Integer) view.getTag();
-        if (names.get(position).contains("@#$")) {
+        if (itemset.getItem(position).getOunces()) {
             AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
             onYes.setTitle("How much?");
             onYes.setMessage("Estimated Number of Ounces: ");
@@ -133,10 +98,8 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             onYes.setView(DialogView);
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    Cart.add(names.get(position), Double.toString(np.getValue() * new Double(prices.get(position))));
-                    StringBuilder sb = new StringBuilder(names.get(position) + " added to Cart!");
-                    sb.replace(0,3,"");
-                    Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();
+                    Cart.add(new Item(itemset.getItem(position), itemset.getItem(position).getPrice().multiply(new BigDecimal(np.getValue()))));
+                    Toast.makeText(activity, itemset.getItem(position).getName(), Toast.LENGTH_SHORT).show();
                     updateBalance();
                 }
             });
@@ -146,13 +109,13 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             });
             onYes.show();
         }
-        else if(prices.size()!=names.size())
+        /*else if(size()!=names.size())
         {
             try
             {
-                Cart.add(names.get(position), prices.get(position));
+                Cart.add(itemset.getItem(position));
                 updateBalance();
-                Toast.makeText(context,names.get(position) + " added to Cart!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, itemset.getItem(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
             }
             catch(IndexOutOfBoundsException e)
             {
@@ -167,12 +130,12 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
                 invalidItem.show();
             }
 
-        }
+        }*/
         else
         {
-            Cart.add(names.get(position), prices.get(position));
+            Cart.add(itemset.getItem(position));
             updateBalance();
-            Toast.makeText(context,names.get(position) + " added to Cart!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, itemset.getItem(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
         }
     }
 }

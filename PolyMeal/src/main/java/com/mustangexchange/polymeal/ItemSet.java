@@ -1,12 +1,10 @@
 package com.mustangexchange.polymeal;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.math.BigDecimal;
 
 public class ItemSet {
     private String title;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     public ItemSet(String title, ArrayList<Item> items)
     {
@@ -44,6 +42,12 @@ public class ItemSet {
     public Item getItem(int index)
     {
         return items.get(index);
+    }
+
+    public void clear()
+    {
+        title = null;
+        items.clear();
     }
 
 }

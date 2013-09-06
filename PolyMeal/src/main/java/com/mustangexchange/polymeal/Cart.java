@@ -23,11 +23,11 @@ public class Cart
         //bdPrice = new BigDecimal(price);
         //bdPrice.setScale(2, RoundingMode.HALF_EVEN);
         //cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
-        MoneyTime.moneySpent = MoneyTime.moneySpent.add(cart.get(cart.size() - 1).getPriceBD());
+        MoneyTime.moneySpent = MoneyTime.moneySpent.add(cart.get(cart.size() - 1).getPrice());
     }
     public static void remove(int index)
     {
-        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(cart.size() - 1).getPriceBD());
+        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(cart.size() - 1).getPrice());
         cart.remove(index);
         //cartMoney.remove(index);
     }
@@ -45,7 +45,7 @@ public class Cart
         int i = cart.size()-1;
         while(cart.size()>0)
         {
-            MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(i).getPriceBD());
+            MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(i).getPrice());
             cart.remove(i);
             //cartMoney.remove(i);
             i--;

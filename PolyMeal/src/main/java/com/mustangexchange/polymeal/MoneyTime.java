@@ -16,7 +16,8 @@ public class MoneyTime
     public static Time today = new Time(Time.getCurrentTimezone());
     public static BigDecimal money;
     //public static boolean manual;
-    public static int whichTime;
+    public static int manualTime;
+    private static int realTime;
 
     //gets time, calculates monetary value of a meal minus whatever has been spent then returns that value
     public static BigDecimal calcTotalMoney()
@@ -29,8 +30,10 @@ public class MoneyTime
         {
             defaultSP = PreferenceManager.getDefaultSharedPreferences(SandwichActivity.mActivity);
         }
-        whichTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
-        if(whichTime==4)
+        manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
+
+
+        if(manualTime==4)
         {
             today.setToNow();
             int minutes = (today.hour*60)+today.minute;
@@ -58,7 +61,30 @@ public class MoneyTime
         }
         else
         {
-            return mealWorth[whichTime].subtract(moneySpent).setScale(2);
+            return mealWorth[manualTime].subtract(moneySpent).setScale(2);
         }
+    }
+
+    public static int calcRealTime()
+    {
+            today.setToNow();
+            int minutes = (today.hour*60)+today.minute;
+            if(minutes>=420&&minutes<=599)
+            {
+                realTime=0;
+            }
+            else if(minutes>=600&&minutes<=1019)
+            {
+                realTime=1;
+            }
+            else if(minutes>=1020&&minutes<=1214)
+            {
+                realTime=2;
+            }
+            else
+            {
+                realTime=3;
+            }
+            return realTime;
     }
 }

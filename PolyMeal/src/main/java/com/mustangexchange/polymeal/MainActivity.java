@@ -106,6 +106,10 @@ public class MainActivity extends Activity{
                     }
                     catch(Exception e)
                     {
+                        System.out.println(e.toString());
+                        for(int i = 0;i<e.getStackTrace().length;i++) {
+                            System.out.println(e.getStackTrace()[i]);
+                        }
                         whichError = 1;
                     }
                     uiUpdate.post(new Runnable() {

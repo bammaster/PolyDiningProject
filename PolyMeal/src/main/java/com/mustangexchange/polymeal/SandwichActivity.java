@@ -101,6 +101,25 @@ public class SandwichActivity extends FragmentActivity {
          */
 
         foodAdapterList.clear();
+        System.out.println(ItemSetContainer.sandItems.get(0).size());
+        for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+        {
+            for(int j = 0;j<ItemSetContainer.sandItems.get(i).size();j++) {
+                System.out.println(ItemSetContainer.sandItems.get(i).getItem(j).getName() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getPriceString());
+            }
+        }
+        for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+        {
+            if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
+            {
+            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                foodAdapterList.add(new FoodItemAdapter(this, ItemSetContainer.sandItems.get(i)));
+            }
+
+        }
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();

@@ -144,10 +144,10 @@ public class CartActivity extends Activity {
 
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
         private Context context;
-        private ArrayList<ItemSet.Item> cart;
+        private ArrayList<Item> cart;
         //private ArrayList<String> cartMoney;
 
-        public CartItemAdapter(Context context, ArrayList<ItemSet.Item> cart)
+        public CartItemAdapter(Context context, ArrayList<Item> cart)
         {
             this.context = context;
             this.cart = cart;

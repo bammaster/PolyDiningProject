@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 
+import java.math.BigDecimal;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jon
@@ -44,16 +46,18 @@ public class MyFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
-                if(PagerAdapter.foodAdapterList.get(position).getPrices().size()==PagerAdapter.foodAdapterList.get(position).getNames().size())
-                {
+                //if(PagerAdapter.foodAdapterList.get(position).getPrices().size()==PagerAdapter.foodAdapterList.get(position).getNames().size())
+                //{
                     final AlertDialog.Builder onListClick= new AlertDialog.Builder(PagerAdapter.activity);
                     onListClick.setCancelable(false);
                     onListClick.setTitle("Add to Cart?");
-                    onListClick.setMessage("Would you like to add " + PagerAdapter.foodAdapterList.get(position).getNames().get(pos).replace("@#$", "") + " to your cart? Price: " + "$" + PagerAdapter.foodAdapterList.get(position).getPrices().get(pos));
+                    onListClick.setMessage("Would you like to add " + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getName() + " to your cart? Price: " + "$" + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice());
                     onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
                             //money = boundPrices.get(tempIndex);
-                            if (PagerAdapter.foodAdapterList.get(position).getNames().get(fPos).contains("@#$")) {
+                            //if (PagerAdapter.foodAdapterList.get(position).getNames().get(fPos).contains("@#$")) {
+                            if( ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getOunces())
+                            {
                                 AlertDialog.Builder onYes = new AlertDialog.Builder(PagerAdapter.activity);
                                 onYes.setTitle("How much?");
                                 onYes.setMessage("Estimated Number of Ounces: ");
@@ -67,7 +71,8 @@ public class MyFragment extends Fragment {
                                 onYes.setView(DialogView);
                                 onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int button) {
-                                        Cart.add(PagerAdapter.foodAdapterList.get(position).getNames().get(fPos), Double.toString(np.getValue() * new Double(PagerAdapter.foodAdapterList.get(position).getPrices().get(fPos))));
+                                        //Cart.add(PagerAdapter.foodAdapterList.get(position).getNames().get(fPos), Double.toString(np.getValue() * new Double(PagerAdapter.foodAdapterList.get(position).getPrices().get(fPos))));
+                                        Cart.add(new Item(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))), ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                                         PagerAdapter.updateBalance();
                                     }
                                 });
@@ -77,7 +82,7 @@ public class MyFragment extends Fragment {
                                 });
                                 onYes.show();
                             } else {
-                                Cart.add(PagerAdapter.foodAdapterList.get(position).getNames().get(fPos), PagerAdapter.foodAdapterList.get(position).getPrices().get(fPos));
+                                Cart.add(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))));
                                 PagerAdapter.updateBalance();
                             }
                         }
@@ -90,7 +95,7 @@ public class MyFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int button) {
                             AlertDialog.Builder onDialogClick = new AlertDialog.Builder(PagerAdapter.activity);
                             onDialogClick.setTitle("Description");
-                            onDialogClick.setMessage(PagerAdapter.foodAdapterList.get(position).getDesc().get(fPos));
+                            onDialogClick.setMessage(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getDescription());
                             onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int button) {
 
@@ -105,8 +110,8 @@ public class MyFragment extends Fragment {
                         }
                     });
                     onListClick.show();
-                }
-                else
+                //}
+                /*else
                 {
                     try
                     {
@@ -184,7 +189,7 @@ public class MyFragment extends Fragment {
                         });
                         invalidItem.show();
                     }
-                }
+                }*/
             }
         });
         return rootView;

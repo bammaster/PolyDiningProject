@@ -26,7 +26,7 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
         timePref = findPreference("currentTime");
-        timePref.setTitle(mealTimes[MoneyTime.whichTime]);
+        timePref.setTitle(mealTimes[MoneyTime.calcRealTime()]);
         timePref.setSelectable(false);
         /*setContentView(R.layout.activity_settings);
         current = (TextView)findViewById(R.id.textCurrent);
