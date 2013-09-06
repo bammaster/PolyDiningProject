@@ -119,7 +119,6 @@ public class SandwichActivity extends FragmentActivity {
             Cart.clear();
         }
     }
-
     public void onResume()
     {
         super.onResume();
@@ -156,13 +155,24 @@ public class SandwichActivity extends FragmentActivity {
     }
 
     public static void updateBalance() {
-        totalAmount = MoneyTime.calcTotalMoney();
-        setSubtitleColor();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        try
+        {
+            totalAmount = MoneyTime.calcTotalMoney();
+            setSubtitleColor();
+            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        }
+        catch (NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
+        }
     }
 
     public void updateSettings()
     {
+        try
+        {
         SharedPreferences defaultSP;
         int sortMode;
         defaultSP = PreferenceManager.getDefaultSharedPreferences(mActivity);
@@ -208,6 +218,13 @@ public class SandwichActivity extends FragmentActivity {
 
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();
+        }
+        catch(NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
+        }
 
     }
 

@@ -105,27 +105,54 @@ public class CartActivity extends Activity {
     }
 
     public void updateBalance() {
-        totalAmount = MoneyTime.calcTotalMoney();
-        setSubtitleColor();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        try
+        {
+            totalAmount = MoneyTime.calcTotalMoney();
+            setSubtitleColor();
+            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        }
+        catch (NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
+        }
     }
 
     public ArrayList<Item> updateSettings() {
-        ArrayList<Item> cart = Cart.getCart();
-        SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
-        int sortMode;
-
-        sortMode = Integer.valueOf(defaultSp.getString("sortMode", "1"));
-
-        if(sortMode == 0) {
-            Collections.sort(cart, new ItemPriceComparator());
-            Collections.reverse(cart);
-        }
-        else
+        ArrayList<Item> cart = new ArrayList<Item>();
+        try
         {
-            Collections.sort(cart, new ItemNameComparator());
+            cart = Cart.getCart();
+            SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
+            int sortMode;
+
+            sortMode = Integer.valueOf(defaultSp.getString("sortMode", "1"));
+
+            if(sortMode == 0) {
+                Collections.sort(cart, new ItemPriceComparator());
+                Collections.reverse(cart);
+            }
+            else
+            {
+                Collections.sort(cart, new ItemNameComparator());
+            }
+            return cart;
+            }
+        catch (NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
         }
         return cart;
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        updateBalance();
+        updateSettings();
     }
 
     @Override

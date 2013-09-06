@@ -136,11 +136,11 @@ public class CompleteorActivity extends Activity {
         }
     }
 
-
     public void onResume()
     {
         super.onResume();
-        Toast.makeText(mContext, "onResume triggered", Toast.LENGTH_SHORT);
+        updateBalance();
+        updateSettings();
     }
 
     public void updateList() {
@@ -161,25 +161,43 @@ public class CompleteorActivity extends Activity {
     }
 
     public void updateBalance() {
-        totalAmount = MoneyTime.calcTotalMoney();
-        setSubtitleColor();
-        mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        try
+        {
+            totalAmount = MoneyTime.calcTotalMoney();
+            setSubtitleColor();
+            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        }
+        catch (NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
+        }
     }
 
     public void updateSettings()
     {
-        int sortMode;
-        SharedPreferences defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
+        try
+        {
+            int sortMode;
+            SharedPreferences defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
 
-        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
-        if(sortMode == 0)
-        {
-            Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
-            Collections.reverse(possibleItems.getItems());
+            sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
+            if(sortMode == 0)
+            {
+                Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
+                Collections.reverse(possibleItems.getItems());
+            }
+            else
+            {
+                Collections.sort(possibleItems.getItems(), new ItemNameComparator());
+            }
         }
-        else
+        catch (NullPointerException e)
         {
-            Collections.sort(possibleItems.getItems(), new ItemNameComparator());
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
         }
     }
 
