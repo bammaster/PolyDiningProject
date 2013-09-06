@@ -267,12 +267,9 @@ public class CompleteorActivity extends Activity {
                 onYes.setView(DialogView);
                 onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int button) {
-                        DecimalFormat twoDForm = new DecimalFormat("#.##");
                         possibleItems.getItem(position).setPrice(new BigDecimal(new BigDecimal(np.getValue())+"").multiply(possibleItems.getItem(position).getPrice()));
                         Cart.add(possibleItems.getItem(position));
-                        StringBuilder sb = new StringBuilder(possibleItems.getItem(position).getName() + " added to Cart!");
-                        sb.replace(0,3,"");
-                        Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, possibleItems.getItem(position).getName(), Toast.LENGTH_SHORT).show();
                         updateBalance();
                         updateList();
                     }
@@ -287,7 +284,7 @@ public class CompleteorActivity extends Activity {
             {
                 Cart.add(possibleItems.getItem(position));
                 updateBalance();
-                Toast.makeText(activity, possibleItems.getItem(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, possibleItems.getItem(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                 updateList();
             }
         }

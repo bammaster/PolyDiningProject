@@ -105,7 +105,7 @@ public class SandwichActivity extends FragmentActivity {
         for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
         {
             for(int j = 0;j<ItemSetContainer.sandItems.get(i).size();j++) {
-                System.out.println(ItemSetContainer.sandItems.get(i).getItem(j).getName() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getPriceString());
+                System.out.println(ItemSetContainer.sandItems.get(i).getItem(j).getName() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getPriceString() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getValid());
             }
         }
         for(int i = 0;i<ItemSetContainer.sandItems.size();i++)

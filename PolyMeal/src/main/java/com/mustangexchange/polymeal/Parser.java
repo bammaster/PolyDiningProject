@@ -130,11 +130,13 @@ public class Parser
                         if(strongName.contains("$"))
                         {
                             parseDesc = true;
+                            price = true;
                             itemPrice = new BigDecimal(strongName.replace("$",""));
                         }
                         else
                         {
                             parseDesc = false;
+                            name = true;
                             itemName = strongName;
                         }
                     }

@@ -48,7 +48,7 @@ public class CartActivity extends Activity {
                 final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
-                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos) + " to your cart? \nPrice: " + "$" +  Cart.getCart().get(pos));
+                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " +  Cart.getCart().get(pos).getPriceString());
                 onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int button) {
                         removeFromCart(fPos);
