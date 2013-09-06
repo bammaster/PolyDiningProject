@@ -13,12 +13,10 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Blake" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3673586d-345e-44e8-90ef-a49e855c0184" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Item.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" afterPath="$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -96,7 +94,7 @@
       <file leaf-file-name="SandwichActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="32" selection-start="5550" selection-end="5550" vertical-scroll-proportion="0.0" vertical-offset="4373" max-vertical-offset="5219">
+            <state line="103" column="69" selection-start="4516" selection-end="4578" vertical-scroll-proportion="0.0" vertical-offset="1614" max-vertical-offset="5219">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -167,8 +165,10 @@
       <file leaf-file-name="Parser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="33" selection-start="138" selection-end="138" vertical-scroll-proportion="0.09725401" vertical-offset="0" max-vertical-offset="3400">
-              <folding />
+            <state line="110" column="29" selection-start="4491" selection-end="4491" vertical-scroll-proportion="-0.6784897" vertical-offset="2463" max-vertical-offset="3366">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -749,7 +749,11 @@
       <created>1378441388775</created>
       <updated>1378441388775</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed parser saving empty(null) items.">
+      <created>1378448206608</created>
+      <updated>1378448206608</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -797,7 +801,8 @@
     <MESSAGE value="Fixed something. Temporary fix." />
     <MESSAGE value="Fixed a bug with list prices size being less then names which caused a crash." />
     <MESSAGE value="ALPHA: Reworked parser and objectified items." />
-    <option name="LAST_COMMIT_MESSAGE" value="ALPHA: Reworked parser and objectified items." />
+    <MESSAGE value="Fixed parser saving empty(null) items." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed parser saving empty(null) items." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -838,15 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="172" column="43" selection-start="10893" selection-end="10893" vertical-scroll-proportion="0.0" vertical-offset="2924" max-vertical-offset="3349">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="32" selection-start="5550" selection-end="5550" vertical-scroll-proportion="0.0" vertical-offset="4373" max-vertical-offset="5219">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -912,10 +908,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/SandwichActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="69" selection-start="4516" selection-end="4578" vertical-scroll-proportion="0.0" vertical-offset="1614" max-vertical-offset="5219">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PolyMeal/src/main/java/com/mustangexchange/polymeal/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="33" selection-start="138" selection-end="138" vertical-scroll-proportion="0.09725401" vertical-offset="0" max-vertical-offset="3400">
-          <folding />
+        <state line="110" column="29" selection-start="4491" selection-end="4491" vertical-scroll-proportion="-0.6784897" vertical-offset="2463" max-vertical-offset="3366">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
