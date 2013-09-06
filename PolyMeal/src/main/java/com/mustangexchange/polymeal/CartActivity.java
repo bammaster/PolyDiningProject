@@ -11,11 +11,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.*;
+import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
+import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CartActivity extends Activity {
 
@@ -35,7 +39,7 @@ public class CartActivity extends Activity {
 
         SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
         //cartAdapter = new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney());
-        cartAdapter = new CartItemAdapter(this, Cart.getCart());
+        cartAdapter = new CartItemAdapter(this, updateSettings());
         mContext = this;
         activity = this;
 
@@ -104,6 +108,24 @@ public class CartActivity extends Activity {
         totalAmount = MoneyTime.calcTotalMoney();
         setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+    }
+
+    public ArrayList<Item> updateSettings() {
+        ArrayList<Item> cart = Cart.getCart();
+        SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
+        int sortMode;
+
+        sortMode = Integer.valueOf(defaultSp.getString("sortMode", "1"));
+
+        if(sortMode == 0) {
+            Collections.sort(cart, new ItemPriceComparator());
+            Collections.reverse(cart);
+        }
+        else
+        {
+            Collections.sort(cart, new ItemNameComparator());
+        }
+        return cart;
     }
 
     @Override

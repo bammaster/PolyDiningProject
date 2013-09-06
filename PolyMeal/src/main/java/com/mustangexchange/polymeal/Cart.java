@@ -27,7 +27,7 @@ public class Cart
     }
     public static void remove(int index)
     {
-        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(cart.size() - 1).getPrice());
+        MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(index).getPrice());
         cart.remove(index);
         //cartMoney.remove(index);
     }

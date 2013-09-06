@@ -6,10 +6,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
@@ -25,11 +27,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.gson.reflect.TypeToken;
+import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
+import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class SandwichActivity extends FragmentActivity {
 
@@ -100,29 +105,10 @@ public class SandwichActivity extends FragmentActivity {
            Fragment inner class called MyFragment.
          */
 
-        foodAdapterList.clear();
-        System.out.println(ItemSetContainer.sandItems.get(0).size());
-        for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
-        {
-            for(int j = 0;j<ItemSetContainer.sandItems.get(i).size();j++) {
-                System.out.println(ItemSetContainer.sandItems.get(i).getItem(j).getName() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getPriceString() + " " + ItemSetContainer.sandItems.get(i).getItem(j).getValid());
-            }
-        }
-        for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
-        {
-            if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
-            {
-            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
-               get what is applicable at this time period rather than the whole thing. This prevents
-               ArrayOutOfBoundsExceptions later on.
-             */
-                foodAdapterList.add(new FoodItemAdapter(this, ItemSetContainer.sandItems.get(i)));
-            }
-
-        }
         vp = (ViewPager) findViewById(R.id.pager);
-        vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
-        vp.getAdapter().notifyDataSetChanged();
+        updateSettings();
+        /*vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
+        vp.getAdapter().notifyDataSetChanged();*/
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
@@ -138,6 +124,7 @@ public class SandwichActivity extends FragmentActivity {
     {
         super.onResume();
         updateBalance();
+        updateSettings();
     }
 
     @Override
@@ -172,6 +159,56 @@ public class SandwichActivity extends FragmentActivity {
         totalAmount = MoneyTime.calcTotalMoney();
         setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+    }
+
+    public void updateSettings()
+    {
+        SharedPreferences defaultSP;
+        int sortMode;
+        defaultSP = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
+
+
+        if(sortMode == 0)
+        {
+            foodAdapterList.clear();
+            for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+            {
+                if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
+                {
+            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                    ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
+                    Collections.sort(sortedList, new ItemPriceComparator());
+                    Collections.reverse(sortedList);
+                    foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
+                }
+            }
+        }
+        else
+        {
+            foodAdapterList.clear();
+            for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+            {
+                if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
+                {
+            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                    ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
+                    Collections.sort(sortedList, new ItemNameComparator());
+                    foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
+                }
+
+            }
+        }
+
+        vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
+        vp.getAdapter().notifyDataSetChanged();
+
     }
 
 

@@ -6,17 +6,22 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.*;
+import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
+import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CompleteorActivity extends Activity {
 
@@ -159,6 +164,23 @@ public class CompleteorActivity extends Activity {
         totalAmount = MoneyTime.calcTotalMoney();
         setSubtitleColor();
         mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+    }
+
+    public void updateSettings()
+    {
+        int sortMode;
+        SharedPreferences defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
+
+        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
+        if(sortMode == 0)
+        {
+            Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
+            Collections.reverse(possibleItems.getItems());
+        }
+        else
+        {
+            Collections.sort(possibleItems.getItems(), new ItemNameComparator());
+        }
     }
 
     @Override
@@ -333,6 +355,7 @@ public class CompleteorActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            updateSettings();
             lvAdapter.notifyDataSetChanged();
             lv.setAdapter(lvAdapter);
             checkLayout();

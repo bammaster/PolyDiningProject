@@ -14,6 +14,10 @@ public class ItemSet {
 
     public ItemSet() {}
 
+    public ArrayList<Item> getItems()
+    {
+        return items;
+    }
     public int size()
     {
         return items.size();
