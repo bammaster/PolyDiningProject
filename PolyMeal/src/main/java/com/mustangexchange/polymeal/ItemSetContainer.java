@@ -1,39 +1,29 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
-
-import com.google.common.base.Preconditions;
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Ordering;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Blake on 9/1/13.
  */
-public class ItemListContainer
+public class ItemSetContainer
 {
-    public static ArrayList<ItemSet> vgItems = new ArrayList<ItemSet>();
-    public static ArrayList<ItemSet> sandItems = new ArrayList<ItemSet>();
+    public static ArrayList<ItemSet> vgItems;
+    public static ArrayList<ItemSet> sandItems;
     private Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
+
+    public ItemSetContainer(){}
+
+    public ItemSetContainer(ArrayList<ItemSet> sandItems,ArrayList<ItemSet> vgItems)
+    {
+        this.vgItems = vgItems;
+        this.sandItems = sandItems;
+    }
+
     public void loadFromCache(SharedPreferences sp)
     {
         Gson gson = new Gson();

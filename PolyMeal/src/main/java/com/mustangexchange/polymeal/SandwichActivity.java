@@ -3,11 +3,9 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -35,16 +33,12 @@ import java.util.Arrays;
 
 public class SandwichActivity extends FragmentActivity {
 
-    private ProgressDialog status;
-
     private ViewPager vp;
     private PagerTabStrip myPagerTabStrip;
     private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     public static ActionBar mActionBar;
     public static BigDecimal totalAmount;
     public static Activity mActivity;
-    private ItemListContainer data = new ItemListContainer();
-    private SharedPreferences sp;
 
     public static Context mContext;
 
@@ -62,7 +56,6 @@ public class SandwichActivity extends FragmentActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItems);
-        sp = getSharedPreferences("PolyMeal",MODE_PRIVATE);
         mContext = this;
         mActivity = this;
         mActionBar = getActionBar();
@@ -108,28 +101,6 @@ public class SandwichActivity extends FragmentActivity {
          */
 
         foodAdapterList.clear();
-        System.out.println(ItemListContainer.sandItems.get(0).size());
-        System.out.println(ItemListContainer.sandItems.get(0).getNames().size());
-        System.out.println(ItemListContainer.sandItems.get(0).getPrices().size());
-        for(int i = 0;i<ItemListContainer.sandItems.size();i++)
-        {
-            for(int j = 0;j<ItemListContainer.sandItems.get(i).getNames().size();j++) {
-                System.out.println(ItemListContainer.sandItems.get(i).getNames().get(j) + " " + ItemListContainer.sandItems.get(i).getPrices().get(j));
-            }
-        }
-        for(int i = 0;i<ItemListContainer.sandItems.size();i++)
-        {
-            if(ItemListContainer.sandItems.get(i).getNames().size() != 0) //check in case it's not the right time of day
-            {
-            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
-               get what is applicable at this time period rather than the whole thing. This prevents
-               ArrayOutOfBoundsExceptions later on.
-             */
-            foodAdapterList.add(new FoodItemAdapter(this, ItemListContainer.sandItems.get(i).getTitle(),ItemListContainer.sandItems.get(i).getDesc(), ItemListContainer.sandItems.get(i).getNames(),
-                    ItemListContainer.sandItems.get(i).getPrices()));
-            }
-
-        }
         vp = (ViewPager) findViewById(R.id.pager);
         vp.setAdapter(new PagerAdapter(this, getSupportFragmentManager(), foodAdapterList));
         vp.getAdapter().notifyDataSetChanged();

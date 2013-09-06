@@ -58,11 +58,11 @@ public class CompleteorActivity extends Activity {
                 final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Add to Cart?");
-                onListClick.setMessage("Would you like to add " + possibleItems.getNames().get(pos).replace("@#$", "") + " to your cart? Price: " + "$" + possibleItems.getPrices().get(pos));
+                onListClick.setMessage("Would you like to add " + possibleItems.getItem(pos).getName() + " to your cart? Price: " + possibleItems.getItem(pos).getPriceString());
                 onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int button) {
                         //money = boundPrices.get(tempIndex);
-                        if (possibleItems.getNames().get(fPos).contains("@#$")) {
+                        if (possibleItems.getItem(fPos).getOunces()) {
                             AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
                             onYes.setTitle("How much?");
                             onYes.setMessage("Estimated Number of Ounces: ");
@@ -76,7 +76,8 @@ public class CompleteorActivity extends Activity {
                             onYes.setView(DialogView);
                             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int button) {
-                                    Cart.add(possibleItems.getNames().get(fPos), Double.toString(np.getValue() * new Double(possibleItems.getPrices().get(fPos))));
+                                    possibleItems.getItem(fPos).setPrice(new BigDecimal(new BigDecimal(np.getValue())+"").multiply(possibleItems.getItem(fPos).getPrice()));
+                                    Cart.add(possibleItems.getItem(fPos));
                                     updateBalance();
                                     updateList();
                                 }
@@ -87,7 +88,7 @@ public class CompleteorActivity extends Activity {
                             });
                             onYes.show();
                         } else {
-                            Cart.add(possibleItems.getNames().get(fPos), possibleItems.getPrices().get(fPos));
+                            Cart.add(possibleItems.getItem(fPos));
                             updateBalance();
                             updateList();
                         }
@@ -101,7 +102,7 @@ public class CompleteorActivity extends Activity {
                     public void onClick(DialogInterface dialog, int button) {
                         AlertDialog.Builder onDialogClick = new AlertDialog.Builder(activity);
                         onDialogClick.setTitle("Description");
-                        onDialogClick.setMessage(possibleItems.getDesc().get(fPos));
+                        onDialogClick.setMessage(possibleItems.getItem(fPos).getDescription());
                         onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
 
@@ -215,11 +216,11 @@ public class CompleteorActivity extends Activity {
         }
 
         public int getCount() {
-            return possibleItems.getNames().size();
+            return possibleItems.size();
         }
 
         public Object getItem(int position) {
-            return possibleItems.getNames().get(position);
+            return possibleItems.getItem(position);
         }
 
         public long getItemId(int position) {
@@ -234,13 +235,10 @@ public class CompleteorActivity extends Activity {
                 convertView = inflater.inflate(R.layout.row_item, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(possibleItems.getNames().get(position).replace("@#$",""));
+            tvName.setText(possibleItems.getItem(position).getName());
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            if(possibleItems.getPrices().size() != 0)
-            {
-                tvPrice.setText("$" + possibleItems.getPrices().get(position));
-            }
+            tvPrice.setText(possibleItems.getItem(position).getPriceString());
 
             //Set the onClick Listener on this button
             ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
@@ -255,7 +253,7 @@ public class CompleteorActivity extends Activity {
         @Override
         public void onClick(View view) {
             final int position = (Integer) view.getTag();
-            if (possibleItems.getNames().get(position).contains("@#$")) {
+            if (possibleItems.getItem(position).getOunces()) {
                 AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
                 onYes.setTitle("How much?");
                 onYes.setMessage("Estimated Number of Ounces: ");
@@ -270,8 +268,9 @@ public class CompleteorActivity extends Activity {
                 onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int button) {
                         DecimalFormat twoDForm = new DecimalFormat("#.##");
-                        Cart.add(possibleItems.getNames().get(position), twoDForm.format(np.getValue() * new Double(possibleItems.getPrices().get(position))));
-                        StringBuilder sb = new StringBuilder(possibleItems.getNames().get(position) + " added to Cart!");
+                        possibleItems.getItem(position).setPrice(new BigDecimal(new BigDecimal(np.getValue())+"").multiply(possibleItems.getItem(position).getPrice()));
+                        Cart.add(possibleItems.getItem(position));
+                        StringBuilder sb = new StringBuilder(possibleItems.getItem(position).getName() + " added to Cart!");
                         sb.replace(0,3,"");
                         Toast.makeText(activity, sb, Toast.LENGTH_SHORT).show();
                         updateBalance();
@@ -286,9 +285,9 @@ public class CompleteorActivity extends Activity {
             }
             else
             {
-                Cart.add(possibleItems.getNames().get(position), possibleItems.getPrices().get(position));
+                Cart.add(possibleItems.getItem(position));
                 updateBalance();
-                Toast.makeText(activity, possibleItems.getNames().get(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, possibleItems.getItem(position) + " added to Cart!", Toast.LENGTH_SHORT).show();
                 updateList();
             }
         }
@@ -300,10 +299,10 @@ public class CompleteorActivity extends Activity {
         protected String doInBackground(String... params) {
             if(MainActivity.vgOrSand==1)
             {
-                System.out.println(ItemListContainer.vgItems.get(0).getTitle());
-                for(int i = 0;i<ItemListContainer.vgItems.size();i++)
+                System.out.println(ItemSetContainer.vgItems.get(0).getTitle());
+                for(int i = 0;i<ItemSetContainer.vgItems.size();i++)
                 {
-                    for(int j = 0;j<ItemListContainer.vgItems.get(i).getPrices().size();j++)
+                    for(int j = 0;j<ItemSetContainer.vgItems.get(i).getPrices().size();j++)
                     {
                         if(MoneyTime.calcTotalMoney().compareTo(new BigDecimal(ItemListContainer.vgItems.get(i).getPrices().get(j)))>=0)
                         {

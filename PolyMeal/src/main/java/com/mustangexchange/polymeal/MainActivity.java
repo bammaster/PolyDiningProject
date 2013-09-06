@@ -31,6 +31,7 @@ public class MainActivity extends Activity{
     private Handler uiUpdate= new Handler();
     private TextView download;
     private ProgressBar downloadProgress;
+    private int whichError;
     private Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
 
     @Override
@@ -43,8 +44,9 @@ public class MainActivity extends Activity{
         final TextView select = (TextView)findViewById(R.id.selectText);
         final Button sandwich = (Button)findViewById(R.id.buttonSand);
         final Button vista = (Button)findViewById(R.id.buttonVista);
-        ItemListContainer.vgItems = new ArrayList<ItemSet>();
-        ItemListContainer.sandItems = new ArrayList<ItemSet>();
+        final ItemSetContainer isc = new ItemSetContainer(new ArrayList<ItemSet>(),new ArrayList<ItemSet>());
+
+        //animates in onScreen objects
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         final Animation in2 = new AlphaAnimation(0.0f, 1.0f);
         select.setVisibility(View.INVISIBLE);
@@ -74,6 +76,7 @@ public class MainActivity extends Activity{
 
             }
         });
+        //connects to website and parses data on a separate thread.
         internet = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,29 +101,12 @@ public class MainActivity extends Activity{
                     });
                     try
                     {
-                        parseHtml = new Parser(ItemListContainer.vgItems);
-                        parseHtml.parse(docVg,false);
+                        parseHtml = new Parser(ItemSetContainer.vgItems,docVg);
+                        parseHtml.parse(false);
                     }
                     catch(Exception e)
                     {
-                        System.out.println(e.toString());
-                        for(int i = 0;i<e.getStackTrace().length;i++) {
-                            System.out.println(e.getStackTrace()[i]);
-                        }
-                       /*uiUpdate.post(new Runnable() {
-                           @Override
-                           public void run() {
-                               AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                               onErrorConn.setTitle("Error Parsing!");
-                               onErrorConn.setMessage("There was an error parsing menu data. Please relaunch the app and try again. If the issue persists contact the developer.");
-                               onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                   public void onClick(DialogInterface dialog, int button) {
-                                       finish();
-                                   }
-                               });
-                               onErrorConn.show();
-                           }
-                       });*/
+                        whichError = 1;
                     }
                     uiUpdate.post(new Runnable() {
                         @Override
@@ -137,15 +123,28 @@ public class MainActivity extends Activity{
                     });
                     try
                     {
-                        parseHtml = new Parser(ItemListContainer.sandItems);
-                        parseHtml.parse(docSand,true);
+                        parseHtml = new Parser(ItemSetContainer.sandItems,docSand);
+                        parseHtml.parse(true);
                     }
                     catch(Exception e)
                     {
-                        System.out.println(e.toString());
-                        for(int i = 0;i<e.getStackTrace().length;i++) {
-                            System.out.println(e.getStackTrace()[i]);
+                        whichError = 1;
+                    }
+                    uiUpdate.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            vista.setEnabled(true);
+                            sandwich.setEnabled(true);
+                            download.setVisibility(View.INVISIBLE);
+                            downloadProgress.setVisibility(View.INVISIBLE);
                         }
+                    });
+                }
+                catch (Exception e)
+                {
+                    whichError = 2;
+                    if(whichError==1)
+                    {
                         uiUpdate.post(new Runnable() {
                             @Override
                             public void run() {
@@ -161,50 +160,43 @@ public class MainActivity extends Activity{
                             }
                         });
                     }
-                    uiUpdate.post(new Runnable() {
-                        @Override
-                        public void run() {
+                    else
+                    {
+                        if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||
+                           getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
+                        {
+
+                            uiUpdate.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
+                                    onErrorConn.setTitle("Error Connecting!");
+                                    onErrorConn.setMessage("There was an error connecting to the website to download the menu and no previous menu data was found. Please check your data connection and try again.");
+                                    onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int button) {
+                                            finish();
+                                        }
+                                    });
+                                    onErrorConn.show();
+                                }
+                            });
+                        }
+                        else
+                        {
+                            SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal", MODE_PRIVATE);
+                            isc.loadFromCache(appSharedPrefs);
                             vista.setEnabled(true);
                             sandwich.setEnabled(true);
                             download.setVisibility(View.INVISIBLE);
                             downloadProgress.setVisibility(View.INVISIBLE);
                         }
-                    });
-                } catch (Exception e) {
-                    if(getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Sandwich Factory Items","").equals("")||getSharedPreferences("PolyMeal",MODE_PRIVATE).getString("Vista Grande Items","").equals(""))
-                    {
-                        System.out.println("168");
-                        uiUpdate.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                AlertDialog.Builder onErrorConn= new AlertDialog.Builder(MainActivity.this);
-                                onErrorConn.setTitle("Error Connecting!");
-                                onErrorConn.setMessage("There was an error connecting to the website to download the menu and no previous menu data was found. Please check your data connection and try again.");
-                                onErrorConn.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int button) {
-                                        finish();
-                                    }
-                                });
-                                onErrorConn.show();
-                            }
-                        });
-                    }
-                    else
-                    {
-                        SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal", MODE_PRIVATE);
-                        ItemListContainer ilc = new ItemListContainer();
-                        ilc.loadFromCache(appSharedPrefs);
-                        vista.setEnabled(true);
-                        sandwich.setEnabled(true);
-                        download.setVisibility(View.INVISIBLE);
-                        downloadProgress.setVisibility(View.INVISIBLE);
                     }
                 }
                 SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
                 Gson gson = new Gson();
-                String sand = gson.toJson(ItemListContainer.sandItems,gsonType);
-                String vg = gson.toJson(ItemListContainer.vgItems,gsonType);
+                String sand = gson.toJson(ItemSetContainer.sandItems,gsonType);
+                String vg = gson.toJson(ItemSetContainer.vgItems,gsonType);
                 prefsEditor.putString("Sandwich Factory Items", sand);
                 prefsEditor.putString("Vista Grande Items", vg);
                 prefsEditor.commit();

@@ -12,15 +12,14 @@ import java.util.ArrayList;
 
 public class Cart
 {
-    private static ArrayList<ItemSet.Item> cart = new ArrayList<ItemSet.Item>();
+    private static ArrayList<Item> cart = new ArrayList<Item>();
     //private static ArrayList<String> cartMoney = new ArrayList<String>();
     private static Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
     public static BigDecimal bdPrice = new BigDecimal("0.00");
 
-    public static void add(String item,String price)
+    public static void add(Item item)
     {
-
-        cart.add(new ItemSet.Item(item, new BigDecimal(price)));
+        cart.add(item);
         //bdPrice = new BigDecimal(price);
         //bdPrice.setScale(2, RoundingMode.HALF_EVEN);
         //cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
@@ -33,7 +32,7 @@ public class Cart
         //cartMoney.remove(index);
     }
     //returns cart
-    public static ArrayList<ItemSet.Item> getCart()
+    public static ArrayList<Item> getCart()
     {
         return cart;
     }
