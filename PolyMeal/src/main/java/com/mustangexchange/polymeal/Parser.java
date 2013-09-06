@@ -49,6 +49,7 @@ public class Parser
                 String itemDesc = null;
 
                 String tempName = "";
+                String tempPrice = "";
 
                 //for storing each part of soup and salad
                 String one = null;
@@ -100,6 +101,7 @@ public class Parser
                         {
                             price = true;
                             parseDesc = true;
+                            tempPrice = strongName;
                             strongName = strongName.replace(",",".");
 
                             //automatically calculates tax if any.
@@ -108,7 +110,7 @@ public class Parser
                                 strongName = strongName.replace(" plus tax","");
                                 strongName = strongName.replace("$","");
                                 //set.getPrices().add(df.format(new Double(strongName)+new Double(strongName)*.08)+"");
-                                itemPrice = (new BigDecimal(strongName).add(new BigDecimal(strongName))).multiply(new BigDecimal(".08"));
+                                itemPrice = (new BigDecimal(strongName).multiply(new BigDecimal(".08")).add(new BigDecimal(strongName)));
                             }
                             //gets proper values for anything per oz items by substringing them out.
                             else if(strongName.contains("per oz"))
@@ -138,7 +140,7 @@ public class Parser
                     }
                     if(parseDesc)
                     {
-                        itemDesc = descParse(tempName,strongName,description);
+                        itemDesc = descParse(tempName,tempPrice,description);
                     }
                 }
                 if(itemName!=null)
