@@ -140,7 +140,7 @@ public class CompleteorActivity extends Activity {
     {
         super.onResume();
         updateBalance();
-        updateSettings();
+        //updateSettings();
     }
 
     public void updateList() {
@@ -185,6 +185,7 @@ public class CompleteorActivity extends Activity {
             sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
             if(sortMode == 0)
             {
+                System.out.println(possibleItems.size() + " " + possibleItems.getItems().size());
                 Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
                 Collections.reverse(possibleItems.getItems());
             }
