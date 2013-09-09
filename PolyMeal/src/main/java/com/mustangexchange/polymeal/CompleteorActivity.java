@@ -19,8 +19,6 @@ import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
 import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 
 public class CompleteorActivity extends Activity {
@@ -350,9 +348,6 @@ public class CompleteorActivity extends Activity {
                     {
                         if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.vgItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.vgItems.get(i).getItem(j).getPriceString().equals(""))
                         {
-                            /*possibleItems.getNames().add(ItemSetContainer.vgItems.get(i).getNames().get(j));
-                            possibleItems.getPrices().add(ItemSetContainer.vgItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(ItemSetContainer.vgItems.get(i).getDesc().get(j));*/
                             possibleItems.add(ItemSetContainer.vgItems.get(i).getItem(j));
                         }
                     }
@@ -367,9 +362,6 @@ public class CompleteorActivity extends Activity {
                         System.out.println(i + " ," + j);
                         if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.sandItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.sandItems.get(i).getItem(j).getPriceString().equals(""))
                         {
-                            /*possibleItems.getNames().add(ItemSetContainer.sandItems.get(i).getNames().get(j));
-                            possibleItems.getPrices().add(ItemSetContainer.sandItems.get(i).getPrices().get(j));
-                            possibleItems.getDesc().add(ItemSetContainer.sandItems.get(i).getDesc().get(j));*/
                             possibleItems.add(ItemSetContainer.sandItems.get(i).getItem(j));
                         }
                     }

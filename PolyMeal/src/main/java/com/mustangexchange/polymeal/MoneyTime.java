@@ -40,22 +40,18 @@ public class MoneyTime
             if(minutes>=420&&minutes<=599)
             {
                 money = mealWorth[0];
-                //whichTime=0;
             }
             else if(minutes>=600&&minutes<=1019)
             {
                 money = mealWorth[1];
-                //whichTime=1;
             }
             else if(minutes>=1020&&minutes<=1214)
             {
                 money = mealWorth[2];
-                //whichTime=2;
             }
             else
             {
                 money = mealWorth[3];
-                //whichTime=3;
             }
             return money.subtract(moneySpent).setScale(2);
         }

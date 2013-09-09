@@ -45,7 +45,6 @@ public class MainActivity extends Activity{
         final Button sandwich = (Button)findViewById(R.id.buttonSand);
         final Button vista = (Button)findViewById(R.id.buttonVista);
         final ItemSetContainer isc = new ItemSetContainer(new ArrayList<ItemSet>(),new ArrayList<ItemSet>());
-
         //animates in onScreen objects
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         final Animation in2 = new AlphaAnimation(0.0f, 1.0f);

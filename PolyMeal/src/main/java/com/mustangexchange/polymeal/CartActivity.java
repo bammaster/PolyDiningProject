@@ -23,7 +23,6 @@ import java.util.Collections;
 
 public class CartActivity extends Activity {
 
-    private static TextView moneyView;
     private ListView lv;
     private CartItemAdapter cartAdapter;
     private static BigDecimal totalAmount;
@@ -37,8 +36,6 @@ public class CartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        SharedPreferences appSharedPrefs = getSharedPreferences("PolyMeal",MODE_PRIVATE);
-        //cartAdapter = new CartItemAdapter(this, Cart.getCart(), Cart.getCartMoney());
         cartAdapter = new CartItemAdapter(this, updateSettings());
         mContext = this;
         activity = this;
@@ -84,8 +81,6 @@ public class CartActivity extends Activity {
 
     public void removeFromCart(int position) {
         Cart.remove(position);
-        //cartAdapter.cart.remove(position);
-        //cartAdapter.cartMoney.remove(position);
         updateBalance();
         isCartEmpty();
         cartAdapter.notifyDataSetChanged();
@@ -174,7 +169,6 @@ public class CartActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
-        //mDrawerToggle.onConfigurationChanged(newConfig);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -188,7 +182,6 @@ public class CartActivity extends Activity {
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();
-                //cartAdapter.clearCartMoney();
                 cartAdapter.notifyDataSetChanged();
                 isCartEmpty();
                 updateBalance();
@@ -202,24 +195,17 @@ public class CartActivity extends Activity {
     public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
         private Context context;
         private ArrayList<Item> cart;
-        //private ArrayList<String> cartMoney;
 
         public CartItemAdapter(Context context, ArrayList<Item> cart)
         {
             this.context = context;
             this.cart = cart;
-            //this.cartMoney = cartMoney;
         }
 
         public void clearCart()
         {
             cart.clear();
         }
-
-        /*public void clearCartMoney()
-        {
-            cartMoney.clear();
-        }*/
 
         public int getCount()
         {
@@ -267,7 +253,6 @@ public class CartActivity extends Activity {
             Integer entry = (Integer) view.getTag();
             Cart.remove(entry);
             cart.remove(entry);
-            //cartMoney.remove(entry);
             updateBalance();
             isCartEmpty();
             notifyDataSetChanged();

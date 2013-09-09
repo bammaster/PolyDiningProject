@@ -1,7 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -49,7 +47,6 @@ public class  Parser
         {
             items = new ItemSet();
             String h2 = h2Eles.get(counter).text();
-            Log.e("Blake",h2);
             items.setTitle(h2);
 
             for(Element tr : table.select("tr"))
@@ -179,7 +176,6 @@ public class  Parser
                 }
             }
             //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
-            Log.e("Blake",items.getTitle());
             listItems.add(items);
             counter++;
         }

@@ -1,45 +1,31 @@
 package com.mustangexchange.polymeal;
 
-import android.content.SharedPreferences;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cart
 {
     private static ArrayList<Item> cart = new ArrayList<Item>();
-    //private static ArrayList<String> cartMoney = new ArrayList<String>();
     private static Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
     public static BigDecimal bdPrice = new BigDecimal("0.00");
 
     public static void add(Item item)
     {
         cart.add(item);
-        //bdPrice = new BigDecimal(price);
-        //bdPrice.setScale(2, RoundingMode.HALF_EVEN);
-        //cartMoney.add(new DecimalFormat("0.00").format(bdPrice));
         MoneyTime.moneySpent = MoneyTime.moneySpent.add(cart.get(cart.size() - 1).getPrice());
     }
     public static void remove(int index)
     {
         MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(index).getPrice());
         cart.remove(index);
-        //cartMoney.remove(index);
     }
-    //returns cart
     public static ArrayList<Item> getCart()
     {
         return cart;
     }
-    /*public static ArrayList<String> getCartMoney()
-    {
-        return cartMoney;
-    }*/
     public static void clear()
     {
         int i = cart.size()-1;
