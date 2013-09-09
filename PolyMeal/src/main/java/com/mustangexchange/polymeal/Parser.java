@@ -1,5 +1,7 @@
 package com.mustangexchange.polymeal;
 
+import android.util.Log;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by Blake on 8/6/13.
  */
-public class Parser
+public class  Parser
 {
     private Item item;
     private ItemSet items;
@@ -34,6 +36,12 @@ public class Parser
     //receives doc to parse and a boolean that determines whether the breakfast table is valid or not.
     public void parse(boolean breakfast)
     {
+        //for storing each part of soup and salad
+        String one = null;
+        String two = null;
+        BigDecimal priceOne = null;
+        BigDecimal priceTwo = null;
+
         Elements h2Eles = doc.getElementsByTag("h2");
         Elements tables = doc.select("table");
             //parses html with tag hierarchy starting with each table the moving to each table row, then table data and then each strong tag
@@ -41,7 +49,9 @@ public class Parser
         {
             items = new ItemSet();
             String h2 = h2Eles.get(counter).text();
+            Log.e("Blake",h2);
             items.setTitle(h2);
+
             for(Element tr : table.select("tr"))
             {
                 String itemName = null;
@@ -50,12 +60,6 @@ public class Parser
 
                 String tempName = "";
                 String tempPrice = "";
-
-                //for storing each part of soup and salad
-                String one = null;
-                String two = null;
-                BigDecimal priceOne = null;
-                BigDecimal priceTwo = null;
 
                 for(Element td : tr.select("td"))
                 {
@@ -115,6 +119,7 @@ public class Parser
                             //gets proper values for anything per oz items by substringing them out.
                             else if(strongName.contains("per oz"))
                             {
+                                soupAndSalad = true;
                                 priceOne = new BigDecimal(strongName.substring(7,11));
                                 priceTwo = new BigDecimal(strongName.substring(26,30));
                             }
@@ -132,12 +137,14 @@ public class Parser
                             parseDesc = true;
                             price = true;
                             itemPrice = new BigDecimal(strongName.replace("$",""));
+                            tempPrice = itemPrice+"";
                         }
                         else
                         {
                             parseDesc = false;
                             name = true;
                             itemName = strongName;
+                            tempName = itemName;
                         }
                     }
                     if(parseDesc)
@@ -145,9 +152,9 @@ public class Parser
                         itemDesc = descParse(tempName,tempPrice,description);
                     }
                 }
-                if(itemName!=null)
+                if(itemName!=null||soupAndSalad)
                 {
-                    if(soupAndSalad)
+                    if(soupAndSalad&&price&&name)
                     {
                         Item itemOne = new Item(one,priceOne,itemDesc,true);
                         Item itemTwo = new Item(two,priceTwo,itemDesc,true);
@@ -171,9 +178,10 @@ public class Parser
                     }
                 }
             }
-                //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
-                listItems.add(items);
-                counter++;
+            //adds each table to itemset arraylist then adds one to counter to allow h2 tag selection(workaround for Cal Poly table formatting)
+            Log.e("Blake",items.getTitle());
+            listItems.add(items);
+            counter++;
         }
     }
     private String descParse(String tempName,String tempPrice,String description)
