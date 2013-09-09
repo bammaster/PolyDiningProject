@@ -99,7 +99,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
                     Cart.add(new Item(itemset.getItem(position), itemset.getItem(position).getPrice().multiply(new BigDecimal(np.getValue()))));
-                    Toast.makeText(activity, itemset.getItem(position).getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, itemset.getItem(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                     updateBalance();
                 }
             });

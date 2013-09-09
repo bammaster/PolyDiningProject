@@ -47,8 +47,6 @@ public class CompleteorActivity extends Activity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
 
-        //possibleItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
-        //dummyItems = new ItemSet("Completeor",new ArrayList<String>(),new ArrayList<String>());
         possibleItems = new ItemSet();
         dummyItems = new ItemSet();
         dummyAdapter = new CompleteorItemAdapter(this, dummyItems);

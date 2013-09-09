@@ -88,6 +88,7 @@ public class SandwichActivity extends FragmentActivity {
             public void onDrawerClosed(View view) {
                 //getActionBar().setTitle(mTitle);
                 //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                mDrawerList.setItemChecked(-1, true);
             }
 
             public void onDrawerOpened(View drawerView) {
