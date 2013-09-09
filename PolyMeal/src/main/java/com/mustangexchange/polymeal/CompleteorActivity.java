@@ -182,16 +182,24 @@ public class CompleteorActivity extends Activity {
             int sortMode;
             SharedPreferences defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
 
-            sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
+            sortMode = Integer.valueOf(defaultSP.getString("sortMode", "0"));
             if(sortMode == 0)
             {
-                System.out.println(possibleItems.size() + " " + possibleItems.getItems().size());
-                Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
+                Collections.sort(possibleItems.getItems(), new ItemNameComparator());
+            }
+            else if(sortMode == 1)
+            {
+                Collections.sort(possibleItems.getItems(), new ItemNameComparator());
                 Collections.reverse(possibleItems.getItems());
+            }
+            else if(sortMode == 2)
+            {
+                Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
             }
             else
             {
-                Collections.sort(possibleItems.getItems(), new ItemNameComparator());
+                Collections.sort(possibleItems.getItems(), new ItemPriceComparator());
+                Collections.reverse(possibleItems.getItems());
             }
         }
         catch (NullPointerException e)

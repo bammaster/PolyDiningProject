@@ -176,7 +176,7 @@ public class SandwichActivity extends FragmentActivity {
         SharedPreferences defaultSP;
         int sortMode;
         defaultSP = PreferenceManager.getDefaultSharedPreferences(mActivity);
-        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "1"));
+        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "0"));
 
 
         if(sortMode == 0)
@@ -191,10 +191,46 @@ public class SandwichActivity extends FragmentActivity {
                ArrayOutOfBoundsExceptions later on.
              */
                     ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
-                    Collections.sort(sortedList, new ItemPriceComparator());
+                    Collections.sort(sortedList, new ItemNameComparator());
+                    foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
+                }
+            }
+        }
+        else if(sortMode == 1)
+        {
+            foodAdapterList.clear();
+            for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+            {
+                if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
+                {
+            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                    ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
+                    Collections.sort(sortedList, new ItemNameComparator());
                     Collections.reverse(sortedList);
                     foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
                 }
+
+            }
+        }
+        else if(sortMode == 2)
+        {
+            foodAdapterList.clear();
+            for(int i = 0;i<ItemSetContainer.sandItems.size();i++)
+            {
+                if(ItemSetContainer.sandItems.get(i).size() != 0) //check in case it's not the right time of day
+                {
+            /* Each of the components of sandItems is passed in INSTEAD of the actual list itself that way we only
+               get what is applicable at this time period rather than the whole thing. This prevents
+               ArrayOutOfBoundsExceptions later on.
+             */
+                    ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
+                    Collections.sort(sortedList, new ItemPriceComparator());
+                    foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
+                }
+
             }
         }
         else
@@ -209,7 +245,8 @@ public class SandwichActivity extends FragmentActivity {
                ArrayOutOfBoundsExceptions later on.
              */
                     ArrayList<Item> sortedList = new ArrayList<Item>(ItemSetContainer.sandItems.get(i).getItems());
-                    Collections.sort(sortedList, new ItemNameComparator());
+                    Collections.sort(sortedList, new ItemPriceComparator());
+                    Collections.reverse(sortedList);
                     foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(ItemSetContainer.sandItems.get(i).getTitle(), sortedList)));
                 }
 

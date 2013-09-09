@@ -99,11 +99,6 @@ public class Item
     {
         return ounces;
     }
-    private String format(String price)
-    {
-        price = currency.format(price);
-        return price.substring(1);
-    }
 
     private BigDecimal format(BigDecimal price)
     {

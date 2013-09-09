@@ -127,15 +127,23 @@ public class CartActivity extends Activity {
             SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
             int sortMode;
 
-            sortMode = Integer.valueOf(defaultSp.getString("sortMode", "1"));
+            sortMode = Integer.valueOf(defaultSp.getString("sortMode", "0"));
 
             if(sortMode == 0) {
-                Collections.sort(cart, new ItemPriceComparator());
+                Collections.sort(cart, new ItemNameComparator());
+            }
+            else if(sortMode == 1)
+            {
+                Collections.sort(cart, new ItemNameComparator());
                 Collections.reverse(cart);
+            } else if(sortMode == 2)
+            {
+                Collections.sort(cart, new ItemPriceComparator());
             }
             else
             {
-                Collections.sort(cart, new ItemNameComparator());
+                Collections.sort(cart, new ItemPriceComparator());
+                Collections.reverse(cart);
             }
             return cart;
             }

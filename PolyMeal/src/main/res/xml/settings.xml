@@ -13,7 +13,7 @@
                 android:summary="@string/pref_sort_mode_summary"
                 android:entryValues="@array/sortModeValues"
                 android:title="@string/pref_sort_mode"
-                android:defaultValue="1"/>
+                android:defaultValue="0"/>
         <ListPreference
                 android:key="moneyMode"
                 android:entries="@array/moneyMode"
