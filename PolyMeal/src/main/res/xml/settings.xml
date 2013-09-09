@@ -3,7 +3,8 @@
 
     <PreferenceCategory android:title="CURRENT MEAL TIME" >
         <Preference
-            android:key="currentTime"/>
+            android:key="currentTime"
+            android:summary="What's a meal worth?"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="GENERAL" >
