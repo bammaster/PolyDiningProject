@@ -1,9 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Cart
