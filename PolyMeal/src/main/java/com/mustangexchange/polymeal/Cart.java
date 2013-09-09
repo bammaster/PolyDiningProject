@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class Cart
 {
     private static ArrayList<Item> cart = new ArrayList<Item>();
-    private static Type gsonType = new TypeToken<ArrayList<ItemSet>>() {}.getType();
-    public static BigDecimal bdPrice = new BigDecimal("0.00");
 
     public static void add(Item item)
     {
@@ -33,7 +31,6 @@ public class Cart
         {
             MoneyTime.moneySpent = MoneyTime.moneySpent.subtract(cart.get(i).getPrice());
             cart.remove(i);
-            //cartMoney.remove(i);
             i--;
         }
     }
