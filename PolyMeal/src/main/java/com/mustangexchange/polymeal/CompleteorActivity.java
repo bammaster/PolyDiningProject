@@ -314,7 +314,7 @@ public class CompleteorActivity extends Activity {
                     public void onClick(DialogInterface dialog, int button) {
                         possibleItems.getItem(position).setPrice(new BigDecimal(new BigDecimal(np.getValue())+"").multiply(possibleItems.getItem(position).getPrice()));
                         Cart.add(possibleItems.getItem(position));
-                        Toast.makeText(activity, possibleItems.getItem(position).getName(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, possibleItems.getItem(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                         updateBalance();
                         updateList();
                     }

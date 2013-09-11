@@ -25,7 +25,7 @@ public class ItemSet {
 
     public void add(Item item)
     {
-        items.add(item);
+        items.add(new Item(item));
     }
 
     public void addAt(Item item,int index)

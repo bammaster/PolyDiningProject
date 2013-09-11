@@ -22,6 +22,15 @@ public class Item
         this.isValid = isValid;
     }
 
+    public Item(Item item)
+    {
+        name = item.getName();
+        price = item.getPrice();
+        description = item.getDescription();
+        isValid = item.getValid();
+        ounces = item.getOunces();
+    }
+
     public Item(Item item, BigDecimal price) {
         this.name = item.getName();
         this.price = price;
