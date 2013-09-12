@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;

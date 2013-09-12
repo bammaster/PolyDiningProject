@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
@@ -24,20 +25,19 @@ import java.util.Collections;
 public class CompleteorActivity extends Activity {
 
     private ItemSet possibleItems;
-    private ItemSet dummyItems;
 
     private ActionBar mActionBar;
     private static BigDecimal totalAmount;
     private static Context mContext;
     private static Activity activity;
     public ListView lv;
-    public CompleteorItemAdapter dummyAdapter;
     public CompleteorItemAdapter lvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completeor);
+        Log.e("Blake","onCreate Called!");
 
         mContext = this;
         activity = this;
@@ -46,12 +46,9 @@ public class CompleteorActivity extends Activity {
         mActionBar.setHomeButtonEnabled(true);
 
         possibleItems = new ItemSet();
-        dummyItems = new ItemSet();
-        dummyAdapter = new CompleteorItemAdapter(this, dummyItems);
         lvAdapter = new CompleteorItemAdapter(this, possibleItems);
 
         lv = (ListView) findViewById(R.id.listView);
-        lv.setAdapter(dummyAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
@@ -120,10 +117,6 @@ public class CompleteorActivity extends Activity {
                 onListClick.show();
             }
         });
-
-        new calcCompleteor().execute("");
-
-        updateBalance();
     }
 
     public void checkLayout() {
@@ -135,8 +128,9 @@ public class CompleteorActivity extends Activity {
     public void onResume()
     {
         super.onResume();
+        Log.e("Blake","onResume Called!");
+        new calcCompleteor().execute("");
         updateBalance();
-        //updateSettings();
     }
 
     public void updateList() {
@@ -264,6 +258,12 @@ public class CompleteorActivity extends Activity {
             return possibleItems.size();
         }
 
+        public void setItems(ItemSet items)
+        {
+            possibleItems = items;
+            notifyDataSetChanged();
+        }
+
         public Object getItem(int position) {
             return possibleItems.getItem(position);
         }
@@ -339,6 +339,7 @@ public class CompleteorActivity extends Activity {
 
         @Override
         protected String doInBackground(String... params) {
+            possibleItems = new ItemSet();
             if(MainActivity.vgOrSand==1)
             {
                 System.out.println(ItemSetContainer.vgItems.get(0).getTitle());
@@ -373,16 +374,13 @@ public class CompleteorActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             updateSettings();
-            lvAdapter.notifyDataSetChanged();
-            lv.setAdapter(lvAdapter);
+            lvAdapter.setItems(possibleItems);
             checkLayout();
         }
 
         @Override
         protected void onPreExecute() {
-            lv.setAdapter(dummyAdapter);
-            possibleItems.clear();
-            lvAdapter.getPossibleItems().clear();
+            lv.setAdapter(lvAdapter);
         }
 
         @Override
