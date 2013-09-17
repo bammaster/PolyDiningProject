@@ -46,11 +46,13 @@
         </activity>
         <activity
             android:name="com.mustangexchange.polymeal.SettingsActivity"
-            android:label="Settings" >
+            android:label="Settings"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.mustangexchange.polymeal.TacoActivity"
-            android:label="@string/title_activity_taco" >
+            android:label="@string/title_activity_taco"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

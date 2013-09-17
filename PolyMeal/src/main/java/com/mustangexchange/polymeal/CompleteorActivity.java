@@ -225,12 +225,19 @@ public class CompleteorActivity extends Activity {
                     startActivity(intent);
                     return true;
                 }
-                else
+                else if(MainActivity.vgOrSand == 2)
                 {
                     Intent intent = new Intent(this, SandwichActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     return true;
+                }
+                else
+                {
+                    Intent intent = new Intent(this, TacoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    return true;                    
                 }
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
@@ -364,6 +371,20 @@ public class CompleteorActivity extends Activity {
                         if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.sandItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.sandItems.get(i).getItem(j).getPriceString().equals(""))
                         {
                             possibleItems.add(ItemSetContainer.sandItems.get(i).getItem(j));
+                        }
+                    }
+                }
+            }
+            else if(MainActivity.vgOrSand==3)
+            {
+                for(int i = 0;i<ItemSetContainer.tacoItems.size();i++)
+                {
+                    for(int j = 0;j<ItemSetContainer.tacoItems.get(i).size();j++)
+                    {
+                        System.out.println(i + " ," + j);
+                        if(MoneyTime.calcTotalMoney().compareTo(ItemSetContainer.tacoItems.get(i).getItem(j).getPrice())>=0 && !ItemSetContainer.tacoItems.get(i).getItem(j).getPriceString().equals(""))
+                        {
+                            possibleItems.add(ItemSetContainer.tacoItems.get(i).getItem(j));
                         }
                     }
                 }

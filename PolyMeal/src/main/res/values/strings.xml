@@ -16,6 +16,7 @@
         <item>Home</item>
         <item>Sandwich Factory</item>
         <item>Vista Grande</item>
+        <item>Tacos To Go</item>
         <item>Meal Completer</item>
         <item>Settings</item>
     </string-array>
@@ -51,6 +52,6 @@
     <string name="pref_money_mode_summary">Force the meal time</string>
     <string name="pref_money_mode">Meal Times</string>
     <string name="pref_sort_mode">Sorting</string>
-    <string name="title_activity_taco">Tacos to Go</string>
+    <string name="title_activity_taco">Tacos To Go</string>
 
 </resources>

@@ -26,9 +26,14 @@ public class MoneyTime
         if(MainActivity.vgOrSand == 1)
         {
             defaultSP = PreferenceManager.getDefaultSharedPreferences(VistaActivity.mActivity);
-        } else
+        }
+        else if(MainActivity.vgOrSand == 2)
         {
             defaultSP = PreferenceManager.getDefaultSharedPreferences(SandwichActivity.mActivity);
+        }
+        else
+        {
+            defaultSP = PreferenceManager.getDefaultSharedPreferences(TacoActivity.mActivity);
         }
         manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
 

@@ -299,7 +299,7 @@ public class MainActivity extends Activity{
     public void vg(View v)
     {
         final Intent i = new Intent(this,VistaActivity.class);
-        if(vgOrSand==2&&Cart.getCart().size()>0)
+        if(vgOrSand!=1&&Cart.getCart().size()>0)
         {
             AlertDialog.Builder notifyClear = new AlertDialog.Builder(MainActivity.this);
             notifyClear.setTitle("Warning!");
@@ -330,7 +330,7 @@ public class MainActivity extends Activity{
     public void sandwich(View v)
     {
         final Intent i = new Intent(this,SandwichActivity.class);
-        if(vgOrSand==1&&Cart.getCart().size()>0)
+        if(vgOrSand!=2&&Cart.getCart().size()>0)
         {
             AlertDialog.Builder notifyClear = new AlertDialog.Builder(MainActivity.this);
             notifyClear.setTitle("Warning!");
@@ -361,7 +361,7 @@ public class MainActivity extends Activity{
     public void taco(View v)
     {
         final Intent i = new Intent(this,TacoActivity.class);
-        if(vgOrSand==1&&Cart.getCart().size()>0)
+        if(vgOrSand!=3&&Cart.getCart().size()>0)
         {
             AlertDialog.Builder notifyClear = new AlertDialog.Builder(MainActivity.this);
             notifyClear.setTitle("Warning!");

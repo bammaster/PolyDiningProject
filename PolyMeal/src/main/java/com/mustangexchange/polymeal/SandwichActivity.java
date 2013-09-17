@@ -345,6 +345,7 @@ public class SandwichActivity extends FragmentActivity {
                             Cart.clear();
                             Toast.makeText(mContext,"Cart Cleared!",Toast.LENGTH_SHORT).show();
                             MainActivity.vgOrSand = 1;
+                            mDrawerLayout.closeDrawer(mDrawerList);
                             VistaActivity.clear = true;
                             threadVG.start();
                         }
@@ -365,6 +366,52 @@ public class SandwichActivity extends FragmentActivity {
             }
             else if(parent.getPositionForView(view)==3)
             {
+                final Thread threadT = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(400);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        final Intent intentT = new Intent(mContext, TacoActivity.class);
+                        intentT.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intentT);
+                        SandwichActivity.mActivity.finish();
+                    }
+                });
+                mDrawerLayout.closeDrawer(mDrawerList);
+                if(Cart.getCart().size()>0)
+                {
+                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
+                    notifyClear.setTitle("Warning!");
+                    notifyClear.setMessage("Your cart contains Sandwich Factory items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
+                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                            Cart.clear();
+                            Toast.makeText(mContext, "Cart Cleared!", Toast.LENGTH_SHORT).show();
+                            MainActivity.vgOrSand = 3;
+                            mDrawerLayout.closeDrawer(mDrawerList);
+                            TacoActivity.clear = true;
+                            threadT.start();
+                        }
+                    });
+                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int button) {
+                        }
+                    });
+                    notifyClear.show();
+                }
+                else
+                {
+                    MainActivity.vgOrSand = 3;
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    TacoActivity.clear = true;
+                    threadT.start();
+                }
+            }
+            else if(parent.getPositionForView(view)==4)
+            {
                 mDrawerLayout.closeDrawer(mDrawerList);
                 final Thread threadCP = new Thread(new Runnable() {
                     @Override
@@ -381,7 +428,7 @@ public class SandwichActivity extends FragmentActivity {
                 });
                 threadCP.start();
             }
-            else if(parent.getPositionForView(view)==4)
+            else if(parent.getPositionForView(view)==5)
             {
                 final Thread threadST = new Thread(new Runnable() {
                     @Override

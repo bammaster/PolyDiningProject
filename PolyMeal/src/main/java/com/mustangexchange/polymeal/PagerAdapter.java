@@ -29,6 +29,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
         } else if(parentClass.equals("VistaActivity"))
         {
             VistaActivity.updateBalance();
+        } else if(parentClass.equals("TacoActivity"))
+        {
+            TacoActivity.updateBalance();
         }
     }
 

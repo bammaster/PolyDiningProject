@@ -34,6 +34,9 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         } else if(parentClass.equals("VistaActivity"))
         {
             VistaActivity.updateBalance();
+        } else if(parentClass.equals("TacoActivity"))
+        {
+            TacoActivity.updateBalance();
         }
     }
 

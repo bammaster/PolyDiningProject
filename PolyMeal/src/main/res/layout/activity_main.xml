@@ -71,7 +71,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tacos to Go"
+        android:text="Tacos To Go"
         android:id="@+id/buttonTaco"
         android:layout_below="@+id/buttonVista"
         android:layout_alignRight="@+id/buttonVista"
