@@ -154,6 +154,7 @@ public class CartActivity extends Activity {
     public void onResume()
     {
         super.onResume();
+        cartAdapter.updateCart();
         updateBalance();
         updateSettings();
     }
@@ -200,6 +201,11 @@ public class CartActivity extends Activity {
         {
             this.context = context;
             this.cart = cart;
+        }
+
+        public void updateCart()
+        {
+            notifyDataSetChanged();
         }
 
         public void clearCart()
