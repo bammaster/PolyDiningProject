@@ -120,6 +120,12 @@ public class  Parser
                                 priceOne = new BigDecimal(strongName.substring(7,11));
                                 priceTwo = new BigDecimal(strongName.substring(26,30));
                             }
+                            else if(strongName.contains("just"))
+                            {
+                                strongName = strongName.replace("just ","");
+                                strongName = strongName.replace("$","");
+                                itemPrice = new BigDecimal(strongName);
+                            }
                             else
                             {
                                 strongName = strongName.replace("$","");
