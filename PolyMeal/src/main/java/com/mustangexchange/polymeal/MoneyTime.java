@@ -23,11 +23,11 @@ public class MoneyTime
     public static BigDecimal calcTotalMoney()
     {
         SharedPreferences defaultSP;
-        if(MainActivity.vgOrSand == 1)
+        if(Constants.venueNumber == 1)
         {
             defaultSP = PreferenceManager.getDefaultSharedPreferences(VistaActivity.mActivity);
         }
-        else if(MainActivity.vgOrSand == 2)
+        else if(Constants.venueNumber == 2)
         {
             defaultSP = PreferenceManager.getDefaultSharedPreferences(SandwichActivity.mActivity);
         }

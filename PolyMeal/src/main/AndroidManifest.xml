@@ -59,6 +59,11 @@
             android:label="@string/title_activity_bagel"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+                android:name="com.mustangexchange.polymeal.BaseActivity"
+                android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".BaseActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -133,7 +133,7 @@ public class Item
         onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int button) {
             Cart.add(Item.this);
-            BaseAcitity.updateBalance();
+            BaseActivity.updateBalance();
             }
         });
         onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
