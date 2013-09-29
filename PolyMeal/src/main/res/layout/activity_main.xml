@@ -14,25 +14,26 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Welcome."
             android:id="@+id/welcomeText"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
-            android:textSize="60dp"/>
+        android:layout_marginTop="15dp"
+            android:textSize="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sandwich Factory"
+            android:text="@string/title_activity_sandwich"
             android:id="@+id/buttonSand"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/welcomeText"
-            android:layout_alignRight="@+id/welcomeText"
-            android:onClick="sandwich"/>
+        android:onClick="sandwich"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/selectText"
+        android:layout_alignRight="@+id/welcomeText"
+        android:layout_alignLeft="@+id/welcomeText" />
 
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vista Grande"
+            android:text="@string/title_activity_vg"
             android:id="@+id/buttonVista"
         android:onClick="vg"
         android:layout_below="@+id/buttonSand"
@@ -46,35 +47,44 @@
             android:text="Select a Meal Location:"
             android:id="@+id/selectText"
             android:textSize="20dp"
-        android:layout_marginBottom="17dp"
-        android:layout_above="@+id/buttonSand"
+        android:layout_marginTop="72dp"
+        android:layout_below="@+id/welcomeText"
         android:layout_centerHorizontal="true" />
-
-    <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Downloading Vista Grande Menu Data..."
+            android:text="Retrieving Menu Data..."
             android:id="@+id/textDownload"
-            android:layout_above="@+id/progressBar"
-            android:layout_centerHorizontal="true"/>
+        android:layout_above="@+id/progressBar"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tacos To Go"
+        android:text="@string/title_activity_taco"
         android:id="@+id/buttonTaco"
         android:layout_below="@+id/buttonVista"
         android:layout_alignRight="@+id/buttonVista"
         android:layout_alignLeft="@+id/buttonVista"
         android:onClick="taco" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_below="@+id/buttonTaco"
+        android:layout_alignRight="@+id/buttonTaco"
+        android:layout_alignLeft="@+id/buttonTaco"
+        android:text="@string/title_activity_bagel"
+        android:onClick="bagel" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

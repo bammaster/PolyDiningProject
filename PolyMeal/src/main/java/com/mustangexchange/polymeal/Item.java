@@ -1,5 +1,12 @@
 package com.mustangexchange.polymeal;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.NumberPicker;
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
@@ -114,5 +121,43 @@ public class Item
         String priceString = price.toString();
         priceString = currency.format(Double.valueOf(priceString));
         return new BigDecimal(priceString.substring(1));
+    }
+
+    public void displayAddDialog(Activity activity)
+    {
+        final Activity mActivity = activity;
+        final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+        onListClick.setCancelable(false);
+        onListClick.setTitle("Add to Cart?");
+        onListClick.setMessage("Would you like to add " + name + " to your cart? Price: " + getPriceString());
+        onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+            Cart.add(Item.this);
+            BaseAcitity.updateBalance();
+            }
+        });
+        onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+            }
+        });
+        onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(mActivity);
+                onDialogClick.setTitle("Description");
+                onDialogClick.setMessage(description);
+                onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+
+                    }
+                });
+                onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
+                        onListClick.show();
+                    }
+                });
+                onDialogClick.show();
+            }
+        });
+        onListClick.show();
     }
 }

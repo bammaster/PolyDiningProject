@@ -54,6 +54,11 @@
             android:label="@string/title_activity_taco"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.mustangexchange.polymeal.EinsteinActivity"
+            android:label="@string/title_activity_bagel"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
