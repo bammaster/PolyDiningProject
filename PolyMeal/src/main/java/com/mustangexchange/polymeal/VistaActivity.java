@@ -38,7 +38,6 @@ import java.util.Collections;
 public class VistaActivity extends BaseActivity {
 
     private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
-    public static ActionBar mActionBar;
 
     public static boolean clear;
 
@@ -159,21 +158,6 @@ public class VistaActivity extends BaseActivity {
             mContext.startActivity(intentHome);
         }
 
-    }
-
-    public static void updateBalance() {
-        try
-        {
-            totalAmount = MoneyTime.calcTotalMoney();
-            setSubtitleColor();
-            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
-        }
-        catch (NullPointerException e)
-        {
-            Intent intentHome = new Intent(mContext, MainActivity.class);
-            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            mContext.startActivity(intentHome);
-        }
     }
 
 }

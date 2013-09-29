@@ -41,6 +41,8 @@ public abstract class BaseActivity extends FragmentActivity {
     public static BigDecimal totalAmount;
     public static Context mContext;
     protected int venueIndex;
+    public static ActionBar mActionBar;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +133,21 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    public static void updateBalance() {
+        try
+        {
+            totalAmount = MoneyTime.calcTotalMoney();
+            setSubtitleColor();
+            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+        }
+        catch (NullPointerException e)
+        {
+            Intent intentHome = new Intent(mContext, MainActivity.class);
+            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            mContext.startActivity(intentHome);
+        }
+    }
+
     /* The click listner for ListView in the navigation drawer */
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -169,34 +186,10 @@ public abstract class BaseActivity extends FragmentActivity {
                         TacoActivity.mActivity.finish();
                     }
                 });
-                if(Cart.getCart().size()>0)
-                {
-                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
-                    notifyClear.setTitle("Warning!");
-                    notifyClear.setMessage("Your cart contains Tacos To Go items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
-                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            Cart.clear();
-                            Toast.makeText(mContext,"Cart Cleared!",Toast.LENGTH_SHORT).show();
-                            Constants.venueNumber = 2;
-                            mDrawerLayout.closeDrawer(mDrawerList);
-                            SandwichActivity.clear = true;
-                            threadSF.start();
-                        }
-                    });
-                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                        }
-                    });
-                    notifyClear.show();
-                }
-                else
-                {
-                    Constants.venueNumber = 2;
-                    mDrawerLayout.closeDrawer(mDrawerList);
-                    SandwichActivity.clear = true;
-                    threadSF.start();
-                }
+                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                SandwichActivity.clear = true;
+                threadSF.start();
             }
             else if(parent.getPositionForView(view)==2 && !(venueIndex == 2))
             {
@@ -215,34 +208,9 @@ public abstract class BaseActivity extends FragmentActivity {
                     }
                 });
                 mDrawerLayout.closeDrawer(mDrawerList);
-                if(Cart.getCart().size()>0)
-                {
-                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
-                    notifyClear.setTitle("Warning!");
-                    notifyClear.setMessage("Your cart contains Sandwich Factory items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
-                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            Cart.clear();
-                            Toast.makeText(mContext, "Cart Cleared!", Toast.LENGTH_SHORT).show();
-                            Constants.venueNumber = 1;
-                            mDrawerLayout.closeDrawer(mDrawerList);
-                            VistaActivity.clear = true;
-                            threadVG.start();
-                        }
-                    });
-                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                        }
-                    });
-                    notifyClear.show();
-                }
-                else
-                {
-                    Constants.venueNumber = 1;
-                    mDrawerLayout.closeDrawer(mDrawerList);
-                    VistaActivity.clear = true;
-                    threadVG.start();
-                }
+                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
+                VistaActivity.clear = true;
+                threadVG.start();
             }
             else if(parent.getPositionForView(view)==3 && !(venueIndex == 3))
             {
@@ -261,34 +229,9 @@ public abstract class BaseActivity extends FragmentActivity {
                     }
                 });
                 mDrawerLayout.closeDrawer(mDrawerList);
-                if(Cart.getCart().size()>0)
-                {
-                    AlertDialog.Builder notifyClear = new AlertDialog.Builder(mContext);
-                    notifyClear.setTitle("Warning!");
-                    notifyClear.setMessage("Your cart contains Sandwich Factory items. If you continue the cart will be cleared and these items will be removed. Do you want to continue?");
-                    notifyClear.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            Cart.clear();
-                            Toast.makeText(mContext, "Cart Cleared!", Toast.LENGTH_SHORT).show();
-                            Constants.venueNumber = 3;
-                            mDrawerLayout.closeDrawer(mDrawerList);
-                            TacoActivity.clear = true;
-                            threadT.start();
-                        }
-                    });
-                    notifyClear.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                        }
-                    });
-                    notifyClear.show();
-                }
-                else
-                {
-                    Constants.venueNumber = 3;
-                    mDrawerLayout.closeDrawer(mDrawerList);
-                    TacoActivity.clear = true;
-                    threadT.start();
-                }
+                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
+                TacoActivity.clear = true;
+                threadT.start();
             }
             else if(parent.getPositionForView(view)==4)
             {
@@ -327,7 +270,6 @@ public abstract class BaseActivity extends FragmentActivity {
                 threadST.start();
             }
             else if(venueIndex > 0) {
-                //Constants.venueNumber = 2;
                 mDrawerLayout.closeDrawer(mDrawerList);
             }
             else
