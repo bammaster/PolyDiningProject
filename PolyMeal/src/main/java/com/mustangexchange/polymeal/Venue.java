@@ -20,15 +20,16 @@ public class Venue
     private String gsonKey;
     private String name;
     private String url;
+    private String phoneNumer;
+    private String location;
     private int id;
     //construct a venu with a name and url.
-    public Venue(String name, String url, int id)
+    public Venue(String name, String url, String location, String phoneNumber)
     {
         venueItems = new ArrayList<ItemSet>();
         gsonKey = name + " Items";
         this.name = name;
         this.url = url;
-        this.id = id;
     }
     //loads items from shared preferences using GSON.
     public void loadFromCache(SharedPreferences sp)

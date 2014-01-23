@@ -22,6 +22,7 @@ public class Constants
     public static final Animation inAnimation2 = new AlphaAnimation(0.0f, 1.0f);
     public static final ArrayList<Venue> venues = new ArrayList<Venue>();
     public static final int numVenues = 4;
+    //not constant as it needs to be changed but should only be one of them.
     public static int venueNumber;
     private Constants(){}
 }

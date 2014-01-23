@@ -3,16 +3,9 @@ package com.mustangexchange.polymeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.NumberPicker;
-
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-/**
- * Created by Blake on 9/4/13.
- */
 public class Item
 {
     private String name = null;
