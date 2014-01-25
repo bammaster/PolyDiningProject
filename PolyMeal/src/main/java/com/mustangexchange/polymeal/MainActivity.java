@@ -1,31 +1,20 @@
 package com.mustangexchange.polymeal;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.*;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends Activity
 {
 
-    private TextView download;
-    private ProgressBar downloadProgress;
+    final ArrayList<String> names = new ArrayList<String>();
+    final Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,43 +24,22 @@ public class MainActivity extends Activity
         ListView lv = (ListView)findViewById(R.id.listView);
 
         /**
-         * BLAKE FILL IN THE LIST VIEW
+         * BLAKE CALL PARSE
          */
+        for(Map.Entry<String, Venue> entry : Constants.venues.entrySet()) {
+            names.add(entry.getKey());
+        }
 
-        lv.setOnClickListener();
-        /*download = (TextView)findViewById(R.id.textDownload);
-        downloadProgress = (ProgressBar)findViewById(R.id.progressBar);
-        final TextView welcome = (TextView)findViewById(R.id.welcomeText);
-        final TextView select = (TextView)findViewById(R.id.selectText);
-        final Button sandwich = (Button)findViewById(R.id.buttonSand);
-        final Button vista = (Button)findViewById(R.id.buttonVista);
-        final Button taco = (Button)findViewById(R.id.buttonTaco);
-
-        //animates in objects to screen.
-        select.setVisibility(View.INVISIBLE);
-        sandwich.setVisibility(View.INVISIBLE);
-        vista.setVisibility(View.INVISIBLE);
-        taco.setVisibility(View.INVISIBLE);
-        Constants.inAnimation.setDuration(1000);
-        Constants.inAnimation2.setDuration(1000);
-        welcome.startAnimation(Constants.inAnimation);
-        Constants.inAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {}
-            @Override
-            public void onAnimationEnd(Animation animation)
-            {
-                select.setVisibility(View.VISIBLE);
-                sandwich.setVisibility(View.VISIBLE);
-                vista.setVisibility(View.VISIBLE);
-                taco.setVisibility(View.VISIBLE);
-                select.startAnimation(Constants.inAnimation2);
-                sandwich.startAnimation(Constants.inAnimation2);
-                vista.startAnimation(Constants.inAnimation2);
-                taco.setAnimation(Constants.inAnimation2);
+        lv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, (String[])names.toArray()));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                final int positionTapped = parent.getPositionForView(view);
+                Constants.activityTitle = names.get(positionTapped);
+                Intent intentVenue = new Intent(mContext, VenueActivity.class);
+                intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             }
-            @Override
-            public void onAnimationRepeat(Animation animation) {}
-        });*/
+
+        });
     }
 }
