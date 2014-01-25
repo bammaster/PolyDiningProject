@@ -58,7 +58,7 @@ public abstract class BaseActivity extends FragmentActivity {
         // set up the drawer's list view with items and click listener
         /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mDrawerItems));*/
-        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList(Arrays.asList(mDrawerItems))));
+        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
         //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -148,136 +148,6 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-    /* The click listner for ListView in the navigation drawer */
-    protected class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(parent.getPositionForView(view)==0)
-            {
-                mDrawerLayout.closeDrawer(mDrawerList);
-                Thread threadHome = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Intent intentHome = new Intent(mContext, MainActivity.class);
-                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentHome);
-                    }
-                });
-                threadHome.start();
-            }
-            else if(parent.getPositionForView(view)==1 && !(venueIndex == 1))
-            {
-                final Thread threadSF = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        final Intent intentSF = new Intent(mContext, SandwichActivity.class);
-                        intentSF.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentSF);
-                        TacoActivity.mActivity.finish();
-                    }
-                });
-                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
-                mDrawerLayout.closeDrawer(mDrawerList);
-                SandwichActivity.clear = true;
-                threadSF.start();
-            }
-            else if(parent.getPositionForView(view)==2 && !(venueIndex == 2))
-            {
-                final Thread threadVG = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        final Intent intentVG = new Intent(mContext, VistaActivity.class);
-                        intentVG.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentVG);
-                        SandwichActivity.mActivity.finish();
-                    }
-                });
-                mDrawerLayout.closeDrawer(mDrawerList);
-                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
-                VistaActivity.clear = true;
-                threadVG.start();
-            }
-            else if(parent.getPositionForView(view)==3 && !(venueIndex == 3))
-            {
-                final Thread threadT = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        final Intent intentT = new Intent(mContext, TacoActivity.class);
-                        intentT.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentT);
-                        SandwichActivity.mActivity.finish();
-                    }
-                });
-                mDrawerLayout.closeDrawer(mDrawerList);
-                Constants.venues.get(parent.getPositionForView(view)).checkVenueCart(mActivity);
-                TacoActivity.clear = true;
-                threadT.start();
-            }
-            else if(parent.getPositionForView(view)==4)
-            {
-                mDrawerLayout.closeDrawer(mDrawerList);
-                final Thread threadCP = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                        intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentCP);
-                    }
-                });
-                threadCP.start();
-            }
-            else if(parent.getPositionForView(view)==5)
-            {
-                final Thread threadST = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        final Intent intentST = new Intent(mContext, SettingsActivity.class);
-                        intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentST);
-                    }
-                });
-                mDrawerLayout.closeDrawer(mDrawerList);
-                threadST.start();
-            }
-            else if(venueIndex > 0) {
-                mDrawerLayout.closeDrawer(mDrawerList);
-            }
-            else
-            {
-                Toast.makeText(mContext, "Invalid Selection!", Toast.LENGTH_SHORT);
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

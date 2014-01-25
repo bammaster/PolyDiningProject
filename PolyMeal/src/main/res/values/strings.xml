@@ -16,6 +16,8 @@
     <string name="pref_money_mode_summary">Force the meal time</string>
     <string name="pref_money_mode">Meal Times</string>
     <string name="pref_sort_mode">Sorting</string>
+    <string name="welcome">Choose a venue:</string>
+
 
     <string-array name="drawerItems">
         <item>Home</item>

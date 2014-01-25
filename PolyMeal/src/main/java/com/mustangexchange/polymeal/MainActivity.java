@@ -11,10 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.jsoup.Connection;
@@ -35,7 +32,14 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        download = (TextView)findViewById(R.id.textDownload);
+        ListView lv = (ListView)findViewById(R.id.listView);
+
+        /**
+         * BLAKE FILL IN THE LIST VIEW
+         */
+
+        lv.setOnClickListener();
+        /*download = (TextView)findViewById(R.id.textDownload);
         downloadProgress = (ProgressBar)findViewById(R.id.progressBar);
         final TextView welcome = (TextView)findViewById(R.id.welcomeText);
         final TextView select = (TextView)findViewById(R.id.selectText);
@@ -68,28 +72,6 @@ public class MainActivity extends Activity
             }
             @Override
             public void onAnimationRepeat(Animation animation) {}
-        });
+        });*/
     }
-
-    //start onClick methods for each venue
-    public void sandwich(View v)
-    {
-        Constants.venues.get(0).checkVenueCart(this);
-    }
-
-    public void vg(View v)
-    {
-        Constants.venues.get(1).checkVenueCart(this);
-    }
-
-    public void taco(View v)
-    {
-        Constants.venues.get(2).checkVenueCart(this);
-    }
-
-    public void bagel(View v)
-    {
-        Constants.venues.get(3).checkVenueCart(this);
-    }
-    //end onClick methods for each venue
 }

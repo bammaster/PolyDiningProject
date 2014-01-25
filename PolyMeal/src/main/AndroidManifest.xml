@@ -5,7 +5,7 @@
     android:versionName="1.0.1" >
 
     <uses-sdk
-        android:minSdkVersion="13"
+        android:minSdkVersion="14"
         android:targetSdkVersion="16" />
 
     <application
@@ -25,18 +25,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.VistaActivity"
-            android:label="@string/title_activity_vg"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.mustangexchange.polymeal.CartActivity"
             android:label="@string/title_activity_cart"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.SandwichActivity"
-            android:label="@string/title_activity_sandwich"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -50,20 +40,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.TacoActivity"
-            android:label="@string/title_activity_taco"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.EinsteinActivity"
-            android:label="@string/title_activity_bagel"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
                 android:name="com.mustangexchange.polymeal.BaseActivity"
                 android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".BaseActivity"/>
+        <activity android:name=".VenueActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

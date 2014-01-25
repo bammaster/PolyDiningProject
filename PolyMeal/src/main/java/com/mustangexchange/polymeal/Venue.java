@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Venue
 {
     //holds the item sets for a venue.
-    private ArrayList<ItemSet> venueItems;
+    protected ArrayList<ItemSet> venueItems;
 
     //String key for retrieving data from shared preferences.
     private String gsonKey;
@@ -49,6 +49,7 @@ public class Venue
     {
         return id;
     }
+    public int size() { return venueItems.size();}
     public void checkVenueCart(Activity activity)
     {
         final Activity mActivity = activity;
