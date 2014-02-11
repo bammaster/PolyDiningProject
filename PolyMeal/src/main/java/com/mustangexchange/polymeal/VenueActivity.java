@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,24 +25,25 @@ public class VenueActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.empty);
         mContext = this;
         mActionBar = getActionBar();
         mActionBar.setTitle(Constants.activityTitle);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         venue = Constants.venues.get(Constants.activityTitle);
 
-        updateBalance();
-        if(clear)
-        {
-            Cart.clear();
-        }
+        //updateBalance();
+        //if(clear)
+        //{
+            //Cart.clear();
+       // }
     }
 
     public void onResume()
     {
         super.onResume();
-        updateBalance();
-        updateSettings();
+        //updateBalance();
+        //updateSettings();
     }
 
     public void updateSettings()
@@ -177,9 +179,9 @@ public class VenueActivity extends BaseActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                        intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentCP);
+                        //final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
+                        //intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //mContext.startActivity(intentCP);
                     }
                 });
                 threadCP.start();
@@ -194,9 +196,9 @@ public class VenueActivity extends BaseActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        final Intent intentST = new Intent(mContext, SettingsActivity.class);
-                        intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentST);
+                        //final Intent intentST = new Intent(mContext, SettingsActivity.class);
+                        //intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        //mContext.startActivity(intentST);
                     }
                 });
                 mDrawerLayout.closeDrawer(mDrawerList);

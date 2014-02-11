@@ -11,7 +11,7 @@ public class Item
     private String name = null;
     private BigDecimal price = null;
     private String description;
-    private boolean isValid;
+    private boolean isValid = true;
     private boolean ounces = false;
     private NumberFormat currency = NumberFormat.getCurrencyInstance();
     public Item(String name, BigDecimal price, String description, boolean isValid)
@@ -125,8 +125,8 @@ public class Item
         onListClick.setMessage("Would you like to add " + name + " to your cart? Price: " + getPriceString());
         onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int button) {
-            Cart.add(Item.this);
-            BaseActivity.updateBalance();
+            //Cart.add(Item.this);
+            //BaseActivity.updateBalance();
             }
         });
         onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {

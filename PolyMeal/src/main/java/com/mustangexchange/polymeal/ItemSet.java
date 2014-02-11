@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ItemSet {
     protected String title;
-    protected ArrayList<Item> items = new ArrayList<Item>();
+    protected ArrayList<Item> items;
 
     public ItemSet(String title, ArrayList<Item> items)
     {
@@ -12,8 +12,16 @@ public class ItemSet {
         this.items = items;
     }
 
-    public ItemSet() {}
+    public ItemSet(String title)
+    {
+        this.title = title;
+        items = new ArrayList<Item>();
+    }
 
+    public ItemSet()
+    {
+        items = new ArrayList<Item>();
+    }
     public int size()
     {
         return items.size();

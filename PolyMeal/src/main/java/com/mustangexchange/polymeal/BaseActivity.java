@@ -136,7 +136,7 @@ public abstract class BaseActivity extends FragmentActivity {
     public static void updateBalance() {
         try
         {
-            totalAmount = MoneyTime.calcTotalMoney();
+            //totalAmount = MoneyTime.calcTotalMoney();
             setSubtitleColor();
             mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         }
@@ -164,9 +164,9 @@ public abstract class BaseActivity extends FragmentActivity {
         switch (item.getItemId())
         {
             case R.id.cart:
-                Intent intent = new Intent(this, CartActivity.class);
-                intent.putExtra("PARENT", getClass().getSimpleName() + ".class");
-                startActivity(intent);
+                //Intent intent = new Intent(this, CartActivity.class);
+                //intent.putExtra("PARENT", getClass().getSimpleName() + ".class");
+                //startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

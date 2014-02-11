@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">Poly Dining</string>
+    <string name="error_conn_title">Error Connecting to Server</string>
+    <string name="error_conn_msg">Please ensure you are connected to the internet and try again. If this error persists, contact the developer.</string>
+    <string name="ok">Ok</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_vg">Vista Grande</string>
     <string name="title_activity_taco">Tacos To-Go Grill</string>

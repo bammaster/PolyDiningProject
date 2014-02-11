@@ -27,7 +27,7 @@ public class MyFragment extends Fragment {
 
     public MyFragment()
     {
-        //empty contructor required for fragment subclasses
+        //empty constructor required for fragment subclasses
     }
 
     public MyFragment(int position) {
@@ -69,7 +69,7 @@ public class MyFragment extends Fragment {
                                 onYes.setView(DialogView);
                                 onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int button) {
-                                        Cart.add(new Item(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))), ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
+                                        //Cart.add(new Item(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))), ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                                         PagerAdapter.updateBalance();
                                     }
                                 });
@@ -80,7 +80,7 @@ public class MyFragment extends Fragment {
                                 onYes.show();
                             }
                             else {
-                                Cart.add(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))));
+                                //Cart.add(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))));
                                 PagerAdapter.updateBalance();
                             }
                         }

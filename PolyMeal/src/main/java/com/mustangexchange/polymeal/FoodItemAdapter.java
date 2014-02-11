@@ -30,19 +30,19 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         System.out.println(parentClass);
         if(parentClass.equals("SandwichActivity"))
         {
-            SandwichActivity.updateBalance();
+            //SandwichActivity.updateBalance();
         } else if(parentClass.equals("VistaActivity"))
         {
-            VistaActivity.updateBalance();
+            //VistaActivity.updateBalance();
         } else if(parentClass.equals("TacoActivity"))
         {
-            TacoActivity.updateBalance();
+           //TacoActivity.updateBalance();
         }
     }
 
     public String getTitle()
     {
-        return itemset.getTitle();
+        return itemset.title;
     }
 
     public int getCount()
@@ -101,7 +101,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             onYes.setView(DialogView);
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
-                    Cart.add(new Item(itemset.getItem(position), itemset.getItem(position).getPrice().multiply(new BigDecimal(np.getValue()))));
+                    //Cart.add(new Item(itemset.getItem(position), itemset.getItem(position).getPrice().multiply(new BigDecimal(np.getValue()))));
                     Toast.makeText(activity, itemset.getItem(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                     updateBalance();
                 }
@@ -126,7 +126,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
         else
         {
-            Cart.add(itemset.getItem(position));
+            //Cart.add(itemset.getItem(position));
             updateBalance();
             Toast.makeText(context, itemset.getItem(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
         }
