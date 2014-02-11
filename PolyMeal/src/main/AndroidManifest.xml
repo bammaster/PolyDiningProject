@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/CalPolyHolo" >
         <activity
-            android:name="com.mustangexchange.polymeal.MainActivity"
+            android:name=".PolyMealActivity"
             android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >

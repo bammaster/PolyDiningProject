@@ -2,9 +2,7 @@ package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -20,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -142,7 +138,7 @@ public abstract class BaseActivity extends FragmentActivity {
         }
         catch (NullPointerException e)
         {
-            Intent intentHome = new Intent(mContext, MainActivity.class);
+            Intent intentHome = new Intent(mContext, PolyMealActivity.class);
             intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mContext.startActivity(intentHome);
         }
@@ -152,7 +148,7 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.polymeal, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -112,7 +111,7 @@ public class VenueActivity extends BaseActivity {
         }
         catch(NullPointerException e)
         {
-            Intent intentHome = new Intent(mContext, MainActivity.class);
+            Intent intentHome = new Intent(mContext, PolyMealActivity.class);
             intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             mContext.startActivity(intentHome);
         }
@@ -135,7 +134,7 @@ public class VenueActivity extends BaseActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        Intent intentHome = new Intent(mContext, MainActivity.class);
+                        Intent intentHome = new Intent(mContext, PolyMealActivity.class);
                         intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         mContext.startActivity(intentHome);
                     }
