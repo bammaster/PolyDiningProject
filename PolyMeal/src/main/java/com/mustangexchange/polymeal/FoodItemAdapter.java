@@ -15,13 +15,15 @@ import java.util.ArrayList;
 public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private Activity activity;
-    private ItemSet itemset;
+    private String title;
+    private ArrayList<Item> items;
 
-    public FoodItemAdapter(Context context, ItemSet itemset)
+    public FoodItemAdapter(Context context, String title, ArrayList<Item> sortedList)
     {
         this.context = context;
         activity = (Activity) context;
-        this.itemset = itemset;
+        this.title = title;
+        items = sortedList;
     }
 
     public void updateBalance()
@@ -31,17 +33,17 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
 
     public String getTitle()
     {
-        return itemset.title;
+        return title;
     }
 
     public int getCount()
     {
-        return itemset.size();
+        return items.size();
     }
 
     public Object getItem(int position)
     {
-        return itemset.getItem(position);
+        return items.get(position);
     }
 
     public long getItemId(int position)
@@ -57,10 +59,10 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             convertView = inflater.inflate(R.layout.row_item, null);
         }
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-        tvName.setText(itemset.getItem(position).getName());
+        tvName.setText(items.get(position).getName());
 
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-        tvPrice.setText(itemset.getItem(position).getPriceString());
+        tvPrice.setText(items.get(position).getPriceString());
 
         //Set the onClick Listener on this button
         ImageButton btnAdd = (ImageButton) convertView.findViewById(R.id.btn_add);
@@ -76,7 +78,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
     public void onClick(View view)
     {
         final int position = (Integer) view.getTag();
-        if (itemset.getItem(position).getOunces()) {
+        if (items.get(position).getOunces()) {
             AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
             onYes.setTitle("How much?");
             onYes.setMessage("Estimated Number of Ounces: ");
@@ -91,8 +93,8 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
 
-                    Cart.add(new Item(itemset.getItem(position), itemset.getItem(position).getPrice().multiply(new BigDecimal(np.getValue()))));
-                    Toast.makeText(activity, itemset.getItem(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
+                    Cart.add(new Item(items.get(position), items.get(position).getPrice().multiply(new BigDecimal(np.getValue()))));
+                    Toast.makeText(activity, items.get(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                     updateBalance();
                 }
             });
@@ -102,7 +104,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
             });
             onYes.show();
         }
-        else if(!itemset.getItem(position).getValid())
+        else if(!items.get(position).getValid())
         {
             AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
             invalidItem.setTitle("Invalid Item!");
@@ -116,9 +118,9 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
         else
         {
-            Cart.add(itemset.getItem(position));
+            Cart.add(items.get(position));
             updateBalance();
-            Toast.makeText(context, itemset.getItem(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, items.get(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
         }
     }
 }

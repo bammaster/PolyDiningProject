@@ -47,7 +47,7 @@ public class  VenueParser
                 String subName = category.getElementsByTag("name").text();
                 subVenue = new ItemSet(subName);
                 //Gets each menu item from the category which represents an Item.
-                for(Element menuItem : venDoc.select("menu_item"))
+                for(Element menuItem : category.select("menu_item"))
                 {
                     Item item = new Item();
                     item.setName(menuItem.getElementsByTag("product_name").text());

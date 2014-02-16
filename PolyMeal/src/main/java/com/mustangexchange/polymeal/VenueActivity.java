@@ -110,7 +110,6 @@ public class VenueActivity extends FragmentActivity {
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
         venue = Constants.venues.get(Constants.activityTitle);
-        System.out.println("venueSize: " + venue.size() + "\n");
         mActionBar.setTitle(Constants.activityTitle);
 
         updateBalance();
@@ -133,7 +132,7 @@ public class VenueActivity extends FragmentActivity {
             {
                 ArrayList<Item> sortedList = new ArrayList<Item>(venue.venueItems.get(i).items);
                 Collections.sort(sortedList, new ItemNameComparator());
-                foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(venue.venueItems.get(i).title, sortedList)));
+                foodAdapterList.add(new FoodItemAdapter(this, venue.venueItems.get(i).title, sortedList));
 
             }
         }
@@ -141,13 +140,13 @@ public class VenueActivity extends FragmentActivity {
         else if(sortMode == 1)
         {
             foodAdapterList.clear();
-            for(int i = 0;i<venue.size();i++)
+            for(int i = 0;i < venue.size();i++)
             {
 
                 ArrayList<Item> sortedList = new ArrayList<Item>(venue.venueItems.get(i).items);
                 Collections.sort(sortedList, new ItemNameComparator());
                 Collections.reverse(sortedList);
-                foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(venue.venueItems.get(i).title, sortedList)));
+                foodAdapterList.add(new FoodItemAdapter(this, venue.venueItems.get(i).title, sortedList));
 
             }
         }
@@ -160,7 +159,7 @@ public class VenueActivity extends FragmentActivity {
 
                 ArrayList<Item> sortedList = new ArrayList<Item>(venue.venueItems.get(i).items);
                 Collections.sort(sortedList, new ItemPriceComparator());
-                foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(venue.venueItems.get(i).title, sortedList)));
+                foodAdapterList.add(new FoodItemAdapter(this, venue.venueItems.get(i).title, sortedList));
 
             }
         }
@@ -173,7 +172,7 @@ public class VenueActivity extends FragmentActivity {
                 ArrayList<Item> sortedList = new ArrayList<Item>(venue.venueItems.get(i).items);
                 Collections.sort(sortedList, new ItemPriceComparator());
                 Collections.reverse(sortedList);
-                foodAdapterList.add(new FoodItemAdapter(this, new ItemSet(venue.venueItems.get(i).title, sortedList)));
+                foodAdapterList.add(new FoodItemAdapter(this, venue.venueItems.get(i).title, sortedList));
             }
         }
 
