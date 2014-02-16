@@ -9,6 +9,16 @@ import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpParams;
 import org.jsoup.Jsoup;
 import org.jsoup.parser.Parser;
 
@@ -73,6 +83,16 @@ public class GetData extends AsyncTask<String, String, Integer> {
         try
         {
             //Next few lines handle making an XML String to parse.
+
+            //possibly faster
+            /*HttpParams httpparams = new BasicHttpParams();
+            httpparams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+            HttpClient httpclient = new DefaultHttpClient(httpparams);
+            HttpGet request = new HttpGet(Constants.URL);
+            HttpResponse httpResponse = httpclient.execute(request);
+            HttpEntity entity = httpResponse.getEntity();
+            InputStream is = entity.getContent();*/
+
             URL url = new URL(Constants.URL);
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();

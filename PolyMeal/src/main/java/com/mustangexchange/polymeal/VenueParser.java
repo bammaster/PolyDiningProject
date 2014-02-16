@@ -32,19 +32,20 @@ public class  VenueParser
     {
         Gson cache = new Gson();
         Elements links = doc.select("link");
+        ItemSet subVenue = new ItemSet();
         int counter = 0;
         //Gets each venues name.
         for(Element name : doc.select("name"))
         {
             String venue = name.text();
             String link = links.get(counter).text();
-            Constants.venues.put(venue,new Venue(venue,link,counter));
+            Constants.venues.put(venue, new Venue(venue,link,counter));
             Document venDoc = Jsoup.connect(link).get();
             //Gets each category of each venue which represents an ItemSet.
             for(Element category : venDoc.select("category"))
             {
                 String subName = category.getElementsByTag("name").text();
-                ItemSet subVenue = new ItemSet(subName);
+                subVenue = new ItemSet(subName);
                 //Gets each menu item from the category which represents an Item.
                 for(Element menuItem : venDoc.select("menu_item"))
                 {
@@ -61,6 +62,7 @@ public class  VenueParser
                     item.setDescription(menuItem.getElementsByTag("description").text());
                     subVenue.add(item);
                 }
+                Constants.venues.get(venue).venueItems.add(subVenue);
             }
             data.update(venue);
             counter++;

@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="16" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,30 +26,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mustangexchange.polymeal.CartActivity"
-            android:label="@string/title_activity_cart"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.CompleteorActivity"
-            android:label="@string/title_activity_completeor"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.SettingsActivity"
-            android:label="Settings"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.BaseActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.mustangexchange.polymeal.VenueActivity"
+            android:name=".VenueActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".CartActivity"/>
+        <activity android:name=".CompleterActivity"/>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>

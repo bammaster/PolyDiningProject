@@ -22,17 +22,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     public static void updateBalance()
     {
-        String parentClass = context.getClass().getSimpleName();
-        if(parentClass.equals("SandwichActivity"))
-        {
-            //SandwichActivity.updateBalance();
-        } else if(parentClass.equals("VistaActivity"))
-        {
-            //VistaActivity.updateBalance();
-        } else if(parentClass.equals("TacoActivity"))
-        {
-            //TacoActivity.updateBalance();
-        }
+        VenueActivity.updateBalance();
     }
 
     @Override

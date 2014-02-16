@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class PolyMealActivity extends Activity
 {
-    final private Context mContext = this;
+    private Context mContext;
     private ArrayList<String> names = new ArrayList<String>();
     private ListView lv;
     private ArrayAdapter<String> listAdapter;
@@ -35,15 +35,16 @@ public class PolyMealActivity extends Activity
         lv = (ListView)findViewById(R.id.listView);
         listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         listAdapter.setNotifyOnChange(true);
+        mContext = this;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
                 Constants.activityTitle = names.get(index);
-                Intent intentVenue = new Intent(mContext, VenueActivity.class);
+                final Intent intentVenue = new Intent(mContext, VenueActivity.class);
                 intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intentVenue);
+                mContext.startActivity(intentVenue);
             }
         });
         lv.setAdapter(listAdapter);
