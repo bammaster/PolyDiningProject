@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Currency;
 
 public class Item
 {
@@ -13,7 +15,7 @@ public class Item
     private String description;
     private boolean isValid = true;
     private boolean ounces = false;
-    private NumberFormat currency = NumberFormat.getCurrencyInstance();
+    private DecimalFormat currency = new DecimalFormat("#.##");
     public Item(String name, BigDecimal price, String description, boolean isValid)
     {
         this.name = name;
@@ -113,7 +115,7 @@ public class Item
     {
         String priceString = price.toString();
         priceString = currency.format(Double.valueOf(priceString));
-        return new BigDecimal(priceString.substring(1));
+        return new BigDecimal(priceString);
     }
 
     public void displayAddDialog(Activity activity)
