@@ -24,10 +24,8 @@
 
     <string-array name="drawerItems">
         <item>Home</item>
-        <item>Sandwich Factory</item>
-        <item>Vista Grande</item>
-        <item>Tacos To Go</item>
-        <item>Meal Completer</item>
+        <item>Plus Dollars</item>
+        <item>Meal Completeor</item>
         <item>Settings</item>
     </string-array>
     <string-array name="moneyMode">

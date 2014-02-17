@@ -32,7 +32,7 @@ public class  VenueParser
     {
         Gson cache = new Gson();
         Elements links = doc.select("link");
-        ItemSet subVenue = new ItemSet();
+        ItemSet subVenue;
         int counter = 0;
         //Gets each venues name.
         for(Element name : doc.select("name"))
@@ -45,6 +45,7 @@ public class  VenueParser
             for(Element category : venDoc.select("category"))
             {
                 String subName = category.getElementsByTag("name").text();
+                subName = subName.replace("amp;","");
                 subVenue = new ItemSet(subName);
                 //Gets each menu item from the category which represents an Item.
                 for(Element menuItem : category.select("menu_item"))

@@ -16,13 +16,18 @@ import android.widget.*;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PolyMealActivity extends Activity
 {
     private Context mContext;
     private ArrayList<String> names = new ArrayList<String>();
+    private List<Map<String,String>> data;
     private ListView lv;
     private ArrayAdapter<String> listAdapter;
+    //private SimpleAdapter adapter;
     private SharedPreferences sp;
 
     @Override
@@ -33,6 +38,9 @@ public class PolyMealActivity extends Activity
         setContentView(R.layout.activity_main);
         sp = getSharedPreferences(Constants.spKey, MODE_PRIVATE);
         lv = (ListView)findViewById(R.id.listView);
+        //data = new ArrayList<Map<String,String>>();
+        //adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
+                //new String[] {"venue", "status"},new int[] {android.R.id.text1, android.R.id.text2});
         listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
         listAdapter.setNotifyOnChange(true);
         mContext = this;
@@ -48,14 +56,17 @@ public class PolyMealActivity extends Activity
             }
         });
         lv.setAdapter(listAdapter);
-        if(sp.getBoolean(Constants.firstLaunch,true))
+        String gson = sp.getString(Constants.speKey,"");
+        Log.e("Blake",gson);
+        Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
+        if(sp.getBoolean(Constants.firstLaunch,true) || Constants.venues == null)
         {
             setProgressBarIndeterminateVisibility(true);
+            Constants.venues = new HashMap<String, Venue>();
             new GetData(listAdapter, this, sp).execute();
         }
         else
         {
-            Constants.venues = new Gson().fromJson(sp.getString(Constants.speKey,""),Constants.gsonType);
             for(String venue : Constants.venues.keySet())
             {
                 listAdapter.add(venue);
@@ -74,6 +85,7 @@ public class PolyMealActivity extends Activity
         switch (item.getItemId()) {
             case R.id.refresh:
                 setProgressBarIndeterminateVisibility(true);
+                listAdapter.clear();
                 new GetData(listAdapter, this, sp).execute();
                 return true;
             default:

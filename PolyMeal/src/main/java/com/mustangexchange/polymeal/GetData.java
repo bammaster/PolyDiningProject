@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Handles getting and parsing all of the data for the app from the internet.
@@ -107,24 +108,26 @@ public class GetData extends AsyncTask<String, String, Integer> {
         catch(IOException e)
         {
             //Displays an error message in the event of a connection error.
-            AlertDialog.Builder connectionError = new AlertDialog.Builder(mActivity);
+            final AlertDialog.Builder connectionError = new AlertDialog.Builder(mActivity);
             connectionError.setTitle(R.string.error_conn_title);
             connectionError.setMessage(R.string.error_conn_msg);
-            connectionError.setNegativeButton(R.string.ok,new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int button)
-                {
+            connectionError.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
                     //If data is in the cache, load from it.
-                    if(!sp.getString(Constants.speKey,"").equals(""))
-                    {
-                        Constants.venues = new Gson().fromJson(sp.getString(Constants.speKey,""),Constants.gsonType);
-                        for(String venue : Constants.venues.keySet())
-                        {
+                    if (!sp.getString(Constants.speKey, "").equals("")) {
+                        Constants.venues = new Gson().fromJson(sp.getString(Constants.speKey, ""), Constants.gsonType);
+                        for (String venue : Constants.venues.keySet()) {
                             list.add(venue);
                         }
                     }
                 }
             });
-            connectionError.show();
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    connectionError.show();
+                }
+            });
         }
         return 0;
     }
