@@ -38,7 +38,6 @@ import java.util.HashMap;
 public class GetData extends AsyncTask<String, String, Integer> {
 
     private ArrayAdapter<String> list;
-    private ArrayList<String> venueNames;
     private Activity mActivity;
     private SharedPreferences sp;
 
@@ -54,7 +53,6 @@ public class GetData extends AsyncTask<String, String, Integer> {
         this.list = list;
         this.sp = sp;
         mActivity= activity;
-        venueNames = new ArrayList<String>();
     }
 
     @Override
@@ -139,10 +137,9 @@ public class GetData extends AsyncTask<String, String, Integer> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
-        if(!venueNames.contains(values[0]))
+        if(!Constants.names.contains(values[0]))
         {
             list.add(values[0]);
-            venueNames.add(values[0]);
         }
     }
 

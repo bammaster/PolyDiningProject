@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,6 +22,8 @@ public class Constants
     public static String firstLaunch = "firstLaunch";
     public static final Gson gson = new Gson();
     public static HashMap<String, Venue> venues;
+    //Stores the venue names for the PolyMEalActivity list view.
+    public static ArrayList<String> names = new ArrayList<String>();
     public static final int numVenues = 4;
     //not constant as it needs to be changed but should only be one of them.
     public static String activityTitle = "";

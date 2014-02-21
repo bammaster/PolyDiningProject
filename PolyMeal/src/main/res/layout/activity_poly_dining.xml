@@ -25,7 +25,8 @@
         android:layout_below="@+id/mainHeader"
         android:layout_alignLeft="@+id/mainHeader"
         android:layout_marginTop="33dp"
-        android:layout_alignRight="@+id/welcomeText" />
+        android:layout_alignRight="@+id/welcomeText"
+        android:onClick="plusdollars" />
 
     <TextView
         android:layout_width="wrap_content"

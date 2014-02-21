@@ -23,7 +23,6 @@ import java.util.Map;
 public class PolyMealActivity extends Activity
 {
     private Context mContext;
-    private ArrayList<String> names = new ArrayList<String>();
     private List<Map<String,String>> data;
     private ListView lv;
     private ArrayAdapter<String> listAdapter;
@@ -41,7 +40,7 @@ public class PolyMealActivity extends Activity
         //data = new ArrayList<Map<String,String>>();
         //adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
                 //new String[] {"venue", "status"},new int[] {android.R.id.text1, android.R.id.text2});
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Constants.names);
         listAdapter.setNotifyOnChange(true);
         mContext = this;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -49,7 +48,7 @@ public class PolyMealActivity extends Activity
             @Override
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
-                Constants.activityTitle = names.get(index);
+                Constants.activityTitle = Constants.names.get(index);
                 final Intent intentVenue = new Intent(mContext, VenueActivity.class);
                 intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 mContext.startActivity(intentVenue);
@@ -57,7 +56,6 @@ public class PolyMealActivity extends Activity
         });
         lv.setAdapter(listAdapter);
         String gson = sp.getString(Constants.speKey,"");
-        Log.e("Blake",gson);
         Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
         if(sp.getBoolean(Constants.firstLaunch,true) || Constants.venues == null)
         {
@@ -65,8 +63,9 @@ public class PolyMealActivity extends Activity
             Constants.venues = new HashMap<String, Venue>();
             new GetData(listAdapter, this, sp).execute();
         }
-        else
+        else if(Constants.names.isEmpty())
         {
+            Log.e("Blake","Hello2");
             for(String venue : Constants.venues.keySet())
             {
                 listAdapter.add(venue);
