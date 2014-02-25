@@ -127,6 +127,24 @@ public class GetData extends AsyncTask<String, String, Integer> {
                 }
             });
         }
+        catch(Exception e)
+        {
+            //Displays an error message in the event of a connection error.
+            final AlertDialog.Builder error = new AlertDialog.Builder(mActivity);
+            error.setTitle(R.string.error_title);
+            error.setMessage(R.string.error_msg);
+            error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int button) {
+                    mActivity.finish();
+                }
+            });
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    error.show();
+                }
+            });
+        }
         return 0;
     }
 
@@ -144,7 +162,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
     }
 
     /**
-     * Used for external package calling to publish progress of the thread.
+     * Used for external class calling to publish progress of the thread.
      * @param name The value to update with.
      */
     protected void update(String name)

@@ -32,7 +32,8 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".CartActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".CompleterActivity"/>
+        <activity android:name=".PlusDollarsActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 

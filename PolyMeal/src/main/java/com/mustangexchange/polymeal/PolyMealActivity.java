@@ -23,12 +23,11 @@ import java.util.Map;
 public class PolyMealActivity extends Activity
 {
     private Context mContext;
-    private List<Map<String,String>> data;
+    //private List<Map<String,String>> data;
     private ListView lv;
     private ArrayAdapter<String> listAdapter;
     //private SimpleAdapter adapter;
     private SharedPreferences sp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,7 +64,6 @@ public class PolyMealActivity extends Activity
         }
         else if(Constants.names.isEmpty())
         {
-            Log.e("Blake","Hello2");
             for(String venue : Constants.venues.keySet())
             {
                 listAdapter.add(venue);

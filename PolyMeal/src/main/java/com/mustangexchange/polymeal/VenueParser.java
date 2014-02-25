@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Blake on 8/6/13.
@@ -52,13 +53,26 @@ public class  VenueParser
                 {
                     Item item = new Item();
                     item.setName(menuItem.getElementsByTag("product_name").text());
+                    String price = menuItem.getElementsByTag("price").text();
+                    if(price.contains("per oz."))
+                    {
+                        item.setOunces(true);
+                    }
                     try
                     {
-                        item.setPrice(new BigDecimal(menuItem.getElementsByTag("price").text().replace("$","")));
+                        item.setPrice(new BigDecimal(price.replace("$","")));
                     }
                     catch(Exception e)
                     {
-                        item.setPrice(new BigDecimal("69.69"));
+                        String tempPrice = handlePriceParseFail(price);
+                        if(tempPrice.length() != 0)
+                        {
+                            item.setPrice(new BigDecimal(tempPrice));
+                        }
+                        else
+                        {
+                            item.setPrice(new BigDecimal(Constants.DEFAULT_PRICE));
+                        }
                     }
                     item.setDescription(menuItem.getElementsByTag("description").text());
                     subVenue.add(item);
@@ -68,7 +82,41 @@ public class  VenueParser
             data.update(venue);
             counter++;
         }
+        //Write venue object to storage.
         spe.putString(Constants.speKey,cache.toJson(Constants.venues));
         spe.commit();
+    }
+
+    /**
+     * Handles the situation where parsing the price is not as simple as making it a Big Decimal.
+     * In that case the price must be extracted from the price string.
+     * @param price The string to extract the price from.
+     * @return The extracted price.
+     */
+    private String handlePriceParseFail(String price)
+    {
+        Scanner priceScanner = new Scanner(price);
+        String value;
+        //Iterates  over each part of the price String.
+        while(priceScanner.hasNext())
+        {
+            value = priceScanner.next();
+            StringBuilder parsedVal = new StringBuilder();
+            //Ensures one of the parts of the string has a dollar sign.
+            if(value.contains("$"))
+            {
+                value.replace("$","");
+                //Iterates over the part of the price with a dollar sign and gets the value.
+                for(int i = 0; i < value.length(); i++)
+                {
+                    if(Character.isDigit(value.charAt(i)) || value.charAt(i) == '.')
+                    {
+                        parsedVal.append(value.charAt(i));
+                    }
+                }
+                return parsedVal.toString();
+            }
+        }
+        return "0.00";
     }
 }

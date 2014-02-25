@@ -1,8 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,6 +13,7 @@ import java.util.HashMap;
 public class Constants
 {
     public static final Type gsonType = new TypeToken<HashMap<String, Venue>>() {}.getType();
+    public static final String DEFAULT_PRICE = "0.00";
     public static final String URL = "http://www.calpolydining.com/_mobiledata/locations.xml";
     public static final String spKey = "Venue Cache";
     public static final String speKey = "Cache";
@@ -28,5 +26,14 @@ public class Constants
     //not constant as it needs to be changed but should only be one of them.
     public static String activityTitle = "";
     public static int venueNumber;
+    //From Plus Dollars app.
+    public static final String FILENAME = "account";
+    public static final String EMPTY = "";
+    public static final String PREFS = "main";
+    public static final String QUARTER_END = "quarter_end";
+    public static final String DATE_FORMAT = "M/d/yyyy HH:mm:ss";
+    public static final String REMEMBER_ME = "remember_me";
+    public static final String UPDATE_FREQ = "update_frequency";
+    public static final String TIME_FORMAT = "K:mm aa";
     private Constants(){}
 }

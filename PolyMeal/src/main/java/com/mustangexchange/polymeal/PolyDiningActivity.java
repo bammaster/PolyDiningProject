@@ -44,6 +44,6 @@ public class PolyDiningActivity extends Activity
     }
     public void plusdollars(View v)
     {
-        //startActivity();
+        startActivity(new Intent(this,PlusDollarsActivity.class));
     }
 }
