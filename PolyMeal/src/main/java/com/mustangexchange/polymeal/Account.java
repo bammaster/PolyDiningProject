@@ -21,7 +21,14 @@ public class Account implements Serializable {
     public BigDecimal campusExpress, plusDollars;
     public DateTime updated;
     public ArrayList<Transaction> transactions;
-
+    public String plusAsMoney()
+    {
+        return "$" + plusDollars.toString();
+    }
+    public String expressAsMoney()
+    {
+        return "$" + campusExpress.toString();
+    }
     public static Account loadAccount(String filename, Context context) {
         Account a = null;
         try {

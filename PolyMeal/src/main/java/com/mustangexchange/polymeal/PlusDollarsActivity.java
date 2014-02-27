@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -24,46 +25,89 @@ import org.w3c.dom.Text;
 public class PlusDollarsActivity extends Activity {
     private Account account;
     private Thread update;
+    private TextView name;
+    private TextView expressHeader;
+    private TextView express;
+    private TextView plusHeader;
+    private TextView plus;
+    private TextView mealHeader;
+    private TextView meal;
+    private View loginView;
+    private EditText username;
+    private EditText password;
+    private CheckBox remember;
+    private LayoutInflater factory;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.plus_dollars_activity);
-        TextView name = (TextView)findViewById(R.id.nameText);
-        TextView plus = (TextView)findViewById(R.id.plusValue);
-        TextView express = (TextView)findViewById(R.id.expValue);
-        TextView meal = (TextView)findViewById(R.id.mealText);
-        LayoutInflater factory = LayoutInflater.from(this);
-        View loginView = factory.inflate(R.layout.login_dialog, null);
-        EditText username = (EditText)loginView.findViewById(R.id.username);
-        EditText password = (EditText)loginView.findViewById(R.id.password);
-        CheckBox remember = (CheckBox)loginView.findViewById(R.id.remember);
+        name = (TextView)findViewById(R.id.nameText);
+        expressHeader = (TextView)findViewById(R.id.expHeader);
+        express = (TextView)findViewById(R.id.expValue);
+        plusHeader = (TextView)findViewById(R.id.plusHeader);
+        plus = (TextView)findViewById(R.id.plusValue);
+        mealHeader = (TextView)findViewById(R.id.mealHeader);
+        meal = (TextView)findViewById(R.id.mealText);
+        name.setAlpha(0);
+        expressHeader.setAlpha(0);
+        express.setAlpha(0);
+        plusHeader.setAlpha(0);
+        plus.setAlpha(0);
+        mealHeader.setAlpha(0);
+        meal.setAlpha(0);
+        factory = LayoutInflater.from(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         name.setTypeface(font);
         account = account.loadAccount(Constants.FILENAME, this);
         //If the loaded account does not exist or the user said not to remember.
         if(account == null || !account.remember)
         {
-            handleLogin(loginView, name, username, password, remember, plus);
+            handleLogin();
         }
         else if(account.remember)
         {
             name.setText(account.name);
+            plus.setText(account.plusAsMoney());
+            express.setText(account.expressAsMoney());
+            meal.setText(account.meals+"");
         }
+        fadeIn();
         update = buildThread(name,remember);
     }
+    private void fadeIn()
+    {
+        final int duration = 300;
+        final int delay = 150;
+        name.animate().alpha(1.0f).setStartDelay(delay).setDuration(duration).start();
+        expressHeader.animate().alpha(1.0f).setStartDelay(duration/2+delay).setDuration(duration).start();
+        express.animate().alpha(1.0f).setStartDelay(2*duration/2+delay).setDuration(duration).start();
+        plusHeader.animate().alpha(1.0f).setStartDelay(3 * duration/2+delay).setDuration(duration).start();
+        plus.animate().alpha(1.0f).setStartDelay(4 * duration/2+delay).setDuration(duration).start();
+        mealHeader.animate().alpha(1.0f).setStartDelay(5 * duration/2+delay).setDuration(duration).start();
+        meal.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+    }
+    protected void onResume()
+    {
+        super.onResume();
+        if(account!= null && name != null)
+        {
+            setTextSizeName(account.name, name);
+        }
+    }
+
     private void setTextSizeName(String name,TextView nameText)
     {
-        if(name.length() > 10 && name.length() < 15 || nameText.getLineCount() == 2)
+        if(name.length() > 10 && name.length() < 15)
         {
             nameText.setTextSize(60f);
         }
-        else if(name.length() >= 15 && name.length() < 20 || nameText.getLineCount() == 2)
+        else if(name.length() >= 15 && name.length() < 20 )
         {
             nameText.setTextSize(50f);
         }
-        else if(name.length() >= 20 || nameText.getLineCount() == 2)
+        else if(name.length() >= 20)
         {
             nameText.setTextSize(40f);
         }
@@ -72,16 +116,13 @@ public class PlusDollarsActivity extends Activity {
     /**
      * Handles a user login by giving the user a dialog to enter their information into.
      * Also starts the thread to get the user data and updates the UI.
-     * @param loginView The view used on the laert dialog.
-     * @param name The name text view at the top of the screen.
-     * @param username The username the user enters into the dialog.
-     * @param password The password the user enters into the dialog.
-     * @param remember Whether or not the user checked the box to remember details.
-     * @param plus
      */
-    private void handleLogin(final View loginView, final TextView name, final EditText username,
-                             final EditText password, final CheckBox remember, final TextView plus)
+    private void handleLogin()
     {
+        loginView = factory.inflate(R.layout.login_dialog, null);
+        username = (EditText)loginView.findViewById(R.id.username);
+        password = (EditText)loginView.findViewById(R.id.password);
+        remember = (CheckBox)loginView.findViewById(R.id.remember);
         AlertDialog.Builder login = new AlertDialog.Builder(this);
         login.setTitle("Please login.");
         login.setCancelable(false);
@@ -90,7 +131,9 @@ public class PlusDollarsActivity extends Activity {
             public void onClick(DialogInterface dialog, int id)
             {
                 account = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
-
+                setProgressBarIndeterminateVisibility(true);
+                buildThread(name, remember).start();
+                dialog.dismiss();
             }
         });
         login.show();
@@ -99,7 +142,7 @@ public class PlusDollarsActivity extends Activity {
     /**
      * Builds the thread used to get all of the plus dollars data.
      * @param name Name view to update with the name that is found.
-     * @param remember Wether or not to remeber the account.
+     * @param remember Whether or not to remember the account.
      * @return A copy of the Thread.
      */
     private Thread buildThread(final TextView name, final CheckBox remember)
@@ -112,29 +155,39 @@ public class PlusDollarsActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("Blake","Name: " + account.name);
-                        setTextSizeName(account.name, name);
-                        name.setText(account.name);
-                        if(remember.isChecked() && account != null)
+                        if(account == null)
                         {
-                            account.remember = true;
-                            account.saveAccount(Constants.FILENAME, PlusDollarsActivity.this);
+                            Toast.makeText(PlusDollarsActivity.this, "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
+                            handleLogin();
                         }
-                        //plus.setText(account.plusDollars.toString());
-                        //express.setText(account.campusExpress.toString());
-                        //meal.setText(account.meals);
+                        else
+                        {
+                            setTextSizeName(account.name, name);
+                            name.setText(account.name);
+                            if(remember.isChecked() && account != null)
+                            {
+                                account.remember = true;
+                                account.saveAccount(Constants.FILENAME, PlusDollarsActivity.this);
+                            }
+                            Log.e("Blake",account.plusDollars.toString());
+                            plus.setText(account.plusAsMoney());
+                            express.setText(account.expressAsMoney());
+                            meal.setText(account.meals+"");
+                        }
                         setProgressBarIndeterminateVisibility(false);
                     }
                 });
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.plusdollars, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
