@@ -6,26 +6,26 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.*;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PolyMealActivity extends Activity
 {
     private Context mContext;
     //private List<Map<String,String>> data;
     private ListView lv;
-    private ArrayAdapter<String> listAdapter;
+    private ListAdapter listAdapter;
     //private SimpleAdapter adapter;
     private SharedPreferences sp;
     @Override
@@ -39,7 +39,7 @@ public class PolyMealActivity extends Activity
         //data = new ArrayList<Map<String,String>>();
         //adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
                 //new String[] {"venue", "status"},new int[] {android.R.id.text1, android.R.id.text2});
-        listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Constants.names);
+        listAdapter = new ListAdapter(this, R.id.polymealListItem, Constants.names);
         listAdapter.setNotifyOnChange(true);
         mContext = this;
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -48,26 +48,47 @@ public class PolyMealActivity extends Activity
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
                 Constants.activityTitle = Constants.names.get(index);
+                Log.e("Blake",Constants.venues.get(Constants.names.get(index)).isOpen()+"");
                 final Intent intentVenue = new Intent(mContext, VenueActivity.class);
                 intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 mContext.startActivity(intentVenue);
             }
         });
         lv.setAdapter(listAdapter);
-        String gson = sp.getString(Constants.speKey,"");
-        Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
-        if(sp.getBoolean(Constants.firstLaunch,true) || Constants.venues == null)
+        if(sp.getBoolean(Constants.firstLaunch,true))
         {
             setProgressBarIndeterminateVisibility(true);
             Constants.venues = new HashMap<String, Venue>();
             new GetData(listAdapter, this, sp).execute();
         }
-        else if(Constants.names.isEmpty())
+        else if(Constants.venues == null)
         {
-            for(String venue : Constants.venues.keySet())
-            {
-                listAdapter.add(venue);
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    String gson = sp.getString(Constants.speKey,"");
+                    Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
+                    for(final String venue : Constants.venues.keySet())
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                listAdapter.add(venue);
+                            }
+                        });
+                    }
+                }
+            }).start();
+        }
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(lv!=null)
+        {
+            lv.invalidate();
         }
     }
     @Override
@@ -87,6 +108,34 @@ public class PolyMealActivity extends Activity
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+    public class ListAdapter extends ArrayAdapter<String>
+    {
+        public ListAdapter(Context context, int resource, List<String> items)
+        {
+            super(context, resource, items);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            if(convertView == null)
+            {
+                LayoutInflater inflater = getLayoutInflater();
+                convertView = inflater.inflate(R.layout.polymeal_list_item, parent, false);
+            }
+            TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
+            tt.setText("  " + Constants.names.get(position));
+            if(Constants.venues.get(Constants.names.get(position)).isOpen())
+            {
+                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.open_dot),null,null,null);
+            }
+            else
+            {
+                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.close_dot),null,null,null);
+            }
+            return convertView;
+
         }
     }
 }

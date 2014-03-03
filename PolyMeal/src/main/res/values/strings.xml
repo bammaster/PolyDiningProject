@@ -26,9 +26,11 @@
 
     <string-array name="drawerItems">
         <item>Home</item>
+        <item>Poly Meal</item>
         <item>Plus Dollars</item>
         <item>Meal Completeor</item>
         <item>Settings</item>
+        <item>Transactions</item>
     </string-array>
     <string-array name="moneyMode">
         <item>Breakfast</item>

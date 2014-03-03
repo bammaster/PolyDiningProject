@@ -23,6 +23,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
 import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
 
@@ -66,7 +68,7 @@ public class VenueActivity extends FragmentActivity {
         /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mDrawerItems));*/
         mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
-        //mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -228,6 +230,7 @@ public class VenueActivity extends FragmentActivity {
     {
         super.onResume();
         updateBalance();
+        updateSettings();
     }
 
     @Override
@@ -257,89 +260,51 @@ public class VenueActivity extends FragmentActivity {
     /* The click listner for ListView in the navigation drawer */
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final int positionTapped = parent.getPositionForView(view);
-            //if home
-            if(positionTapped == 0)
-            {
-                mDrawerLayout.closeDrawer(mDrawerList);
-                Thread threadHome = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Intent intentHome = new Intent(mContext, PolyMealActivity.class);
-                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intentHome);
-                    }
-                });
-                threadHome.start();
-            }
-            //if venue
-            else if(positionTapped <= Constants.numVenues)
-            {
-                mDrawerLayout.closeDrawer(mDrawerList);
-                Thread threadVenue = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch(InterruptedException e)
+        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+            final int delay = 200;
+            new Thread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        switch(position)
                         {
-                            e.printStackTrace();
+                            case 0:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                break;
+                            case 1:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyMealActivity.class));
+                                break;
+                            case 2:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PlusDollarsActivity.class));
+                                break;
+                            case 3:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, CompleteorActivity.class));
+                                break;
+                            case 4:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, SettingsActivity.class));
+                                break;
+                            case 5:
+                                break;
+                            default:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                break;
                         }
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Constants.activityTitle = mDrawerItems[positionTapped - 1];
-                                venue = Constants.venues.get(Constants.activityTitle);
-                                mActionBar.setTitle(Constants.activityTitle);
-                                updateSettings();
-                            }
-                        });
                     }
-                });
-                threadVenue.run();
-            }
-            else if(positionTapped == Constants.numVenues + 1)
-            {
-                mDrawerLayout.closeDrawer(mDrawerList);
-                final Thread threadCP = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //final Intent intentCP = new Intent(mContext, CompleteorActivity.class);
-                        //intentCP.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        //mContext.startActivity(intentCP);
+                    catch(InterruptedException e)
+                    {
+                        Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG);
                     }
-                });
-                threadCP.start();
-            }
-            else if(positionTapped == Constants.numVenues + 2)
-            {
-                final Thread threadST = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(400);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //final Intent intentST = new Intent(mContext, SettingsActivity.class);
-                        //intentST.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        //mContext.startActivity(intentST);
-                    }
-                });
-                mDrawerLayout.closeDrawer(mDrawerList);
-                threadST.start();
-            }
+                }
+            }).start();
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 }

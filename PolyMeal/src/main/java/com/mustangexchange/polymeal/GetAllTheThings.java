@@ -8,7 +8,6 @@ import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -90,7 +89,6 @@ public class GetAllTheThings
             // follow redirects to meal plan loading page and get skey from
             // the jcript in the page
             String loginPageHtml = login.html();
-            Log.e("Blake", loginPageHtml);
             int offset = loginPageHtml.indexOf("skey=") + 5;
             String skey = loginPageHtml.substring(offset, offset + 32);
             Jsoup.connect(

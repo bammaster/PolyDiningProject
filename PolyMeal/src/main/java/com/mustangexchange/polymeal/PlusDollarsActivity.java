@@ -1,10 +1,18 @@
 package com.mustangexchange.polymeal;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,12 +20,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Blake on 2/20/14.
@@ -37,12 +50,59 @@ public class PlusDollarsActivity extends Activity {
     private EditText password;
     private CheckBox remember;
     private LayoutInflater factory;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String[]  mDrawerItems;
+    private ActionBar mActionBar;
+    private Context mContext;
+    private Activity mActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.plus_dollars_activity);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerItems = getResources().getStringArray(R.array.drawerItems);
+        mActivity = this;
+        mContext = this;
+        mActionBar = getActionBar();
+
+        // set a custom shadow that overlays the main content when the drawer opens
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        // set up the drawer's list view with items and click listener
+        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mDrawerItems));*/
+        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // enable ActionBar app icon to behave as action to toggle nav drawer
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+        // ActionBarDrawerToggle ties together the the proper interactions
+        // between the sliding drawer and the action bar app icon
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description for accessibility */
+                R.string.drawer_close  /* "close drawer" description for accessibility */
+        ) {
+            public void onDrawerClosed(View view) {
+                //getActionBar().setTitle(mTitle);
+                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                mDrawerList.setItemChecked(-1, true);
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                //getActionBar().setTitle(mDrawerTitle);
+                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
         name = (TextView)findViewById(R.id.nameText);
         expressHeader = (TextView)findViewById(R.id.expHeader);
         express = (TextView)findViewById(R.id.expValue);
@@ -94,6 +154,14 @@ public class PlusDollarsActivity extends Activity {
         if(account!= null && name != null)
         {
             setTextSizeName(account.name, name);
+        }
+    }
+    protected void onStop()
+    {
+        super.onStop();
+        if(account.remember)
+        {
+            account.saveAccount(Constants.FILENAME, this);
         }
     }
 
@@ -164,12 +232,15 @@ public class PlusDollarsActivity extends Activity {
                         {
                             setTextSizeName(account.name, name);
                             name.setText(account.name);
-                            if(remember.isChecked() && account != null)
+                            if(remember != null)
                             {
-                                account.remember = true;
-                                account.saveAccount(Constants.FILENAME, PlusDollarsActivity.this);
+                                if(remember.isChecked() && account != null)
+                                {
+                                    account.remember = true;
+                                    account.saveAccount(Constants.FILENAME, PlusDollarsActivity.this);
+                                }
                             }
-                            Log.e("Blake",account.plusDollars.toString());
+                            Log.e("Blake", account.plusDollars.toString());
                             plus.setText(account.plusAsMoney());
                             express.setText(account.expressAsMoney());
                             meal.setText(account.meals+"");
@@ -190,6 +261,9 @@ public class PlusDollarsActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
@@ -198,6 +272,57 @@ public class PlusDollarsActivity extends Activity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+    /* The click listner for ListView in the navigation drawer */
+    protected class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+            final int delay = 200;
+            new Thread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        switch(position)
+                        {
+                            case 0:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                break;
+                            case 1:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyMealActivity.class));
+                                break;
+                            case 2:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PlusDollarsActivity.class));
+                                break;
+                            case 3:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, CompleteorActivity.class));
+                                break;
+                            case 4:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, SettingsActivity.class));
+                                break;
+                            case 5:
+                                Log.e("Blake", account.transactions.toString());
+                                break;
+                            default:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                break;
+                        }
+                    }
+                    catch(InterruptedException e)
+                    {
+                        Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG);
+                    }
+                }
+            }).start();
+            mDrawerLayout.closeDrawer(mDrawerList);
         }
     }
 }

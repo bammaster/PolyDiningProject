@@ -32,7 +32,7 @@ public class Account implements Serializable {
     public static Account loadAccount(String filename, Context context) {
         Account a = null;
         try {
-            FileInputStream fis = context.openFileInput(Constants.FILENAME);
+            FileInputStream fis = context.openFileInput(filename);
             ObjectInputStream is = new ObjectInputStream(fis);
             a = (Account) is.readObject();
             is.close();

@@ -1,9 +1,7 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
@@ -14,7 +12,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -35,12 +32,15 @@ public class  VenueParser
         Elements links = doc.select("link");
         ItemSet subVenue;
         int counter = 0;
-        //Gets each venues name.
-        for(Element name : doc.select("name"))
+        //Gets each venues name and open times.
+        for(Element venueItem : doc.select("item"))
         {
-            String venue = name.text();
+            String venueName = venueItem.select("name").get(0).text();
+            Elements times = venueItem.getElementsByTag("time");
             String link = links.get(counter).text();
-            Constants.venues.put(venue, new Venue(venue,link,counter));
+            Venue venue = new Venue(venueName,link,counter);
+            handleTimes(times, venue);
+            Constants.venues.put(venueName, venue);
             Document venDoc = Jsoup.connect(link).get();
             //Gets each category of each venue which represents an ItemSet.
             for(Element category : venDoc.select("category"))
@@ -77,9 +77,9 @@ public class  VenueParser
                     item.setDescription(menuItem.getElementsByTag("description").text());
                     subVenue.add(item);
                 }
-                Constants.venues.get(venue).venueItems.add(subVenue);
+                Constants.venues.get(venueName).venueItems.add(subVenue);
             }
-            data.update(venue);
+            data.update(venueName);
             counter++;
         }
         //Write venue object to storage.
@@ -118,5 +118,53 @@ public class  VenueParser
             }
         }
         return "0.00";
+    }
+    private void handleTimes(Elements times, Venue venue)
+    {
+        try
+        {
+            for(Element time : times)
+            {
+                if(time.text().equals("Closed"))
+                {
+                    DayTimes daytime = new DayTimes();
+                    daytime.setClosedAllDay();
+                    venue.addTime(daytime);
+                }
+                else
+                {
+                    DayTimes daytime = new DayTimes();
+                    String[] wholeTimeString = time.text().split(" # ");
+                    for(int i =0; i < wholeTimeString.length; i++)
+                    {
+                        String[] startAndEndTimes = wholeTimeString[i].split("-");
+                        String[] oneTime = startAndEndTimes[0].split(":");
+                        daytime.addOpen(new Time(checkInt(oneTime[0]), checkInt(oneTime[1])));
+                        oneTime = startAndEndTimes[1].split(":");
+                        daytime.addClosed(new Time(checkInt(oneTime[0]), checkInt(oneTime[1])));
+                    }
+                    venue.addTime(daytime);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Log.e("Blake","Error with times!", e);
+        }
+    }
+    private int checkInt(String number)
+    {
+        if(number.contains("00"))
+        {
+            return 0;
+        }
+        if(number.contains(" "))
+        {
+            return Integer.parseInt(number.replace(" ", ""));
+        }
+        else
+        {
+            return Integer.parseInt(number);
+        }
     }
 }

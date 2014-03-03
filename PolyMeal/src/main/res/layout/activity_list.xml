@@ -9,10 +9,11 @@
     tools:context=".VgActivity">
 
     <ListView
+            android:choiceMode="singleChoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listViewMain"
-        android:layout_centerHorizontal="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="13dp"/>
 
 </RelativeLayout>

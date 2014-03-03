@@ -22,11 +22,11 @@
         android:text="Plu$ Dollars"
         android:id="@+id/plusDollarsButton"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="46dp"
+        android:onClick="plusdollars"
         android:layout_below="@+id/mainHeader"
-        android:layout_alignLeft="@+id/mainHeader"
-        android:layout_marginTop="33dp"
-        android:layout_alignRight="@+id/welcomeText"
-        android:onClick="plusdollars" />
+        android:layout_alignLeft="@+id/welcomeText"
+        android:layout_alignRight="@+id/welcomeText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,6 +46,6 @@
         android:layout_below="@+id/plusDollarsButton"
         android:layout_marginTop="29dp"
         android:layout_alignLeft="@+id/plusDollarsButton"
-        android:layout_alignRight="@+id/mainHeader"
-        android:onClick="polymeal" />
+        android:onClick="polymeal"
+        android:layout_alignRight="@+id/plusDollarsButton" />
 </RelativeLayout>

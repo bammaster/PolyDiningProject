@@ -54,4 +54,26 @@ public class MoneyTime
             return mealWorth[manualTime].subtract(moneySpent).setScale(2);
         }
     }
+    public static int calcRealTime()
+    {
+        today.setToNow();
+        int minutes = (today.hour*60)+today.minute;
+        if(minutes>=420&&minutes<=599)
+        {
+            realTime=0;
+        }
+        else if(minutes>=600&&minutes<=1019)
+        {
+            realTime=1;
+        }
+        else if(minutes>=1020&&minutes<=1214)
+        {
+            realTime=2;
+        }
+        else
+        {
+            realTime=3;
+        }
+        return realTime;
+    }
 }

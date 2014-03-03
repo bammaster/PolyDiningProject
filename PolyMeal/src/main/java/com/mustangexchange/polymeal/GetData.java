@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 
@@ -129,6 +130,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
         }
         catch(Exception e)
         {
+            Log.e("Blake","Error somewhere.",e);
             //Displays an error message in the event of a connection error.
             final AlertDialog.Builder error = new AlertDialog.Builder(mActivity);
             error.setTitle(R.string.error_title);

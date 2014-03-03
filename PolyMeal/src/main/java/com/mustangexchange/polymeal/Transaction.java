@@ -24,4 +24,8 @@ public class Transaction implements Serializable{
         this.place = place;
         this.date = date;
     }
+    public String toString()
+    {
+        return "Place: " + place + "Date: " + date + " Amount: " + amount;
+    }
 }

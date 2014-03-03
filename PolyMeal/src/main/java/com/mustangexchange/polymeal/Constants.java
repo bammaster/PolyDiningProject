@@ -35,5 +35,6 @@ public class Constants
     public static final String REMEMBER_ME = "remember_me";
     public static final String UPDATE_FREQ = "update_frequency";
     public static final String TIME_FORMAT = "K:mm aa";
+    public static final int HOURS_TO_MINUTES = 60;
     private Constants(){}
 }
