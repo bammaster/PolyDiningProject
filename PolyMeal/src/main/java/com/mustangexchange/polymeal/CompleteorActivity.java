@@ -127,7 +127,6 @@ public class CompleteorActivity extends Activity {
     public void onResume()
     {
         super.onResume();
-        Log.e("Blake","onResume Called!");
         new calcCompleteor().execute("");
         updateBalance();
     }

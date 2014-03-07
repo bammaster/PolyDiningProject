@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -26,6 +27,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -65,7 +68,7 @@ public class PlusDollarsActivity extends Activity {
         setContentView(R.layout.plus_dollars_activity);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItems);
+        mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
@@ -159,9 +162,10 @@ public class PlusDollarsActivity extends Activity {
     protected void onStop()
     {
         super.onStop();
-        if(account.remember)
-        {
-            account.saveAccount(Constants.FILENAME, this);
+        if(account != null) {
+            if (account.remember) {
+                account.saveAccount(Constants.FILENAME, this);
+            }
         }
     }
 
@@ -301,13 +305,10 @@ public class PlusDollarsActivity extends Activity {
                                 break;
                             case 3:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, CompleteorActivity.class));
+                                startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                             case 4:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, SettingsActivity.class));
-                                break;
-                            case 5:
                                 Log.e("Blake", account.transactions.toString());
                                 break;
                             default:

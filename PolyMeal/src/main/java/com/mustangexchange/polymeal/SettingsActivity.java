@@ -42,6 +42,13 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+        Preference rememberAccount = findPreference("rememberAccount");
+        rememberAccount.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                return false;
+            }
+        });
     }
     
 }

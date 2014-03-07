@@ -36,5 +36,9 @@ public class Constants
     public static final String UPDATE_FREQ = "update_frequency";
     public static final String TIME_FORMAT = "K:mm aa";
     public static final int HOURS_TO_MINUTES = 60;
+    public static final String SKEYCHECK_URL = "https://services.jsatech.com/login-check.php?skey=";
+    public static final String JSA_HOSTNAME = "services.jsatech.com";
+    public static final String CP_HOSTNAME = "my.calpoly.edu";
+    public static final String JSA_LOGIN_URL = "https://services.jsatech.com/login.php?skey=";
     private Constants(){}
 }

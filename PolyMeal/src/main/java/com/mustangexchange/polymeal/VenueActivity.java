@@ -57,7 +57,7 @@ public class VenueActivity extends FragmentActivity {
         setContentView(R.layout.activity_base);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItems);
+        mDrawerItems = getResources().getStringArray(R.array.drawerItemsMeal);
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();

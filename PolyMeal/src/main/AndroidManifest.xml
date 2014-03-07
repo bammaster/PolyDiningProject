@@ -29,15 +29,19 @@
             android:name=".VenueActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".PolyMealActivity"
+                  android:label="@string/poly_meal_activity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".CartActivity"
+                  android:label="@string/activity_cart"
                   android:screenOrientation="portrait"/>
         <activity android:name=".PlusDollarsActivity"
+                  android:label="@string/plus_dollar_activity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".CompleteorActivity"
-                android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"/>
         <activity android:name=".SettingsActivity"
-            android:screenOrientation="portrait"/>
+                  android:label="@string/activity_settings"
+                  android:screenOrientation="portrait"/>
     </application>
 
 
