@@ -50,7 +50,7 @@ public class PolyMealActivity extends Activity
                 Constants.activityTitle = Constants.names.get(index);
                 Log.e("Blake",Constants.venues.get(Constants.names.get(index)).isOpen()+"");
                 final Intent intentVenue = new Intent(mContext, VenueActivity.class);
-                intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mContext.startActivity(intentVenue);
             }
         });
