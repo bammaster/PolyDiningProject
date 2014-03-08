@@ -41,6 +41,7 @@ public class CompleteorActivity extends Activity {
         mContext = this;
         activity = this;
         mActionBar = getActionBar();
+        mActionBar.setTitle(Constants.activityTitle);
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
 
@@ -215,6 +216,11 @@ public class CompleteorActivity extends Activity {
     {
         switch (item.getItemId())
         {
+            case android.R.id.home:
+                final Intent intentVenue = new Intent(mContext, VenueActivity.class);
+                intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                mContext.startActivity(intentVenue);
+                return true;
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

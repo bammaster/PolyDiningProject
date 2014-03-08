@@ -154,6 +154,7 @@ public class CartActivity extends Activity {
     public void onResume()
     {
         super.onResume();
+        isCartEmpty();
         cartAdapter.updateCart();
         updateBalance();
         updateSettings();
@@ -176,10 +177,10 @@ public class CartActivity extends Activity {
     {
         switch (item.getItemId())
         {
-            //case R.id.menuCom:
-                //Intent intent = new Intent(this, CompleteorActivity.class);
-                //startActivity(intent);
-                //return true;
+            case R.id.menuCom:
+                Intent intent = new Intent(this, CompleteorActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();
