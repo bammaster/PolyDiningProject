@@ -44,7 +44,6 @@ public class VenueActivity extends FragmentActivity {
     protected static Activity mActivity;
     public static BigDecimal totalAmount;
     public static Context mContext;
-    protected int venueIndex;
     public static ActionBar mActionBar;
 
     private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
@@ -300,7 +299,7 @@ public class VenueActivity extends FragmentActivity {
                     }
                     catch(InterruptedException e)
                     {
-                        Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG);
+                        Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG).show();
                     }
                 }
             }).start();

@@ -48,7 +48,9 @@ public class MyFragment extends Fragment {
                 final int fPos = pos;
                 if(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getValid())
                 {
-                    final AlertDialog.Builder onListClick= new AlertDialog.Builder(PagerAdapter.activity);
+                    final QustomDialogBuilder onListClick = new QustomDialogBuilder(PagerAdapter.activity);
+                    onListClick.setDividerColor(Constants.CAL_POLY_GREEN);
+                    onListClick.setTitleColor(Constants.CAL_POLY_GREEN);
                     onListClick.setCancelable(false);
                     onListClick.setTitle("Add to Cart?");
                     onListClick.setMessage("Would you like to add " + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getName() + " to your cart? Price: " + "$" + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice());
@@ -91,17 +93,14 @@ public class MyFragment extends Fragment {
                     });
                     onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
-                            AlertDialog.Builder onDialogClick = new AlertDialog.Builder(PagerAdapter.activity);
+                            QustomDialogBuilder onDialogClick = new QustomDialogBuilder(PagerAdapter.activity);
+                            onDialogClick.setTitleColor(Constants.CAL_POLY_GREEN);
+                            onDialogClick.setDividerColor(Constants.CAL_POLY_GREEN);
                             onDialogClick.setTitle("Description");
                             onDialogClick.setMessage(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getDescription());
                             onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int button) {
 
-                                }
-                            });
-                            onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int button) {
-                                    onListClick.show();
                                 }
                             });
                             onDialogClick.show();

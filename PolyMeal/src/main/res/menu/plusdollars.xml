@@ -2,4 +2,8 @@
     <item android:id="@+id/refresh"
         android:icon="@drawable/navigation_refresh"
         android:showAsAction="always"/>
+    <item android:id="@+id/login"
+        android:title="@string/login"
+        android:showAsAction="always"/>
+
 </menu>

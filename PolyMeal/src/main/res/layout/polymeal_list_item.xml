@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:paddingBottom="15dp"
-        android:paddingTop="15dp" />
+        android:paddingTop="15dp"
+        android:paddingLeft="5dp" />
 </RelativeLayout>
 

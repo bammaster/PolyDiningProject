@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -38,7 +39,8 @@ import java.util.Arrays;
 /**
  * Created by Blake on 2/20/14.
  */
-public class PlusDollarsActivity extends Activity {
+public class PlusDollarsActivity extends Activity
+{
     private Account account;
     private Thread update;
     private TextView name;
@@ -66,9 +68,7 @@ public class PlusDollarsActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.plus_dollars_activity);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
+        getViews();
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
@@ -105,25 +105,11 @@ public class PlusDollarsActivity extends Activity {
                 //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        name = (TextView)findViewById(R.id.nameText);
-        expressHeader = (TextView)findViewById(R.id.expHeader);
-        express = (TextView)findViewById(R.id.expValue);
-        plusHeader = (TextView)findViewById(R.id.plusHeader);
-        plus = (TextView)findViewById(R.id.plusValue);
-        mealHeader = (TextView)findViewById(R.id.mealHeader);
-        meal = (TextView)findViewById(R.id.mealText);
-        name.setAlpha(0);
-        expressHeader.setAlpha(0);
-        express.setAlpha(0);
-        plusHeader.setAlpha(0);
-        plus.setAlpha(0);
-        mealHeader.setAlpha(0);
-        meal.setAlpha(0);
+        setAlphaToZero();
         factory = LayoutInflater.from(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         name.setTypeface(font);
-        account = account.loadAccount(Constants.FILENAME, this);
+        account = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
         //If the loaded account does not exist or the user said not to remember.
         if(account == null || !account.remember)
         {
@@ -134,11 +120,36 @@ public class PlusDollarsActivity extends Activity {
             name.setText(account.name);
             plus.setText(account.plusAsMoney());
             express.setText(account.expressAsMoney());
-            meal.setText(account.meals+"");
+            meal.setText(account.meals + "");
         }
         fadeIn();
         update = buildThread(name,remember);
     }
+    private void getViews()
+    {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        name = (TextView)findViewById(R.id.nameText);
+        expressHeader = (TextView)findViewById(R.id.expHeader);
+        express = (TextView)findViewById(R.id.expValue);
+        plusHeader = (TextView)findViewById(R.id.plusHeader);
+        plus = (TextView)findViewById(R.id.plusValue);
+        mealHeader = (TextView)findViewById(R.id.mealHeader);
+        meal = (TextView)findViewById(R.id.mealText);
+    }
+    private void setAlphaToZero()
+    {
+        name.setAlpha(0);
+        expressHeader.setAlpha(0);
+        express.setAlpha(0);
+        plusHeader.setAlpha(0);
+        plus.setAlpha(0);
+        mealHeader.setAlpha(0);
+        meal.setAlpha(0);
+    }
+
     private void fadeIn()
     {
         final int duration = 300;
@@ -164,12 +175,12 @@ public class PlusDollarsActivity extends Activity {
         super.onStop();
         if(account != null) {
             if (account.remember) {
-                account.saveAccount(Constants.FILENAME, this);
+                account.saveAccount(getSharedPreferences(Constants.accSpKey, MODE_PRIVATE));
             }
         }
     }
 
-    private void setTextSizeName(String name,TextView nameText)
+    private void setTextSizeName(String name, TextView nameText)
     {
         if(name.length() > 10 && name.length() < 15)
         {
@@ -195,10 +206,11 @@ public class PlusDollarsActivity extends Activity {
         username = (EditText)loginView.findViewById(R.id.username);
         password = (EditText)loginView.findViewById(R.id.password);
         remember = (CheckBox)loginView.findViewById(R.id.remember);
-        AlertDialog.Builder login = new AlertDialog.Builder(this);
+        QustomDialogBuilder login = new QustomDialogBuilder(this);
+        login.setTitleColor(Constants.CAL_POLY_GREEN);
+        login.setDividerColor(Constants.CAL_POLY_GREEN);
         login.setTitle("Please login.");
-        login.setCancelable(false);
-        login.setView(loginView);
+        login.setCustomView(loginView, this);
         login.setPositiveButton("Login", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id)
             {
@@ -241,10 +253,9 @@ public class PlusDollarsActivity extends Activity {
                                 if(remember.isChecked() && account != null)
                                 {
                                     account.remember = true;
-                                    account.saveAccount(Constants.FILENAME, PlusDollarsActivity.this);
+                                    account.saveAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
                                 }
                             }
-                            Log.e("Blake", account.plusDollars.toString());
                             plus.setText(account.plusAsMoney());
                             express.setText(account.expressAsMoney());
                             meal.setText(account.meals+"");
@@ -255,7 +266,18 @@ public class PlusDollarsActivity extends Activity {
             }
         });
     }
-
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -273,6 +295,9 @@ public class PlusDollarsActivity extends Activity {
             case R.id.refresh:
                 new Thread(update).start();
                 setProgressBarIndeterminateVisibility(true);
+                return true;
+            case R.id.login:
+                handleLogin();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,7 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -40,6 +38,18 @@ public class DayTimes
                 {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+    public boolean closedSoon(Time now)
+    {
+        for(int i = 0; i < open.size(); i++)
+        {
+            if(now.getTimeInMinutes() >= closed.get(i).getTimeInMinutes() - Constants.HOURS_TO_MINUTES
+               &&now.getTimeInMinutes() <= closed.get(i).getTimeInMinutes())
+            {
+                return true;
             }
         }
         return false;

@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:text="Remember me?"
         android:id="@+id/remember"
-        android:layout_below="@+id/password"
-        android:layout_toRightOf="@+id/textView"
         android:checked="false"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_toRightOf="@+id/textView" />
 </RelativeLayout>

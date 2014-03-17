@@ -42,7 +42,7 @@ public class GetAllTheThings
         {
             handleInitConnection();
             Connection.Response loginResponse = handleCookies();
-            Log.e("Blake","Connected!");
+            Log.v("Blake","Connected!");
             // try to get the CASTGC cookie to see if the login succeeded
             if (loginResponse.cookie("CASTGC") == null)
             {
@@ -66,14 +66,19 @@ public class GetAllTheThings
             Log.v("Blake","Getting name.");
 
             // get the page with the meal plan info on it and parse it
-            Document mealInfoPage = Jsoup.connect(Constants.JSA_LOGIN_URL + skey + "&cid=79")
+            Document mealInfoPage = Jsoup.connect(Constants.JSA_INDEX_URL + skey + "&cid=79")
                                     .timeout(10000).execute().parse();
 
-            Element name = null;
-            if(mealInfoPage.getElementsByClass("sidebar1body").select("b").size() > 0)
+            Element name;
+            Elements temp = mealInfoPage.getElementsByClass("sidebar1body").select("b");
+            if(temp.size() > 0)
             {
-                 name = mealInfoPage.getElementsByClass("sidebar1body").select("b").get(0);
+                 name = temp.get(0);
                  a.name = name.text();
+            }
+            else
+            {
+                a.name = "Error";
             }
             a.updated = DateTime.now();
             Log.v("Blake","Starting balances.");
@@ -94,7 +99,7 @@ public class GetAllTheThings
         catch (Exception e)
         {
             e.printStackTrace();
-            Log.e("Blake","GetTheThingsError!");
+            Log.v("Blake","GetTheThingsError!");
             return null;
         }
     }
@@ -147,6 +152,9 @@ public class GetAllTheThings
         }
         else
         {
+            a.campusExpress = new BigDecimal("0.00");
+            a.plusDollars = new BigDecimal("0.00");
+            a.meals = 0;
             Log.v("Blake", "Failed to get data. Size: " + balanceList.size());
         }
     }

@@ -126,7 +126,11 @@ public class PolyMealActivity extends Activity
             }
             TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
             tt.setText("  " + Constants.names.get(position));
-            if(Constants.venues.get(Constants.names.get(position)).isOpen())
+            if(Constants.venues.get(Constants.names.get(position)).closeSoon())
+            {
+                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.soon_dot),null,null,null);
+            }
+            else if(Constants.venues.get(Constants.names.get(position)).isOpen())
             {
                 tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.open_dot),null,null,null);
             }

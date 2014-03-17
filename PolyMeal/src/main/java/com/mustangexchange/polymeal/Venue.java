@@ -81,6 +81,44 @@ public class Venue
         }
         return false;
     }
+    public boolean closeSoon()
+    {
+        android.text.format.Time today =
+                new android.text.format.Time(android.text.format.Time.getCurrentTimezone());
+        today.setToNow();
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        String weekDay = dayFormat.format(calendar.getTime());
+        if(weekDay.equals("Sunday"))
+        {
+            return times.get(0).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Monday"))
+        {
+            return times.get(1).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Tuesday"))
+        {
+            return times.get(2).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Wednesday"))
+        {
+            return times.get(3).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Thursday"))
+        {
+            return times.get(4).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Friday"))
+        {
+            return times.get(5).closedSoon(new Time(today.hour, today.minute));
+        }
+        else if(weekDay.equals("Saturday"))
+        {
+            return times.get(6).closedSoon(new Time(today.hour, today.minute));
+        }
+        return false;
+    }
     public void addTime(DayTimes openTimes)
     {
         times.add(openTimes);

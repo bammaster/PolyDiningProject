@@ -22,6 +22,8 @@
     <string name="welcome">Choose a venue:</string>
     <string name="remeberAccountSum">Change this account setting.</string>
     <string name="remeberAccount">Remember Account?</string>
+    <string name="alert_image_content_description">Alert Image</string>
+    <string name="login">Login</string>
 
     <string-array name="drawerItemsMeal">
         <item>Home</item>

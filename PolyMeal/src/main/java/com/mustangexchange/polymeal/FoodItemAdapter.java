@@ -79,7 +79,9 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
     {
         final int position = (Integer) view.getTag();
         if (items.get(position).getOunces()) {
-            AlertDialog.Builder onYes = new AlertDialog.Builder(activity);
+            QustomDialogBuilder onYes = new QustomDialogBuilder(activity);
+            onYes.setDividerColor(Constants.CAL_POLY_GREEN);
+            onYes.setTitleColor(Constants.CAL_POLY_GREEN);
             onYes.setTitle("How much?");
             onYes.setMessage("Estimated Number of Ounces: ");
             LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
@@ -106,7 +108,9 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
         else if(!items.get(position).getValid())
         {
-            AlertDialog.Builder invalidItem = new AlertDialog.Builder(activity);
+            QustomDialogBuilder invalidItem = new QustomDialogBuilder(activity);
+            invalidItem.setDividerColor(Constants.CAL_POLY_GREEN);
+            invalidItem.setDividerColor(Constants.CAL_POLY_GREEN);
             invalidItem.setTitle("Invalid Item!");
             invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
             invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
