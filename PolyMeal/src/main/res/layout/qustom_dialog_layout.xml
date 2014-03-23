@@ -43,13 +43,6 @@ I should have probably just rewritten similar code, but i was feeling lazy. Mayb
             android:minHeight="64dip"
             android:layout_marginStart="16dip"
             android:layout_marginEnd="16dip">
-            <ImageView android:id="@+id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="8dip"
-                android:layout_marginLeft="8dip"
-                android:src="@null"
-                android:contentDescription="@string/alert_image_content_description"/>
             <com.android.internal.widget.DialogTitle android:id="@+id/alertTitle"
                 style="@android:style/TextAppearance.Holo.DialogWindowTitle"
                 android:singleLine="true"
@@ -77,7 +70,6 @@ I should have probably just rewritten similar code, but i was feeling lazy. Mayb
             android:paddingStart="16dip"
             android:paddingEnd="16dip"
             android:paddingTop="8dip"
-            android:layout_marginLeft="16dip"
             android:paddingBottom="8dip"
             android:textIsSelectable="true"/>
     </LinearLayout>

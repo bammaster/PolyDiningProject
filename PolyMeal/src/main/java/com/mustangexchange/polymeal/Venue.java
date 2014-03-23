@@ -1,13 +1,5 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.widget.Toast;
-
-import org.joda.time.DateTime;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +12,7 @@ public class Venue
 {
     //holds the item sets for a venue.
     protected ArrayList<ItemSet> venueItems;
-    private ArrayList<DayTimes> times;
+    private ArrayList<VenueTime> times;
     //String key for retrieving data from shared preferences.
     private String name;
     private String url;
@@ -29,7 +21,7 @@ public class Venue
     public Venue(String name, String url, int id)
     {
         venueItems = new ArrayList<ItemSet>();
-        times = new ArrayList<DayTimes>();
+        times = new ArrayList<VenueTime>();
         this.name = name;
         this.url = url;
         this.id = id;
@@ -119,7 +111,7 @@ public class Venue
         }
         return false;
     }
-    public void addTime(DayTimes openTimes)
+    public void addTime(VenueTime openTimes)
     {
         times.add(openTimes);
     }

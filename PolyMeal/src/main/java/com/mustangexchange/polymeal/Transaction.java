@@ -1,14 +1,7 @@
 package com.mustangexchange.polymeal;
 
-import java.io.Serializable;
-
-public class Transaction implements Serializable{
-
-    private static final long serialVersionUID = 1L;
-    public static final int PLUS_DOLLARS = 0;
-    public static final int CAMPUS_EXPRESS = 1;
-    public static final int MEAL = 2;
-
+public class Transaction
+{
     public int type;
     public String place, date, amount;
 

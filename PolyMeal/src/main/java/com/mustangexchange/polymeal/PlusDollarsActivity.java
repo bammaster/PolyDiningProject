@@ -2,17 +2,13 @@ package com.mustangexchange.polymeal;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -29,10 +25,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -41,7 +33,7 @@ import java.util.Arrays;
  */
 public class PlusDollarsActivity extends Activity
 {
-    private Account account;
+    protected static Account account;
     private Thread update;
     private TextView name;
     private TextView expressHeader;
@@ -67,7 +59,7 @@ public class PlusDollarsActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.plus_dollars_activity);
+        setContentView(R.layout.activity_plus_dollars);
         getViews();
         mActivity = this;
         mContext = this;
@@ -125,6 +117,10 @@ public class PlusDollarsActivity extends Activity
         fadeIn();
         update = buildThread(name,remember);
     }
+
+    /**
+     * Gets access to the views on screen for manipulation and animation.
+     */
     private void getViews()
     {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,6 +135,10 @@ public class PlusDollarsActivity extends Activity
         mealHeader = (TextView)findViewById(R.id.mealHeader);
         meal = (TextView)findViewById(R.id.mealText);
     }
+
+    /**
+     * Prepares the views on the screen for fading in.
+     */
     private void setAlphaToZero()
     {
         name.setAlpha(0);
@@ -150,6 +150,10 @@ public class PlusDollarsActivity extends Activity
         meal.setAlpha(0);
     }
 
+    /**
+     * Fades in UI elements. To add an elements, add 1 to the multiple of duration and follow
+     * the format "# * duration/2 + delay" for the cascading effect.
+     */
     private void fadeIn()
     {
         final int duration = 300;
@@ -180,6 +184,11 @@ public class PlusDollarsActivity extends Activity
         }
     }
 
+    /**
+     * Helps auto size text based on the length of the users name.
+     * @param name The name of the person from the meal plan website.
+     * @param nameText The view to set the parameter name to.
+     */
     private void setTextSizeName(String name, TextView nameText)
     {
         if(name.length() > 10 && name.length() < 15)
@@ -261,6 +270,8 @@ public class PlusDollarsActivity extends Activity
                             meal.setText(account.meals+"");
                         }
                         setProgressBarIndeterminateVisibility(false);
+                        setAlphaToZero();
+                        fadeIn();
                     }
                 });
             }
@@ -327,6 +338,7 @@ public class PlusDollarsActivity extends Activity
                             case 2:
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, PlusDollarsActivity.class));
+                                Thread.sleep(delay);
                                 break;
                             case 3:
                                 Thread.sleep(delay);

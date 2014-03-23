@@ -80,7 +80,6 @@ public class GetAllTheThings
             {
                 a.name = "Error";
             }
-            a.updated = DateTime.now();
             Log.v("Blake","Starting balances.");
             Elements balances = mealInfoPage
                     .getElementsContainingOwnText("Current Balance:");

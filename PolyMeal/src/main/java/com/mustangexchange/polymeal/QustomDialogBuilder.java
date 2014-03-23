@@ -3,10 +3,8 @@ package com.mustangexchange.polymeal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -17,8 +15,6 @@ public class QustomDialogBuilder extends AlertDialog.Builder{
 
     /** optional dialog title layout */
     private TextView mTitle;
-    /** optional alert dialog image */
-    private ImageView mIcon;
     /** optional message displayed below title if title exists*/
     private TextView mMessage;
     /** The colored holo divider. You can set its color with the setDividerColor method */
@@ -32,7 +28,6 @@ public class QustomDialogBuilder extends AlertDialog.Builder{
 
         mTitle = (TextView) mDialogView.findViewById(R.id.alertTitle);
         mMessage = (TextView) mDialogView.findViewById(R.id.message);
-        mIcon = (ImageView) mDialogView.findViewById(R.id.icon);
         mDivider = mDialogView.findViewById(R.id.titleDivider);
     }
 
@@ -69,19 +64,6 @@ public class QustomDialogBuilder extends AlertDialog.Builder{
         mMessage.setText(text);
         return this;
     }
-
-    @Override
-    public QustomDialogBuilder setIcon(int drawableResId) {
-        mIcon.setImageResource(drawableResId);
-        return this;
-    }
-
-    @Override
-    public QustomDialogBuilder setIcon(Drawable icon) {
-        mIcon.setImageDrawable(icon);
-        return this;
-    }
-
     /**
      * This allows you to specify a custom layout for the area below the title divider bar
      * in the dialog. As an example you can look at example_ip_address_layout.xml and how
@@ -90,6 +72,7 @@ public class QustomDialogBuilder extends AlertDialog.Builder{
      */
     public QustomDialogBuilder setCustomView(View view, Context context) {
         //View customView = View.inflate(context, resId, null);
+        mDialogView.findViewById(R.id.message).setVisibility(View.GONE);
         ((FrameLayout)mDialogView.findViewById(R.id.customPanel)).addView(view);
         return this;
     }

@@ -3,26 +3,47 @@ package com.mustangexchange.polymeal;
 import java.util.ArrayList;
 
 /**
- * Created by Blake on 2/28/14.
+ * Stores the open and close times for a venue. Can also determine if venue is open or closing soon.
  */
-public class DayTimes
+public class VenueTime
 {
+    /**Used to store if a venue is closed all day.*/
     private boolean closedAllDay = false;
+    /**All of the open times. Will work with breaks in service. For example 12-3 then 5-8.
+     * This is why open and closed are array lists. Open is for the opening times and closed is for
+     * the closing times.
+     */
     private ArrayList<Time> open;
     private ArrayList<Time> closed;
-    public DayTimes()
+    public VenueTime()
     {
         open = new ArrayList<Time>();
         closed = new ArrayList<Time>();
     }
+
+    /**
+     * Add an opening time for this venue time.
+     * @param open When the venue opens.
+     */
     public void addOpen(Time open)
     {
         this.open.add(open);
     }
+
+    /**
+     * Add a closing time for the venue.
+     * @param closed When the venue closes.
+     */
     public void addClosed(Time closed)
     {
         this.closed.add(closed);
     }
+
+    /**
+     * Returns true if the venue is currently open or false if it is closed.
+     * @param now The current time.
+     * @return Whether or not the venue is open.
+     */
     public boolean isOpen(Time now)
     {
         if(closedAllDay)
@@ -42,6 +63,12 @@ public class DayTimes
         }
         return false;
     }
+
+    /**
+     * Returns true if the venue is closing within an hour or false otherwise.
+     * @param now The current time.
+     * @return Whether or not the venue will close within the hour.
+     */
     public boolean closedSoon(Time now)
     {
         for(int i = 0; i < open.size(); i++)
@@ -54,6 +81,10 @@ public class DayTimes
         }
         return false;
     }
+
+    /**
+     * Setter method to store if the venue is closed all day.
+     */
     public void setClosedAllDay()
     {
         closedAllDay = true;

@@ -11,10 +11,10 @@ import java.math.BigDecimal;
  */
 public class MoneyTime
 {
-    public static BigDecimal[] mealWorth = {new BigDecimal("7.90"),new BigDecimal("9.00"),new BigDecimal("10.75"),new BigDecimal("8.75")};
-    public static BigDecimal moneySpent = new BigDecimal("0.00");
-    public static Time today = new Time(Time.getCurrentTimezone());
-    public static BigDecimal money;
+    protected static BigDecimal[] mealWorth = {new BigDecimal("7.90"),new BigDecimal("9.00"),new BigDecimal("10.75"),new BigDecimal("8.75")};
+    protected static BigDecimal moneySpent = new BigDecimal("0.00");
+    protected static Time today = new Time(Time.getCurrentTimezone());
+    protected static BigDecimal money;
     //public static boolean manual;
     public static int manualTime;
     private static int realTime;

@@ -7,6 +7,7 @@
     <string name="error_title">An Unknown Error Occurred!</string>
     <string name="error_msg">If this error persists, please contact the developer.</string>
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
     <string name="action_settings">Settings</string>
     <string name="activity_cart">Cart</string>
     <string name="title_activity_completer">Meal Completer</string>
@@ -24,6 +25,8 @@
     <string name="remeberAccount">Remember Account?</string>
     <string name="alert_image_content_description">Alert Image</string>
     <string name="login">Login</string>
+    <string name="plusdollarsalert">Plus Dollars Alert!</string>
+    <string name="plusdollarsalertmessage">This meal will exceed the number of plus dollars you have left.</string>
 
     <string-array name="drawerItemsMeal">
         <item>Home</item>

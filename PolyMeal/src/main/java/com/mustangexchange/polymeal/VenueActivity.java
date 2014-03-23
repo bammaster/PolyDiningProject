@@ -3,6 +3,7 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -213,6 +214,27 @@ public class VenueActivity extends FragmentActivity {
         try
         {
             totalAmount = MoneyTime.calcTotalMoney();
+            /*
+            if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
+            {
+                if(totalAmount.multiply(new BigDecimal("-1")).compareTo(PlusDollarsActivity.account.plusDollars) > 0)
+                {
+                    QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(mContext);
+                    plusDollarsExceeded.setDividerColor(Constants.CAL_POLY_GREEN);
+                    plusDollarsExceeded.setTitleColor(Constants.CAL_POLY_GREEN);
+                    plusDollarsExceeded.setTitle(R.string.plusdollarsalert);
+                    plusDollarsExceeded.setMessage(R.string.plusdollarsalertmessage);
+                    plusDollarsExceeded.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {}
+                    });
+                    plusDollarsExceeded.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {}
+                    });
+                }
+            }
+            */
             setSubtitleColor();
             mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         }
@@ -248,14 +270,12 @@ public class VenueActivity extends FragmentActivity {
         {
             case R.id.cart:
                 Intent intent = new Intent(this, CartActivity.class);
-                //intent.putExtra("PARENT", getClass().getSimpleName() + ".class");
                 startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
     /* The click listner for ListView in the navigation drawer */
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override

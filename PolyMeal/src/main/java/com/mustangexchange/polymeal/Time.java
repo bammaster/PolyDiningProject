@@ -1,9 +1,7 @@
 package com.mustangexchange.polymeal;
 
-import android.util.Log;
-
 /**
- * Created by Blake on 2/28/14.
+ * Stores the hour and minutes for a time.
  */
 public class Time
 {
@@ -14,14 +12,11 @@ public class Time
         this.hour = hour;
         this.minutes = minutes;
     }
-    public int getHour()
-    {
-        return hour;
-    }
-    public int getMinutes()
-    {
-        return minutes;
-    }
+
+    /**
+     * Gets the value for this time in minutes.
+     * @return The value of this time in minutes.
+     */
     public int getTimeInMinutes()
     {
         return hour*Constants.HOURS_TO_MINUTES + minutes;

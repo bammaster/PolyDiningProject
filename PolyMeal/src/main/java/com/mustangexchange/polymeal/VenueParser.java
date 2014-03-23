@@ -127,13 +127,13 @@ public class  VenueParser
             {
                 if(time.text().equals("Closed"))
                 {
-                    DayTimes daytime = new DayTimes();
+                    VenueTime daytime = new VenueTime();
                     daytime.setClosedAllDay();
                     venue.addTime(daytime);
                 }
                 else
                 {
-                    DayTimes daytime = new DayTimes();
+                    VenueTime daytime = new VenueTime();
                     String[] wholeTimeString = time.text().split(" # ");
                     for(int i =0; i < wholeTimeString.length; i++)
                     {

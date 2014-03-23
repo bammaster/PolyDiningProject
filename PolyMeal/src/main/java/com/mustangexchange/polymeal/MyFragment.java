@@ -51,7 +51,6 @@ public class MyFragment extends Fragment {
                     final QustomDialogBuilder onListClick = new QustomDialogBuilder(PagerAdapter.activity);
                     onListClick.setDividerColor(Constants.CAL_POLY_GREEN);
                     onListClick.setTitleColor(Constants.CAL_POLY_GREEN);
-                    onListClick.setCancelable(false);
                     onListClick.setTitle("Add to Cart?");
                     onListClick.setMessage("Would you like to add " + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getName() + " to your cart? Price: " + "$" + ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice());
                     onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -69,7 +68,7 @@ public class MyFragment extends Fragment {
                                 np.setWrapSelectorWheel(false);
                                 np.setValue(1);
                                 onYes.setView(DialogView);
-                                onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int button) {
                                         Cart.add(new Item(((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))), ((Item) (PagerAdapter.foodAdapterList.get(position).getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                                         PagerAdapter.updateBalance();

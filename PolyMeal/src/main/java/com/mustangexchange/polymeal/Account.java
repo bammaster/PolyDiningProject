@@ -3,22 +3,17 @@ package com.mustangexchange.polymeal;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
-
-import org.joda.time.DateTime;
-
-import java.io.Serializable;
+import com.google.gson.reflect.TypeToken;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class Account implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    public String username, password, name;
-    public boolean remember = false;
-    public int meals;
-    public BigDecimal campusExpress, plusDollars;
-    public DateTime updated;
-    public ArrayList<Transaction> transactions;
+public class Account
+{
+    protected String username, password, name;
+    protected boolean remember = false;
+    protected int meals;
+    protected BigDecimal campusExpress, plusDollars;
+    protected ArrayList<Transaction> transactions;
     private final String key = "Account";
     public String plusAsMoney()
     {
@@ -30,12 +25,12 @@ public class Account implements Serializable {
     }
     public Account loadAccount(SharedPreferences sp)
     {
-        Account acc = new Gson().fromJson(sp.getString(key, ""), Constants.gsonType);
+        Account acc = new Gson().fromJson(sp.getString(key, ""), new TypeToken<Account>() {}.getType());
         return acc;
     }
     public void saveAccount(SharedPreferences sp)
     {
-        sp.edit().putString("Account",new Gson().toJson(this));
+        sp.edit().putString(key,new Gson().toJson(this)).commit();
     }
     public Account(String username, String password, boolean remember)
     {
