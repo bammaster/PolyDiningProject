@@ -3,12 +3,16 @@ package com.mustangexchange.polymeal;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
 
-public class Item
+public class Item implements Parcelable
 {
     private String name = null;
     private BigDecimal price = null;
@@ -16,12 +20,26 @@ public class Item
     private boolean isValid = true;
     private boolean ounces = false;
     private DecimalFormat currency = new DecimalFormat("#.##");
+
     public Item(String name, BigDecimal price, String description, boolean isValid)
     {
         this.name = name;
         this.price = price;
         this.description = description;
         this.isValid = isValid;
+    }
+
+    public Item(Parcel in) {
+        String[] strData = new String[3];
+        boolean[] boolData = new boolean[2];
+
+        in.readStringArray(strData);
+        this.name = strData[0];
+        this.price = new BigDecimal(strData[1]);
+        this.description = strData[2];
+        in.readBooleanArray(boolData);
+        this.isValid = boolData[0];
+        this.ounces = boolData[1];
     }
 
     public Item(Item item)
@@ -155,4 +173,27 @@ public class Item
         });
         onListClick.show();
     }
+
+
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[] {this.name,
+                this.price.toString(),
+                this.description});
+        dest.writeBooleanArray(new boolean[] {this.isValid,
+                this.ounces});
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 }

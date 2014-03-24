@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Cart
 {
-    private static ArrayList<Item> cart = new ArrayList<Item>();
+    protected static ArrayList<Item> cart = new ArrayList<Item>();
 
     public static void add(Item item)
     {

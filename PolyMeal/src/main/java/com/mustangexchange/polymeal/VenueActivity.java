@@ -45,6 +45,7 @@ public class VenueActivity extends FragmentActivity {
     public static BigDecimal totalAmount;
     public static Context mContext;
     public static ActionBar mActionBar;
+    private static String restoreVenue;
 
     private static ArrayList<FoodItemAdapter> foodAdapterList = new ArrayList<FoodItemAdapter>();
     private Venue venue;
@@ -60,7 +61,20 @@ public class VenueActivity extends FragmentActivity {
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
+        if(savedInstanceState != null) {
+            System.out.println("got here");
+            MoneyTime.moneySpent = new BigDecimal(savedInstanceState.getString("moneySpent"));
+            Cart.cart = savedInstanceState.getParcelableArrayList("cart");
+            //startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+                //| Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            finish();
+            overridePendingTransition(0, 0); //no animation
+        } else {
+            finishOnCreate();
+        }
+    }
 
+    private void finishOnCreate() {
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
@@ -116,8 +130,14 @@ public class VenueActivity extends FragmentActivity {
         updateBalance();
         updateSettings();
 
-    }
 
+    }
+    protected void onSaveInstanceState(Bundle outState){
+        // This gets called by the system when it's about to kill your app
+        // Put all your data in the outState bundle
+        outState.putParcelableArrayList("cart", Cart.getCart());
+        outState.putString("moneySpent", MoneyTime.moneySpent.toString());
+    }
     public void updateSettings()
     {
         SharedPreferences defaultSP;
