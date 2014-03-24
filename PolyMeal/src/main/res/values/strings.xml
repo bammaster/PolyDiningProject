@@ -35,15 +35,15 @@
         <item>Poly Meal</item>
         <item>Plus Dollars</item>
         <item>Meal Completeor</item>
-        <item>Settings</item>
         <item>Transactions</item>
+        <item>Settings</item>
     </string-array>
     <string-array name="drawerItemsPlus">
         <item>Home</item>
         <item>Poly Meal</item>
         <item>Plus Dollars</item>
-        <item>Settings</item>
         <item>Transactions</item>
+        <item>Settings</item>
     </string-array>
     <string-array name="moneyMode">
         <item>Breakfast</item>

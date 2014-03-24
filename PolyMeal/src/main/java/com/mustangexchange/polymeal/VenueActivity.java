@@ -3,7 +3,6 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -54,7 +53,7 @@ public class VenueActivity extends FragmentActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        setContentView(R.layout.activity_venue);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItemsMeal);
@@ -291,31 +290,31 @@ public class VenueActivity extends FragmentActivity {
                         {
                             case 0:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                startActivity(new Intent(mContext, PolyDiningActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 break;
                             case 1:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyMealActivity.class));
+                                startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                                 break;
                             case 2:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PlusDollarsActivity.class));
+                                startActivity(new Intent(mContext, PlusDollarsActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                                 break;
                             case 3:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, CompleteorActivity.class));
+                                startActivity(new Intent(mContext, CompleteorActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                                 break;
                             case 4:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, SettingsActivity.class));
+                                startActivity(new Intent(mContext, TransactionActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                                 break;
                             case 5:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, TransactionActivity.class));
+                                startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                             default:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class));
+                                startActivity(new Intent(mContext, PolyDiningActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 break;
                         }
                     }

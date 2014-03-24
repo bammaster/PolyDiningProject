@@ -26,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VenueActivity"
-            android:screenOrientation="portrait"/>
+                  android:name=".VenueActivity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".PolyMealActivity"
                   android:label="@string/poly_meal_activity"
                   android:screenOrientation="portrait"/>
@@ -45,6 +45,8 @@
         <activity android:name=".SettingsActivity"
                   android:label="@string/activity_settings"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".BaseActivity"/>
+        <activity android:name=".BaseFragmentActivity"/>
     </application>
 
 

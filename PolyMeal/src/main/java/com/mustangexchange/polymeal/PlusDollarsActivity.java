@@ -31,7 +31,7 @@ import java.util.Arrays;
 /**
  * Created by Blake on 2/20/14.
  */
-public class PlusDollarsActivity extends Activity
+public class PlusDollarsActivity extends BaseActivity
 {
     //protected static Account account;
     private Thread update;
@@ -48,9 +48,9 @@ public class PlusDollarsActivity extends Activity
     private CheckBox remember;
     private LayoutInflater factory;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    /*private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String[]  mDrawerItems;
+    private String[]  mDrawerItems;*/
     private ActionBar mActionBar;
     private Context mContext;
     private Activity mActivity;
@@ -60,44 +60,12 @@ public class PlusDollarsActivity extends Activity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_plus_dollars);
-        getViews();
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
+        init(mContext, mActionBar);
+        getViews();
 
-        // set a custom shadow that overlays the main content when the drawer opens
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));*/
-        mDrawerList.setAdapter(new ListViewArrayAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                //getActionBar().setTitle(mTitle);
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-                mDrawerList.setItemChecked(-1, true);
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                //getActionBar().setTitle(mDrawerTitle);
-                //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
         setAlphaToZero();
         factory = LayoutInflater.from(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
@@ -124,9 +92,9 @@ public class PlusDollarsActivity extends Activity
      */
     private void getViews()
     {
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        //mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
         name = (TextView)findViewById(R.id.nameText);
         expressHeader = (TextView)findViewById(R.id.expHeader);
         express = (TextView)findViewById(R.id.expValue);
@@ -281,18 +249,6 @@ public class PlusDollarsActivity extends Activity
         });
     }
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
-    {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState)
-    {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.plusdollars, menu);
@@ -317,7 +273,7 @@ public class PlusDollarsActivity extends Activity
                 return super.onOptionsItemSelected(item);
         }
     }
-    /* The click listner for ListView in the navigation drawer */
+    /* The click listner for ListView in the navigation drawer
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -365,5 +321,5 @@ public class PlusDollarsActivity extends Activity
             }).start();
             mDrawerLayout.closeDrawer(mDrawerList);
         }
-    }
+    }*/
 }
