@@ -33,7 +33,7 @@ import java.util.Arrays;
  */
 public class PlusDollarsActivity extends Activity
 {
-    protected static Account account;
+    //protected static Account account;
     private Thread update;
     private TextView name;
     private TextView expressHeader;
@@ -97,22 +97,23 @@ public class PlusDollarsActivity extends Activity
                 //invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
         setAlphaToZero();
         factory = LayoutInflater.from(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         name.setTypeface(font);
-        account = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
-        //If the loaded account does not exist or the user said not to remember.
-        if(account == null || !account.remember)
+        Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+        //If the loaded Constants.user does not exist or the user said not to remember.
+        if(Constants.user == null || !Constants.user.remember)
         {
             handleLogin();
         }
-        else if(account.remember)
+        else if(Constants.user.remember)
         {
-            name.setText(account.name);
-            plus.setText(account.plusAsMoney());
-            express.setText(account.expressAsMoney());
-            meal.setText(account.meals + "");
+            name.setText(Constants.user.name);
+            plus.setText(Constants.user.plusAsMoney());
+            express.setText(Constants.user.expressAsMoney());
+            meal.setText(Constants.user.meals + "");
         }
         fadeIn();
         update = buildThread(name,remember);
@@ -126,7 +127,6 @@ public class PlusDollarsActivity extends Activity
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
         name = (TextView)findViewById(R.id.nameText);
         expressHeader = (TextView)findViewById(R.id.expHeader);
         express = (TextView)findViewById(R.id.expValue);
@@ -169,17 +169,17 @@ public class PlusDollarsActivity extends Activity
     protected void onResume()
     {
         super.onResume();
-        if(account!= null && name != null)
+        if(Constants.user!= null && name != null)
         {
-            setTextSizeName(account.name, name);
+            setTextSizeName(Constants.user.name, name);
         }
     }
     protected void onStop()
     {
         super.onStop();
-        if(account != null) {
-            if (account.remember) {
-                account.saveAccount(getSharedPreferences(Constants.accSpKey, MODE_PRIVATE));
+        if(Constants.user != null) {
+            if (Constants.user.remember) {
+                Constants.user.saveAccount(getSharedPreferences(Constants.accSpKey, MODE_PRIVATE));
             }
         }
     }
@@ -223,7 +223,7 @@ public class PlusDollarsActivity extends Activity
         login.setPositiveButton("Login", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id)
             {
-                account = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
+                Constants.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
                 setProgressBarIndeterminateVisibility(true);
                 buildThread(name, remember).start();
                 dialog.dismiss();
@@ -243,33 +243,36 @@ public class PlusDollarsActivity extends Activity
         return new Thread(new Runnable() {
             @Override
             public void run() {
-                GetAllTheThings getPlusData = new GetAllTheThings(account);
-                account = getPlusData.getTheThings();
+                GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
+                Constants.user = getPlusData.getTheThings();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(account == null)
+                        if(Constants.user == null)
                         {
                             Toast.makeText(PlusDollarsActivity.this, "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
                             handleLogin();
                         }
                         else
                         {
-                            setTextSizeName(account.name, name);
-                            name.setText(account.name);
+                            setTextSizeName(Constants.user.name, name);
+                            name.setText(Constants.user.name);
                             if(remember != null)
                             {
-                                if(remember.isChecked() && account != null)
+                                if(remember.isChecked() && Constants.user != null)
                                 {
-                                    account.remember = true;
-                                    account.saveAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+                                    Constants.user.remember = true;
+                                    Constants.user.saveAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
                                 }
                             }
-                            plus.setText(account.plusAsMoney());
-                            express.setText(account.expressAsMoney());
-                            meal.setText(account.meals+"");
+                            plus.setText(Constants.user.plusAsMoney());
+                            express.setText(Constants.user.expressAsMoney());
+                            meal.setText(Constants.user.meals+"");
                         }
                         setProgressBarIndeterminateVisibility(false);
+                        //used when TransactionActivity calls this activity, closes immediately for a more seamless transition
+                        if(mActivity.getIntent().getExtras() != null && mActivity.getIntent().getExtras().getInt("login") == 1)
+                            mActivity.finish();
                         setAlphaToZero();
                         fadeIn();
                     }
@@ -346,7 +349,7 @@ public class PlusDollarsActivity extends Activity
                                 break;
                             case 4:
                                 Thread.sleep(delay);
-                                Log.e("Blake", account.transactions.toString());
+                                startActivity(new Intent(mContext, TransactionActivity.class));
                                 break;
                             default:
                                 Thread.sleep(delay);

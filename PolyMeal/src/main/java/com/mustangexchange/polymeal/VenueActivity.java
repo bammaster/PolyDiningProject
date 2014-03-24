@@ -310,6 +310,8 @@ public class VenueActivity extends FragmentActivity {
                                 startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                             case 5:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, TransactionActivity.class));
                                 break;
                             default:
                                 Thread.sleep(delay);

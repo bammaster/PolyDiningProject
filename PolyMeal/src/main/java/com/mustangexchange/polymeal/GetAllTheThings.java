@@ -18,6 +18,7 @@ import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import javax.net.ssl.HostnameVerifier;
@@ -93,6 +94,7 @@ public class GetAllTheThings
             // balance will be present
             handleTransactions(transactionsTables);
             Log.v("Blake","Finished tables.");
+            Collections.reverse(a.transactions);
             return a;
         }
         catch (Exception e)

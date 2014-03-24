@@ -37,6 +37,9 @@
         <activity android:name=".PlusDollarsActivity"
                   android:label="@string/plus_dollar_activity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".TransactionActivity"
+                  android:label="@string/transaction_activity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".CompleteorActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".SettingsActivity"

@@ -4,50 +4,43 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
+import android.view.*;
 import android.widget.*;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
-public class PolyMealActivity extends Activity
-{
-    private Context mContext;
-    private ListView lv;
-    private ListAdapter listAdapter;
-    private SharedPreferences sp;
+/**
+ * Created by jon on 3/23/14.
+ */
+public class TransactionActivity extends Activity {
+
+    //protected static Account Constants.user = Constants.user;
+    protected Thread update;
     protected DrawerLayout mDrawerLayout;
     protected ListView mDrawerList;
     protected ActionBarDrawerToggle mDrawerToggle;
     protected String[]  mDrawerItems;
     protected static Activity mActivity;
+    protected static Context mContext;
     protected static ActionBar mActionBar;
+    protected ListView lv;
+    protected TransactionAdapter ta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.activity_polymeal);
+        setContentView(R.layout.activity_trans);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(R.array.drawerItemsMeal);
+        mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
@@ -85,70 +78,62 @@ public class PolyMealActivity extends Activity
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        sp = getSharedPreferences(Constants.spKey, MODE_PRIVATE);
-        lv = (ListView)findViewById(R.id.listView);
-        //data = new ArrayList<Map<String,String>>();
-        //adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
-                //new String[] {"venue", "status"},new int[] {android.R.id.text1, android.R.id.text2});
-        listAdapter = new ListAdapter(this, R.id.polymealListItem, Constants.names);
-        listAdapter.setNotifyOnChange(true);
-        mContext = this;
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+
+        update = buildThread();
+        if(Constants.user == null) {
+            Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+        }
+        if(Constants.user == null)
         {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v,int index, long id)
+            Toast.makeText(mContext, "Please login.", Toast.LENGTH_LONG).show();
+            try
             {
-                Constants.activityTitle = Constants.names.get(index);
-                Log.e("Blake",Constants.venues.get(Constants.names.get(index)).isOpen()+"");
-                final Intent intentVenue = new Intent(mContext, VenueActivity.class);
-                intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                mContext.startActivity(intentVenue);
+                Thread.sleep(200);
+                Intent PDIntent = new Intent(mContext, PlusDollarsActivity.class);
+                Bundle extras = new Bundle();
+                extras.putInt("login", 1);
+                PDIntent.putExtras(extras);
+                startActivity(PDIntent);
             }
-        });
-        lv.setAdapter(listAdapter);
-        if(sp.getBoolean(Constants.firstLaunch,true))
-        {
-            setProgressBarIndeterminateVisibility(true);
-            Constants.venues = new HashMap<String, Venue>();
-            new GetData(listAdapter, this, sp).execute();
+            catch(InterruptedException e)
+            {
+                Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG).show();
+            }
         }
-        else if(Constants.venues == null)
+        else
         {
-            new Thread(new Runnable() {
-                @Override
-                public void run()
-                {
-                    String gson = sp.getString(Constants.speKey,"");
-                    Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
-                    for(final String venue : Constants.venues.keySet())
-                    {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                listAdapter.add(venue);
-                            }
-                        });
-                    }
-                }
-            }).start();
+            lv = (ListView) findViewById(R.id.listView);
+            lv.setAdapter(ta = new TransactionAdapter(mContext, Constants.user.transactions));
         }
+
     }
+
     @Override
     protected void onResume()
     {
         super.onResume();
-        if(lv!=null)
-        {
-            lv.invalidate();
+        if(Constants.user != null) {
+            lv = (ListView) findViewById(R.id.listView);
+            lv.setAdapter(ta = new TransactionAdapter(mContext, Constants.user.transactions));
         }
     }
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState)
-    {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
 
+    private Thread buildThread()
+    {
+        return new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
+                Constants.user = getPlusData.getTheThings();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setProgressBarIndeterminateVisibility(false);
+                    }
+                });
+            }
+        });
+    }
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
@@ -156,56 +141,35 @@ public class PolyMealActivity extends Activity
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.polymeal, menu);
-        return true;
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
     }
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.trans, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
+                new Thread(update).start();
                 setProgressBarIndeterminateVisibility(true);
-                listAdapter.clear();
-                new GetData(listAdapter, this, sp).execute();
+                ta.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-    public class ListAdapter extends ArrayAdapter<String>
-    {
-        public ListAdapter(Context context, int resource, List<String> items)
-        {
-            super(context, resource, items);
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            if(convertView == null)
-            {
-                LayoutInflater inflater = getLayoutInflater();
-                convertView = inflater.inflate(R.layout.polymeal_list_item, parent, false);
-            }
-            TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
-            tt.setText("  " + Constants.names.get(position));
-            if(Constants.venues.get(Constants.names.get(position)).closeSoon())
-            {
-                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.soon_dot),null,null,null);
-            }
-            else if(Constants.venues.get(Constants.names.get(position)).isOpen())
-            {
-                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.open_dot),null,null,null);
-            }
-            else
-            {
-                tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.close_dot),null,null,null);
-            }
-            return convertView;
 
-        }
-    }
     /* The click listner for ListView in the navigation drawer */
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -240,8 +204,7 @@ public class PolyMealActivity extends Activity
                                 startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                             case 5:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, TransactionActivity.class));
+                                mDrawerLayout.closeDrawers();
                                 break;
                             default:
                                 Thread.sleep(delay);

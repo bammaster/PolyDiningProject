@@ -27,8 +27,6 @@ I should have probably just rewritten similar code, but i was feeling lazy. Mayb
     android:id="@+id/parentPanel"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dip"
-    android:layout_marginEnd="8dip"
     android:orientation="vertical">
 
     <LinearLayout android:id="@+id/topPanel"
@@ -40,9 +38,7 @@ I should have probably just rewritten similar code, but i was feeling lazy. Mayb
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical|start"
-            android:minHeight="64dip"
-            android:layout_marginStart="16dip"
-            android:layout_marginEnd="16dip">
+            android:minHeight="64dip">
             <com.android.internal.widget.DialogTitle android:id="@+id/alertTitle"
                 style="@android:style/TextAppearance.Holo.DialogWindowTitle"
                 android:singleLine="true"
@@ -67,8 +63,6 @@ I should have probably just rewritten similar code, but i was feeling lazy. Mayb
             style="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dip"
-            android:paddingEnd="16dip"
             android:paddingTop="8dip"
             android:paddingBottom="8dip"
             android:textIsSelectable="true"/>
