@@ -42,10 +42,6 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
                 if(parentClass.equals("TransactionActivity"))
                     return true;
                 break;
-            case 4:
-                if(parentClass.equals("TransactionActivity"))
-                    return true;
-                break;
             default:
                 break;
         }

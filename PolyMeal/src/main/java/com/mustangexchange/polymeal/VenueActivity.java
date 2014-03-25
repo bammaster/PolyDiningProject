@@ -65,9 +65,10 @@ public class VenueActivity extends FragmentActivity {
             System.out.println("got here");
             MoneyTime.moneySpent = new BigDecimal(savedInstanceState.getString("moneySpent"));
             Cart.cart = savedInstanceState.getParcelableArrayList("cart");
-            //startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-                //| Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION));
-            finish();
+            Constants.lastVenue = savedInstanceState.getString("lastVenue");
+            startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+                | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION));
+            //finish();
             overridePendingTransition(0, 0); //no animation
         } else {
             finishOnCreate();
@@ -137,6 +138,7 @@ public class VenueActivity extends FragmentActivity {
         // Put all your data in the outState bundle
         outState.putParcelableArrayList("cart", Cart.getCart());
         outState.putString("moneySpent", MoneyTime.moneySpent.toString());
+        outState.putString("lastVenue", Constants.lastVenue);
     }
     public void updateSettings()
     {

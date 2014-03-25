@@ -38,6 +38,11 @@ public class TransactionAdapter extends BaseAdapter {
         return position;
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
+
     public View getView(int position, View convertView, ViewGroup viewGroup)
     {
         if (convertView == null) {
