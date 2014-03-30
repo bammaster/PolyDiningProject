@@ -74,7 +74,15 @@ public class  VenueParser
                             item.setPrice(new BigDecimal(Constants.DEFAULT_PRICE));
                         }
                     }
-                    item.setDescription(menuItem.getElementsByTag("description").text());
+                    String desc = menuItem.getElementsByTag("description").text();
+                    if(desc.isEmpty())
+                    {
+                        item.setDescription("No Description Available!");
+                    }
+                    else
+                    {
+                        item.setDescription(desc);
+                    }
                     subVenue.add(item);
                 }
                 Constants.venues.get(venueName).venueItems.add(subVenue);

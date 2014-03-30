@@ -1,17 +1,19 @@
 package com.mustangexchange.polymeal;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Blake on 9/28/13.
+ * Used to store most static types in the app. If multiple activities need access to it,
+ * and you only need one reference to it put it here. All constants should also go here.
  */
 public class Constants
 {
+    public static final NumberFormat currency = NumberFormat.getCurrencyInstance();
     public static final Type gsonType = new TypeToken<HashMap<String, Venue>>() {}.getType();
     public static final String DEFAULT_PRICE = "0.00";
     public static final String URL = "http://www.calpolydining.com/_mobiledata/locations.xml";
@@ -21,13 +23,13 @@ public class Constants
     public static String firstLaunch = "firstLaunch";
     public static Account user;
     public static String lastVenue = "";
+    //Main data structure. Contains all venue data.
     public static HashMap<String, Venue> venues;
     //Stores the venue names for the PolyMEalActivity list view.
     public static ArrayList<String> names = new ArrayList<String>();
     //not constant as it needs to be changed but should only be one of them.
     public static String activityTitle = "";
-    //From Plus Dollars app.
-    public static final String FILENAME = "account";
+    //Conversion for hours to minutes
     public static final int HOURS_TO_MINUTES = 60;
     public static final String SKEYCHECK_URL = "https://services.jsatech.com/login-check.php?skey=";
     public static final String JSA_HOSTNAME = "services.jsatech.com";

@@ -46,9 +46,5 @@
                   android:label="@string/activity_settings"
                   android:screenOrientation="portrait"/>
         <activity android:name=".BaseActivity"/>
-        <activity android:name=".BaseFragmentActivity"/>
     </application>
-
-
-
 </manifest>

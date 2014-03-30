@@ -33,7 +33,6 @@ import java.util.Arrays;
  */
 public class PlusDollarsActivity extends BaseActivity
 {
-    //protected static Account account;
     private Thread update;
     private TextView name;
     private TextView expressHeader;
@@ -266,53 +265,4 @@ public class PlusDollarsActivity extends BaseActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-    /* The click listner for ListView in the navigation drawer
-    protected class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-            final int delay = 200;
-            new Thread(new Runnable() {
-                @Override
-                public void run()
-                {
-                    try
-                    {
-                        switch(position)
-                        {
-                            case 0:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class));
-                                break;
-                            case 1:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyMealActivity.class));
-                                break;
-                            case 2:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PlusDollarsActivity.class));
-                                Thread.sleep(delay);
-                                break;
-                            case 3:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, SettingsActivity.class));
-                                break;
-                            case 4:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, TransactionActivity.class));
-                                break;
-                            default:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class));
-                                break;
-                        }
-                    }
-                    catch(InterruptedException e)
-                    {
-                        Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG);
-                    }
-                }
-            }).start();
-            mDrawerLayout.closeDrawer(mDrawerList);
-        }
-    }*/
 }

@@ -19,7 +19,6 @@ public class Item implements Parcelable
     private String description;
     private boolean isValid = true;
     private boolean ounces = false;
-    private DecimalFormat currency = new DecimalFormat("#.##");
 
     public Item(String name, BigDecimal price, String description, boolean isValid)
     {
@@ -109,11 +108,6 @@ public class Item implements Parcelable
         this.description = description;
     }
 
-    public void setValid(boolean valid)
-    {
-        isValid = valid;
-    }
-
     public boolean getValid()
     {
         return isValid;
@@ -132,49 +126,9 @@ public class Item implements Parcelable
     private BigDecimal format(BigDecimal price)
     {
         String priceString = price.toString();
-        priceString = currency.format(Double.valueOf(priceString));
-        return new BigDecimal(priceString);
+        priceString = Constants.currency.format(Double.valueOf(priceString));
+        return new BigDecimal(priceString.replace("$",""));
     }
-
-    public void displayAddDialog(Activity activity)
-    {
-        final Activity mActivity = activity;
-        final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
-        onListClick.setCancelable(false);
-        onListClick.setTitle("Add to Cart?");
-        onListClick.setMessage("Would you like to add " + name + " to your cart? Price: " + getPriceString());
-        onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int button) {
-            //Cart.add(Item.this);
-            //BaseActivity.updateBalance();
-            }
-        });
-        onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int button) {
-            }
-        });
-        onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int button) {
-                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(mActivity);
-                onDialogClick.setTitle("Description");
-                onDialogClick.setMessage(description);
-                onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int button) {
-
-                    }
-                });
-                onDialogClick.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int button) {
-                        onListClick.show();
-                    }
-                });
-                onDialogClick.show();
-            }
-        });
-        onListClick.show();
-    }
-
-
     public int describeContents(){
         return 0;
     }

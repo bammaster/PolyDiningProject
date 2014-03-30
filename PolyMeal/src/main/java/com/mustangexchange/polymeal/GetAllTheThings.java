@@ -187,6 +187,14 @@ public class GetAllTheThings
         }
         Log.e("Blake",a.transactions.toString());
     }
+
+    /**
+     * Handles the login check to make sure the user is logged in.= which happens when a 1 is returned at Constants.SKEYCHECK_URL
+     * @param skey The skey that pertains to the user.
+     * @return Returns a because if login check fails account is null.
+     * @throws InterruptedException If something goes wrong with the connection.
+     * @throws IOException If something goes wrong with the connection.
+     */
     private Account loginCheck(String skey) throws InterruptedException, IOException
     {
         // to check if the login has completed.
@@ -210,6 +218,12 @@ public class GetAllTheThings
         while (!loginCheck.getElementsByTag("message").text().equals("1"));
         return a;
     }
+
+    /**
+     * Opens the initial connection to the server with the ssl credentials
+     * @throws NoSuchAlgorithmException
+     * @throws KeyManagementException
+     */
     private void handleInitConnection() throws NoSuchAlgorithmException, KeyManagementException
     {
         // accept all SSL certificates
