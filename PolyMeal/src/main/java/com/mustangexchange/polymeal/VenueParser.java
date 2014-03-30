@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
- * Created by Blake on 8/6/13.
+ * Parses all data of the venues for the PolyMeal and Venue Activities.
  */
 public class  VenueParser
 {
@@ -127,6 +127,12 @@ public class  VenueParser
         }
         return "0.00";
     }
+
+    /**
+     * Helper method to handle parsing the times venues are open at.
+     * @param times The Html with all of the times.
+     * @param venue The current venue that's being constructed.
+     */
     private void handleTimes(Elements times, Venue venue)
     {
         try
@@ -160,6 +166,12 @@ public class  VenueParser
             Log.e("Blake","Error with times!", e);
         }
     }
+
+    /**
+     * Handles weird number formatting on the website.
+     * @param number The string representation of the number to fix.
+     * @return
+     */
     private int checkInt(String number)
     {
         if(number.contains("00"))

@@ -25,14 +25,9 @@ public class SettingsActivity extends PreferenceActivity {
             public boolean onPreferenceClick(Preference preference) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
                 builder
-                        .setTitle("What's a meal worth?")
-                        .setMessage(
-                                "Breakfast: $7.90 (7:00-10:00am)\n"
-                                        + "Lunch: $9.00 (10:00am-5pm)\n"
-                                        + "Dinner: $10.75 (5-8:14pm)\n"
-                                        + "Late Night: $8.75 (8:15pm-2am)\n\n"
-                                        + "Meals reset weekly on Saturday morning at 2:00am")
-                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.mealtimepreftitle)
+                        .setMessage(R.string.mealtimemessage)
+                        .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -40,13 +35,6 @@ public class SettingsActivity extends PreferenceActivity {
                         });
                 builder.create().show();
                 return true;
-            }
-        });
-        Preference rememberAccount = findPreference("rememberAccount");
-        rememberAccount.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object o) {
-                return false;
             }
         });
     }
