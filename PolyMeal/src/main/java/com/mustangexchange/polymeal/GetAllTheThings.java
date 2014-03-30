@@ -161,29 +161,31 @@ public class GetAllTheThings
     }
     private void handleTransactions(Elements transactionsTables)
     {
+        a.transactions.clear();
         for(int i = 0; i < transactionsTables.size(); i++)
         {
-            for(Element row : transactionsTables.get(i).select("tr"))
-            {
-                for(Element element : row.select("td"))
-                {
+            for(Element tbody : transactionsTables.get(i).select("tbody")) {
+                for (Element element : tbody.select("tr")) {
                     String time = "";
                     String location = "";
                     String ammount = "";
-                    if(element.getElementsByClass("tablefirstcol").size() > 0) {
+                    if (element.getElementsByClass("tablefirstcol").size() > 0) {
                         time = element.getElementsByClass("tablefirstcol").get(0).text();
                     }
-                    if(element.getElementsByClass("tablecol").size() > 0) {
+                    if (element.getElementsByClass("tablecol").size() > 0) {
                         location = element.getElementsByClass("tablecol").get(0).text();
                     }
-                    if(element.getElementsByClass("tablecolnum").size() > 0)
-                    {
+                    if (element.getElementsByClass("tablecolnum").size() > 0) {
                         ammount = element.getElementsByClass("tablecolnum").get(0).text();
                     }
-                    a.transactions.add(new Transaction(i,time,location,ammount));
+                    if (!time.isEmpty() && !location.isEmpty() && !ammount.isEmpty()) {
+                        Log.v("Blake",time+"|"+location+"|"+ammount);
+                        a.transactions.add(new Transaction(i, time, location, ammount));
+                    }
                 }
             }
         }
+        Log.e("Blake",a.transactions.toString());
     }
     private Account loginCheck(String skey) throws InterruptedException, IOException
     {

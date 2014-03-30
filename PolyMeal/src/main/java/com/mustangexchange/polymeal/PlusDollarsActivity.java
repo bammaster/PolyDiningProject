@@ -88,9 +88,6 @@ public class PlusDollarsActivity extends BaseActivity
      */
     private void getViews()
     {
-        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        //mDrawerItems = getResources().getStringArray(R.array.drawerItemsPlus);
         name = (TextView)findViewById(R.id.nameText);
         expressHeader = (TextView)findViewById(R.id.expHeader);
         express = (TextView)findViewById(R.id.expValue);

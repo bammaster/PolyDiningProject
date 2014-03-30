@@ -19,7 +19,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Plu$ Dollars"
+        android:text="Plus Dollars"
         android:id="@+id/plusDollarsButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="46dp"

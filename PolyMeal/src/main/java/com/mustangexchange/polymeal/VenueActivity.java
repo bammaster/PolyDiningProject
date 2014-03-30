@@ -3,6 +3,7 @@ package com.mustangexchange.polymeal;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -68,7 +69,6 @@ public class VenueActivity extends FragmentActivity {
             Constants.lastVenue = savedInstanceState.getString("lastVenue");
             startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION));
-            //finish();
             overridePendingTransition(0, 0); //no animation
         } else {
             finishOnCreate();
@@ -140,6 +140,8 @@ public class VenueActivity extends FragmentActivity {
         outState.putString("moneySpent", MoneyTime.moneySpent.toString());
         outState.putString("lastVenue", Constants.lastVenue);
     }
+    //Handles chaning the view based upon user input
+
     public void updateSettings()
     {
         SharedPreferences defaultSP;
@@ -235,10 +237,10 @@ public class VenueActivity extends FragmentActivity {
         try
         {
             totalAmount = MoneyTime.calcTotalMoney();
-            /*
+            //Alerts the user if they will exceed their plus dollars with whats in the cart.
             if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
             {
-                if(totalAmount.multiply(new BigDecimal("-1")).compareTo(PlusDollarsActivity.account.plusDollars) > 0)
+                if(totalAmount.multiply(new BigDecimal("-1")).compareTo(Constants.user.plusDollars) > 0)
                 {
                     QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(mContext);
                     plusDollarsExceeded.setDividerColor(Constants.CAL_POLY_GREEN);
@@ -253,9 +255,9 @@ public class VenueActivity extends FragmentActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {}
                     });
+                    plusDollarsExceeded.show();
                 }
             }
-            */
             setSubtitleColor();
             mActionBar.setSubtitle("$" + totalAmount + " Remaining");
         }

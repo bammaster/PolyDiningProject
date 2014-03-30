@@ -23,14 +23,5 @@
                 android:title="@string/pref_money_mode"
                 android:defaultValue="4"/>
     </PreferenceCategory>
-    <PreferenceCategory android:title="PLUS DOLLARS" >
-        <ListPreference
-            android:key="rememberAccount"
-            android:entries="@array/accountOptions"
-            android:summary="@string/remeberAccountSum"
-            android:entryValues="@array/rememberAcc"
-            android:title="@string/remeberAccount"
-            android:defaultValue="0"/>
-    </PreferenceCategory>
 
 </PreferenceScreen>
