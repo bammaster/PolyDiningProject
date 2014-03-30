@@ -5,12 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,11 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.*;
-
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,13 +36,8 @@ public class PolyMealActivity extends BaseActivity
         mContext = this;
         mActionBar = getActionBar();
         init(mContext, mActionBar);
-
-
         sp = getSharedPreferences(Constants.spKey, MODE_PRIVATE);
         lv = (ListView)findViewById(R.id.listView);
-        //data = new ArrayList<Map<String,String>>();
-        //adapter = new SimpleAdapter(this, data, android.R.layout.simple_list_item_2,
-                //new String[] {"venue", "status"},new int[] {android.R.id.text1, android.R.id.text2});
         listAdapter = new ListAdapter(this, R.id.polymealListItem, Constants.names);
         listAdapter.setNotifyOnChange(true);
         mContext = this;
@@ -61,7 +47,6 @@ public class PolyMealActivity extends BaseActivity
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
                 Constants.activityTitle = Constants.names.get(index);
-                Log.e("Blake",Constants.venues.get(Constants.names.get(index)).isOpen()+"");
                 final Intent intentVenue = new Intent(mContext, VenueActivity.class);
                 intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mContext.startActivity(intentVenue);
@@ -157,7 +142,6 @@ public class PolyMealActivity extends BaseActivity
                 tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.close_dot),null,null,null);
             }
             return convertView;
-
         }
     }
 }

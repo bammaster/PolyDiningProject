@@ -165,9 +165,23 @@ public class GetAllTheThings
         {
             for(Element row : transactionsTables.get(i).select("tr"))
             {
-                Elements values = row.select("td");
-                a.transactions.add(new Transaction(i,values.get(1).text(),values.get(0).text(),
-                                   values.get(2).text()));
+                for(Element element : row.select("td"))
+                {
+                    String time = "";
+                    String location = "";
+                    String ammount = "";
+                    if(element.getElementsByClass("tablefirstcol").size() > 0) {
+                        time = element.getElementsByClass("tablefirstcol").get(0).text();
+                    }
+                    if(element.getElementsByClass("tablecol").size() > 0) {
+                        location = element.getElementsByClass("tablecol").get(0).text();
+                    }
+                    if(element.getElementsByClass("tablecolnum").size() > 0)
+                    {
+                        ammount = element.getElementsByClass("tablecolnum").get(0).text();
+                    }
+                    a.transactions.add(new Transaction(i,time,location,ammount));
+                }
             }
         }
     }

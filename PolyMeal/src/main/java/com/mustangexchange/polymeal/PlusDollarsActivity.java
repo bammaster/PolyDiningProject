@@ -47,10 +47,6 @@ public class PlusDollarsActivity extends BaseActivity
     private EditText password;
     private CheckBox remember;
     private LayoutInflater factory;
-    private DrawerLayout mDrawerLayout;
-    /*private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private String[]  mDrawerItems;*/
     private ActionBar mActionBar;
     private Context mContext;
     private Activity mActivity;
@@ -119,7 +115,7 @@ public class PlusDollarsActivity extends BaseActivity
     }
 
     /**
-     * Fades in UI elements. To add an elements, add 1 to the multiple of duration and follow
+     * Fades in UI elements. To add an elements, add 1 to the multiple(#) of duration and follow
      * the format "# * duration/2 + delay" for the cascading effect.
      */
     private void fadeIn()
