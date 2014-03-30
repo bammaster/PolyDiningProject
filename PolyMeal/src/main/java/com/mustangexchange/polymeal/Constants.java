@@ -20,6 +20,7 @@ public class Constants
     public static final String speKey = "Cache";
     public static String firstLaunch = "firstLaunch";
     public static Account user;
+    public static String lastVenue = "";
     public static HashMap<String, Venue> venues;
     //Stores the venue names for the PolyMEalActivity list view.
     public static ArrayList<String> names = new ArrayList<String>();
