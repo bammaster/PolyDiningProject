@@ -24,9 +24,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Period;
+import org.joda.time.Weeks;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by Blake on 2/20/14.
@@ -41,6 +48,9 @@ public class PlusDollarsActivity extends BaseActivity
     private TextView plus;
     private TextView mealHeader;
     private TextView meal;
+    private TextView budgetHeader;
+    private TextView budget1;
+    private TextView budget2;
     private View loginView;
     private EditText username;
     private EditText password;
@@ -73,10 +83,19 @@ public class PlusDollarsActivity extends BaseActivity
         }
         else if(Constants.user.remember)
         {
+            DateTime start = new DateTime();
+            DateTime end = new DateTime(Constants.endOfSpring[0], Constants.endOfSpring[1], Constants.endOfSpring[2], 0, 0, 0, 0);
+            Days d = Days.daysBetween(start, end);
+            Weeks w = Weeks.weeksBetween(start, end);
+            String temp = Constants.user.plusAsMoney();
+            temp = temp.substring(1);
+
             name.setText(Constants.user.name);
             plus.setText(Constants.user.plusAsMoney());
             express.setText(Constants.user.expressAsMoney());
             meal.setText(Constants.user.meals + "");
+            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
         }
         fadeIn();
         update = buildThread(name,remember);
@@ -94,6 +113,9 @@ public class PlusDollarsActivity extends BaseActivity
         plus = (TextView)findViewById(R.id.plusValue);
         mealHeader = (TextView)findViewById(R.id.mealHeader);
         meal = (TextView)findViewById(R.id.mealText);
+        budgetHeader = (TextView) findViewById(R.id.budgetHeader);
+        budget1 = (TextView) findViewById(R.id.budgetText1);
+        budget2 = (TextView) findViewById(R.id.budgetText2);
     }
 
     /**
@@ -108,6 +130,9 @@ public class PlusDollarsActivity extends BaseActivity
         plus.setAlpha(0);
         mealHeader.setAlpha(0);
         meal.setAlpha(0);
+        budgetHeader.setAlpha(0);
+        budget1.setAlpha(0);
+        budget2.setAlpha(0);
     }
 
     /**
@@ -125,6 +150,9 @@ public class PlusDollarsActivity extends BaseActivity
         plus.animate().alpha(1.0f).setStartDelay(4 * duration/2+delay).setDuration(duration).start();
         mealHeader.animate().alpha(1.0f).setStartDelay(5 * duration/2+delay).setDuration(duration).start();
         meal.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budgetHeader.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budget1.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budget2.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
     }
     protected void onResume()
     {
@@ -228,6 +256,16 @@ public class PlusDollarsActivity extends BaseActivity
                             plus.setText(Constants.user.plusAsMoney());
                             express.setText(Constants.user.expressAsMoney());
                             meal.setText(Constants.user.meals+"");
+
+                            DateTime start = new DateTime();
+                            DateTime end = new DateTime(Constants.endOfSpring[0], Constants.endOfSpring[1], Constants.endOfSpring[2], 0, 0, 0, 0);
+                            Days d = Days.daysBetween(start, end);
+                            Weeks w = Weeks.weeksBetween(start, end);
+                            String temp = Constants.user.plusAsMoney();
+                            temp = temp.substring(1);
+
+                            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+                            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
                         }
                         setProgressBarIndeterminateVisibility(false);
                         //used when TransactionActivity calls this activity, closes immediately for a more seamless transition

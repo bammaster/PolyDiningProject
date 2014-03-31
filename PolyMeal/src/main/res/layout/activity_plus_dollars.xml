@@ -1,81 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:paddingLeft="8dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="John Doe"
-        android:id="@+id/nameText"
-        android:layout_gravity="center_horizontal"
-        android:textSize="70sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:minLines="1" />
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fadeScrollbars="false">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp" android:paddingLeft="8dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="John Doe"
+                    android:id="@+id/nameText"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="70sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:minLines="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        style="@style/sectionHeader"
-        android:text="Campus Express"
-        android:id="@+id/expHeader"
-        android:textSize="25sp"
-        android:layout_above="@+id/expValue"
-        android:layout_alignParentLeft="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        style="@style/sectionHeader"
-        android:text="Plus Dollars"
-        android:id="@+id/plusHeader"
-        android:textSize="25sp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        style="@style/sectionHeader"
-        android:text="Meals"
-        android:id="@+id/mealHeader"
-        android:textSize="25sp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/plusValue"
-        android:layout_alignParentLeft="true" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/sectionHeader"
+                    android:text="Campus Express"
+                    android:id="@+id/expHeader"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/nameText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/sectionHeader"
+                    android:text="Plus Dollars"
+                    android:id="@+id/plusHeader"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/expValue"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/sectionHeader"
+                    android:text="Meals"
+                    android:id="@+id/mealHeader"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/plusValue"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="$0"
-        android:id="@+id/expValue"
-        android:textSize="30sp"
-        android:layout_above="@+id/plusHeader"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="30dp" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="$0"
+                    android:id="@+id/expValue"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/expHeader"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="15dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="$0"
-        android:id="@+id/plusValue"
-        android:textSize="30sp"
-        android:layout_below="@+id/plusHeader"
-        android:layout_alignParentLeft="true" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="$0"
+                    android:id="@+id/plusValue"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/plusHeader"
+                    android:layout_alignParentLeft="true" android:layout_marginBottom="15dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0"
-        android:id="@+id/mealText"
-        android:textSize="30sp"
-        android:layout_below="@+id/mealHeader"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="17dp" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="0"
+                    android:id="@+id/mealText"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/mealHeader"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="17dp" android:layout_marginBottom="15dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    style="@style/sectionHeader"
+                    android:text="Budget"
+                    android:id="@+id/budgetHeader"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/mealText"
+                    android:layout_alignParentLeft="true" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="$0"
+                    android:id="@+id/budgetText1"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/budgetHeader"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="17dp" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="$0"
+                    android:id="@+id/budgetText2"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/budgetHeader"
+                    android:layout_toRightOf="@+id/budgetText1"
+                    android:layout_marginLeft="64dp" />
 
 
-</RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>

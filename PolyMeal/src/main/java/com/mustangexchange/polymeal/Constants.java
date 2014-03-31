@@ -21,6 +21,7 @@ public class Constants
     public static final String accSpKey = "Account";
     public static final String speKey = "Cache";
     public static String firstLaunch = "firstLaunch";
+    public static int[] endOfSpring = {2014, 06, 13};
     public static Account user;
     public static String lastVenue = "";
     //Main data structure. Contains all venue data.
