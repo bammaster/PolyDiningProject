@@ -23,12 +23,10 @@ public class  VenueParser
      * Parses the data from the internet and stores it into shared preferences.
      * @param doc The xml document to parse.
      * @param data Reference to the GetData Object that called this method.
-     * @param spe Shared preferences editor to store data with.
      * @throws IOException If a connection error occurs.
      */
-    public void parseAndStore(Document doc, GetData data, SharedPreferences.Editor spe) throws IOException
+    public void parse(Document doc, GetData data) throws IOException
     {
-        Gson cache = new Gson();
         Elements links = doc.select("link");
         ItemSet subVenue;
         int counter = 0;
@@ -38,7 +36,7 @@ public class  VenueParser
             String venueName = venueItem.select("name").get(0).text();
             Elements times = venueItem.getElementsByTag("time");
             String link = links.get(counter).text();
-            Venue venue = new Venue(venueName,link,counter);
+            Venue venue = new Venue(venueName,counter);
             handleTimes(times, venue);
             Constants.venues.put(venueName, venue);
             Document venDoc = Jsoup.connect(link).get();
@@ -90,9 +88,6 @@ public class  VenueParser
             data.update(venueName);
             counter++;
         }
-        //Write venue object to storage.
-        spe.putString(Constants.speKey,cache.toJson(Constants.venues));
-        spe.commit();
     }
 
     /**

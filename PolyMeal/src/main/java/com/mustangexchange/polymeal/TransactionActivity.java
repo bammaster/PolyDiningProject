@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -20,8 +21,6 @@ import java.util.Arrays;
  */
 public class TransactionActivity extends BaseActivity {
 
-    //protected static Account Constants.user = Constants.user;
-    protected Thread update;
     protected static Activity mActivity;
     protected static Context mContext;
     protected static ActionBar mActionBar;
@@ -38,11 +37,13 @@ public class TransactionActivity extends BaseActivity {
         mContext = this;
         mActionBar = getActionBar();
         init(mContext, mActionBar);
+    }
 
-        update = buildThread();
-        if(Constants.user == null) {
-            Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
-        }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
         if(Constants.user == null)
         {
             Toast.makeText(mContext, "Please login.", Toast.LENGTH_LONG).show();
@@ -65,17 +66,6 @@ public class TransactionActivity extends BaseActivity {
             lv = (ListView) findViewById(R.id.listView);
             lv.setAdapter(ta = new TransactionAdapter(mContext, Constants.user.transactions));
         }
-
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if(Constants.user != null) {
-            lv = (ListView) findViewById(R.id.listView);
-            lv.setAdapter(ta = new TransactionAdapter(mContext, Constants.user.transactions));
-        }
     }
 
     private Thread buildThread()
@@ -83,8 +73,14 @@ public class TransactionActivity extends BaseActivity {
         return new Thread(new Runnable() {
             @Override
             public void run() {
-                GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
-                Constants.user = getPlusData.getTheThings();
+                try {
+                    GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
+                    Constants.user = getPlusData.getTheThings();
+                }
+                catch(BudgetException e)
+                {
+                    Log.e("Blake", "Ruh Roh!");
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -110,7 +106,7 @@ public class TransactionActivity extends BaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                new Thread(update).start();
+                buildThread().start();
                 setProgressBarIndeterminateVisibility(true);
                 ta.notifyDataSetChanged();
                 return true;

@@ -70,7 +70,6 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         btnAdd.setFocusable(false);
         btnAdd.setOnClickListener(this);
         btnAdd.setTag(new Integer(position));
-
         return convertView;
     }
 

@@ -13,8 +13,8 @@ public class VenueTime
      * This is why open and closed are array lists. Open is for the opening times and closed is for
      * the closing times.
      */
-    private ArrayList<Time> open;
-    private ArrayList<Time> closed;
+    protected ArrayList<Time> open;
+    protected ArrayList<Time> closed;
     public VenueTime()
     {
         open = new ArrayList<Time>();
@@ -74,9 +74,17 @@ public class VenueTime
         for(int i = 0; i < open.size(); i++)
         {
             if(now.getTimeInMinutes() >= closed.get(i).getTimeInMinutes() - Constants.HOURS_TO_MINUTES
-               &&now.getTimeInMinutes() <= closed.get(i).getTimeInMinutes())
+                        &&now.getTimeInMinutes() <= closed.get(i).getTimeInMinutes())
             {
-                return true;
+                if(now.getTimeInMinutes() >= Constants.ELEVEN_O_CLOCK_MINUTES &&
+                        closed.get(i).getTimeInMinutes() <= Constants.TWELVE_O_CLOCK_MINUTES)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
         return false;

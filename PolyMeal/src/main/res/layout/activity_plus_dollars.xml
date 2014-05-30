@@ -81,9 +81,8 @@
                     android:text="0"
                     android:id="@+id/mealText"
                     android:textSize="30sp"
-                    android:layout_below="@+id/mealHeader"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="17dp" android:layout_marginBottom="15dp"/>
+                android:layout_below="@+id/mealHeader"
+                android:layout_alignRight="@+id/budgetText1" />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,8 +91,8 @@
                     android:text="Budget"
                     android:id="@+id/budgetHeader"
                     android:textSize="25sp"
-                    android:layout_below="@+id/mealText"
-                    android:layout_alignParentLeft="true" />
+                android:layout_below="@+id/mealText"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                     android:layout_width="wrap_content"
@@ -101,20 +100,27 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/budgetText1"
-                    android:textSize="25sp"
-                    android:layout_below="@+id/budgetHeader"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="17dp" />
+                    android:textSize="30sp"
+                android:layout_below="@+id/budgetHeader"
+                android:layout_alignParentLeft="true" />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/budgetText2"
-                    android:textSize="25sp"
-                    android:layout_below="@+id/budgetHeader"
-                    android:layout_toRightOf="@+id/budgetText1"
-                    android:layout_marginLeft="64dp" />
+                    android:textSize="30sp"
+                android:layout_below="@+id/budgetHeader"
+                android:layout_alignRight="@+id/budgetHeader" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textWeeks"
+                android:text="@string/weeksleft"
+                android:layout_below="@+id/budgetText1"
+                android:layout_alignParentLeft="true" />
 
 
         </RelativeLayout>

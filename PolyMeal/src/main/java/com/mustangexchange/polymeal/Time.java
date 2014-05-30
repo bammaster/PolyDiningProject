@@ -21,4 +21,16 @@ public class Time
     {
         return hour*Constants.HOURS_TO_MINUTES + minutes;
     }
+
+    @Override
+    public String toString()
+    {
+        String amOrPm = "PM";
+        if(hour < 12)
+        {
+            amOrPm = "AM";
+        }
+        return hour + ":" + minutes + " " + amOrPm;
+    }
+
 }

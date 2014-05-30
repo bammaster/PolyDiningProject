@@ -61,7 +61,7 @@
   </style>
 
     <style name="ActionBarCalPolyHolo" parent="android:Widget.Holo.Light.ActionBar">
-        <item name="android:background">#1E4D2B</item>
+        <item name="android:background">#036228</item>
     </style>
 
 </resources>

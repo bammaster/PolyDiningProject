@@ -1,16 +1,10 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Currency;
+
 
 public class Item implements Parcelable
 {

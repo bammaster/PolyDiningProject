@@ -4,36 +4,24 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.Period;
 import org.joda.time.Weeks;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 
 /**
  * Created by Blake on 2/20/14.
@@ -51,6 +39,7 @@ public class PlusDollarsActivity extends BaseActivity
     private TextView budgetHeader;
     private TextView budget1;
     private TextView budget2;
+    private TextView weeksLeft;
     private View loginView;
     private EditText username;
     private EditText password;
@@ -59,12 +48,14 @@ public class PlusDollarsActivity extends BaseActivity
     private ActionBar mActionBar;
     private Context mContext;
     private Activity mActivity;
+    private SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_plus_dollars);
+        sp = getSharedPreferences(Constants.accSpKey,MODE_PRIVATE);
         mActivity = this;
         mContext = this;
         mActionBar = getActionBar();
@@ -83,8 +74,9 @@ public class PlusDollarsActivity extends BaseActivity
         }
         else if(Constants.user.remember)
         {
+            loadBudget();
             DateTime start = new DateTime();
-            DateTime end = new DateTime(Constants.endOfSpring[0], Constants.endOfSpring[1], Constants.endOfSpring[2], 0, 0, 0, 0);
+            DateTime end = new DateTime(Constants.endOfQuarter[0], Constants.endOfQuarter[1], Constants.endOfQuarter[2], 0, 0, 0, 0);
             Days d = Days.daysBetween(start, end);
             Weeks w = Weeks.weeksBetween(start, end);
             String temp = Constants.user.plusAsMoney();
@@ -96,6 +88,7 @@ public class PlusDollarsActivity extends BaseActivity
             meal.setText(Constants.user.meals + "");
             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
         }
         fadeIn();
         update = buildThread(name,remember);
@@ -116,6 +109,7 @@ public class PlusDollarsActivity extends BaseActivity
         budgetHeader = (TextView) findViewById(R.id.budgetHeader);
         budget1 = (TextView) findViewById(R.id.budgetText1);
         budget2 = (TextView) findViewById(R.id.budgetText2);
+        weeksLeft = (TextView) findViewById(R.id.textWeeks);
     }
 
     /**
@@ -157,9 +151,11 @@ public class PlusDollarsActivity extends BaseActivity
     protected void onResume()
     {
         super.onResume();
-        if(Constants.user!= null && name != null)
+        if(Constants.user!= null)
         {
-            setTextSizeName(Constants.user.name, name);
+            if(name != null && Constants.user.name!= null) {
+                setTextSizeName(Constants.user.name, name);
+            }
         }
     }
     protected void onStop()
@@ -232,7 +228,19 @@ public class PlusDollarsActivity extends BaseActivity
             @Override
             public void run() {
                 GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
-                Constants.user = getPlusData.getTheThings();
+                try {
+                    Constants.user = getPlusData.getTheThings();
+                }
+                catch(BudgetException e)
+                {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(PlusDollarsActivity.this, "Unable to download budget data.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    loadBudget();
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -247,10 +255,15 @@ public class PlusDollarsActivity extends BaseActivity
                             name.setText(Constants.user.name);
                             if(remember != null)
                             {
-                                if(remember.isChecked() && Constants.user != null)
+
+                                if(remember.isChecked())
                                 {
                                     Constants.user.remember = true;
-                                    Constants.user.saveAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+                                    Constants.user.saveAccount(sp);
+                                }
+                                else
+                                {
+                                    sp.edit().putString(Constants.accSpKey,"");
                                 }
                             }
                             plus.setText(Constants.user.plusAsMoney());
@@ -258,7 +271,7 @@ public class PlusDollarsActivity extends BaseActivity
                             meal.setText(Constants.user.meals+"");
 
                             DateTime start = new DateTime();
-                            DateTime end = new DateTime(Constants.endOfSpring[0], Constants.endOfSpring[1], Constants.endOfSpring[2], 0, 0, 0, 0);
+                            DateTime end = new DateTime(Constants.endOfQuarter[0], Constants.endOfQuarter[1], Constants.endOfQuarter[2], 0, 0, 0, 0);
                             Days d = Days.daysBetween(start, end);
                             Weeks w = Weeks.weeksBetween(start, end);
                             String temp = Constants.user.plusAsMoney();
@@ -266,6 +279,12 @@ public class PlusDollarsActivity extends BaseActivity
 
                             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
                             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+                            sp.edit().putInt("StartYear", Constants.startOfQuarter[0])
+                                    .putInt("EndYear",Constants.endOfQuarter[0])
+                                    .putInt("StartMonth",Constants.startOfQuarter[1])
+                                    .putInt("EndMonth",Constants.endOfQuarter[1])
+                                    .putInt("StartDay",Constants.startOfQuarter[2])
+                                    .putInt("EndDay",Constants.endOfQuarter[2]).commit();
                         }
                         setProgressBarIndeterminateVisibility(false);
                         //used when TransactionActivity calls this activity, closes immediately for a more seamless transition
@@ -277,6 +296,17 @@ public class PlusDollarsActivity extends BaseActivity
                 });
             }
         });
+    }
+    private void loadBudget()
+    {
+        Constants.startOfQuarter = new int[3];
+        Constants.endOfQuarter = new int[3];
+        Constants.startOfQuarter[0] = sp.getInt("StartYear",0);
+        Constants.endOfQuarter[0] = sp.getInt("EndYear",0);
+        Constants.startOfQuarter[1] = sp.getInt("StartMonth",0);
+        Constants.endOfQuarter[1] = sp.getInt("EndMonth",0);
+        Constants.startOfQuarter[2] = sp.getInt("StartDay",0);
+        Constants.endOfQuarter[2] = sp.getInt("EndDay",0);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

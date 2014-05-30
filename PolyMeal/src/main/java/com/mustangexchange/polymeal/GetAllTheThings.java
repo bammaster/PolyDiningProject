@@ -10,8 +10,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -36,11 +42,20 @@ public class GetAllTheThings
         this.a = a;
     }
 
-    public Account getTheThings()
+    public Account getTheThings() throws BudgetException
     {
         Log.v("Blake","Started.");
         try
         {
+            getDates();
+        }
+        catch(IOException e)
+        {
+            throw new BudgetException();
+        }
+        try
+        {
+
             handleInitConnection();
             Connection.Response loginResponse = handleCookies();
             Log.v("Blake","Connected!");
@@ -295,5 +310,24 @@ public class GetAllTheThings
             skeyBuilder.append(docText.charAt(i));
         }
         return skeyBuilder.toString();
+    }
+    private void getDates() throws IOException
+    {
+        URL dateUrl = new URL(Constants.DATE_URL);
+        URLConnection dateCon = dateUrl.openConnection();
+        InputStream is = dateCon.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String start = br.readLine();
+        String end = br.readLine();
+        String[] temp = end.split("/");
+        Constants.endOfQuarter = new int[3];
+        Constants.endOfQuarter[0] = new Integer(temp[2]);
+        Constants.endOfQuarter[1] = new Integer(temp[0]);
+        Constants.endOfQuarter[2] = new Integer(temp[1]);
+        temp = start.split("/");
+        Constants.startOfQuarter = new int[3];
+        Constants.startOfQuarter[0] = new Integer(temp[2]);
+        Constants.startOfQuarter[1] = new Integer(temp[0]);
+        Constants.startOfQuarter[2] = new Integer(temp[1]);
     }
 }

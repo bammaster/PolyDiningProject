@@ -12,18 +12,16 @@ public class Venue
 {
     //holds the item sets for a venue.
     protected ArrayList<ItemSet> venueItems;
-    private ArrayList<VenueTime> times;
+    protected ArrayList<VenueTime> times;
     //String key for retrieving data from shared preferences.
     private String name;
-    private String url;
     private int id;
-    //construct a venu with a name and url.
-    public Venue(String name, String url, int id)
+    //construct a venue with a name and url.
+    public Venue(String name, int id)
     {
         venueItems = new ArrayList<ItemSet>();
         times = new ArrayList<VenueTime>();
         this.name = name;
-        this.url = url;
         this.id = id;
     }
     public String getName()

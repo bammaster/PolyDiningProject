@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -68,6 +70,8 @@ public class GetData extends AsyncTask<String, String, Integer> {
      */
     protected void onPostExecute(Integer result)
     {
+        list.clear();
+        list.addAll(Constants.venues.keySet());
         mActivity.setProgressBarIndeterminateVisibility(false);
         sp.edit().putBoolean(Constants.firstLaunch,false).commit();
     }
@@ -82,17 +86,6 @@ public class GetData extends AsyncTask<String, String, Integer> {
     {
         try
         {
-            //Next few lines handle making an XML String to parse.
-
-            //possibly faster
-            /*HttpParams httpparams = new BasicHttpParams();
-            httpparams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-            HttpClient httpclient = new DefaultHttpClient(httpparams);
-            HttpGet request = new HttpGet(Constants.URL);
-            HttpResponse httpResponse = httpclient.execute(request);
-            HttpEntity entity = httpResponse.getEntity();
-            InputStream is = entity.getContent();*/
-
             URL url = new URL(Constants.URL);
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
@@ -102,7 +95,11 @@ public class GetData extends AsyncTask<String, String, Integer> {
             while((line = br.readLine()) != null)
                 sb.append(line);
             //Parses and stores all of the apps data.
-            new VenueParser().parseAndStore(Jsoup.parse(sb.toString(), "", Parser.xmlParser()), this, sp.edit());
+            new VenueParser().parse(Jsoup.parse(sb.toString(), "", Parser.xmlParser()), this);
+            int version = sp.getInt("DBVersion", 1);
+            Database db = new Database(mActivity, version++);
+            sp.edit().putInt("DBVersion", version).commit();
+            store(db);
         }
         catch(IOException e)
         {
@@ -111,20 +108,19 @@ public class GetData extends AsyncTask<String, String, Integer> {
             connectionError.setTitle(R.string.error_conn_title);
             connectionError.setMessage(R.string.error_conn_msg);
             connectionError.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int button) {
-                    //If data is in the cache, load from it.
-                    if (!sp.getString(Constants.speKey, "").equals("")) {
-                        Constants.venues = new Gson().fromJson(sp.getString(Constants.speKey, ""), Constants.gsonType);
-                        for (String venue : Constants.venues.keySet()) {
-                            list.add(venue);
-                        }
-                    }
-                }
+                public void onClick(DialogInterface dialog, int button) {}
             });
             mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    connectionError.show();
+                    String json = sp.getString(Constants.speKey, "");
+                    if (!json.equals("")) {
+                        Constants.venues = new Gson().fromJson(json, Constants.gsonType);
+                        list.addAll(Constants.venues.keySet());
+                    }
+                    else{
+                        connectionError.show();
+                    }
                 }
             });
         }
@@ -157,6 +153,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
+        Log.e("Blake",Constants.names.toString());
         if(!Constants.names.contains(values[0]))
         {
             list.add(values[0]);
@@ -171,5 +168,11 @@ public class GetData extends AsyncTask<String, String, Integer> {
     {
         publishProgress(name);
     }
-
+    private void store(Database db)
+    {
+         for(String s : Constants.names)
+         {
+                db.updateVenues(Constants.venues.get(s));
+         }
+    }
 }
