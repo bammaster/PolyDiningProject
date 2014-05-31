@@ -17,6 +17,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mustangexchange.polymeal.Exceptions.BudgetException;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Weeks;
@@ -66,26 +69,26 @@ public class PlusDollarsActivity extends BaseActivity
         factory = LayoutInflater.from(this);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         name.setTypeface(font);
-        Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+        Statics.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
         //If the loaded Constants.user does not exist or the user said not to remember.
-        if(Constants.user == null || !Constants.user.remember)
+        if(Statics.user == null || !Statics.user.remember)
         {
             handleLogin();
         }
-        else if(Constants.user.remember)
+        else if(Statics.user.remember)
         {
             loadBudget();
             DateTime start = new DateTime();
-            DateTime end = new DateTime(Constants.endOfQuarter[0], Constants.endOfQuarter[1], Constants.endOfQuarter[2], 0, 0, 0, 0);
+            DateTime end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
             Days d = Days.daysBetween(start, end);
             Weeks w = Weeks.weeksBetween(start, end);
-            String temp = Constants.user.plusAsMoney();
+            String temp = Statics.user.plusAsMoney();
             temp = temp.substring(1);
 
-            name.setText(Constants.user.name);
-            plus.setText(Constants.user.plusAsMoney());
-            express.setText(Constants.user.expressAsMoney());
-            meal.setText(Constants.user.meals + "");
+            name.setText(Statics.user.name);
+            plus.setText(Statics.user.plusAsMoney());
+            express.setText(Statics.user.expressAsMoney());
+            meal.setText(Statics.user.meals + "");
             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
             weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
@@ -151,19 +154,19 @@ public class PlusDollarsActivity extends BaseActivity
     protected void onResume()
     {
         super.onResume();
-        if(Constants.user!= null)
+        if(Statics.user!= null)
         {
-            if(name != null && Constants.user.name!= null) {
-                setTextSizeName(Constants.user.name, name);
+            if(name != null && Statics.user.name!= null) {
+                setTextSizeName(Statics.user.name, name);
             }
         }
     }
     protected void onStop()
     {
         super.onStop();
-        if(Constants.user != null) {
-            if (Constants.user.remember) {
-                Constants.user.saveAccount(getSharedPreferences(Constants.accSpKey, MODE_PRIVATE));
+        if(Statics.user != null) {
+            if (Statics.user.remember) {
+                Statics.user.saveAccount(getSharedPreferences(Constants.accSpKey, MODE_PRIVATE));
             }
         }
     }
@@ -207,7 +210,7 @@ public class PlusDollarsActivity extends BaseActivity
         login.setPositiveButton("Login", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id)
             {
-                Constants.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
+                Statics.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
                 setProgressBarIndeterminateVisibility(true);
                 buildThread(name, remember).start();
                 dialog.dismiss();
@@ -227,9 +230,9 @@ public class PlusDollarsActivity extends BaseActivity
         return new Thread(new Runnable() {
             @Override
             public void run() {
-                GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
+                GetAllTheThings getPlusData = new GetAllTheThings(Statics.user);
                 try {
-                    Constants.user = getPlusData.getTheThings();
+                    Statics.user = getPlusData.getTheThings();
                 }
                 catch(BudgetException e)
                 {
@@ -244,47 +247,47 @@ public class PlusDollarsActivity extends BaseActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(Constants.user == null)
+                        if(Statics.user == null)
                         {
                             Toast.makeText(PlusDollarsActivity.this, "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
                             handleLogin();
                         }
                         else
                         {
-                            setTextSizeName(Constants.user.name, name);
-                            name.setText(Constants.user.name);
+                            setTextSizeName(Statics.user.name, name);
+                            name.setText(Statics.user.name);
                             if(remember != null)
                             {
 
                                 if(remember.isChecked())
                                 {
-                                    Constants.user.remember = true;
-                                    Constants.user.saveAccount(sp);
+                                    Statics.user.remember = true;
+                                    Statics.user.saveAccount(sp);
                                 }
                                 else
                                 {
                                     sp.edit().putString(Constants.accSpKey,"");
                                 }
                             }
-                            plus.setText(Constants.user.plusAsMoney());
-                            express.setText(Constants.user.expressAsMoney());
-                            meal.setText(Constants.user.meals+"");
+                            plus.setText(Statics.user.plusAsMoney());
+                            express.setText(Statics.user.expressAsMoney());
+                            meal.setText(Statics.user.meals+"");
 
                             DateTime start = new DateTime();
-                            DateTime end = new DateTime(Constants.endOfQuarter[0], Constants.endOfQuarter[1], Constants.endOfQuarter[2], 0, 0, 0, 0);
+                            DateTime end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
                             Days d = Days.daysBetween(start, end);
                             Weeks w = Weeks.weeksBetween(start, end);
-                            String temp = Constants.user.plusAsMoney();
+                            String temp = Statics.user.plusAsMoney();
                             temp = temp.substring(1);
 
                             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
                             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-                            sp.edit().putInt("StartYear", Constants.startOfQuarter[0])
-                                    .putInt("EndYear",Constants.endOfQuarter[0])
-                                    .putInt("StartMonth",Constants.startOfQuarter[1])
-                                    .putInt("EndMonth",Constants.endOfQuarter[1])
-                                    .putInt("StartDay",Constants.startOfQuarter[2])
-                                    .putInt("EndDay",Constants.endOfQuarter[2]).commit();
+                            sp.edit().putInt("StartYear", Statics.startOfQuarter[0])
+                                    .putInt("EndYear",Statics.endOfQuarter[0])
+                                    .putInt("StartMonth",Statics.startOfQuarter[1])
+                                    .putInt("EndMonth",Statics.endOfQuarter[1])
+                                    .putInt("StartDay",Statics.startOfQuarter[2])
+                                    .putInt("EndDay",Statics.endOfQuarter[2]).commit();
                         }
                         setProgressBarIndeterminateVisibility(false);
                         //used when TransactionActivity calls this activity, closes immediately for a more seamless transition
@@ -299,14 +302,14 @@ public class PlusDollarsActivity extends BaseActivity
     }
     private void loadBudget()
     {
-        Constants.startOfQuarter = new int[3];
-        Constants.endOfQuarter = new int[3];
-        Constants.startOfQuarter[0] = sp.getInt("StartYear",0);
-        Constants.endOfQuarter[0] = sp.getInt("EndYear",0);
-        Constants.startOfQuarter[1] = sp.getInt("StartMonth",0);
-        Constants.endOfQuarter[1] = sp.getInt("EndMonth",0);
-        Constants.startOfQuarter[2] = sp.getInt("StartDay",0);
-        Constants.endOfQuarter[2] = sp.getInt("EndDay",0);
+        Statics.startOfQuarter = new int[3];
+        Statics.endOfQuarter = new int[3];
+        Statics.startOfQuarter[0] = sp.getInt("StartYear",0);
+        Statics.endOfQuarter[0] = sp.getInt("EndYear",0);
+        Statics.startOfQuarter[1] = sp.getInt("StartMonth",0);
+        Statics.endOfQuarter[1] = sp.getInt("EndMonth",0);
+        Statics.startOfQuarter[2] = sp.getInt("StartDay",0);
+        Statics.endOfQuarter[2] = sp.getInt("EndDay",0);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

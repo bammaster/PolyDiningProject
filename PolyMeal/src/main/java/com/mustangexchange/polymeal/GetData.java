@@ -71,7 +71,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
     protected void onPostExecute(Integer result)
     {
         list.clear();
-        list.addAll(Constants.venues.keySet());
+        list.addAll(Statics.venues.keySet());
         mActivity.setProgressBarIndeterminateVisibility(false);
         sp.edit().putBoolean(Constants.firstLaunch,false).commit();
     }
@@ -115,8 +115,8 @@ public class GetData extends AsyncTask<String, String, Integer> {
                 public void run() {
                     String json = sp.getString(Constants.speKey, "");
                     if (!json.equals("")) {
-                        Constants.venues = new Gson().fromJson(json, Constants.gsonType);
-                        list.addAll(Constants.venues.keySet());
+                        Statics.venues = new Gson().fromJson(json, Constants.gsonType);
+                        list.addAll(Statics.venues.keySet());
                     }
                     else{
                         connectionError.show();
@@ -153,8 +153,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
-        Log.e("Blake",Constants.names.toString());
-        if(!Constants.names.contains(values[0]))
+        if(!Statics.names.contains(values[0]))
         {
             list.add(values[0]);
         }
@@ -170,9 +169,9 @@ public class GetData extends AsyncTask<String, String, Integer> {
     }
     private void store(Database db)
     {
-         for(String s : Constants.names)
+         for(String s : Statics.names)
          {
-                db.updateVenues(Constants.venues.get(s));
+                db.updateVenues(Statics.venues.get(s));
          }
     }
 }

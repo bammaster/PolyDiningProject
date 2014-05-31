@@ -1,9 +1,8 @@
 package com.mustangexchange.polymeal;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.mustangexchange.polymeal.Exceptions.TimeException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,7 +24,7 @@ public class  VenueParser
      * @param data Reference to the GetData Object that called this method.
      * @throws IOException If a connection error occurs.
      */
-    public void parse(Document doc, GetData data) throws IOException
+    public void parse(Document doc, GetData data) throws IOException, TimeException
     {
         Elements links = doc.select("link");
         ItemSet subVenue;
@@ -38,7 +37,7 @@ public class  VenueParser
             String link = links.get(counter).text();
             Venue venue = new Venue(venueName,counter);
             handleTimes(times, venue);
-            Constants.venues.put(venueName, venue);
+            Statics.venues.put(venueName, venue);
             Document venDoc = Jsoup.connect(link).get();
             //Gets each category of each venue which represents an ItemSet.
             for(Element category : venDoc.select("category"))
@@ -83,7 +82,7 @@ public class  VenueParser
                     }
                     subVenue.add(item);
                 }
-                Constants.venues.get(venueName).venueItems.add(subVenue);
+                Statics.venues.get(venueName).venueItems.add(subVenue);
             }
             data.update(venueName);
             counter++;
@@ -128,7 +127,7 @@ public class  VenueParser
      * @param times The Html with all of the times.
      * @param venue The current venue that's being constructed.
      */
-    private void handleTimes(Elements times, Venue venue)
+    private void handleTimes(Elements times, Venue venue) throws TimeException
     {
         try
         {
@@ -159,6 +158,7 @@ public class  VenueParser
         catch(Exception e)
         {
             Log.e("Blake","Error with times!", e);
+            throw new TimeException();
         }
     }
 
