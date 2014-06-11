@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,6 +54,10 @@ public class PlusDollarsActivity extends BaseActivity
     private Context mContext;
     private Activity mActivity;
     private SharedPreferences sp;
+    private DateTime start;
+    private DateTime end;
+    private Days d;
+    private Weeks w;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -78,23 +84,18 @@ public class PlusDollarsActivity extends BaseActivity
         else if(Statics.user.remember)
         {
             loadBudget();
-            DateTime start = new DateTime();
-            DateTime end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
-            Days d = Days.daysBetween(start, end);
-            Weeks w = Weeks.weeksBetween(start, end);
             String temp = Statics.user.plusAsMoney();
             temp = temp.substring(1);
-
             name.setText(Statics.user.name);
             plus.setText(Statics.user.plusAsMoney());
             express.setText(Statics.user.expressAsMoney());
             meal.setText(Statics.user.meals + "");
             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
         }
         fadeIn();
         update = buildThread(name,remember);
+        handleMusic();
     }
 
     /**
@@ -160,6 +161,20 @@ public class PlusDollarsActivity extends BaseActivity
                 setTextSizeName(Statics.user.name, name);
             }
         }
+        if(Statics.endOfQuarter == null) {
+            loadBudget();
+        }
+        start = new DateTime(Statics.startOfQuarter[0], Statics.startOfQuarter[1], Statics.startOfQuarter[2], 0, 0, 0, 0);
+        end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
+        d = Days.daysBetween(start, end);
+        w = Weeks.weeksBetween(start, end);
+        if(w.getWeeks() > 10)
+        {
+            weeksLeft.setText(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
+        }
+        else {
+            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
+        }
     }
     protected void onStop()
     {
@@ -217,6 +232,28 @@ public class PlusDollarsActivity extends BaseActivity
             }
         });
         login.show();
+    }
+
+    /**
+     * Sets up the media player for the John Doe "easter egg".
+     */
+    private void handleMusic()
+    {
+        MediaPlayer mp = MediaPlayer.create(PlusDollarsActivity.this, R.raw.john_doe_sample);
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(final MediaPlayer mediaPlayer) {
+                name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(name.getText().toString().equals("John Doe")) {
+                            mediaPlayer.seekTo(0);
+                            mediaPlayer.start();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -336,4 +373,5 @@ public class PlusDollarsActivity extends BaseActivity
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

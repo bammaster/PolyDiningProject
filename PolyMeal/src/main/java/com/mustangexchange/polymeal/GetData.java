@@ -11,16 +11,7 @@ import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpParams;
+
 import org.jsoup.Jsoup;
 import org.jsoup.parser.Parser;
 
@@ -30,9 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 /**
  * Handles getting and parsing all of the data for the app from the internet.
@@ -43,6 +31,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
     private ArrayAdapter<String> list;
     private Activity mActivity;
     private SharedPreferences sp;
+    private Database db;
 
     /**
      * Builds a GetData object.
@@ -74,6 +63,15 @@ public class GetData extends AsyncTask<String, String, Integer> {
         list.addAll(Statics.venues.keySet());
         mActivity.setProgressBarIndeterminateVisibility(false);
         sp.edit().putBoolean(Constants.firstLaunch,false).commit();
+        int version = sp.getInt("DBVersion", 1);
+        db = new Database(mActivity, version++);
+        sp.edit().putInt("DBVersion", version).commit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                store(db);
+            }
+        }).start();
     }
 
     /**
@@ -96,10 +94,6 @@ public class GetData extends AsyncTask<String, String, Integer> {
                 sb.append(line);
             //Parses and stores all of the apps data.
             new VenueParser().parse(Jsoup.parse(sb.toString(), "", Parser.xmlParser()), this);
-            int version = sp.getInt("DBVersion", 1);
-            Database db = new Database(mActivity, version++);
-            sp.edit().putInt("DBVersion", version).commit();
-            store(db);
         }
         catch(IOException e)
         {
@@ -169,9 +163,10 @@ public class GetData extends AsyncTask<String, String, Integer> {
     }
     private void store(Database db)
     {
-         for(String s : Statics.names)
-         {
-                db.updateVenues(Statics.venues.get(s));
-         }
+        SQLiteDatabase temp = db.getWritableDatabase();
+        for(String s : Statics.names)
+        {
+            db.updateVenues(Statics.venues.get(s), temp);
+        }
     }
 }

@@ -22,17 +22,7 @@ public class Constants
     public static final String spKey = "Venue Cache";
     public static final String accSpKey = "Account";
     public static final String speKey = "Cache";
-    public static String firstLaunch = "firstLaunch";
-    public static int[] endOfQuarter;
-    public static int[] startOfQuarter;
-    public static Account user;
-    public static String lastVenue = "";
-    //Main data structure. Contains all venue data.
-    public static TreeMap<String, Venue> venues;
-    //Stores the venue names for the PolyMEalActivity list view.
-    public static ArrayList<String> names = new ArrayList<String>();
-    //not constant as it needs to be changed but should only be one of them.
-    public static String activityTitle = "";
+    public static final String firstLaunch = "firstLaunch";
     //Conversion for hours to minutes
     public static final int HOURS_TO_MINUTES = 60;
     public static final int ELEVEN_O_CLOCK_MINUTES = 1379;
@@ -43,5 +33,6 @@ public class Constants
     public static final String JSA_LOGIN_URL = "https://services.jsatech.com/login.php?skey=";
     public static final String JSA_INDEX_URL = "https://services.jsatech.com/index.php?skey=";
     public static final String CAL_POLY_GREEN = "#036228";
+    public static final int DATE_ARRAY_SIZE = 3;
     private Constants(){}
 }

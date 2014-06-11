@@ -4,17 +4,12 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.mustangexchange.polymeal.Exceptions.BudgetException;
 
 /**
  * Created by jon on 3/23/14.
@@ -43,8 +38,8 @@ public class TransactionActivity extends BaseActivity {
     protected void onResume()
     {
         super.onResume();
-        Constants.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
-        if(Constants.user == null)
+        Statics.user = new Account().loadAccount(getSharedPreferences(Constants.accSpKey,MODE_PRIVATE));
+        if(Statics.user == null)
         {
             Toast.makeText(mContext, "Please login.", Toast.LENGTH_LONG).show();
             try
@@ -64,7 +59,7 @@ public class TransactionActivity extends BaseActivity {
         else
         {
             lv = (ListView) findViewById(R.id.listView);
-            lv.setAdapter(ta = new TransactionAdapter(mContext, Constants.user.transactions));
+            lv.setAdapter(ta = new TransactionAdapter(mContext, Statics.user.transactions));
         }
     }
 
@@ -74,8 +69,8 @@ public class TransactionActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    GetAllTheThings getPlusData = new GetAllTheThings(Constants.user);
-                    Constants.user = getPlusData.getTheThings();
+                    GetAllTheThings getPlusData = new GetAllTheThings(Statics.user);
+                    Statics.user = getPlusData.getTheThings();
                 }
                 catch(BudgetException e)
                 {

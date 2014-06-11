@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Blake on 5/9/2014.
@@ -55,9 +56,8 @@ public class Database extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + itemTable);
         onCreate(db);
     }
-    public void updateVenues(Venue venue)
+    public void updateVenues(Venue venue, SQLiteDatabase db)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(colName, venue.getName());
         cv.put(colIdVenue, venue.getId());

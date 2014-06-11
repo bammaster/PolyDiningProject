@@ -41,7 +41,7 @@ public class CompleteorActivity extends Activity {
         mContext = this;
         activity = this;
         mActionBar = getActionBar();
-        mActionBar.setTitle(Constants.activityTitle);
+        mActionBar.setTitle(Statics.activityTitle);
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
 
@@ -334,9 +334,9 @@ public class CompleteorActivity extends Activity {
         @Override
         protected String doInBackground(String... params) {
             possibleItems = new ItemSet();
-            for(Venue venue : Constants.venues.values())
+            for(Venue venue : Statics.venues.values())
             {
-                if(venue.getName().equals(Constants.activityTitle))
+                if(venue.getName().equals(Statics.activityTitle))
                 for(ItemSet itemset : venue.venueItems)
                 {
                     for(Item item : itemset.items)

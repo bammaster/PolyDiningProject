@@ -2,7 +2,8 @@ package com.mustangexchange.polymeal;
 
 import android.util.Log;
 
-import org.joda.time.DateTime;
+import com.mustangexchange.polymeal.Exceptions.BudgetException;
+
 import org.jsoup.Connection;
 import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
@@ -15,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.KeyManagementException;
@@ -320,14 +320,33 @@ public class GetAllTheThings
         String start = br.readLine();
         String end = br.readLine();
         String[] temp = end.split("/");
-        Constants.endOfQuarter = new int[3];
-        Constants.endOfQuarter[0] = new Integer(temp[2]);
-        Constants.endOfQuarter[1] = new Integer(temp[0]);
-        Constants.endOfQuarter[2] = new Integer(temp[1]);
+        if(checkDate(temp)) {
+            Statics.endOfQuarter = new int[3];
+            Statics.endOfQuarter[0] = new Integer(temp[2]);
+            Statics.endOfQuarter[1] = new Integer(temp[0]);
+            Statics.endOfQuarter[2] = new Integer(temp[1]);
+        }
         temp = start.split("/");
-        Constants.startOfQuarter = new int[3];
-        Constants.startOfQuarter[0] = new Integer(temp[2]);
-        Constants.startOfQuarter[1] = new Integer(temp[0]);
-        Constants.startOfQuarter[2] = new Integer(temp[1]);
+        if(checkDate(temp)) {
+            Statics.startOfQuarter = new int[3];
+            Statics.startOfQuarter[0] = new Integer(temp[2]);
+            Statics.startOfQuarter[1] = new Integer(temp[0]);
+            Statics.startOfQuarter[2] = new Integer(temp[1]);
+        }
+    }
+    private boolean checkDate(String[] dates) {
+        if (dates.length != Constants.DATE_ARRAY_SIZE) {
+            return false;
+        } else {
+            for (int i = 0; i < dates.length; i++) {
+                try {
+                    dates[i].replace(" ", "");
+                    Integer.parseInt(dates[i]);
+                } catch (NumberFormatException ne) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

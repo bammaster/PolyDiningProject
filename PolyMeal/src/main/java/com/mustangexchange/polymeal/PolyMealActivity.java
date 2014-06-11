@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,35 +43,31 @@ public class PolyMealActivity extends BaseActivity
         init(mContext, mActionBar);
         sp = getSharedPreferences(Constants.spKey, MODE_PRIVATE);
         lv = (ListView)findViewById(R.id.listView);
-        listAdapter = new ListAdapter(this, R.id.polymealListItem, Constants.names);
+        listAdapter = new ListAdapter(this, R.id.polymealListItem, Statics.names);
         setupList();
         if(sp.getBoolean(Constants.firstLaunch,true))
         {
             getData();
         }
-        else if(Constants.venues == null)
-        {
+        else if(Statics.venues == null) {
             new Thread(new Runnable() {
                 @Override
-                public void run()
-                {
-                    String gson = sp.getString(Constants.speKey,"");
-                    Constants.venues = new Gson().fromJson(gson,Constants.gsonType);
-                    if(Constants.venues == null)
-                    {
+                public void run() {
+                    String gson = sp.getString(Constants.speKey, "");
+                    Statics.venues = new Gson().fromJson(gson, Constants.gsonType);
+                    if (Statics.venues == null) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mContext,"Error! Reloading data!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext, "Error! Reloading data!", Toast.LENGTH_LONG).show();
                             }
                         });
                         getData();
-                    }
-                    else {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                listAdapter.addAll(Constants.venues.keySet());
+                                listAdapter.addAll(Statics.venues.keySet());
                             }
                         });
                     }
@@ -115,7 +110,7 @@ public class PolyMealActivity extends BaseActivity
     private void getData()
     {
         setProgressBarIndeterminateVisibility(true);
-        Constants.venues = new TreeMap<String, Venue>(new VenueNameComparator());
+        Statics.venues = new TreeMap<String, Venue>(new VenueNameComparator());
         new GetData(listAdapter, this, sp).execute();
     }
     private void setupList()
@@ -128,9 +123,8 @@ public class PolyMealActivity extends BaseActivity
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
                 final int fIndex = index;
-                Constants.activityTitle = Constants.names.get(index);
-                Log.e("Blake",Constants.venues.get(Constants.names.get(index)).isOpen()+"");
-                if(!Constants.lastVenue.equals(Constants.names.get(index))
+                Statics.activityTitle = Statics.names.get(index);
+                if(!Statics.lastVenue.equals(Statics.names.get(index))
                         && MoneyTime.moneySpent.compareTo(new BigDecimal("0.00")) != 0) {
                     final QustomDialogBuilder onListClick = new QustomDialogBuilder(PolyMealActivity.mActivity);
                     onListClick.setDividerColor(Constants.CAL_POLY_GREEN);
@@ -142,7 +136,7 @@ public class PolyMealActivity extends BaseActivity
                         public void onClick(DialogInterface dialog, int button) {
                             Cart.clear();
                             final Intent intentVenue = new Intent(mContext, VenueActivity.class);
-                            Constants.lastVenue= Constants.names.get(fIndex);
+                            Statics.lastVenue= Statics.names.get(fIndex);
                             intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mContext.startActivity(intentVenue);
                         }
@@ -154,7 +148,7 @@ public class PolyMealActivity extends BaseActivity
                     onListClick.show();
                 } else {
                     final Intent intentVenue = new Intent(mContext, VenueActivity.class);
-                    Constants.lastVenue = Constants.names.get(index);
+                    Statics.lastVenue = Statics.names.get(index);
                     intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mContext.startActivity(intentVenue);
                 }
@@ -178,12 +172,12 @@ public class PolyMealActivity extends BaseActivity
                 convertView = inflater.inflate(R.layout.polymeal_list_item, parent, false);
             }
             TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
-            tt.setText("  " + Constants.names.get(position));
-            if(Constants.venues.get(Constants.names.get(position)).closeSoon())
+            tt.setText("  " + Statics.names.get(position));
+            if(Statics.venues.get(Statics.names.get(position)).closeSoon())
             {
                 tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.soon_dot),null,null,null);
             }
-            else if(Constants.venues.get(Constants.names.get(position)).isOpen())
+            else if(Statics.venues.get(Statics.names.get(position)).isOpen())
             {
                 tt.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.open_dot),null,null,null);
             }
@@ -193,7 +187,7 @@ public class PolyMealActivity extends BaseActivity
             }
             if(animationCounter <= position) {
                 convertView.setAlpha(0f);
-                convertView.animate().alpha(1.0f).setDuration(1000).start();
+                convertView.animate().alpha(1.0f).setDuration(1000).setStartDelay(50).start();
                 animationCounter++;
             }
             if(animationCounter >= getCount() && position == 0)

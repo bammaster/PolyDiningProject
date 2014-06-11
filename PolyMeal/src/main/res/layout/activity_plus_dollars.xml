@@ -82,7 +82,8 @@
                     android:id="@+id/mealText"
                     android:textSize="30sp"
                 android:layout_below="@+id/mealHeader"
-                android:layout_alignRight="@+id/budgetText1" />
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="17dp" />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

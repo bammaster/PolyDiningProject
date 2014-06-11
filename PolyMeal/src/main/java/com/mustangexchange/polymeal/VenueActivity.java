@@ -66,7 +66,7 @@ public class VenueActivity extends FragmentActivity {
             System.out.println("got here");
             MoneyTime.moneySpent = new BigDecimal(savedInstanceState.getString("moneySpent"));
             Cart.cart = savedInstanceState.getParcelableArrayList("cart");
-            Constants.lastVenue = savedInstanceState.getString("lastVenue");
+            Statics.lastVenue = savedInstanceState.getString("lastVenue");
             startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NO_ANIMATION));
             overridePendingTransition(0, 0); //no animation
@@ -125,8 +125,8 @@ public class VenueActivity extends FragmentActivity {
 
         myPagerTabStrip = (PagerTabStrip) findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
-        venue = Constants.venues.get(Constants.activityTitle);
-        mActionBar.setTitle(Constants.activityTitle);
+        venue = Statics.venues.get(Statics.activityTitle);
+        mActionBar.setTitle(Statics.activityTitle);
 
         updateBalance();
         updateSettings();
@@ -138,7 +138,7 @@ public class VenueActivity extends FragmentActivity {
         // Put all your data in the outState bundle
         outState.putParcelableArrayList("cart", Cart.getCart());
         outState.putString("moneySpent", MoneyTime.moneySpent.toString());
-        outState.putString("lastVenue", Constants.lastVenue);
+        outState.putString("lastVenue", Statics.lastVenue);
     }
     //Handles chaning the view based upon user input
 
@@ -240,7 +240,7 @@ public class VenueActivity extends FragmentActivity {
             //Alerts the user if they will exceed their plus dollars with whats in the cart.
             if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
             {
-                if(totalAmount.multiply(new BigDecimal("-1")).compareTo(Constants.user.plusDollars) > 0)
+                if(totalAmount.multiply(new BigDecimal("-1")).compareTo(Statics.user.plusDollars) > 0)
                 {
                     QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(mContext);
                     plusDollarsExceeded.setDividerColor(Constants.CAL_POLY_GREEN);
