@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 /**
  * Parses all data of the venues for the PolyMeal and Venue Activities.
  */
@@ -41,6 +45,7 @@ public class  VenueParser
             Venue venue = new Venue(venueName,link,counter);
             handleTimes(times, venue);
             Constants.venues.put(venueName, venue);
+            setHostNameVerifier();
             Document venDoc = Jsoup.connect(link).get();
             //Gets each category of each venue which represents an ItemSet.
             for(Element category : venDoc.select("category"))
@@ -186,5 +191,21 @@ public class  VenueParser
         {
             return Integer.parseInt(number);
         }
+    }
+
+    /**
+     * Resets the hostname verifier for the Plus Dollars portion, so that the connection does not fail.
+     */
+    private void setHostNameVerifier()
+    {
+        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+            public boolean verify(String hostname,SSLSession session) {
+                if (hostname.equals(Constants.CP_DINING_HOSTNAME)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 }

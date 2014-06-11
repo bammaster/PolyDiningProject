@@ -10,27 +10,12 @@ import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpParams;
+
 import org.jsoup.Jsoup;
 import org.jsoup.parser.Parser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 
 /**
  * Handles getting and parsing all of the data for the app from the internet.
@@ -84,23 +69,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
         {
             //Next few lines handle making an XML String to parse.
 
-            //possibly faster
-            /*HttpParams httpparams = new BasicHttpParams();
-            httpparams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-            HttpClient httpclient = new DefaultHttpClient(httpparams);
-            HttpGet request = new HttpGet(Constants.URL);
-            HttpResponse httpResponse = httpclient.execute(request);
-            HttpEntity entity = httpResponse.getEntity();
-            InputStream is = entity.getContent();*/
-
-            URL url = new URL(Constants.URL);
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while((line = br.readLine()) != null)
-                sb.append(line);
+            String sb = Constants.getHTML(Constants.URL);
             //Parses and stores all of the apps data.
             new VenueParser().parseAndStore(Jsoup.parse(sb.toString(), "", Parser.xmlParser()), this, sp.edit());
         }
