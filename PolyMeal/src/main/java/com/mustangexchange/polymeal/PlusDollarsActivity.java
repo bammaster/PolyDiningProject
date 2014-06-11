@@ -94,8 +94,24 @@ public class PlusDollarsActivity extends BaseActivity
             plus.setText(Constants.user.plusAsMoney());
             express.setText(Constants.user.expressAsMoney());
             meal.setText(Constants.user.meals + "");
-            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+
+            try
+            {
+                budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+            }
+            catch (Exception e)
+            {
+                budget1.setText(Constants.user.plusAsMoney());
+            }
+
+            try
+            {
+                budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+            }
+            catch (Exception e)
+            {
+                budget2.setText(Constants.user.plusAsMoney());
+            }
         }
         fadeIn();
         update = buildThread(name,remember);
@@ -264,8 +280,23 @@ public class PlusDollarsActivity extends BaseActivity
                             String temp = Constants.user.plusAsMoney();
                             temp = temp.substring(1);
 
-                            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-                            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+                            try
+                            {
+                                budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+                            }
+                            catch (Exception e)
+                            {
+                                budget1.setText(Constants.user.plusAsMoney());
+                            }
+
+                            try
+                            {
+                                budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+                            }
+                            catch (Exception e)
+                            {
+                                budget2.setText(Constants.user.plusAsMoney());
+                            }
                         }
                         setProgressBarIndeterminateVisibility(false);
                         //used when TransactionActivity calls this activity, closes immediately for a more seamless transition

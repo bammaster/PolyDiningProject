@@ -106,6 +106,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
         }
         catch(IOException e)
         {
+            Log.e("Blake","Connection error.",e);
             //Displays an error message in the event of a connection error.
             final AlertDialog.Builder connectionError = new AlertDialog.Builder(mActivity);
             connectionError.setTitle(R.string.error_conn_title);
