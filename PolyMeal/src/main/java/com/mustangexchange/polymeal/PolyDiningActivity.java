@@ -1,6 +1,8 @@
 package com.mustangexchange.polymeal;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -32,6 +34,21 @@ public class PolyDiningActivity extends Activity
         plus.setAlpha(0);
         meal.setAlpha(0);
         fadeIn();
+        QustomDialogBuilder login = new QustomDialogBuilder(this);
+        if(getSharedPreferences(Constants.spKey, MODE_PRIVATE).getInt("MessageClick",0)==1) {
+            login.setTitleColor(Constants.CAL_POLY_GREEN);
+            login.setDividerColor(Constants.CAL_POLY_GREEN);
+            login.setTitle("Hello!");
+            login.setMessage("The Plus Dollars issue has been fixed. The app was dividing by 0 since there are \"0 weeks\" " +
+                    "left in the quarter and ripped a hole in the space time continuum causing the app to crash. Anyway, good luck on finals and have an awesome summer!");
+            login.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    getSharedPreferences(Constants.spKey, MODE_PRIVATE).edit().putInt("MessageClick", 1);
+
+                }
+            });
+            login.show();
+        }
     }
     private void fadeIn()
     {
