@@ -35,7 +35,7 @@ public class PolyDiningActivity extends Activity
         meal.setAlpha(0);
         fadeIn();
         QustomDialogBuilder login = new QustomDialogBuilder(this);
-        if(getSharedPreferences(Constants.spKey, MODE_PRIVATE).getInt("MessageClick",0)==1) {
+        if(getSharedPreferences(Constants.spKey, MODE_PRIVATE).getInt("MessageClick",0)==0) {
             login.setTitleColor(Constants.CAL_POLY_GREEN);
             login.setDividerColor(Constants.CAL_POLY_GREEN);
             login.setTitle("Hello!");
@@ -43,7 +43,7 @@ public class PolyDiningActivity extends Activity
                     "left in the quarter and ripped a hole in the space time continuum causing the app to crash. Anyway, good luck on finals and have an awesome summer!");
             login.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    getSharedPreferences(Constants.spKey, MODE_PRIVATE).edit().putInt("MessageClick", 1);
+                    getSharedPreferences(Constants.spKey, MODE_PRIVATE).edit().putInt("MessageClick", 1).commit();
 
                 }
             });
