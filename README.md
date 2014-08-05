@@ -1,6 +1,6 @@
 PolyDiningProject
 =================
-SNAPSHOT BRANCH - STABLE RELEASES THAT ARE NOT FINALIZED ONLY
+SNAPSHOT BRANCH - STABLE RELEASES THAT ARE NOT FINALIZED
 
 The goto application for Cal poly freshman in regards to campus dining.
 This Android application allows students to check their Plus Dollars and Meal Credits on the fly,
