@@ -47,14 +47,6 @@ public class GetAllTheThings
         Log.v("Blake","Started.");
         try
         {
-            getDates();
-        }
-        catch(IOException e)
-        {
-            throw new BudgetException();
-        }
-        try
-        {
 
             handleInitConnection();
             Connection.Response loginResponse = handleCookies();
@@ -310,43 +302,5 @@ public class GetAllTheThings
             skeyBuilder.append(docText.charAt(i));
         }
         return skeyBuilder.toString();
-    }
-    private void getDates() throws IOException
-    {
-        URL dateUrl = new URL(Constants.DATE_URL);
-        URLConnection dateCon = dateUrl.openConnection();
-        InputStream is = dateCon.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String start = br.readLine();
-        String end = br.readLine();
-        String[] temp = end.split("/");
-        if(checkDate(temp)) {
-            Statics.endOfQuarter = new int[3];
-            Statics.endOfQuarter[0] = new Integer(temp[2]);
-            Statics.endOfQuarter[1] = new Integer(temp[0]);
-            Statics.endOfQuarter[2] = new Integer(temp[1]);
-        }
-        temp = start.split("/");
-        if(checkDate(temp)) {
-            Statics.startOfQuarter = new int[3];
-            Statics.startOfQuarter[0] = new Integer(temp[2]);
-            Statics.startOfQuarter[1] = new Integer(temp[0]);
-            Statics.startOfQuarter[2] = new Integer(temp[1]);
-        }
-    }
-    private boolean checkDate(String[] dates) {
-        if (dates.length != Constants.DATE_ARRAY_SIZE) {
-            return false;
-        } else {
-            for (int i = 0; i < dates.length; i++) {
-                try {
-                    dates[i].replace(" ", "");
-                    Integer.parseInt(dates[i]);
-                } catch (NumberFormatException ne) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

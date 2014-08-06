@@ -93,7 +93,7 @@ public class GetData extends AsyncTask<String, String, Integer> {
             while((line = br.readLine()) != null)
                 sb.append(line);
             //Parses and stores all of the apps data.
-            new VenueParser().parse(Jsoup.parse(sb.toString(), "", Parser.xmlParser()), this);
+            Statics.venues = new Gson().fromJson(sb.toString(),Constants.gsonType);
         }
         catch(IOException e)
         {
