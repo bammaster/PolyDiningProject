@@ -5,23 +5,40 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.math.BigDecimal;
 
-
-public class Item implements Parcelable
+/**
+ * This class represents a Item on a menu at a restaurant on campus.
+ */
+public class Item implements Parcelable, Comparable<Item>
 {
-    private String name = null;
-    private BigDecimal price = null;
-    private String description;
-    private boolean isValid = true;
-    private boolean ounces = false;
+    /**The name of the item.*/
+    private String name;
 
-    public Item(String name, BigDecimal price, String description, boolean isValid)
+    /**The price of the item.*/
+    private BigDecimal price;
+
+    /**The description of the item if it exists.*/
+    private String description;
+
+    /**Whether or not this item is priced per ounce.*/
+    private boolean isPricePerOunce;
+
+    /**
+     * Builds a new Item with all of its properties.
+     * @param name The name of the new Item.
+     * @param price The price of the new Item.
+     * @param description The description of the new Item.
+     */
+    public Item(String name, BigDecimal price, String description)
     {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.isValid = isValid;
     }
 
+    /**
+     * Builds a new Item from a Parcel.
+     * @param in The Parcel to build the Item from.
+     */
     public Item(Parcel in) {
         String[] strData = new String[3];
         boolean[] boolData = new boolean[2];
@@ -31,43 +48,64 @@ public class Item implements Parcelable
         this.price = new BigDecimal(strData[1]);
         this.description = strData[2];
         in.readBooleanArray(boolData);
-        this.isValid = boolData[0];
-        this.ounces = boolData[1];
+        this.isPricePerOunce = boolData[0];
     }
 
+    /**
+     * Builds a new Item by copying another Item.
+     * @param item The Item to copy.
+     */
     public Item(Item item)
     {
-        name = item.getName();
-        price = item.getPrice();
-        description = item.getDescription();
-        isValid = item.getValid();
-        ounces = item.getOunces();
+        this.name = item.name;
+        this.price = new BigDecimal(item.price.toString());
+        this.description = item.description;
+        this.isPricePerOunce = item.isPricePerOunce;
     }
 
+    /**
+     * Builds an item by partially copying another item and a new price.
+     * @param item The Item to partially copy.
+     * @param price The price of the new Item.
+     */
     public Item(Item item, BigDecimal price) {
-        this.name = item.getName();
-        this.price = price;
-        this.description = item.getDescription();
-        this.isValid = item.getValid();
+        this.name = item.name;
+        this.price = new BigDecimal(price.toString());
+        this.description = item.description;
     }
 
+    /**
+     * The default constructor.
+     */
     public Item(){}
 
-    public void setName(String title)
+    /**
+     * Sets the name of the Item.
+     * @param name The name of the Item.
+     */
+    public void setName(String name)
     {
-        this.name = title;
+        this.name = name;
     }
 
+    /**
+     * Gets the name of this Item.
+     * @return The name of the Item.
+     */
     public String getName()
     {
         return this.name;
     }
 
+    /**
+     * Gets this Item's price as a BigDecimal
+     * @return This Item's price.
+     */
     public BigDecimal getPrice()
     {
         if(price != null)
         {
-            return format(price);
+            return format();
         }
         else
         {
@@ -75,54 +113,78 @@ public class Item implements Parcelable
         }
     }
 
+    /**
+     * Gets this Item's price as a String.
+     * @return The Item's price as a String.
+     */
     public String getPriceString()
     {
-        if(price!=null)
+        if(price != null)
         {
-            return "$"+ format(price);
+            return "$"+ format();
         }
         else
         {
-            return "";
+            return "$0.00";
         }
     }
 
+    /**
+     * Sets this Item's price.
+     * @param price The BigDecimal to set this Item's price to.
+     */
     public void setPrice(BigDecimal price)
     {
-        this.price = price;
+        this.price = new BigDecimal(price.toString());
     }
 
+    /**
+     * Gets this Item's description.
+     * @return The Item's description.
+     */
     public String getDescription()
     {
         return description;
     }
 
+    /**
+     * Sets this Item's description.
+     * @param description The Item's description.
+     */
     public void setDescription(String description)
     {
         this.description = description;
     }
 
-    public boolean getValid()
+    /**
+     * Sets this Item as price per ounce.
+     * @param isPricePerOunce Whether or not the Item is price per ounce.
+     */
+    public void setIsPricePerOunce(boolean isPricePerOunce)
     {
-        return isValid;
+        this.isPricePerOunce = isPricePerOunce;
     }
 
-    public void setOunces(boolean ounces)
+    /**
+     * Gets whether or not this Item is price per ounce.
+     * @return Whether or not this Item is price per ounce.
+     */
+    public boolean getIsPricePerOunce()
     {
-        this.ounces = ounces;
+        return isPricePerOunce;
     }
 
-    public boolean getOunces()
-    {
-        return ounces;
-    }
-
-    private BigDecimal format(BigDecimal price)
+    /**
+     * Formats the price as currency.
+     * @return The formatted price.
+     */
+    private BigDecimal format()
     {
         String priceString = price.toString();
         priceString = Constants.currency.format(Double.valueOf(priceString));
         return new BigDecimal(priceString.replace("$",""));
     }
+
     public int describeContents(){
         return 0;
     }
@@ -132,8 +194,7 @@ public class Item implements Parcelable
         dest.writeStringArray(new String[] {this.name,
                 this.price.toString(),
                 this.description});
-        dest.writeBooleanArray(new boolean[] {this.isValid,
-                this.ounces});
+        dest.writeBooleanArray(new boolean[] {this.isPricePerOunce});
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Item createFromParcel(Parcel in) {
@@ -144,4 +205,15 @@ public class Item implements Parcelable
             return new Item[size];
         }
     };
+
+    /**
+     * Compares two items by name and returns the result.
+     * @param other The other Item to compare to this Item.
+     * @return See compareTo documentation.
+     */
+    @Override
+    public int compareTo(Item other)
+    {
+        return this.name.compareTo(other.name);
+    }
 }

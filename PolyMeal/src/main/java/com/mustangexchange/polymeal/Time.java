@@ -5,12 +5,48 @@ package com.mustangexchange.polymeal;
  */
 public class Time
 {
+    /**Conversion constant for hours to minutes.*/
+    private static final int HOURS_TO_MINUTES = 60;
+
+    /**This times hour value.*/
     private int hour;
+
+    /**The number of minutes for this time*/
     private int minutes;
+
+    /**
+     * Builds a new time.
+     * @param hour The hour for the new time.
+     * @param minutes The number of minutes for the new time.
+     */
     public Time(int hour, int minutes)
     {
-        this.hour = hour;
-        this.minutes = minutes;
+        if(hour > 23)
+        {
+            this.hour = 23;
+        }
+        else
+        {
+            this.hour = hour;
+        }
+        if(minutes > 60)
+        {
+            this.minutes = 60;
+        }
+        else
+        {
+            this.minutes = minutes;
+        }
+    }
+
+    /**
+     * Builds a Time by copying another Time.
+     * @param time The Time to copy.
+     */
+    public Time(Time time)
+    {
+        this.hour = time.hour;
+        this.minutes = time.minutes;
     }
 
     /**
@@ -19,9 +55,13 @@ public class Time
      */
     public int getTimeInMinutes()
     {
-        return hour*Constants.HOURS_TO_MINUTES + minutes;
+        return hour*HOURS_TO_MINUTES + minutes;
     }
 
+    /**
+     * Converts this time to the String representation of a time such as 8:00 PM
+     * @return The String representation of a time.
+     */
     @Override
     public String toString()
     {

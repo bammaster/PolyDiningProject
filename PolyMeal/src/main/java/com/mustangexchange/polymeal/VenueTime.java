@@ -13,12 +13,33 @@ public class VenueTime
      * This is why open and closed are array lists. Open is for the opening times and closed is for
      * the closing times.
      */
-    protected ArrayList<Time> open;
-    protected ArrayList<Time> closed;
+    private ArrayList<Time> open;
+    private ArrayList<Time> closed;
+
+    /**
+     * The default constructor.
+     */
     public VenueTime()
     {
         open = new ArrayList<Time>();
         closed = new ArrayList<Time>();
+    }
+
+    /**
+     * Builds a VenueTime by copying another VenueTime.
+     * @param venueTime The VenueTime to copy.
+     */
+    public VenueTime(VenueTime venueTime)
+    {
+        for(Time time : venueTime.open)
+        {
+            open.add(new Time(time));
+        }
+        for(Time time : venueTime.closed)
+        {
+            closed.add(new Time(time));
+        }
+        this.closedAllDay = venueTime.closedAllDay;
     }
 
     /**
