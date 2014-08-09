@@ -187,7 +187,7 @@ public class GetAllTheThings
                     }
                     if (!time.isEmpty() && !location.isEmpty() && !ammount.isEmpty()) {
                         Log.v("Blake",time+"|"+location+"|"+ammount);
-                        a.transactions.add(new Transaction(i, time, location, ammount));
+                        a.transactions.add(new Transaction(MealType.none, time, location, ammount));
                     }
                 }
             }

@@ -5,8 +5,8 @@ package com.mustangexchange.polymeal;
  */
 public class Transaction
 {
-    /**The type, meal of dollar, of the purchase made.*/
-    private int type;
+    /**The type, meal or dollar, of the purchase made.*/
+    private MealType type;
 
     /**The location of the purchase.*/
     private String place;
@@ -24,7 +24,7 @@ public class Transaction
      * @param date The date the transaction was made.
      * @param amount The amount of the transaction.
      */
-    public Transaction(int type, String place, String date, String amount) {
+    public Transaction(MealType type, String place, String date, String amount) {
         this.type = type;
         this.place = place;
         this.amount = amount;
@@ -46,7 +46,7 @@ public class Transaction
      * Gets the type of transaction.
      * @return The type of the transaction.
      */
-    public int getType()
+    public MealType getType()
     {
         return type;
     }
