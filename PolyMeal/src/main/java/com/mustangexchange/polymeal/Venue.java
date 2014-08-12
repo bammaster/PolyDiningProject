@@ -29,17 +29,22 @@ public class Venue
     /**ID used for situations where a numerical identifier is needed.*/
     private int id;
 
+    /**Specifies if the venue accepts meal credits or not.*/
+    private MealType mealType;
+
     /**
      * Construct a venue with a name and numerical id.
      * @param name The name of the new Venue.
      * @param id The numerical ID of the new Venue.
+     * @param mealType Specifies if the venue accepts meal credits or not.
      */
-    public Venue(String name, int id)
+    public Venue(String name, int id, MealType mealType)
     {
         venueItemSets = new ArrayList<ItemSet>();
         venueTimes = new ArrayList<VenueTime>();
         this.name = name;
         this.id = id;
+        this.mealType = mealType;
     }
 
     /**
@@ -209,4 +214,21 @@ public class Venue
     {
         this.venueTimes.add(new VenueTime(venueTime));
     }
+
+    /**
+     * Gets if the venue accepts meal credits or not.
+     * @return Does the venue accept meal credits?
+     */
+    private MealType getType()
+    {
+        if(mealType == MealType.meal)
+        {
+            return MealType.meal;
+        }
+        else
+        {
+            return MealType.plus;
+        }
+    }
+
 }
