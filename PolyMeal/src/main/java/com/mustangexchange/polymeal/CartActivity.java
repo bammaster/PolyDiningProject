@@ -1,44 +1,47 @@
 package com.mustangexchange.polymeal;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.*;
-import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
-import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
+import com.mustangexchange.polymeal.models.Cart;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class CartActivity extends Activity {
 
     private ListView lv;
-    private CartItemAdapter cartAdapter;
-    private static BigDecimal totalAmount;
-    private static ActionBar mActionBar;
+    private CartAdapter cartAdapter;
+    public static Activity mActivity;
 
-    private static Context mContext;
-    public static Activity activity;
+    private CartPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        cartAdapter = new CartItemAdapter(this, updateSettings());
-        mContext = this;
-        activity = this;
+        mActivity = this;
+
+        init();
+
+        presenter = new CartPresenter(this);
+
+        updateBalance();
+
+        isCartEmpty();
+    }
+
+    private void init()
+    {
+        cartAdapter = new CartAdapter(this);
 
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(cartAdapter);
@@ -46,7 +49,8 @@ public class CartActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
-                final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+                final AlertDialog.Builder onListClick= new AlertDialog.Builder(mActivity);
+                System.out.println(pos);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
                 onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " +  Cart.getCart().get(pos).getPriceString());
@@ -62,11 +66,6 @@ public class CartActivity extends Activity {
                 onListClick.show();
             }
         });
-
-        mActionBar = getActionBar();
-        updateBalance();
-
-        isCartEmpty();
     }
 
     public void isCartEmpty()
@@ -89,7 +88,7 @@ public class CartActivity extends Activity {
     public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView)findViewById(titleId);
-        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        if(presenter.getTotalAmount().compareTo(BigDecimal.ZERO) < 0)
         {
             yourTextView.setTextColor(Color.RED);
         }
@@ -102,61 +101,24 @@ public class CartActivity extends Activity {
     public void updateBalance() {
         try
         {
-            totalAmount = MoneyTime.calcTotalMoney();
             setSubtitleColor();
-            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
+            getActionBar().setSubtitle("$" + presenter.getTotalAmount() + " Remaining");
         }
         catch (NullPointerException e)
         {
-            Intent intentHome = new Intent(mContext, MainActivity.class);
+            Intent intentHome = new Intent(this, PolyMealActivity.class);
             intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            mContext.startActivity(intentHome);
+            startActivity(intentHome);
         }
-    }
-
-    public ArrayList<Item> updateSettings() {
-        ArrayList<Item> cart = new ArrayList<Item>();
-        try
-        {
-            cart = Cart.getCart();
-            SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
-            int sortMode;
-
-            sortMode = Integer.valueOf(defaultSp.getString("sortMode", "0"));
-
-            if(sortMode == 0) {
-                Collections.sort(cart, new ItemNameComparator());
-            }
-            else if(sortMode == 1)
-            {
-                Collections.sort(cart, new ItemNameComparator());
-                Collections.reverse(cart);
-            } else if(sortMode == 2)
-            {
-                Collections.sort(cart, new ItemPriceComparator());
-            }
-            else
-            {
-                Collections.sort(cart, new ItemPriceComparator());
-                Collections.reverse(cart);
-            }
-            return cart;
-            }
-        catch (NullPointerException e)
-        {
-            Intent intentHome = new Intent(mContext, MainActivity.class);
-            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            mContext.startActivity(intentHome);
-        }
-        return cart;
     }
 
     public void onResume()
     {
         super.onResume();
+        isCartEmpty();
         cartAdapter.updateCart();
         updateBalance();
-        updateSettings();
+        presenter.updateSettings();
     }
 
     @Override
@@ -176,10 +138,10 @@ public class CartActivity extends Activity {
     {
         switch (item.getItemId())
         {
-            case R.id.menuCom:
+            /*case R.id.menuCom:
                 Intent intent = new Intent(this, CompleteorActivity.class);
                 startActivity(intent);
-                return true;
+                return true;*/
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();
@@ -193,14 +155,12 @@ public class CartActivity extends Activity {
         }
     }
 
-    public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
+    public class CartAdapter extends BaseAdapter implements View.OnClickListener {
         private Context context;
-        private ArrayList<Item> cart;
 
-        public CartItemAdapter(Context context, ArrayList<Item> cart)
+        public CartAdapter(Context context)
         {
             this.context = context;
-            this.cart = cart;
         }
 
         public void updateCart()
@@ -210,17 +170,17 @@ public class CartActivity extends Activity {
 
         public void clearCart()
         {
-            cart.clear();
+            Cart.clear();
         }
 
         public int getCount()
         {
-            return cart.size();
+            return Cart.getCart().size();
         }
 
         public Object getItem(int position)
         {
-            return cart.get(position);
+            return Cart.get(position);
         }
 
         public long getItemId(int position)
@@ -237,10 +197,10 @@ public class CartActivity extends Activity {
                 convertView = inflater.inflate(R.layout.row_item_cart, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(cart.get(position).getName().replace("@#$",""));
+            tvName.setText(Cart.get(position).getName().replace("@#$",""));
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            tvPrice.setText("$" + cart.get(position).getPrice());
+            tvPrice.setText("$" + Cart.get(position).getPrice());
 
 
             //Set the onClick Listener on this button
@@ -258,11 +218,10 @@ public class CartActivity extends Activity {
         {
             Integer entry = (Integer) view.getTag();
             Cart.remove(entry);
-            cart.remove(entry);
             updateBalance();
             isCartEmpty();
             notifyDataSetChanged();
         }
     }
-    
+
 }

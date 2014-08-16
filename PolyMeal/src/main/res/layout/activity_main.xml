@@ -1,80 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+<?xml version="1.0" encoding="utf-8"?>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Welcome."
-            android:id="@+id/welcomeText"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
-            android:textSize="60dp"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sandwich Factory"
-            android:id="@+id/buttonSand"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/welcomeText"
-            android:layout_alignRight="@+id/welcomeText"
-            android:onClick="sandwich"/>
-
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vista Grande"
-            android:id="@+id/buttonVista"
-        android:onClick="vg"
-        android:layout_below="@+id/buttonSand"
-        android:layout_alignLeft="@+id/buttonSand"
-        android:layout_alignRight="@+id/buttonSand" />
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Select a Meal Location:"
-            android:id="@+id/selectText"
-            android:textSize="20dp"
-        android:layout_marginBottom="17dp"
-        android:layout_above="@+id/buttonSand"
-        android:layout_centerHorizontal="true" />
-
-    <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Downloading Vista Grande Menu Data..."
-            android:id="@+id/textDownload"
-            android:layout_above="@+id/progressBar"
-            android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tacos To Go"
-        android:id="@+id/buttonTaco"
-        android:layout_below="@+id/buttonVista"
-        android:layout_alignRight="@+id/buttonVista"
-        android:layout_alignLeft="@+id/buttonVista"
-        android:onClick="taco" />
-</RelativeLayout>
+    <fragment android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/fragment"
+              android:name="com.jamireh.PolyDiningDemo.PolyDiningFragment"/>
+</LinearLayout>
