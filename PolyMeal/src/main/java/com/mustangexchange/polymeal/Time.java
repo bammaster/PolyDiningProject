@@ -8,6 +8,18 @@ public class Time
     /**Conversion constant for hours to minutes.*/
     private static final int HOURS_TO_MINUTES = 60;
 
+    /**Default hour in case of an invalid time.*/
+    private static final int DEFAULT_HOUR = 23;
+
+    /**Default minutes in case of an invalid time.*/
+    private static final int DEFAULT_MINUTES = 59;
+
+    /**Default time in minutes in case of an invalid time.*/
+    private static final int DEFAULT_TIME_IN_MINUTES = 1439;
+
+    /**Used to determine if the time time is AM or PM.*/
+    private static final int AM_TO_PM_HOUR = 12;
+
     /**This times hour value.*/
     private int hour;
 
@@ -21,17 +33,17 @@ public class Time
      */
     public Time(int hour, int minutes)
     {
-        if(hour > 23)
+        if(hour > DEFAULT_HOUR)
         {
-            this.hour = 23;
+            this.hour = DEFAULT_HOUR;
         }
         else
         {
             this.hour = hour;
         }
-        if(minutes > 60)
+        if(minutes > DEFAULT_MINUTES)
         {
-            this.minutes = 60;
+            this.minutes = DEFAULT_MINUTES;
         }
         else
         {
@@ -47,6 +59,20 @@ public class Time
     {
         this.hour = time.hour;
         this.minutes = time.minutes;
+    }
+
+    public Time(int timeInMinutes)
+    {
+        if(timeInMinutes <= DEFAULT_TIME_IN_MINUTES)
+        {
+            hour = timeInMinutes/HOURS_TO_MINUTES;
+            minutes = timeInMinutes%HOURS_TO_MINUTES;
+        }
+        else
+        {
+            hour = DEFAULT_HOUR;
+            minutes = DEFAULT_MINUTES;
+        }
     }
 
     /**
@@ -66,7 +92,7 @@ public class Time
     public String toString()
     {
         String amOrPm = "PM";
-        if(hour < 12)
+        if(hour < AM_TO_PM_HOUR)
         {
             amOrPm = "AM";
         }
