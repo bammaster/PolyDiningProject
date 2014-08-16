@@ -61,6 +61,10 @@ public class Time
         this.minutes = time.minutes;
     }
 
+    /**
+     * Builds a time from the time in minutes. Useful for building times from the database.
+     * @param timeInMinutes The time in minutes to make this time for.
+     */
     public Time(int timeInMinutes)
     {
         if(timeInMinutes <= DEFAULT_TIME_IN_MINUTES)
