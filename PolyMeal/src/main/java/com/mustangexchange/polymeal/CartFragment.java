@@ -1,52 +1,57 @@
 package com.mustangexchange.polymeal;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.*;
-import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
-import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
+import com.mustangexchange.polymeal.models.Cart;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
 
-public class CartActivity extends Activity {
-
+public class CartFragment extends Fragment
+{
     private ListView lv;
-    private CartItemAdapter cartAdapter;
-    private static BigDecimal totalAmount;
-    private static ActionBar mActionBar;
-
-    private static Context mContext;
-    public static Activity activity;
+    private CartAdapter cartAdapter;
+    private View v;
+    private CartPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        cartAdapter = new CartItemAdapter(this, updateSettings());
-        mContext = this;
-        activity = this;
+        v = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        lv = (ListView)findViewById(R.id.listView);
+        init();
+
+        presenter = new CartPresenter(getActivity());
+
+        updateBalance();
+
+        isCartEmpty();
+
+        return v;
+    }
+
+    private void init()
+    {
+        cartAdapter = new CartAdapter();
+
+        this.setHasOptionsMenu(true);
+
+        lv = (ListView) v.findViewById(R.id.listView);
         lv.setAdapter(cartAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
-                final AlertDialog.Builder onListClick= new AlertDialog.Builder(activity);
+                final AlertDialog.Builder onListClick= new AlertDialog.Builder(getActivity());
+                System.out.println(pos);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
                 onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " +  Cart.getCart().get(pos).getPriceString());
@@ -62,20 +67,14 @@ public class CartActivity extends Activity {
                 onListClick.show();
             }
         });
-
-        mActionBar = getActionBar();
-        updateBalance();
-
-        isCartEmpty();
     }
 
     public void isCartEmpty()
     {
-        if(lv.getAdapter().getCount() > 0) {
-        }
-        else
+        if(lv.getAdapter().getCount() <= 0)
         {
-            setContentView(R.layout.empty_cart);
+            v.findViewById(R.id.cart).setVisibility(View.GONE);
+            v.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
         }
     }
 
@@ -88,8 +87,8 @@ public class CartActivity extends Activity {
 
     public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-        TextView yourTextView = (TextView)findViewById(titleId);
-        if(totalAmount.compareTo(BigDecimal.ZERO) < 0)
+        TextView yourTextView = (TextView) getActivity().findViewById(titleId);
+        if(presenter.getTotalAmount().compareTo(BigDecimal.ZERO) < 0)
         {
             yourTextView.setTextColor(Color.RED);
         }
@@ -100,55 +99,8 @@ public class CartActivity extends Activity {
     }
 
     public void updateBalance() {
-        try
-        {
-            totalAmount = MoneyTime.calcTotalMoney();
-            setSubtitleColor();
-            mActionBar.setSubtitle("$" + totalAmount + " Remaining");
-        }
-        catch (NullPointerException e)
-        {
-            Intent intentHome = new Intent(mContext, PolyMealActivity.class);
-            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            mContext.startActivity(intentHome);
-        }
-    }
-
-    public ArrayList<Item> updateSettings() {
-        ArrayList<Item> cart = new ArrayList<Item>();
-        try
-        {
-            cart = Cart.getCart();
-            SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(this);
-            int sortMode;
-
-            sortMode = Integer.valueOf(defaultSp.getString("sortMode", "0"));
-
-            if(sortMode == 0) {
-                Collections.sort(cart, new ItemNameComparator());
-            }
-            else if(sortMode == 1)
-            {
-                Collections.sort(cart, new ItemNameComparator());
-                Collections.reverse(cart);
-            } else if(sortMode == 2)
-            {
-                Collections.sort(cart, new ItemPriceComparator());
-            }
-            else
-            {
-                Collections.sort(cart, new ItemPriceComparator());
-                Collections.reverse(cart);
-            }
-            return cart;
-        }
-        catch (NullPointerException e)
-        {
-            Intent intentHome = new Intent(mContext, PolyMealActivity.class);
-            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            mContext.startActivity(intentHome);
-        }
-        return cart;
+        setSubtitleColor();
+        getActivity().getActionBar().setSubtitle("$" + presenter.getTotalAmount() + " Remaining");
     }
 
     public void onResume()
@@ -157,15 +109,15 @@ public class CartActivity extends Activity {
         isCartEmpty();
         cartAdapter.updateCart();
         updateBalance();
-        updateSettings();
+        presenter.updateSettings();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu,inflater);
+        menu.clear();
         inflater.inflate(R.menu.cart, menu);
-        return super.onCreateOptionsMenu(menu);
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -177,32 +129,24 @@ public class CartActivity extends Activity {
     {
         switch (item.getItemId())
         {
-            case R.id.menuCom:
+            /*case R.id.menuCom:
                 Intent intent = new Intent(this, CompleteorActivity.class);
                 startActivity(intent);
-                return true;
+                return true;*/
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();
                 cartAdapter.notifyDataSetChanged();
                 isCartEmpty();
                 updateBalance();
-                Toast.makeText(this, "Cart Cleared!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Cart Cleared!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public class CartItemAdapter extends BaseAdapter implements View.OnClickListener {
-        private Context context;
-        private ArrayList<Item> cart;
-
-        public CartItemAdapter(Context context, ArrayList<Item> cart)
-        {
-            this.context = context;
-            this.cart = cart;
-        }
+    public class CartAdapter extends BaseAdapter implements View.OnClickListener {
 
         public void updateCart()
         {
@@ -211,17 +155,17 @@ public class CartActivity extends Activity {
 
         public void clearCart()
         {
-            cart.clear();
+            Cart.clear();
         }
 
         public int getCount()
         {
-            return cart.size();
+            return Cart.getCart().size();
         }
 
         public Object getItem(int position)
         {
-            return cart.get(position);
+            return Cart.get(position);
         }
 
         public long getItemId(int position)
@@ -233,15 +177,14 @@ public class CartActivity extends Activity {
         {
             Integer entry = position;
             if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
                 convertView = inflater.inflate(R.layout.row_item_cart, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(cart.get(position).getName().replace("@#$",""));
+            tvName.setText(Cart.get(position).getName().replace("@#$",""));
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            tvPrice.setText("$" + cart.get(position).getPrice());
+            tvPrice.setText("$" + Cart.get(position).getPrice());
 
 
             //Set the onClick Listener on this button
@@ -259,11 +202,9 @@ public class CartActivity extends Activity {
         {
             Integer entry = (Integer) view.getTag();
             Cart.remove(entry);
-            cart.remove(entry);
             updateBalance();
             isCartEmpty();
             notifyDataSetChanged();
         }
     }
-
 }

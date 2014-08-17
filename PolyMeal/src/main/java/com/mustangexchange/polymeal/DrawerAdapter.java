@@ -10,16 +10,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Blake on 8/10/13.
- */
-public class ListViewArrayAdapter extends ArrayAdapter<String> {
+public class DrawerAdapter extends ArrayAdapter<String>
+{
 
     Context context;
     ArrayList<String> strings;
     Typeface font;
 
-    public ListViewArrayAdapter(Context context, ArrayList<String> strings) {
+    public DrawerAdapter(Context context, ArrayList<String> strings) {
         super(context, R.layout.drawer_list_item, strings);
         this.strings = strings;
         this.context = context;
@@ -28,36 +26,34 @@ public class ListViewArrayAdapter extends ArrayAdapter<String> {
 
     protected boolean callingClass(int position) {
         String parentClass = context.getClass().getSimpleName();
-        switch (position)
-        {
-            case 1:
-                if(parentClass.equals("PolyMealActivity"))
-                    return true;
-                break;
-            case 2:
-                if(parentClass.equals("PlusDollarsActivity"))
-                    return true;
-                break;
-            case 3:
-                if(parentClass.equals("TransactionActivity"))
-                    return true;
-                break;
-            default:
-                break;
+
+        if(parentClass.equals("PolyMealActivity") && position == 1) {
+            return true;
+        } else if(parentClass.equals("PlusDollarsActivity") && position == 2) {
+            return true;
+        } else if(parentClass.equals("TransactionActivity") && position == 3) {
+            return true;
         }
+
         return false;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         convertView = inflater.inflate(R.layout.drawer_list_item, parent, false);
+
         TextView drawerItem = (TextView) convertView.findViewById(R.id.text1);
         drawerItem.setText(strings.get(position));
-        if(callingClass(position))
+
+        if(callingClass(position)) {
             drawerItem.setTypeface(font, Typeface.BOLD);
-        else
+        }
+        else {
             drawerItem.setTypeface(font);
+        }
+
         return convertView;
 
     }

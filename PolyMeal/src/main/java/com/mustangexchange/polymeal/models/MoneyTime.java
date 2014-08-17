@@ -1,8 +1,9 @@
-package com.mustangexchange.polymeal;
+package com.mustangexchange.polymeal.models;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
+import com.mustangexchange.polymeal.PolyMealActivity;
 
 import java.math.BigDecimal;
 
@@ -23,7 +24,7 @@ public class MoneyTime
     public static BigDecimal calcTotalMoney()
     {
         SharedPreferences defaultSP;
-        defaultSP = PreferenceManager.getDefaultSharedPreferences(VenueActivity.mActivity);
+        defaultSP = PreferenceManager.getDefaultSharedPreferences(PolyMealActivity.mActivity);
         manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
 
 
@@ -75,5 +76,15 @@ public class MoneyTime
             realTime=3;
         }
         return realTime;
+    }
+
+    public static void setMoneySpent(BigDecimal newMoneySpent)
+    {
+        moneySpent = newMoneySpent;
+    }
+
+    public static BigDecimal getMoneySpent()
+    {
+        return new BigDecimal(moneySpent.toString());
     }
 }

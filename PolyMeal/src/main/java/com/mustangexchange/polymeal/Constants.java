@@ -1,12 +1,11 @@
 package com.mustangexchange.polymeal;
 
 import com.google.gson.reflect.TypeToken;
+import com.mustangexchange.polymeal.models.Venue;
 
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
  * Used to store most static types in the app. If multiple activities need access to it,
@@ -34,7 +33,7 @@ public class Constants
     public static final String CP_HOSTNAME = "my.calpoly.edu";
     public static final String JSA_LOGIN_URL = "https://services.jsatech.com/login.php?skey=";
     public static final String JSA_INDEX_URL = "https://services.jsatech.com/index.php?skey=";
-    public static String CAL_POLY_GREEN = "#036228";
+    public static String APP_COLOR = "#036228";
     public static final int DATE_ARRAY_SIZE = 3;
     private Constants(){}
 }

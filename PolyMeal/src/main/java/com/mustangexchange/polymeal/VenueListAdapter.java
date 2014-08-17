@@ -1,39 +1,30 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.mustangexchange.polymeal.models.Cart;
+import com.mustangexchange.polymeal.models.Item;
+import com.mustangexchange.polymeal.models.ItemSet;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener {
-    private Context context;
-    private Activity activity;
-    private String title;
+//VenueListAdapter inflates the rows for each Item in the ItemSet for the current page in the ViewPager
+
+public class VenueListAdapter extends BaseAdapter implements View.OnClickListener {
+    private static VenueListFragment fragment;
+    private VenueListPresenter presenter;
     private ArrayList<Item> items;
 
-    public FoodItemAdapter(Context context, String title, ArrayList<Item> sortedList)
+    public VenueListAdapter(Fragment fragment, VenueListPresenter presenter, ItemSet itemSet)
     {
-        this.context = context;
-        activity = (Activity) context;
-        this.title = title;
-        items = sortedList;
-    }
-
-    public void updateBalance()
-    {
-        VenueActivity.updateBalance();
-    }
-
-    public String getTitle()
-    {
-        return title;
+        this.fragment = (VenueListFragment) fragment;
+        this.items = itemSet.getItems();
+        this.presenter = presenter;
     }
 
     public int getCount()
@@ -54,8 +45,7 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
     public View getView(int position, View convertView, ViewGroup viewGroup)
     {
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
             convertView = inflater.inflate(R.layout.row_item, null);
         }
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
@@ -78,12 +68,12 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
     {
         final int position = (Integer) view.getTag();
         if (items.get(position).getOunces()) {
-            QustomDialogBuilder onYes = new QustomDialogBuilder(activity);
-            onYes.setDividerColor(Constants.CAL_POLY_GREEN);
-            onYes.setTitleColor(Constants.CAL_POLY_GREEN);
+            QustomDialogBuilder onYes = new QustomDialogBuilder(fragment.getActivity());
+            onYes.setDividerColor(Constants.APP_COLOR);
+            onYes.setTitleColor(Constants.APP_COLOR);
             onYes.setTitle("How much?");
             onYes.setMessage("Estimated Number of Ounces: ");
-            LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
+            LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
             View DialogView = inflater.inflate(R.layout.number_picker, null);
             final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
             np.setMinValue(1);
@@ -95,8 +85,8 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
                 public void onClick(DialogInterface dialog, int button) {
 
                     Cart.add(new Item(items.get(position), items.get(position).getPrice().multiply(new BigDecimal(np.getValue()))));
-                    Toast.makeText(activity, items.get(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
-                    updateBalance();
+                    Toast.makeText(fragment.getActivity(), items.get(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
+                    presenter.updateBalance();
                 }
             });
             onYes.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -107,9 +97,9 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         }
         else if(!items.get(position).getValid())
         {
-            QustomDialogBuilder invalidItem = new QustomDialogBuilder(activity);
-            invalidItem.setDividerColor(Constants.CAL_POLY_GREEN);
-            invalidItem.setDividerColor(Constants.CAL_POLY_GREEN);
+            QustomDialogBuilder invalidItem = new QustomDialogBuilder(fragment.getActivity());
+            invalidItem.setDividerColor(Constants.APP_COLOR);
+            invalidItem.setDividerColor(Constants.APP_COLOR);
             invalidItem.setTitle("Invalid Item!");
             invalidItem.setMessage("No price data was found for this item. It was not added to your cart.");
             invalidItem.setNeutralButton("OK",new DialogInterface.OnClickListener() {
@@ -122,8 +112,8 @@ public class FoodItemAdapter extends BaseAdapter implements View.OnClickListener
         else
         {
             Cart.add(items.get(position));
-            updateBalance();
-            Toast.makeText(context, items.get(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
+            presenter.updateBalance();
+            Toast.makeText(fragment.getActivity(), items.get(position).getName() + " added to Cart!",Toast.LENGTH_SHORT).show();
         }
     }
 }

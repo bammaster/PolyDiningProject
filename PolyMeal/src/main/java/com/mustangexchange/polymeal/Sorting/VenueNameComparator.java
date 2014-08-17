@@ -1,7 +1,5 @@
 package com.mustangexchange.polymeal.Sorting;
 
-import com.mustangexchange.polymeal.Venue;
-
 import java.util.Comparator;
 
 /**
