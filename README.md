@@ -1,6 +1,6 @@
 PolyDiningProject
 =================
-STABLE BRANCH - GOOGLE PLAY STORE RELEASES ONLY
+UIREFACTOR BRANCH
 
 The goto application for Cal poly freshman in regards to campus dining.
 This Android application allows students to check their Plus Dollars and Meal Credits on the fly,
