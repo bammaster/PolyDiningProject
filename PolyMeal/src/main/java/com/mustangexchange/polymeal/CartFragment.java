@@ -42,6 +42,8 @@ public class CartFragment extends Fragment
     {
         cartAdapter = new CartAdapter();
 
+        this.setHasOptionsMenu(true);
+
         lv = (ListView) v.findViewById(R.id.listView);
         lv.setAdapter(cartAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
