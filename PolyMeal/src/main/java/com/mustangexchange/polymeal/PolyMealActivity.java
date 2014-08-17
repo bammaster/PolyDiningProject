@@ -18,6 +18,11 @@ public class PolyMealActivity extends BaseActivity implements android.support.v4
 
         super.init(this, getActionBar(), true);
 
+        PolyMealFragment fragment = new PolyMealFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_layout, fragment).commit();
+
         mActivity = this;
     }
 

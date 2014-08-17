@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import com.mustangexchange.polymeal.models.Cart;
-import com.mustangexchange.polymeal.models.Item;
+import com.jamireh.PolyDiningDemo.models.Cart;
+import com.jamireh.PolyDiningDemo.models.Item;
 
 import java.math.BigDecimal;
 
@@ -26,7 +26,6 @@ public class VenueListFragment extends ListFragment
     {
         this.position = position;
         this.presenter = presenter;
-        presenter.setFragment(this);
     }
 
     @Override
@@ -40,6 +39,12 @@ public class VenueListFragment extends ListFragment
     {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(new VenueListAdapter(this, presenter, presenter.items));
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
     }
 
     @Override
@@ -70,7 +75,7 @@ public class VenueListFragment extends ListFragment
                         onYes.setView(DialogView);
                         onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
-                                Cart.add(new Item(((presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
+                                Cart.add(new Item( ( (presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                                 presenter.updateBalance();
                             }
                         });

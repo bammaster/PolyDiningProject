@@ -1,55 +1,54 @@
 package com.mustangexchange.polymeal;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.*;
 import com.mustangexchange.polymeal.models.Cart;
 
 import java.math.BigDecimal;
 
-public class CartActivity extends Activity {
-
+public class CartFragment extends Fragment
+{
     private ListView lv;
     private CartAdapter cartAdapter;
-    public static Activity mActivity;
-
+    private View v;
     private CartPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        mActivity = this;
+        v = inflater.inflate(R.layout.fragment_cart, container, false);
 
         init();
 
-        presenter = new CartPresenter(this);
+        presenter = new CartPresenter(getActivity());
 
         updateBalance();
 
         isCartEmpty();
+
+        return v;
     }
 
     private void init()
     {
-        cartAdapter = new CartAdapter(this);
+        cartAdapter = new CartAdapter();
 
-        lv = (ListView)findViewById(R.id.listView);
+        lv = (ListView) v.findViewById(R.id.listView);
         lv.setAdapter(cartAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
-                final AlertDialog.Builder onListClick= new AlertDialog.Builder(mActivity);
+                final AlertDialog.Builder onListClick= new AlertDialog.Builder(getActivity());
                 System.out.println(pos);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
@@ -70,11 +69,10 @@ public class CartActivity extends Activity {
 
     public void isCartEmpty()
     {
-        if(lv.getAdapter().getCount() > 0) {
-        }
-        else
+        if(lv.getAdapter().getCount() <= 0)
         {
-            setContentView(R.layout.empty_cart);
+            v.findViewById(R.id.cart).setVisibility(View.GONE);
+            v.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
         }
     }
 
@@ -87,7 +85,7 @@ public class CartActivity extends Activity {
 
     public void setSubtitleColor() {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-        TextView yourTextView = (TextView)findViewById(titleId);
+        TextView yourTextView = (TextView) getActivity().findViewById(titleId);
         if(presenter.getTotalAmount().compareTo(BigDecimal.ZERO) < 0)
         {
             yourTextView.setTextColor(Color.RED);
@@ -99,17 +97,8 @@ public class CartActivity extends Activity {
     }
 
     public void updateBalance() {
-        try
-        {
-            setSubtitleColor();
-            getActionBar().setSubtitle("$" + presenter.getTotalAmount() + " Remaining");
-        }
-        catch (NullPointerException e)
-        {
-            Intent intentHome = new Intent(this, PolyMealActivity.class);
-            intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intentHome);
-        }
+        setSubtitleColor();
+        getActivity().getActionBar().setSubtitle("$" + presenter.getTotalAmount() + " Remaining");
     }
 
     public void onResume()
@@ -122,11 +111,11 @@ public class CartActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu,inflater);
+        menu.clear();
         inflater.inflate(R.menu.cart, menu);
-        return super.onCreateOptionsMenu(menu);
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -148,7 +137,7 @@ public class CartActivity extends Activity {
                 cartAdapter.notifyDataSetChanged();
                 isCartEmpty();
                 updateBalance();
-                Toast.makeText(this, "Cart Cleared!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Cart Cleared!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -156,12 +145,6 @@ public class CartActivity extends Activity {
     }
 
     public class CartAdapter extends BaseAdapter implements View.OnClickListener {
-        private Context context;
-
-        public CartAdapter(Context context)
-        {
-            this.context = context;
-        }
 
         public void updateCart()
         {
@@ -192,8 +175,7 @@ public class CartActivity extends Activity {
         {
             Integer entry = position;
             if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
                 convertView = inflater.inflate(R.layout.row_item_cart, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
@@ -223,5 +205,4 @@ public class CartActivity extends Activity {
             notifyDataSetChanged();
         }
     }
-
 }

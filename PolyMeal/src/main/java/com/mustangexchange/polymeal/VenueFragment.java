@@ -1,14 +1,14 @@
 package com.mustangexchange.polymeal;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.*;
-import com.mustangexchange.polymeal.models.Cart;
-import com.mustangexchange.polymeal.models.MoneyTime;
+import com.jamireh.PolyDiningDemo.models.Cart;
+import com.jamireh.PolyDiningDemo.models.MoneyTime;
 
 //VenueFragment holds the ViewPager and the ViewPagerTabString
 
@@ -51,7 +51,7 @@ public class VenueFragment extends Fragment
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
         getActivity().getActionBar().setTitle(Statics.activityTitle);
 
-        updateBalance();
+        presenter.updateBalance();
         updateSettings();
     }
     @Override
@@ -68,44 +68,15 @@ public class VenueFragment extends Fragment
     {
         presenter.updateSettings();
 
-        vp.setAdapter(presenter.adapterInit(getActivity().getSupportFragmentManager()));
+        vp.setAdapter(presenter.adapterInit(this.getChildFragmentManager()));
         vp.getAdapter().notifyDataSetChanged();
-    }
-
-    public void updateBalance()
-    {
-        if(presenter.updateBalance())
-        {
-            QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(getActivity());
-            plusDollarsExceeded.setDividerColor(Constants.APP_COLOR);
-            plusDollarsExceeded.setTitleColor(Constants.APP_COLOR);
-            plusDollarsExceeded.setTitle(R.string.plusdollarsalert);
-            plusDollarsExceeded.setMessage(R.string.plusdollarsalertmessage);
-            plusDollarsExceeded.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                }
-            });
-            plusDollarsExceeded.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                }
-            });
-            plusDollarsExceeded.show();
-
-        }
-        presenter.setSubtitle();
     }
 
     @Override
     public void onResume()
     {
         super.onResume();
-        updateBalance();
+        presenter.updateBalance();
     }
 
     @Override
@@ -114,6 +85,7 @@ public class VenueFragment extends Fragment
         super.onDestroyView();
         getActivity().getActionBar().setSubtitle(null);
         getActivity().getActionBar().setTitle("PolyMeal");
+        vp.getAdapter().notifyDataSetChanged();
         vp.invalidate();
     }
 
@@ -131,8 +103,11 @@ public class VenueFragment extends Fragment
         switch (item.getItemId())
         {
             case R.id.cart:
-                Intent intent = new Intent(getActivity(), CartActivity.class);
-                startActivity(intent);
+                CartFragment cartFragment = new CartFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_layout, cartFragment)
+                        .addToBackStack(null);
+                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

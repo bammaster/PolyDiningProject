@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.mustangexchange.polymeal.models.Cart;
-import com.mustangexchange.polymeal.models.MoneyTime;
+import com.jamireh.PolyDiningDemo.models.Cart;
+import com.jamireh.PolyDiningDemo.models.MoneyTime;
 
 import java.math.BigDecimal;
 
@@ -106,8 +106,8 @@ public class PolyMealFragment extends Fragment
                             Statics.lastVenue= Statics.names.get(fIndex);
                             VenueFragment venueFragment = new VenueFragment();
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment, venueFragment)
-                                       .addToBackStack(null);
+                            transaction.replace(R.id.fragment_layout, venueFragment)
+                                    .addToBackStack(null);
                             transaction.commit();
                         }
                     });
@@ -124,7 +124,7 @@ public class PolyMealFragment extends Fragment
                     Statics.lastVenue= Statics.names.get(fIndex);
                     VenueFragment venueFragment = new VenueFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment, venueFragment)
+                    transaction.replace(R.id.fragment_layout, venueFragment)
                             .addToBackStack(null);
                     transaction.commit();
                 }
