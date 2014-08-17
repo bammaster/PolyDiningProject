@@ -19,6 +19,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
 {
     private FragmentManager fm;
     private PolyDiningActivity activity;
+    PolyDiningFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,11 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
         init();
 
         activity = this;
+
+        fragment = new PolyDiningFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_layout, fragment).commit();
 
         getConfigFromWeb();
     }
@@ -51,7 +57,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
     {
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(Constants.APP_COLOR)));
 
-        Fragment f = fm.findFragmentById(R.id.fragment);
+        Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;
@@ -64,7 +70,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
 
     public void setGreeting(String s)
     {
-        Fragment f = fm.findFragmentById(R.id.fragment);
+        Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;

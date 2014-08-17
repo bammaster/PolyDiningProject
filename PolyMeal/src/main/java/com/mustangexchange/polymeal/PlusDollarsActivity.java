@@ -22,6 +22,11 @@ public class PlusDollarsActivity extends BaseActivity implements android.support
 
         super.init(this, getActionBar(), true);
 
+        PlusDollarsFragment fragment = new PlusDollarsFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_layout, fragment).commit();
+
         init();
     }
 
@@ -55,7 +60,7 @@ public class PlusDollarsActivity extends BaseActivity implements android.support
     {
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(Constants.APP_COLOR)));
 
-        Fragment f = fm.findFragmentById(R.id.fragment);
+        Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;
@@ -68,7 +73,7 @@ public class PlusDollarsActivity extends BaseActivity implements android.support
 
     public void setGreeting(String s)
     {
-        Fragment f = fm.findFragmentById(R.id.fragment);
+        Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;
