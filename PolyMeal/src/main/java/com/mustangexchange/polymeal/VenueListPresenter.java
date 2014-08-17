@@ -1,8 +1,8 @@
 package com.mustangexchange.polymeal;
 
-import com.jamireh.PolyDiningDemo.models.ItemSet;
-
 //VenueListPresenter holds the ItemSet for the current page in the ViewPager
+
+import com.mustangexchange.polymeal.models.ItemSet;
 
 public class VenueListPresenter extends MealPresenter
 {

@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import com.jamireh.PolyDiningDemo.models.Cart;
-import com.jamireh.PolyDiningDemo.models.Item;
+import com.mustangexchange.polymeal.models.Cart;
+import com.mustangexchange.polymeal.models.Item;
 
 import java.math.BigDecimal;
 
@@ -75,7 +75,7 @@ public class VenueListFragment extends ListFragment
                         onYes.setView(DialogView);
                         onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int button) {
-                                Cart.add(new Item( ( (presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
+                                Cart.add(new Item(((presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                                 presenter.updateBalance();
                             }
                         });

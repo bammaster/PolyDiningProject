@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.jamireh.PolyDiningDemo.models.Cart;
-import com.jamireh.PolyDiningDemo.models.MoneyTime;
+import com.mustangexchange.polymeal.models.Cart;
+import com.mustangexchange.polymeal.models.MoneyTime;
 
 import java.math.BigDecimal;
 

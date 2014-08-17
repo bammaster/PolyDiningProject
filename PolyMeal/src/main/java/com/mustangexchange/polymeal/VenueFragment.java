@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.*;
-import com.jamireh.PolyDiningDemo.models.Cart;
-import com.jamireh.PolyDiningDemo.models.MoneyTime;
+import com.mustangexchange.polymeal.models.Cart;
+import com.mustangexchange.polymeal.models.MoneyTime;
 
 //VenueFragment holds the ViewPager and the ViewPagerTabString
 

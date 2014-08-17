@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
-import com.jamireh.PolyDiningDemo.models.MoneyTime;
+import com.mustangexchange.polymeal.models.MoneyTime;
 
 import java.math.BigDecimal;
 

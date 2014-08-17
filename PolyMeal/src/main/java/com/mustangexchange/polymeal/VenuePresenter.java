@@ -7,11 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
-import com.jamireh.PolyDiningDemo.Sorting.ItemNameComparator;
-import com.jamireh.PolyDiningDemo.Sorting.ItemPriceComparator;
-import com.jamireh.PolyDiningDemo.models.Cart;
-import com.jamireh.PolyDiningDemo.models.ItemSet;
-import com.jamireh.PolyDiningDemo.models.MoneyTime;
+import com.mustangexchange.polymeal.Sorting.ItemNameComparator;
+import com.mustangexchange.polymeal.Sorting.ItemPriceComparator;
+import com.mustangexchange.polymeal.models.Cart;
+import com.mustangexchange.polymeal.models.ItemSet;
+import com.mustangexchange.polymeal.models.MoneyTime;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
