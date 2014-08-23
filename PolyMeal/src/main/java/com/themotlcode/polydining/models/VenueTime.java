@@ -32,6 +32,8 @@ public class VenueTime
      */
     public VenueTime(VenueTime venueTime)
     {
+        open = new ArrayList<Time>();
+        closed = new ArrayList<Time>();
         for(Time time : venueTime.open)
         {
             open.add(new Time(time));

@@ -65,7 +65,7 @@ public class Venue
      * Adds a deep copy of an ItemSet to this Venue's list of ItemSets.
      * @param set The ItemSet to add to this Venue.
      */
-    public void addVenueItemSet(ItemList set)
+    public void addVenueItemList(ItemList set)
     {
         venueItemLists.add(new ItemList(set));
     }
