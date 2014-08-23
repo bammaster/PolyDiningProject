@@ -33,6 +33,8 @@ public class PolyMealFragment extends Fragment
         presenter = new PolyMealPresenter(this, listAdapter);
         presenter.getData();
 
+        setupList();
+
         return v;
     }
 
@@ -40,7 +42,6 @@ public class PolyMealFragment extends Fragment
     {
         lv = (ListView) v.findViewById(R.id.listView);
         listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, Statics.names);
-        setupList();
 
         this.setHasOptionsMenu(true);
 
@@ -70,8 +71,7 @@ public class PolyMealFragment extends Fragment
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                listAdapter.clear();
-                presenter.getData();
+                presenter.refresh();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -80,56 +80,6 @@ public class PolyMealFragment extends Fragment
 
     private void setupList()
     {
-        listAdapter.setNotifyOnChange(true);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v,int index, long id)
-            {
-                final int fIndex = index;
-                Statics.activityTitle = Statics.names.get(index);
-                if(!Statics.lastVenue.equals(Statics.names.get(index))
-                        && MoneyTime.getMoneySpent().compareTo(new BigDecimal("0.00")) != 0) {
-                    final QustomDialogBuilder onListClick = new QustomDialogBuilder(getActivity());
-                    onListClick.setDividerColor(Constants.APP_COLOR);
-                    onListClick.setTitleColor(Constants.APP_COLOR);
-                    onListClick.setTitle("Clear Cart?");
-                    onListClick.setMessage("Your cart has items that are not from this venue. " +
-                            "Would you like to clear it now?");
-                    onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                            Cart.clear();
-                            /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
-                            Statics.lastVenue= Statics.names.get(fIndex);
-                            intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            mActivity.startActivity(intentVenue);*/
-                            Statics.lastVenue= Statics.names.get(fIndex);
-                            VenueFragment venueFragment = new VenueFragment();
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_layout, venueFragment)
-                                    .addToBackStack(null);
-                            transaction.commit();
-                        }
-                    });
-                    onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int button) {
-                        }
-                    });
-                    onListClick.show();
-                } else {
-                    /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
-                    Statics.lastVenue = Statics.names.get(index);
-                    intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    mActivity.startActivity(intentVenue);*/
-                    Statics.lastVenue= Statics.names.get(fIndex);
-                    VenueFragment venueFragment = new VenueFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragment_layout, venueFragment)
-                            .addToBackStack(null);
-                    transaction.commit();
-                }
-            }
-        });
-        lv.setAdapter(listAdapter);
+        presenter.setupList(lv);
     }
 }
