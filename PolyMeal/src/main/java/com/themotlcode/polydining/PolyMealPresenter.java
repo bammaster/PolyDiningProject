@@ -93,8 +93,7 @@ public class PolyMealPresenter extends Presenter {
             {
                 final int fIndex = index;
                 Statics.activityTitle = Statics.names.get(index);
-                if(!Statics.lastVenue.equals(Statics.names.get(index))
-                        && MoneyTime.getMoneySpent().compareTo(new BigDecimal("0.00")) != 0) {
+                if(!Statics.lastVenue.equals(Statics.names.get(index)) && Cart.size() > 0) {
                     final QustomDialogBuilder onListClick = new QustomDialogBuilder(fragment.getActivity());
                     onListClick.setDividerColor(Constants.APP_COLOR);
                     onListClick.setTitleColor(Constants.APP_COLOR);
@@ -108,7 +107,7 @@ public class PolyMealPresenter extends Presenter {
                             Statics.lastVenue= Statics.names.get(fIndex);
                             intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mActivity.startActivity(intentVenue);*/
-                            Statics.lastVenue= Statics.names.get(fIndex);
+                            Statics.lastVenue = Statics.names.get(fIndex);
                             VenueFragment venueFragment = new VenueFragment();
                             FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_layout, venueFragment)
@@ -126,7 +125,7 @@ public class PolyMealPresenter extends Presenter {
                     Statics.lastVenue = Statics.names.get(index);
                     intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mActivity.startActivity(intentVenue);*/
-                    Statics.lastVenue= Statics.names.get(fIndex);
+                    Statics.lastVenue = Statics.names.get(fIndex);
                     VenueFragment venueFragment = new VenueFragment();
                     FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_layout, venueFragment)

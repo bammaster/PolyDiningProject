@@ -32,6 +32,11 @@ public class Cart
         return deepCopy;
     }
 
+    public static int size()
+    {
+        return cart.size();
+    }
+
     public static Item get(int pos)
     {
         return new Item(cart.get(pos));
