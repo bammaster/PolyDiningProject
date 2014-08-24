@@ -12,11 +12,13 @@ import java.util.List;
 public class ListAdapter extends ArrayAdapter<String> {
 
     private Activity activity;
+    private PolyApplication app;
 
     public ListAdapter(Activity activity, int resource, List<String> items)
     {
         super(activity, resource, items);
         this.activity = activity;
+        this.app = (PolyApplication) activity.getApplication();
     }
 
     @Override
@@ -28,12 +30,12 @@ public class ListAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.polymeal_list_item, parent, false);
         }
         TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
-        tt.setText("  " + Statics.names.get(position));
-        if(Statics.venues.get(Statics.names.get(position)).closeSoon())
+        tt.setText("  " + app.names.get(position));
+        if(app.venues.get(app.names.get(position)).closeSoon())
         {
             tt.setCompoundDrawablesWithIntrinsicBounds(activity.getResources().getDrawable(R.drawable.soon_dot),null,null,null);
         }
-        else if(Statics.venues.get(Statics.names.get(position)).isOpen())
+        else if(app.venues.get(app.names.get(position)).isOpen())
         {
             tt.setCompoundDrawablesWithIntrinsicBounds(activity.getResources().getDrawable(R.drawable.open_dot),null,null,null);
         }

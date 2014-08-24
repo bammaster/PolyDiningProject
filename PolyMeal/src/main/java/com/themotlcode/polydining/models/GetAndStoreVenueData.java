@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import com.google.gson.Gson;
-import com.themotlcode.polydining.Constants;
-import com.themotlcode.polydining.Statics;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +28,7 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
     private SharedPreferences sp;
     private Database db;
     private AlertDialog.Builder error;
+    private PolyApplication app;
 
     /**
      * Builds a GetData object.
@@ -37,21 +36,22 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
      * @param activity The activity to push progress to.
      * @param sp Shared preferences to the parsed store data to.
      */
-    public GetAndStoreVenueData(ArrayAdapter<String> list, Activity activity, SharedPreferences sp)
+    public GetAndStoreVenueData(ArrayAdapter<String> list, Activity activity, SharedPreferences sp, PolyApplication app)
     {
         super();
         this.list = list;
         this.sp = sp;
         mActivity= activity;
+        this.app = app;
     }
 
     @Override
     protected void onPostExecute(Integer result)
     {
         list.clear();
-        list.addAll(Statics.venues.keySet());
+        list.addAll(app.venues.keySet());
         mActivity.setProgressBarIndeterminateVisibility(false);
-        sp.edit().putBoolean(Constants.firstLaunch,false).apply();
+        sp.edit().putBoolean(PolyApplication.firstLaunch,false).apply();
         int version = sp.getInt("DBVersion", 1);
         db = new Database(mActivity, version++);
         sp.edit().putInt("DBVersion", version).apply();
@@ -64,7 +64,7 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
         String venues = "";
         try
         {
-            URL url = new URL(Constants.URL);
+            URL url = new URL(PolyApplication.URL);
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -82,7 +82,7 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
         }
         try
         {
-            Statics.venues = new Gson().fromJson(venues.toString(), Constants.gsonType);
+            app.venues = new Gson().fromJson(venues.toString(), PolyApplication.gsonType);
         }
         catch(Exception e)
         {
@@ -114,7 +114,7 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
 
     private void storeData(Database db)
     {
-        for(Map.Entry<String, Venue> entry : Statics.venues.entrySet())
+        for(Map.Entry<String, Venue> entry : app.venues.entrySet())
         {
             db.updateVenues(entry.getValue());
         }

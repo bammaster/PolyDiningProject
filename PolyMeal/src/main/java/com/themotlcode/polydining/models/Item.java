@@ -1,10 +1,8 @@
 package com.themotlcode.polydining.models;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.themotlcode.polydining.Constants;
+import com.themotlcode.polydining.PolyApplication;
 
 import java.math.BigDecimal;
 
@@ -112,7 +110,7 @@ public class Item implements Parcelable, Comparable<Item>
         }
         else
         {
-            return new BigDecimal(Constants.DEFAULT_PRICE);
+            return new BigDecimal(PolyApplication.DEFAULT_PRICE);
         }
     }
 
@@ -128,7 +126,7 @@ public class Item implements Parcelable, Comparable<Item>
         }
         else
         {
-            return Constants.DEFAULT_PRICE;
+            return PolyApplication.DEFAULT_PRICE;
         }
     }
 
@@ -184,7 +182,7 @@ public class Item implements Parcelable, Comparable<Item>
     private BigDecimal format()
     {
         String priceString = price.toString();
-        priceString = com.themotlcode.polydining.Constants.currency.format(Double.valueOf(priceString));
+        priceString = PolyApplication.currency.format(Double.valueOf(priceString));
         return new BigDecimal(priceString.replace("$",""));
     }
 

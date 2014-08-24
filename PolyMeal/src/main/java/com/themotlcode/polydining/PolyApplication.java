@@ -1,17 +1,16 @@
 package com.themotlcode.polydining;
 
+import android.app.Application;
 import com.google.gson.reflect.TypeToken;
+import com.themotlcode.polydining.models.Account;
 import com.themotlcode.polydining.models.Venue;
 
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
-/**
- * Used to store most static types in the app. If multiple activities need access to it,
- * and you only need one reference to it put it here. All constants should also go here.
- */
-public class Constants
+public class PolyApplication extends Application
 {
     public static final NumberFormat currency = NumberFormat.getCurrencyInstance();
     public static final Type gsonType = new TypeToken<TreeMap<String, Venue>>() {}.getType();
@@ -36,5 +35,16 @@ public class Constants
     public static final String JSA_INDEX_URL = "https://services.jsatech.com/index.php?skey=";
     public static String APP_COLOR = "#036228";
     public static final int DATE_ARRAY_SIZE = 3;
-    private Constants(){}
+
+    public int[] endOfQuarter;
+    public int[] startOfQuarter;
+    public Account user;
+    public String lastVenue = "";
+    //Main data structure. Contains all venue data.
+    public TreeMap<String, Venue> venues;
+    //Stores the venue names for the PolyMEalActivity list view.
+    public ArrayList<String> names = new ArrayList<String>();
+    //not constant as it needs to be changed but should only be one of them.
+    public String activityTitle = "";
+
 }

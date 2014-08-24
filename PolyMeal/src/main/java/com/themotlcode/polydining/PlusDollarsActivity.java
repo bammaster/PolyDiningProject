@@ -58,14 +58,14 @@ public class PlusDollarsActivity extends BaseActivity implements android.support
 
     public void setColor()
     {
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(Constants.APP_COLOR)));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
 
         Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;
-            pdf.greeting.setTitleColor(Constants.APP_COLOR);
-            pdf.greeting.setDividerColor(Constants.APP_COLOR);
+            pdf.greeting.setTitleColor(PolyApplication.APP_COLOR);
+            pdf.greeting.setDividerColor(PolyApplication.APP_COLOR);
             pdf.greeting.show();
         }
 

@@ -18,6 +18,7 @@ public class PolyMealFragment extends Fragment
     private ListView lv;
     private ListAdapter listAdapter;
     private static Activity mActivity;
+    private PolyApplication app;
 
     private PolyMealPresenter presenter;
 
@@ -40,12 +41,16 @@ public class PolyMealFragment extends Fragment
 
     private void init(View v)
     {
+        mActivity = getActivity();
+
+        app = (PolyApplication) mActivity.getApplication();
+
         lv = (ListView) v.findViewById(R.id.listView);
-        listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, Statics.names);
+        listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, app.names);
 
         this.setHasOptionsMenu(true);
 
-        mActivity = getActivity();
+
     }
 
     @Override

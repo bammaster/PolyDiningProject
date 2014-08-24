@@ -26,6 +26,7 @@ public class VenueListAdapter extends BaseAdapter implements View.OnClickListene
         this.fragment = (VenueListFragment) fragment;
         this.items = itemList.getItems();
         this.presenter = presenter;
+        presenter.setFragment(fragment);
     }
 
     public int getCount()
@@ -70,8 +71,8 @@ public class VenueListAdapter extends BaseAdapter implements View.OnClickListene
         final int position = (Integer) view.getTag();
         if (items.get(position).getIsPricePerOunce()) {
             QustomDialogBuilder onYes = new QustomDialogBuilder(fragment.getActivity());
-            onYes.setDividerColor(Constants.APP_COLOR);
-            onYes.setTitleColor(Constants.APP_COLOR);
+            onYes.setDividerColor(PolyApplication.APP_COLOR);
+            onYes.setTitleColor(PolyApplication.APP_COLOR);
             onYes.setTitle("How much?");
             onYes.setMessage("Estimated Number of Ounces: ");
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());

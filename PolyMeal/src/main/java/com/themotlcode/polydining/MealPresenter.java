@@ -13,10 +13,12 @@ public class MealPresenter
 {
     private static Fragment fragment;
     private static BigDecimal totalAmount;
+    private PolyApplication app;
 
     public void setFragment(Fragment fragment)
     {
         this.fragment = fragment;
+        app = (PolyApplication) fragment.getActivity().getApplication();
     }
 
     public static void updateTotalAmount()
@@ -24,7 +26,7 @@ public class MealPresenter
         totalAmount = MoneyTime.calcTotalMoney();
     }
 
-    public static void setSubtitle()
+    public void setSubtitle()
     {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView) fragment.getActivity().findViewById(titleId);
@@ -55,16 +57,16 @@ public class MealPresenter
         }
         return false;
     }*/
-    public static void updateBalance() {
+    public void updateBalance() {
         updateTotalAmount();
         //Alerts the user if they will exceed their plus dollars with whats in the cart.
         if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
         {
-            if(Statics.user != null && totalAmount.multiply(new BigDecimal("-1")).compareTo(Statics.user.getPlusDollars()) > 0)
+            if(app.user != null && totalAmount.multiply(new BigDecimal("-1")).compareTo(app.user.getPlusDollars()) > 0)
             {
                 QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(fragment.getActivity());
-                plusDollarsExceeded.setDividerColor(Constants.APP_COLOR);
-                plusDollarsExceeded.setTitleColor(Constants.APP_COLOR);
+                plusDollarsExceeded.setDividerColor(PolyApplication.APP_COLOR);
+                plusDollarsExceeded.setTitleColor(PolyApplication.APP_COLOR);
                 plusDollarsExceeded.setTitle(R.string.plusdollarsalert);
                 plusDollarsExceeded.setMessage(R.string.plusdollarsalertmessage);
                 plusDollarsExceeded.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

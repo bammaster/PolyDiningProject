@@ -52,8 +52,8 @@ public class VenueListFragment extends ListFragment
     {
         final int fPos = position;
         final QustomDialogBuilder onListClick = new QustomDialogBuilder(getActivity());
-        onListClick.setDividerColor(Constants.APP_COLOR);
-        onListClick.setTitleColor(Constants.APP_COLOR);
+        onListClick.setDividerColor(PolyApplication.APP_COLOR);
+        onListClick.setTitleColor(PolyApplication.APP_COLOR);
         onListClick.setTitle("Add to Cart?");
         onListClick.setMessage("Would you like to add " + ((presenter.items.getItem(fPos))).getName() + " to your cart? Price: " + "$" + ((presenter.items.getItem(fPos))).getPrice());
         onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -97,8 +97,8 @@ public class VenueListFragment extends ListFragment
         onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
             QustomDialogBuilder onDialogClick = new QustomDialogBuilder(getActivity());
-            onDialogClick.setTitleColor(Constants.APP_COLOR);
-            onDialogClick.setDividerColor(Constants.APP_COLOR);
+            onDialogClick.setTitleColor(PolyApplication.APP_COLOR);
+            onDialogClick.setDividerColor(PolyApplication.APP_COLOR);
             onDialogClick.setTitle("Description");
             onDialogClick.setMessage((((presenter.items.getItem(fPos))).getDescription()));
             onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

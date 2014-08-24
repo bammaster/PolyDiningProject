@@ -25,12 +25,15 @@ public class VenuePresenter extends MealPresenter
     private ArrayList<ItemList> itemLists;
     private VenuePresenter presenter;
 
+    private PolyApplication app;
+
     private static BigDecimal totalAmount;
 
     public VenuePresenter(Fragment fragment)
     {
+        this.app = (PolyApplication) fragment.getActivity().getApplication();
         this.fragment = (VenueFragment) fragment;
-        this.itemLists = Statics.venues.get(Statics.activityTitle).getVenueItemLists();
+        this.itemLists = app.venues.get(app.activityTitle).getVenueItemLists();
         this.presenter = this;
         presenter.setFragment(fragment);
         updateSettings();
@@ -44,7 +47,7 @@ public class VenuePresenter extends MealPresenter
             System.out.println("got here");
             MoneyTime.setMoneySpent(new BigDecimal(savedInstanceState.getString("moneySpent")));
             Cart.setCart(savedInstanceState.getParcelableArrayList("cart"));
-            Statics.lastVenue = savedInstanceState.getString("lastVenue");
+            app.lastVenue = savedInstanceState.getString("lastVenue");
             return true;
         }
         return false;
@@ -120,11 +123,11 @@ public class VenuePresenter extends MealPresenter
 
     public String getListTitle(int pos)
     {
-        return Statics.venues.get(Statics.lastVenue).getName();
+        return app.venues.get(app.lastVenue).getName();
     }
 
     public int getListCount()
     {
-        return Statics.venues.get(Statics.lastVenue).numberOfItemSets();
+        return app.venues.get(app.lastVenue).numberOfItemSets();
     }
 }

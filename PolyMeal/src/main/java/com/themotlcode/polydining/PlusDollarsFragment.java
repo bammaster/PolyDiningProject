@@ -39,6 +39,7 @@ public class PlusDollarsFragment extends Fragment
     private Weeks w;
 
     private PlusDollarsPresenter presenter;
+    private PolyApplication app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -53,12 +54,12 @@ public class PlusDollarsFragment extends Fragment
 
         if (presenter.init())
         {
-            String temp = Statics.user.plusAsMoney();
+            String temp = app.user.plusAsMoney();
             temp = temp.substring(1);
-            name.setText(Statics.user.getName());
-            plus.setText(Statics.user.plusAsMoney());
-            express.setText(Statics.user.expressAsMoney());
-            meal.setText(Statics.user.getMeals() + "");
+            name.setText(app.user.getName());
+            plus.setText(app.user.plusAsMoney());
+            express.setText(app.user.expressAsMoney());
+            meal.setText(app.user.getMeals() + "");
             budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
             budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
         }
@@ -71,17 +72,17 @@ public class PlusDollarsFragment extends Fragment
     public void onResume()
     {
         super.onResume();
-        if(Statics.user!= null)
+        if(app.user!= null)
         {
-            if(name != null && Statics.user.getName()!= null) {
-                setTextSizeName(Statics.user.getName(), name);
+            if(name != null && app.user.getName()!= null) {
+                setTextSizeName(app.user.getName(), name);
             }
         }
-        if(Statics.endOfQuarter == null) {
+        if(app.endOfQuarter == null) {
             presenter.loadBudget();
         }
-        DateTime start = new DateTime(Statics.startOfQuarter[0], Statics.startOfQuarter[1], Statics.startOfQuarter[2], 0, 0, 0, 0);
-        DateTime end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
+        DateTime start = new DateTime(app.startOfQuarter[0], app.startOfQuarter[1], app.startOfQuarter[2], 0, 0, 0, 0);
+        DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
         d = Days.daysBetween(start, end);
         w = Weeks.weeksBetween(start, end);
         if(w.getWeeks() > 10)
@@ -97,8 +98,8 @@ public class PlusDollarsFragment extends Fragment
     public void onStop()
     {
         super.onStop();
-        if(Statics.user != null) {
-            if (Statics.user.isRemembered()) {
+        if(app.user != null) {
+            if (app.user.isRemembered()) {
                 //presenter.saveAccount();
             }
         }
@@ -161,14 +162,14 @@ public class PlusDollarsFragment extends Fragment
         password = (EditText) loginView.findViewById(R.id.password);
         remember = (CheckBox) loginView.findViewById(R.id.remember);
         QustomDialogBuilder login = new QustomDialogBuilder(getActivity());
-        login.setTitleColor(Constants.APP_COLOR);
-        login.setDividerColor(Constants.APP_COLOR);
+        login.setTitleColor(PolyApplication.APP_COLOR);
+        login.setDividerColor(PolyApplication.APP_COLOR);
         login.setTitle("Please login.");
         login.setCustomView(loginView, getActivity());
         login.setPositiveButton("Login", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int id)
             {
-                Statics.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
+                app.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
                 getActivity().setProgressBarIndeterminateVisibility(true);
                 presenter.loadData();
                 dialog.dismiss();
@@ -207,21 +208,21 @@ public class PlusDollarsFragment extends Fragment
         }
         else
         {
-            if(Statics.user == null)
+            if(app.user == null)
             {
                 Toast.makeText(getActivity(), "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
                 handleLogin();
             }
             else
             {
-                setTextSizeName(Statics.user.getName(), name);
-                name.setText(Statics.user.getName());
+                setTextSizeName(app.user.getName(), name);
+                name.setText(app.user.getName());
                 if(remember != null)
                 {
 
                     if(remember.isChecked())
                     {
-                        Statics.user.setRemembered();
+                        app.user.setRemembered();
                         //presenter.saveAccount();
                     }
                     else
@@ -229,15 +230,15 @@ public class PlusDollarsFragment extends Fragment
                         presenter.clearAccount();
                     }
                 }
-                plus.setText(Statics.user.plusAsMoney());
-                express.setText(Statics.user.expressAsMoney());
-                meal.setText(Statics.user.getMeals()+"");
+                plus.setText(app.user.plusAsMoney());
+                express.setText(app.user.expressAsMoney());
+                meal.setText(app.user.getMeals()+"");
 
                 DateTime start = new DateTime();
-                DateTime end = new DateTime(Statics.endOfQuarter[0], Statics.endOfQuarter[1], Statics.endOfQuarter[2], 0, 0, 0, 0);
+                DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
                 Days d = Days.daysBetween(start, end);
                 Weeks w = Weeks.weeksBetween(start, end);
-                String temp = Statics.user.plusAsMoney();
+                String temp = app.user.plusAsMoney();
                 temp = temp.substring(1);
 
                 budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
@@ -265,6 +266,8 @@ public class PlusDollarsFragment extends Fragment
         factory = LayoutInflater.from(getActivity());
         Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
         name.setTypeface(font);
+
+        app = (PolyApplication) getActivity().getApplication();
     }
 
     /**

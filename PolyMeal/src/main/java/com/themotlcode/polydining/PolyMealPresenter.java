@@ -26,20 +26,23 @@ public class PolyMealPresenter extends Presenter {
     private PolyMealFragment fragment;
     private PolyMealActivity activity;
     private ListAdapter listAdapter;
+    private PolyApplication app;
 
     public PolyMealPresenter(Fragment fragment, ListAdapter listAdapter) {
         this.fragment = (PolyMealFragment) fragment;
         this.activity = (PolyMealActivity) fragment.getActivity();
         this.listAdapter = listAdapter;
+        
+        app = (PolyApplication) activity.getApplication();
     }
 
     public void getData()
     {
-        sp = activity.getSharedPreferences(Constants.spKey, activity.MODE_PRIVATE);
-        if (sp.getBoolean(Constants.firstLaunch, true))
+        sp = activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE);
+        if (sp.getBoolean(PolyApplication.firstLaunch, true))
         {
             getDataHelper();
-        } else if (Statics.venues == null)
+        } else if (app.venues == null)
         {
             new GetDataThread().execute();
         }
@@ -50,8 +53,8 @@ public class PolyMealPresenter extends Presenter {
      */
     private void getDataHelper()
     {
-        Statics.venues = new TreeMap<String, Venue>(new VenueNameComparator());
-        new GetAndStoreVenueData(listAdapter, fragment.getActivity(), sp).execute();
+        app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
+        new GetAndStoreVenueData(listAdapter, fragment.getActivity(), sp, app).execute();
     }
 
     class GetDataThread extends AsyncTask<Void, Void, Boolean>
@@ -59,9 +62,9 @@ public class PolyMealPresenter extends Presenter {
 
         protected Boolean doInBackground(Void... args)
         {
-            String gson = sp.getString(Constants.speKey, "");
-            Statics.venues = new Gson().fromJson(gson, Constants.gsonType);
-            if (Statics.venues == null)
+            String gson = sp.getString(PolyApplication.speKey, "");
+            app.venues = new Gson().fromJson(gson, PolyApplication.gsonType);
+            if (app.venues == null)
             {
                 getDataHelper();
             }
@@ -70,14 +73,14 @@ public class PolyMealPresenter extends Presenter {
 
         protected void onPostExecute(Boolean b)
         {
-            listAdapter.addAll(Statics.venues.keySet());
+            listAdapter.addAll(app.venues.keySet());
         }
     }
 
     void refresh()
     {
         listAdapter.clear();
-        Statics.venues = null;
+        app.venues = null;
         getData();
         listAdapter.notifyData();
     }
@@ -92,11 +95,12 @@ public class PolyMealPresenter extends Presenter {
             public void onItemClick(AdapterView<?> a, View v,int index, long id)
             {
                 final int fIndex = index;
-                Statics.activityTitle = Statics.names.get(index);
-                if(!Statics.lastVenue.equals(Statics.names.get(index)) && Cart.size() > 0) {
+
+                app.activityTitle = app.names.get(index);
+                if(!app.lastVenue.equals(app.names.get(index)) && Cart.size() > 0) {
                     final QustomDialogBuilder onListClick = new QustomDialogBuilder(fragment.getActivity());
-                    onListClick.setDividerColor(Constants.APP_COLOR);
-                    onListClick.setTitleColor(Constants.APP_COLOR);
+                    onListClick.setDividerColor(PolyApplication.APP_COLOR);
+                    onListClick.setTitleColor(PolyApplication.APP_COLOR);
                     onListClick.setTitle("Clear Cart?");
                     onListClick.setMessage("Your cart has items that are not from this venue. " +
                             "Would you like to clear it now?");
@@ -104,10 +108,10 @@ public class PolyMealPresenter extends Presenter {
                         public void onClick(DialogInterface dialog, int button) {
                             Cart.clear();
                             /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
-                            Statics.lastVenue= Statics.names.get(fIndex);
+                            app.lastVenue= app.names.get(fIndex);
                             intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mActivity.startActivity(intentVenue);*/
-                            Statics.lastVenue = Statics.names.get(fIndex);
+                            app.lastVenue = app.names.get(fIndex);
                             VenueFragment venueFragment = new VenueFragment();
                             FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_layout, venueFragment)
@@ -122,10 +126,10 @@ public class PolyMealPresenter extends Presenter {
                     onListClick.show();
                 } else {
                     /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
-                    Statics.lastVenue = Statics.names.get(index);
+                    app.lastVenue = app.names.get(index);
                     intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mActivity.startActivity(intentVenue);*/
-                    Statics.lastVenue = Statics.names.get(fIndex);
+                    app.lastVenue = app.names.get(fIndex);
                     VenueFragment venueFragment = new VenueFragment();
                     FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_layout, venueFragment)

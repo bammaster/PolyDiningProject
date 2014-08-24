@@ -18,6 +18,7 @@ public class VenueFragment extends Fragment
     protected PagerTabStrip myPagerTabStrip;
 
     private VenuePresenter presenter;
+    private PolyApplication app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -44,12 +45,15 @@ public class VenueFragment extends Fragment
     private void init(View v)
     {
         this.setHasOptionsMenu(true);
+        app = (PolyApplication) getActivity().getApplication();
 
         vp = (ViewPager) v.findViewById(R.id.pager);
 
         myPagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
-        getActivity().getActionBar().setTitle(Statics.activityTitle);
+        getActivity().getActionBar().setTitle(app.activityTitle);
+
+
 
         presenter.updateBalance();
         updateSettings();
@@ -60,7 +64,7 @@ public class VenueFragment extends Fragment
         // Put all your data in the outState bundle
         outState.putParcelableArrayList("cart", Cart.getCart());
         outState.putString("moneySpent", MoneyTime.getMoneySpent().toString());
-        outState.putString("lastVenue", Statics.lastVenue);
+        outState.putString("lastVenue", app.lastVenue);
     }
     //Handles chaning the view based upon user input
 

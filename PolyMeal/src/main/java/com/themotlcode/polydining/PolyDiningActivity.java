@@ -21,6 +21,8 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
     private PolyDiningActivity activity;
     PolyDiningFragment fragment;
     private boolean showGreeting;
+    
+    private PolyApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
 
     private void init()
     {
+        app = (PolyApplication) getApplication();
         fm = getSupportFragmentManager();
         fm.addOnBackStackChangedListener(this);
     }
@@ -56,15 +59,15 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
 
     public void setColor()
     {
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(Constants.APP_COLOR)));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
 
         Fragment f = fm.findFragmentById(R.id.fragment_layout);
         if (f instanceof PolyDiningFragment)
         {
             if(showGreeting) {
                 PolyDiningFragment pdf = (PolyDiningFragment) f;
-                pdf.greeting.setTitleColor(Constants.APP_COLOR);
-                pdf.greeting.setDividerColor(Constants.APP_COLOR);
+                pdf.greeting.setTitleColor(PolyApplication.APP_COLOR);
+                pdf.greeting.setDividerColor(PolyApplication.APP_COLOR);
                 pdf.greeting.show();
             }
         }
@@ -78,10 +81,10 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
         {
             PolyDiningFragment pdf = (PolyDiningFragment) f;
             pdf.greeting.setMessage(s);
-            String greeting = getSharedPreferences(Constants.spKey,MODE_PRIVATE).getString(Constants.GREETING_KEY, "");
+            String greeting = getSharedPreferences(PolyApplication.spKey,MODE_PRIVATE).getString(PolyApplication.GREETING_KEY, "");
             if(!s.equals(greeting)) {
                 showGreeting = true;
-                getSharedPreferences(Constants.spKey, MODE_PRIVATE).edit().putString(Constants.GREETING_KEY, s).apply();
+                getSharedPreferences(PolyApplication.spKey, MODE_PRIVATE).edit().putString(PolyApplication.GREETING_KEY, s).apply();
             }
             else
             {
@@ -118,7 +121,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
 
         private void getDates() throws IOException
         {
-            URL dateUrl = new URL(Constants.DATE_URL);
+            URL dateUrl = new URL(PolyApplication.DATE_URL);
             URLConnection dateCon = dateUrl.openConnection();
             InputStream is = dateCon.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -126,22 +129,22 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
             String end = br.readLine();
             String[] temp = end.split("/");
             if(checkDate(temp)) {
-                Statics.endOfQuarter = new int[3];
-                Statics.endOfQuarter[0] = new Integer(temp[2]);
-                Statics.endOfQuarter[1] = new Integer(temp[0]);
-                Statics.endOfQuarter[2] = new Integer(temp[1]);
+                app.endOfQuarter = new int[3];
+                app.endOfQuarter[0] = new Integer(temp[2]);
+                app.endOfQuarter[1] = new Integer(temp[0]);
+                app.endOfQuarter[2] = new Integer(temp[1]);
             }
             temp = start.split("/");
             if(checkDate(temp)) {
-                Statics.startOfQuarter = new int[3];
-                Statics.startOfQuarter[0] = new Integer(temp[2]);
-                Statics.startOfQuarter[1] = new Integer(temp[0]);
-                Statics.startOfQuarter[2] = new Integer(temp[1]);
+                app.startOfQuarter = new int[3];
+                app.startOfQuarter[0] = new Integer(temp[2]);
+                app.startOfQuarter[1] = new Integer(temp[0]);
+                app.startOfQuarter[2] = new Integer(temp[1]);
             }
         }
         private void getMessage() throws IOException
         {
-            URL dateUrl = new URL(Constants.MESSAGE_URL);
+            URL dateUrl = new URL(PolyApplication.MESSAGE_URL);
             URLConnection dateCon = dateUrl.openConnection();
             InputStream is = dateCon.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -153,14 +156,14 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
         }
         private void getColor() throws IOException
         {
-            URL dateUrl = new URL(Constants.COLOR_URL);
+            URL dateUrl = new URL(PolyApplication.COLOR_URL);
             URLConnection dateCon = dateUrl.openConnection();
             InputStream is = dateCon.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            Constants.APP_COLOR = "#" + br.readLine();
+            PolyApplication.APP_COLOR = "#" + br.readLine();
         }
         private boolean checkDate(String[] dates) {
-            if (dates.length != Constants.DATE_ARRAY_SIZE) {
+            if (dates.length != PolyApplication.DATE_ARRAY_SIZE) {
                 return false;
             } else {
                 for (int i = 0; i < dates.length; i++) {
