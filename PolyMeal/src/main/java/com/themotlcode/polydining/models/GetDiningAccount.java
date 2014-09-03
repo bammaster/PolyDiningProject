@@ -2,8 +2,8 @@ package com.themotlcode.polydining.models;
 
 import android.util.Log;
 
-import com.themotlcode.polydining.Constants;
 import com.themotlcode.polydining.Exceptions.BudgetException;
+import com.themotlcode.polydining.PolyApplication;
 import org.jsoup.Connection;
 import org.jsoup.Connection.Method;
 import org.jsoup.Jsoup;
@@ -46,16 +46,16 @@ public class GetDiningAccount
             // follow redirects to meal plan loading page and get skey from
             // the jscript in the page
             String skey = getSkey(login.html());
-            Jsoup.connect(Constants.JSA_LOGIN_URL + skey + URL_CID).execute();
+            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID).execute();
             if(loginCheck(skey) == null)
             {
                 return null;
             }
             // connect to this page with skey or the login doesn't work
-            Jsoup.connect(Constants.JSA_LOGIN_URL + skey + URL_CID).execute();
+            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID).execute();
 
             // get the page with the meal plan info on it and parse it
-            Document mealInfoPage = Jsoup.connect(Constants.JSA_INDEX_URL + skey + URL_CID)
+            Document mealInfoPage = Jsoup.connect(PolyApplication.JSA_INDEX_URL + skey + URL_CID)
                                     .timeout(10000).execute().parse();
 
             Elements temp = mealInfoPage.getElementsByClass("sidebar1body").select("b");
@@ -118,7 +118,7 @@ public class GetDiningAccount
         if(balanceList.size() == 1)
         {
             a.setCampusExpress(balanceList.get(0));
-            a.setPlusDollars(Constants.DEFAULT_PRICE);
+            a.setPlusDollars(PolyApplication.DEFAULT_PRICE);
             a.setMeals(0);
         }
         else if(balanceList.size() == 2)
@@ -135,8 +135,8 @@ public class GetDiningAccount
         }
         else
         {
-            a.setCampusExpress(Constants.DEFAULT_PRICE);
-            a.setPlusDollars(Constants.DEFAULT_PRICE);
+            a.setCampusExpress(PolyApplication.DEFAULT_PRICE);
+            a.setPlusDollars(PolyApplication.DEFAULT_PRICE);
             a.setMeals(0);
             Log.v("Blake", "Failed to get dining data. Size: " + balanceList.size());
         }
@@ -188,7 +188,7 @@ public class GetDiningAccount
         do
         {
             Thread.sleep(500);
-            loginCheck = Jsoup.connect(Constants.SKEYCHECK_URL + skey).execute().parse();
+            loginCheck = Jsoup.connect(PolyApplication.SKEYCHECK_URL + skey).execute().parse();
 
             if (attempts == 30)
             {
@@ -214,7 +214,7 @@ public class GetDiningAccount
         {
             public boolean verify(String hostname,SSLSession session)
             {
-                if(hostname.equals(Constants.JSA_HOSTNAME)||hostname.equals(Constants.CP_HOSTNAME))
+                if(hostname.equals(PolyApplication.JSA_HOSTNAME)||hostname.equals(PolyApplication.CP_HOSTNAME))
                 {
                     return true;
                 }

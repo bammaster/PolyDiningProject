@@ -21,18 +21,15 @@ public class PlusDollarsPresenter extends Presenter {
         
     }
 
-    public boolean init() {
+    public void init() {
         //If the loaded Constants.user does not exist or the user said not to remember.
         if(app.user == null || !app.user.isRemembered())
         {
             fragment.handleLogin();
-            return false;
         }
         else if(app.user.isRemembered()) {
             loadBudget();
-            return true;
         }
-        return false;
     }
 
     void storeDates()

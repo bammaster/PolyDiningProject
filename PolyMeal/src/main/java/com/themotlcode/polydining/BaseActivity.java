@@ -6,12 +6,15 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+import com.themotlcode.polydining.models.Transaction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,7 +96,7 @@ public class BaseActivity extends FragmentActivity
         }
         @Override
         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-            /*final int delay = 200;
+            final int delay = 200;
             new Thread(new Runnable() {
                 @Override
                 public void run()
@@ -102,7 +105,7 @@ public class BaseActivity extends FragmentActivity
                     {
                         switch(position)
                         {
-                            case 0:
+                            /*case 0:
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, PolyDiningActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 break;
@@ -114,19 +117,22 @@ public class BaseActivity extends FragmentActivity
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, PlusDollarsActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                                 Thread.sleep(delay);
-                                break;
+                                break;*/
                             case 3:
                                 Thread.sleep(delay);
-                                startActivity(new Intent(mContext, TransactionActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-                                break;
-                            case 4:
+                                TransactionFragment transactionFragment = new TransactionFragment();
+                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                transaction.replace(R.id.fragment_layout, transactionFragment)
+                                        .addToBackStack(null);
+                                transaction.commit();                                break;
+                            /*case 4:
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                             default:
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, PolyDiningActivity.class));
-                                break;
+                                break;*/
                         }
                     }
                     catch(InterruptedException e)
@@ -134,7 +140,7 @@ public class BaseActivity extends FragmentActivity
                         Toast.makeText(mContext, "An unknown error occurred!", Toast.LENGTH_LONG).show();
                     }
                 }
-            }).start();*/
+            }).start();
             mDrawerLayout.closeDrawer(mDrawerList);
         }
     }

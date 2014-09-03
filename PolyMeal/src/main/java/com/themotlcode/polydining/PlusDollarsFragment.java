@@ -47,22 +47,11 @@ public class PlusDollarsFragment extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_plus_dollars, container, false);
+        presenter = new PlusDollarsPresenter(this);
 
         init(v);
 
-        presenter = new PlusDollarsPresenter(this);
-
-        if (presenter.init())
-        {
-            String temp = app.user.plusAsMoney();
-            temp = temp.substring(1);
-            name.setText(app.user.getName());
-            plus.setText(app.user.plusAsMoney());
-            express.setText(app.user.expressAsMoney());
-            meal.setText(app.user.getMeals() + "");
-            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-        }
+        login();
         fadeIn();
         handleMusic();
 
@@ -123,7 +112,7 @@ public class PlusDollarsFragment extends Fragment
                 getActivity().setProgressBarIndeterminateVisibility(true);
                 return true;
             case R.id.login:
-                handleLogin();
+                login();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -270,6 +259,21 @@ public class PlusDollarsFragment extends Fragment
         app = (PolyApplication) getActivity().getApplication();
     }
 
+    private void login()
+    {
+        presenter.init();
+        if (app.user != null)
+        {
+            String temp = app.user.plusAsMoney();
+            temp = temp.substring(1);
+            name.setText(app.user.getName());
+            plus.setText(app.user.plusAsMoney());
+            express.setText(app.user.expressAsMoney());
+            meal.setText(app.user.getMeals() + "");
+            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+        }
+    }
     /**
      * Gets access to the views on screen for manipulation and animation.
      */
