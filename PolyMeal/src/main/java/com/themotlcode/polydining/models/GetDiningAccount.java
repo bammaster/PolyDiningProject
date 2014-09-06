@@ -26,6 +26,7 @@ public class GetDiningAccount
 {
     private Account a;
     private static final String URL_CID = "&cid=79";
+    private static final String COOKIE = "&fullscreen=1&wason=";
     public GetDiningAccount(Account a)
     {
         this.a = a;
@@ -46,13 +47,13 @@ public class GetDiningAccount
             // follow redirects to meal plan loading page and get skey from
             // the jscript in the page
             String skey = getSkey(login.html());
-            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID).execute();
+            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID + COOKIE).execute();
             if(loginCheck(skey) == null)
             {
                 return null;
             }
             // connect to this page with skey or the login doesn't work
-            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID).execute();
+            Jsoup.connect(PolyApplication.JSA_LOGIN_URL + skey + URL_CID + COOKIE).execute();
 
             // get the page with the meal plan info on it and parse it
             Document mealInfoPage = Jsoup.connect(PolyApplication.JSA_INDEX_URL + skey + URL_CID)
@@ -224,7 +225,22 @@ public class GetDiningAccount
                 }
             }
         });
-        SSLContext context = SSLContext.getInstance("TLS");
+        SSLContext context = SSLContext.getInstance("SSL");
+        context.init(null, new X509TrustManager[]{new X509TrustManager()
+        {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException
+            {
+
+            }
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException
+            {}
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        }}, new SecureRandom());
         HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
     private Connection.Response handleCookies() throws IOException

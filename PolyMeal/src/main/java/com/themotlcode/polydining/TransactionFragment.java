@@ -73,7 +73,8 @@ public class TransactionFragment extends Fragment
     public void onResume()
     {
         super.onResume();
-        init(getView());
+        System.out.println("onResume");
+        //init(getView());
     }
 
     public void showIndeterminate(boolean status)

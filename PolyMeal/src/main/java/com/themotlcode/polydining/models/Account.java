@@ -73,7 +73,7 @@ public class Account
      */
     public String getPassword()
     {
-        return username;
+        return password;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Account
      */
     public String getName()
     {
-        return username;
+        return name;
     }
 
     /**

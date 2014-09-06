@@ -124,7 +124,8 @@ public class BaseActivity extends FragmentActivity
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragment_layout, transactionFragment)
                                         .addToBackStack(null);
-                                transaction.commit();                                break;
+                                transaction.commit();
+                                break;
                             /*case 4:
                                 Thread.sleep(delay);
                                 startActivity(new Intent(mContext, SettingsActivity.class));
