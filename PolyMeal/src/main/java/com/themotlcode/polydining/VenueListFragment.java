@@ -26,11 +26,13 @@ public class VenueListFragment extends ListFragment
     {
         this.position = position;
         this.presenter = presenter;
+        //presenter.setFragment(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        presenter.setFragment(this);
         return inflater.inflate(R.layout.fragment_venue_list, container, false);
     }
 

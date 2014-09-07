@@ -163,7 +163,7 @@ public class Account
      */
     public void setPlusDollars(BigDecimal plusDollars)
     {
-        this.campusExpress = new BigDecimal(campusExpress.toString());
+        this.plusDollars = new BigDecimal(plusDollars.toString());
     }
 
     /**
@@ -172,7 +172,7 @@ public class Account
      */
     public void setPlusDollars(String plusDollars)
     {
-        this.campusExpress = new BigDecimal(plusDollars);
+        this.plusDollars = new BigDecimal(plusDollars);
     }
 
     /**

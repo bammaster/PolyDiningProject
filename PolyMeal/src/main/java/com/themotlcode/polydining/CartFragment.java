@@ -3,15 +3,11 @@ package com.themotlcode.polydining;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.*;
 import com.themotlcode.polydining.models.Cart;
-
-import java.math.BigDecimal;
 
 public class CartFragment extends Fragment
 {
@@ -27,15 +23,63 @@ public class CartFragment extends Fragment
 
         v = inflater.inflate(R.layout.fragment_cart, container, false);
 
+        ((MainActivity) getActivity()).viewDrawer(false);
+
         init();
 
-        presenter = new CartPresenter(getActivity());
+        presenter = new CartPresenter(this);
 
         updateBalance();
 
         isCartEmpty();
 
         return v;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        isCartEmpty();
+        cartAdapter.updateCart();
+        updateBalance();
+        presenter.updateSettings();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu,inflater);
+        menu.clear();
+        inflater.inflate(R.menu.cart, menu);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            /*case R.id.menuCom:
+                Intent intent = new Intent(this, CompleteorActivity.class);
+                startActivity(intent);
+                return true;*/
+            case R.id.clrCart:
+                Cart.clear();
+                cartAdapter.clearCart();
+                cartAdapter.notifyDataSetChanged();
+                isCartEmpty();
+                updateBalance();
+                Toast.makeText(getActivity(), "Cart Cleared!", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void init()
@@ -69,7 +113,7 @@ public class CartFragment extends Fragment
         });
     }
 
-    public void isCartEmpty()
+    private void isCartEmpty()
     {
         if(lv.getAdapter().getCount() <= 0)
         {
@@ -78,75 +122,18 @@ public class CartFragment extends Fragment
         }
     }
 
-    public void removeFromCart(int position) {
+    private void removeFromCart(int position) {
         Cart.remove(position);
         updateBalance();
         isCartEmpty();
         cartAdapter.notifyDataSetChanged();
     }
 
-    public void setSubtitleColor() {
-        int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-        TextView yourTextView = (TextView) getActivity().findViewById(titleId);
-        if(presenter.getTotalAmount().compareTo(BigDecimal.ZERO) < 0)
-        {
-            yourTextView.setTextColor(Color.RED);
-        }
-        else
-        {
-            yourTextView.setTextColor(Color.WHITE);
-        }
+    protected void updateBalance() {
+        presenter.setSubtitle();
     }
 
-    public void updateBalance() {
-        setSubtitleColor();
-        getActivity().getActionBar().setSubtitle("$" + presenter.getTotalAmount() + " Remaining");
-    }
-
-    public void onResume()
-    {
-        super.onResume();
-        isCartEmpty();
-        cartAdapter.updateCart();
-        updateBalance();
-        presenter.updateSettings();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
-        super.onCreateOptionsMenu(menu,inflater);
-        menu.clear();
-        inflater.inflate(R.menu.cart, menu);
-    }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            /*case R.id.menuCom:
-                Intent intent = new Intent(this, CompleteorActivity.class);
-                startActivity(intent);
-                return true;*/
-            case R.id.clrCart:
-                Cart.clear();
-                cartAdapter.clearCart();
-                cartAdapter.notifyDataSetChanged();
-                isCartEmpty();
-                updateBalance();
-                Toast.makeText(getActivity(), "Cart Cleared!", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public class CartAdapter extends BaseAdapter implements View.OnClickListener {
+    protected class CartAdapter extends BaseAdapter implements View.OnClickListener {
 
         public void updateCart()
         {

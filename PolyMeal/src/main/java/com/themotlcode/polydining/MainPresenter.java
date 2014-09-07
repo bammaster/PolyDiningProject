@@ -1,11 +1,8 @@
 package com.themotlcode.polydining;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -15,82 +12,15 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class PolyDiningActivity extends android.support.v4.app.FragmentActivity implements android.support.v4.app.FragmentManager.OnBackStackChangedListener
+public class MainPresenter extends Presenter
 {
-    private FragmentManager fm;
-    private PolyDiningActivity activity;
-    PolyDiningFragment fragment;
-    private boolean showGreeting;
-    
+    private MainActivity activity;
     private PolyApplication app;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        init();
-
-        activity = this;
-
-        fragment = new PolyDiningFragment();
-
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_layout, fragment).commit();
-
-        getConfigFromWeb();
-    }
-
-    private void init()
+    public MainPresenter(Activity a)
     {
-        app = (PolyApplication) getApplication();
-        fm = getSupportFragmentManager();
-        fm.addOnBackStackChangedListener(this);
-    }
-
-    @Override
-    public void onBackStackChanged()
-    {
-        if(getFragmentManager().getBackStackEntryCount() == 0)
-        {
-            finish();
-        }
-    }
-
-    public void setColor()
-    {
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
-
-        Fragment f = fm.findFragmentById(R.id.fragment_layout);
-        if (f instanceof PolyDiningFragment)
-        {
-            if(showGreeting) {
-                PolyDiningFragment pdf = (PolyDiningFragment) f;
-                pdf.greeting.setTitleColor(PolyApplication.APP_COLOR);
-                pdf.greeting.setDividerColor(PolyApplication.APP_COLOR);
-                pdf.greeting.show();
-            }
-        }
-
-    }
-
-    public void setGreeting(String s)
-    {
-        Fragment f = fm.findFragmentById(R.id.fragment_layout);
-        if (f instanceof PolyDiningFragment)
-        {
-            PolyDiningFragment pdf = (PolyDiningFragment) f;
-            pdf.greeting.setMessage(s);
-            String greeting = getSharedPreferences(PolyApplication.spKey,MODE_PRIVATE).getString(PolyApplication.GREETING_KEY, "");
-            if(!s.equals(greeting)) {
-                showGreeting = true;
-                getSharedPreferences(PolyApplication.spKey, MODE_PRIVATE).edit().putString(PolyApplication.GREETING_KEY, s).apply();
-            }
-            else
-            {
-                showGreeting = false;
-            }
-        }
+        this.activity = (MainActivity) a;
+        app = (PolyApplication) activity.getApplication();
     }
 
     protected void getConfigFromWeb()
@@ -98,25 +28,40 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
         new HomeUpdate().execute();
     }
 
-    class HomeUpdate extends AsyncTask<Void, Void, Boolean>
+    class HomeUpdate extends AsyncTask<Void, Void, String>
     {
 
-        protected Boolean doInBackground(Void... args) {
+        protected String doInBackground(Void... args) {
             try
             {
                 getDates();
-                getMessage();
                 getColor();
+                return getMessage();
             }
             catch(IOException e){
                 Log.e("Blake", "IOError: ", e);
-                return false;
             }
-            return true;
+            return null;
         }
 
-        protected void onPostExecute(Boolean b) {
+        protected void onPostExecute(String s) {
             activity.setColor();
+            if(s != null)
+            {
+                Fragment f = activity.getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
+
+                //should always be true
+                if (f instanceof LoginFragment)
+                {
+                    LoginFragment lf = (LoginFragment) f;
+                    lf.greeting.setMessage(s);
+                    String greeting = activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE).getString(PolyApplication.GREETING_KEY, "");
+                    if(!s.equals(greeting)) {
+                        activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE).edit().putString(PolyApplication.GREETING_KEY, s).apply();
+                    }
+                    lf.greeting.show();
+                }
+            }
         }
 
         private void getDates() throws IOException
@@ -142,7 +87,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
                 app.startOfQuarter[2] = new Integer(temp[1]);
             }
         }
-        private void getMessage() throws IOException
+        private String getMessage() throws IOException
         {
             URL dateUrl = new URL(PolyApplication.MESSAGE_URL);
             URLConnection dateCon = dateUrl.openConnection();
@@ -152,7 +97,7 @@ public class PolyDiningActivity extends android.support.v4.app.FragmentActivity 
             String line;
             while((line = br.readLine()) != null)
                 sb.append(line);
-            activity.setGreeting(sb.toString());
+            return sb.toString();
         }
         private void getColor() throws IOException
         {

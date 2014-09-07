@@ -21,30 +21,24 @@ import java.util.ArrayList;
 public class VenuePresenter extends MealPresenter
 {
 
-    VenueFragment fragment;
+    private VenueFragment fragment;
     private ArrayList<ItemList> itemLists;
-    private VenuePresenter presenter;
-
     private PolyApplication app;
-
-    private static BigDecimal totalAmount;
 
     public VenuePresenter(Fragment fragment)
     {
         this.app = (PolyApplication) fragment.getActivity().getApplication();
         this.fragment = (VenueFragment) fragment;
         this.itemLists = app.venues.get(app.activityTitle).getVenueItemLists();
-        this.presenter = this;
-        presenter.setFragment(fragment);
+        setFragment(fragment);
         updateSettings();
 
     }
 
-    boolean loadFromCache(Bundle savedInstanceState)
+    protected boolean loadFromCache(Bundle savedInstanceState)
     {
         if(savedInstanceState != null)
         {
-            System.out.println("got here");
             MoneyTime.setMoneySpent(new BigDecimal(savedInstanceState.getString("moneySpent")));
             Cart.setCart(savedInstanceState.getParcelableArrayList("cart"));
             app.lastVenue = savedInstanceState.getString("lastVenue");
@@ -53,7 +47,7 @@ public class VenuePresenter extends MealPresenter
         return false;
     }
 
-    void updateSettings()
+    protected void updateSettings()
     {
         SharedPreferences defaultSP;
         int sortMode;
@@ -84,12 +78,22 @@ public class VenuePresenter extends MealPresenter
 
     }
 
-    public PagerAdapter adapterInit(FragmentManager supportFragmentManager)
+    protected PagerAdapter adapterInit(FragmentManager supportFragmentManager)
     {
         return new VenueAdapter(supportFragmentManager);
     }
 
-    public class VenueAdapter extends FragmentStatePagerAdapter
+    protected String getListTitle(int pos)
+    {
+        return app.venues.get(app.lastVenue).getName();
+    }
+
+    protected int getListCount()
+    {
+        return app.venues.get(app.lastVenue).numberOfItemSets();
+    }
+
+    protected class VenueAdapter extends FragmentStatePagerAdapter
     {
 
         public VenueAdapter(FragmentManager fm) {
@@ -119,15 +123,5 @@ public class VenuePresenter extends MealPresenter
             return POSITION_NONE;
         }
 
-    }
-
-    public String getListTitle(int pos)
-    {
-        return app.venues.get(app.lastVenue).getName();
-    }
-
-    public int getListCount()
-    {
-        return app.venues.get(app.lastVenue).numberOfItemSets();
     }
 }

@@ -1,30 +1,23 @@
 package com.themotlcode.polydining;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import com.themotlcode.polydining.models.Cart;
-import com.themotlcode.polydining.models.MoneyTime;
 
-import java.math.BigDecimal;
-
-public class CartPresenter extends Presenter
+public class CartPresenter extends MealPresenter
 {
-    private Activity activity;
+    private CartFragment fragment;
 
-    public CartPresenter(Activity activity)
+    public CartPresenter(Fragment fragment)
     {
-        this.activity = activity;
+        this.fragment = (CartFragment) fragment;
+        setFragment(fragment);
 
     }
 
-    public BigDecimal getTotalAmount()
-    {
-        return new BigDecimal(MoneyTime.calcTotalMoney().toString());
-    }
-
-    public void updateSettings() {
-        SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(activity);
+    protected void updateSettings() {
+        SharedPreferences defaultSp = PreferenceManager.getDefaultSharedPreferences(fragment.getActivity());
         int sortMode;
 
         sortMode = Integer.valueOf(defaultSp.getString("sortMode", "0"));

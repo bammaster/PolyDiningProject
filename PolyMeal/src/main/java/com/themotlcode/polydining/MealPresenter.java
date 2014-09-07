@@ -15,18 +15,18 @@ public class MealPresenter
     private static BigDecimal totalAmount;
     private PolyApplication app;
 
-    public void setFragment(Fragment fragment)
+    protected void setFragment(Fragment fragment)
     {
         this.fragment = fragment;
         app = (PolyApplication) fragment.getActivity().getApplication();
     }
 
-    public static void updateTotalAmount()
+    protected static void updateTotalAmount()
     {
         totalAmount = MoneyTime.calcTotalMoney();
     }
 
-    public void setSubtitle()
+    protected void setSubtitle()
     {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView) fragment.getActivity().findViewById(titleId);
@@ -41,23 +41,8 @@ public class MealPresenter
         }
         fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
     }
-    /*
-        TODO: Figure out someway to check the PlusDollars balance from here.
-     */
-    /*public boolean updateBalance()
-    {
-        updateTotalAmount();
-        //Alerts the user if they will exceed their plus dollars with whats in the cart.
-        if (totalAmount.compareTo(new BigDecimal("0.00")) < 0)
-        {
-            if (Statics.user != null && totalAmount.multiply(new BigDecimal("-1")).compareTo(Statics.user.getPlusDollars()) > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }*/
-    public void updateBalance() {
+
+    protected void updateBalance() {
         updateTotalAmount();
         //Alerts the user if they will exceed their plus dollars with whats in the cart.
         if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)

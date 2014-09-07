@@ -1,17 +1,12 @@
 package com.themotlcode.polydining;
 
 
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.themotlcode.polydining.models.Account;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Weeks;
@@ -31,15 +26,11 @@ public class PlusDollarsFragment extends Fragment
     private TextView budget1;
     private TextView budget2;
     private TextView weeksLeft;
-    private EditText username;
-    private EditText password;
-    private CheckBox remember;
-    private LayoutInflater factory;
     private Days d;
     private Weeks w;
 
-    private PlusDollarsPresenter presenter;
     private PolyApplication app;
+    private PlusDollarsPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -47,51 +38,12 @@ public class PlusDollarsFragment extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_plus_dollars, container, false);
+        app = (PolyApplication) getActivity().getApplication();
         presenter = new PlusDollarsPresenter(this);
-
         init(v);
-
-        login();
-        fadeIn();
         handleMusic();
 
         return v;
-    }
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-        if(app.user!= null)
-        {
-            if(name != null && app.user.getName()!= null) {
-                setTextSizeName(app.user.getName(), name);
-            }
-        }
-        if(app.endOfQuarter == null) {
-            presenter.loadBudget();
-        }
-        DateTime start = new DateTime(app.startOfQuarter[0], app.startOfQuarter[1], app.startOfQuarter[2], 0, 0, 0, 0);
-        DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
-        d = Days.daysBetween(start, end);
-        w = Weeks.weeksBetween(start, end);
-        if(w.getWeeks() > 10)
-        {
-            weeksLeft.setText(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
-        }
-        else {
-            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
-        }
-    }
-
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-        if(app.user != null) {
-            if (app.user.isRemembered()) {
-                //presenter.saveAccount();
-            }
-        }
     }
 
     @Override
@@ -99,7 +51,7 @@ public class PlusDollarsFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu,inflater);
         menu.clear();
-        inflater.inflate(R.menu.plusdollars, menu);
+        inflater.inflate(R.menu.refresh, menu);
     }
 
     @Override
@@ -108,22 +60,25 @@ public class PlusDollarsFragment extends Fragment
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                presenter.loadData();
-                getActivity().setProgressBarIndeterminateVisibility(true);
-                return true;
-            case R.id.login:
-                login();
+                presenter.refresh();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /**
-     * Helps auto size text based on the length of the users name.
-     * @param name The name of the person from the meal plan website.
-     * @param nameText The view to set the parameter name to.
-     */
+    private void init(View v)
+    {
+        this.setHasOptionsMenu(true);
+
+        getViews(v);
+
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
+        name.setTypeface(font);
+
+        loadData();
+    }
+
     private void setTextSizeName(String name, TextView nameText)
     {
         if(name.length() > 10 && name.length() < 15)
@@ -140,143 +95,56 @@ public class PlusDollarsFragment extends Fragment
         }
     }
 
-    /**
-     * Handles a user login by giving the user a dialog to enter their information into.
-     * Also starts the thread to get the user data and updates the UI.
-     */
-    void handleLogin()
+    protected void loadData()
     {
-        View loginView = factory.inflate(R.layout.login_dialog, null);
-        username = (EditText) loginView.findViewById(R.id.username);
-        password = (EditText) loginView.findViewById(R.id.password);
-        remember = (CheckBox) loginView.findViewById(R.id.remember);
-        QustomDialogBuilder login = new QustomDialogBuilder(getActivity());
-        login.setTitleColor(PolyApplication.APP_COLOR);
-        login.setDividerColor(PolyApplication.APP_COLOR);
-        login.setTitle("Please login.");
-        login.setCustomView(loginView, getActivity());
-        login.setPositiveButton("Login", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int id)
-            {
-                app.user = new Account(username.getText().toString(), password.getText().toString(), remember.isChecked());
-                getActivity().setProgressBarIndeterminateVisibility(true);
-                presenter.loadData();
-                dialog.dismiss();
-            }
-        });
-        login.show();
-    }
-
-    /**
-     * Sets up the media player for the John Doe "easter egg".
-     */
-    private void handleMusic()
-    {
-        MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.john_doe_sample);
-        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(final MediaPlayer mediaPlayer) {
-                name.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(name.getText().toString().equals("John Doe")) {
-                            mediaPlayer.seekTo(0);
-                            mediaPlayer.start();
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    void returnThread(Boolean b)
-    {
-        if (!b)
-        {
-            Toast.makeText(getActivity(), "Unable to download budget data.", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            if(app.user == null)
-            {
-                Toast.makeText(getActivity(), "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
-                handleLogin();
-            }
-            else
-            {
-                setTextSizeName(app.user.getName(), name);
-                name.setText(app.user.getName());
-                if(remember != null)
-                {
-
-                    if(remember.isChecked())
-                    {
-                        app.user.setRemembered();
-                        //presenter.saveAccount();
-                    }
-                    else
-                    {
-                        presenter.clearAccount();
-                    }
-                }
-                plus.setText(app.user.plusAsMoney());
-                express.setText(app.user.expressAsMoney());
-                meal.setText(app.user.getMeals()+"");
-
-                DateTime start = new DateTime();
-                DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
-                Days d = Days.daysBetween(start, end);
-                Weeks w = Weeks.weeksBetween(start, end);
-                String temp = app.user.plusAsMoney();
-                temp = temp.substring(1);
-
-                budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-                budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-                presenter.storeDates();
-
-            }
-            getActivity().setProgressBarIndeterminateVisibility(false);
-            //used when TransactionActivity calls this activity, closes immediately for a more seamless transition
-            if(getActivity().getIntent().getExtras() != null && getActivity().getIntent().getExtras().getInt("login") == 1)
-                getActivity().finish();
-            setAlphaToZero();
-            fadeIn();
-        }
-    }
-
-
-    private void init(View v)
-    {
-        this.setHasOptionsMenu(true);
-
-        getViews(v);
-
         setAlphaToZero();
-        factory = LayoutInflater.from(getActivity());
-        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Thin.ttf");
-        name.setTypeface(font);
 
-        app = (PolyApplication) getActivity().getApplication();
+        setTextSizeName(app.user.getName(), name);
+
+        DateTime start = new DateTime(app.startOfQuarter[0], app.startOfQuarter[1], app.startOfQuarter[2], 0, 0, 0, 0);
+        DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
+        d = Days.daysBetween(start, end);
+        w = Weeks.weeksBetween(start, end);
+        if(w.getWeeks() > 10)
+        {
+            weeksLeft.setText(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
+        }
+        else {
+            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
+        }
+
+        login();
+        fadeIn();
     }
 
     private void login()
     {
-        presenter.init();
-        if (app.user != null)
-        {
-            String temp = app.user.plusAsMoney();
-            temp = temp.substring(1);
-            name.setText(app.user.getName());
-            plus.setText(app.user.plusAsMoney());
-            express.setText(app.user.expressAsMoney());
-            meal.setText(app.user.getMeals() + "");
-            budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-            budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-        }
+        String temp = app.user.plusAsMoney();
+        temp = temp.substring(1);
+        name.setText(app.user.getName());
+        plus.setText(app.user.plusAsMoney());
+        express.setText(app.user.expressAsMoney());
+        meal.setText(app.user.getMeals() + "");
+        budget1.setText("$" + new BigDecimal(temp).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+        budget2.setText("$" + new BigDecimal(temp).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
     }
-    /**
-     * Gets access to the views on screen for manipulation and animation.
-     */
+
+    private void fadeIn()
+    {
+        final int duration = 300;
+        final int delay = 150;
+        name.animate().alpha(1.0f).setStartDelay(delay).setDuration(duration).start();
+        expressHeader.animate().alpha(1.0f).setStartDelay(duration/2+delay).setDuration(duration).start();
+        express.animate().alpha(1.0f).setStartDelay(2*duration/2+delay).setDuration(duration).start();
+        plusHeader.animate().alpha(1.0f).setStartDelay(3 * duration/2+delay).setDuration(duration).start();
+        plus.animate().alpha(1.0f).setStartDelay(4 * duration/2+delay).setDuration(duration).start();
+        mealHeader.animate().alpha(1.0f).setStartDelay(5 * duration/2+delay).setDuration(duration).start();
+        meal.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budgetHeader.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budget1.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        budget2.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+    }
+
     private void getViews(View v)
     {
         name = (TextView)v.findViewById(R.id.nameText);
@@ -309,23 +177,22 @@ public class PlusDollarsFragment extends Fragment
         budget2.setAlpha(0);
     }
 
-    /**
-     * Fades in UI elements. To add an elements, add 1 to the multiple(#) of duration and follow
-     * the format "# * duration/2 + delay" for the cascading effect.
-     */
-    private void fadeIn()
+    private void handleMusic()
     {
-        final int duration = 300;
-        final int delay = 150;
-        name.animate().alpha(1.0f).setStartDelay(delay).setDuration(duration).start();
-        expressHeader.animate().alpha(1.0f).setStartDelay(duration/2+delay).setDuration(duration).start();
-        express.animate().alpha(1.0f).setStartDelay(2*duration/2+delay).setDuration(duration).start();
-        plusHeader.animate().alpha(1.0f).setStartDelay(3 * duration/2+delay).setDuration(duration).start();
-        plus.animate().alpha(1.0f).setStartDelay(4 * duration/2+delay).setDuration(duration).start();
-        mealHeader.animate().alpha(1.0f).setStartDelay(5 * duration/2+delay).setDuration(duration).start();
-        meal.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
-        budgetHeader.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
-        budget1.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
-        budget2.animate().alpha(1.0f).setStartDelay(6 * duration/2+delay).setDuration(duration).start();
+        MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.john_doe_sample);
+        mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(final MediaPlayer mediaPlayer) {
+                name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(name.getText().toString().equals("John Doe")) {
+                            mediaPlayer.seekTo(0);
+                            mediaPlayer.start();
+                        }
+                    }
+                });
+            }
+        });
     }
 }

@@ -8,29 +8,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import com.google.gson.Gson;
 import com.themotlcode.polydining.Sorting.VenueNameComparator;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.GetAndStoreVenueData;
-import com.themotlcode.polydining.models.MoneyTime;
 import com.themotlcode.polydining.models.Venue;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.TreeMap;
 
-public class PolyMealPresenter extends Presenter {
+public class PolyMealPresenter extends Presenter
+{
 
     private SharedPreferences sp;
     private PolyMealFragment fragment;
-    private PolyMealActivity activity;
+    private MainActivity activity;
     private ListAdapter listAdapter;
     private PolyApplication app;
 
     public PolyMealPresenter(Fragment fragment, ListAdapter listAdapter) {
         this.fragment = (PolyMealFragment) fragment;
-        this.activity = (PolyMealActivity) fragment.getActivity();
+        this.activity = (MainActivity) fragment.getActivity();
         this.listAdapter = listAdapter;
         
         app = (PolyApplication) activity.getApplication();
@@ -57,7 +54,7 @@ public class PolyMealPresenter extends Presenter {
         new GetAndStoreVenueData(listAdapter, fragment.getActivity(), sp, app).execute();
     }
 
-    class GetDataThread extends AsyncTask<Void, Void, Boolean>
+    protected class GetDataThread extends AsyncTask<Void, Void, Boolean>
     {
 
         protected Boolean doInBackground(Void... args)
@@ -77,7 +74,7 @@ public class PolyMealPresenter extends Presenter {
         }
     }
 
-    void refresh()
+    protected void refresh()
     {
         listAdapter.clear();
         app.venues = null;
@@ -86,7 +83,7 @@ public class PolyMealPresenter extends Presenter {
     }
 
 
-    void setupList(ListView lv)
+    protected void setupList(ListView lv)
     {
         listAdapter.setNotifyOnChange(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -113,7 +110,7 @@ public class PolyMealPresenter extends Presenter {
                             mActivity.startActivity(intentVenue);*/
                             app.lastVenue = app.names.get(fIndex);
                             VenueFragment venueFragment = new VenueFragment();
-                            FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
+                            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_layout, venueFragment)
                                     .addToBackStack(null);
                             transaction.commit();

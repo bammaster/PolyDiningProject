@@ -1,32 +1,65 @@
 package com.themotlcode.polydining;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.themotlcode.polydining.models.Transaction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class BaseActivity extends FragmentActivity
+public class MainActivity extends FragmentActivity implements FragmentManager.OnBackStackChangedListener
 {
+    // Drawer UI
     protected DrawerLayout mDrawerLayout;
     protected RelativeLayout mRelLayout;
     protected ListView mDrawerList;
     protected ActionBarDrawerToggle mDrawerToggle;
     protected String[]  mDrawerItems;
+
+    private FragmentManager fm;
+    public static MainActivity mActivity;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        setContentView(R.layout.activity_main);
+        initActivity();
+
+        fm = getSupportFragmentManager();
+        MainPresenter presenter = new MainPresenter(this);
+        presenter.getConfigFromWeb();
+
+        fm.beginTransaction()
+                .add(R.id.fragment_layout, new LoginFragment()).commit();
+    }
+
+    @Override
+    public void onBackStackChanged()
+    {
+        if(getFragmentManager().getBackStackEntryCount() == 0)
+        {
+            finish();
+        }
+    }
 
     @Override
     public void setContentView(final int layoutResID) {
@@ -48,22 +81,28 @@ public class BaseActivity extends FragmentActivity
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-    public void init(Context mContext, ActionBar mActionBar, boolean plus) {
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (mDrawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void initActivity() {
+        mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerItems = getResources().getStringArray(plus ? R.array.drawerItemsPlus : R.array.drawerItemsMeal);
 
-        // set a custom shadow that overlays the main content when the drawer opens
+        mDrawerItems = getResources().getStringArray(R.array.drawerItems);
+
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mDrawerItems));*/
-        mDrawerList.setAdapter(new DrawerAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(mContext));
 
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
+        mDrawerList.setAdapter(new DrawerAdapter(this, new ArrayList<String>(Arrays.asList(mDrawerItems))));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
@@ -88,10 +127,23 @@ public class BaseActivity extends FragmentActivity
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    protected void viewDrawer(boolean b)
+    {
+        // enable ActionBar app icon to behave as action to toggle nav drawer
+        getActionBar().setDisplayHomeAsUpEnabled(b);
+        getActionBar().setHomeButtonEnabled(b);
+    }
+
+    protected void setColor()
+    {
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
+
+    }
+
     /* The click listner for ListView in the navigation drawer */
     protected class DrawerItemClickListener implements ListView.OnItemClickListener {
         Context mContext;
-        public DrawerItemClickListener(Context mContext) {
+        protected DrawerItemClickListener(Context mContext) {
             this.mContext = mContext;
         }
         @Override
@@ -103,37 +155,41 @@ public class BaseActivity extends FragmentActivity
                 {
                     try
                     {
+                        Thread.sleep(delay);
                         switch(position)
                         {
-                            /*case 0:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            case 0:
+                                Bundle pData = new Bundle();
+                                pData.putBoolean("plus", true);
+
+                                MyAccountFragment plusFragment = new MyAccountFragment();
+                                plusFragment.setArguments(pData);
+
+                                FragmentTransaction pTransaction = getSupportFragmentManager().beginTransaction();
+                                pTransaction.replace(R.id.fragment_layout, plusFragment)
+                                        .addToBackStack(null);
+                                pTransaction.commit();
                                 break;
                             case 1:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyMealActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-                                break;
-                            case 2:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PlusDollarsActivity.class).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-                                Thread.sleep(delay);
-                                break;*/
-                            case 3:
-                                Thread.sleep(delay);
-                                TransactionFragment transactionFragment = new TransactionFragment();
+                                MyAccountFragment transFragment = new MyAccountFragment();
+                                Bundle tData = new Bundle();
+                                tData.putBoolean("plus", false);
+                                transFragment.setArguments(tData);
+
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.fragment_layout, transactionFragment)
+                                transaction.replace(R.id.fragment_layout, transFragment)
                                         .addToBackStack(null);
                                 transaction.commit();
                                 break;
-                            /*case 4:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, SettingsActivity.class));
+                            case 2:
+                                PolyMealFragment venuesFragment = new PolyMealFragment();
+                                FragmentTransaction vTransaction = getSupportFragmentManager().beginTransaction();
+                                vTransaction.replace(R.id.fragment_layout, venuesFragment)
+                                        .addToBackStack(null);
+                                vTransaction.commit();
                                 break;
-                            default:
-                                Thread.sleep(delay);
-                                startActivity(new Intent(mContext, PolyDiningActivity.class));
-                                break;*/
+                            case 3:
+                                break;
                         }
                     }
                     catch(InterruptedException e)

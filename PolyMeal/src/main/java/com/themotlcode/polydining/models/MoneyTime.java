@@ -3,7 +3,7 @@ package com.themotlcode.polydining.models;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
-import com.themotlcode.polydining.PolyMealActivity;
+import com.themotlcode.polydining.MainActivity;
 
 import java.math.BigDecimal;
 
@@ -24,7 +24,7 @@ public class MoneyTime
     public static BigDecimal calcTotalMoney()
     {
         SharedPreferences defaultSP;
-        defaultSP = PreferenceManager.getDefaultSharedPreferences(PolyMealActivity.mActivity);
+        defaultSP = PreferenceManager.getDefaultSharedPreferences(MainActivity.mActivity);
         manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
 
 

@@ -12,7 +12,6 @@ import com.themotlcode.polydining.models.ItemList;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 //VenueListAdapter inflates the rows for each Item in the ItemSet for the current page in the ViewPager
 

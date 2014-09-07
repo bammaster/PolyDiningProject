@@ -6,7 +6,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 import com.themotlcode.polydining.models.Transaction;
 
 import java.util.ArrayList;
@@ -62,5 +63,11 @@ public class TransactionAdapter extends BaseAdapter {
         tvAmount.setText(trans.get(position).getAmount());
 
         return convertView;
+    }
+
+    public void updateData(ArrayList<Transaction> trans)
+    {
+        this.trans = trans;
+        notifyDataSetChanged();
     }
 }

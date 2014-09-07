@@ -1,7 +1,8 @@
 package com.themotlcode.polydining.models;
 
+import com.themotlcode.polydining.PolyApplication;
+
 import java.util.ArrayList;
-import com.themotlcode.polydining.Constants;
 
 /**
  * Stores the open and close times for a venue. Can also determine if venue is open or closing soon.
@@ -124,11 +125,11 @@ public class VenueTime
     {
         for(int i = 0; i < open.size(); i++)
         {
-            if(now.getTimeInMinutes() >= closed.get(i).getTimeInMinutes() - Constants.HOURS_TO_MINUTES
+            if(now.getTimeInMinutes() >= closed.get(i).getTimeInMinutes() - PolyApplication.HOURS_TO_MINUTES
                     &&now.getTimeInMinutes() <= closed.get(i).getTimeInMinutes())
             {
-                if(now.getTimeInMinutes() >= Constants.ELEVEN_O_CLOCK_MINUTES &&
-                        closed.get(i).getTimeInMinutes() <= Constants.TWELVE_O_CLOCK_MINUTES)
+                if(now.getTimeInMinutes() >= PolyApplication.ELEVEN_O_CLOCK_MINUTES &&
+                        closed.get(i).getTimeInMinutes() <= PolyApplication.TWELVE_O_CLOCK_MINUTES)
                 {
                     return false;
                 }
