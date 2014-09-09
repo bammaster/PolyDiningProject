@@ -16,7 +16,7 @@
             android:theme="@style/CalPolyHolo"
             android:name="com.themotlcode.polydining.PolyApplication">
         <activity
-                android:name="com.themotlcode.polydining.PolyDiningActivity"
+                android:name="com.themotlcode.polydining.MainActivity"
                 android:clearTaskOnLaunch="true"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait" >
@@ -26,12 +26,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.themotlcode.polydining.PolyMealActivity"
-                  android:label="@string/poly_meal_activity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name="com.themotlcode.polydining.PlusDollarsActivity"
-                  android:label="@string/plus_dollar_activity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name="com.themotlcode.polydining.BaseActivity"/>
     </application>
 </manifest>

@@ -52,6 +52,12 @@
         <item>Transactions</item>
         <item>Settings</item>
     </string-array>
+    <string-array name="drawerItems">
+        <item>My Account</item>
+        <item>Transactions</item>
+        <item>Venues</item>
+        <item>Settings</item>
+    </string-array>
     <string-array name="moneyMode">
         <item>Breakfast</item>
         <item>Lunch</item>

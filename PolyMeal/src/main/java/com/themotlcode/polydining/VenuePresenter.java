@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
 import com.themotlcode.polydining.Sorting.ItemNameComparator;
 import com.themotlcode.polydining.Sorting.ItemPriceComparator;
 import com.themotlcode.polydining.models.Cart;
@@ -78,14 +80,14 @@ public class VenuePresenter extends MealPresenter
 
     }
 
-    protected PagerAdapter adapterInit(FragmentManager supportFragmentManager)
+    protected VenueAdapter adapterInit(FragmentManager supportFragmentManager)
     {
         return new VenueAdapter(supportFragmentManager);
     }
 
     protected String getListTitle(int pos)
     {
-        return app.venues.get(app.lastVenue).getName();
+        return app.venues.get(app.lastVenue).getVenueItemLists().get(pos).getTitle();
     }
 
     protected int getListCount()

@@ -23,7 +23,7 @@ public class VenueFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-
+        System.out.println("onCreateView)");
         View v = inflater.inflate(R.layout.fragment_venue, container, false);
         ((MainActivity) getActivity()).viewDrawer(true);
 
@@ -50,6 +50,8 @@ public class VenueFragment extends Fragment
         getActivity().getActionBar().setTitle("PolyMeal");
         vp.getAdapter().notifyDataSetChanged();
         vp.invalidate();
+        vp = null;
+        myPagerTabStrip = null;
     }
 
     @Override
@@ -93,12 +95,12 @@ public class VenueFragment extends Fragment
         app = (PolyApplication) getActivity().getApplication();
 
         vp = (ViewPager) v.findViewById(R.id.pager);
+        vp.setSaveEnabled(false);
 
         myPagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_title_strip);
         myPagerTabStrip.setTabIndicatorColor(0xC6930A);
+        myPagerTabStrip.setSaveEnabled(false);
         getActivity().getActionBar().setTitle(app.activityTitle);
-
-
 
         presenter.updateBalance();
         updateSettings();
