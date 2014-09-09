@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.*;
+import android.widget.PopupMenu;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.MoneyTime;
 
@@ -73,6 +74,17 @@ public class VenueFragment extends Fragment
                 transaction.replace(R.id.fragment_layout, cartFragment)
                         .addToBackStack(null);
                 transaction.commit();
+                return true;
+            case R.id.sort:
+                //popupMenu.show();
+                return true;
+            case R.id.mc_choice:
+                System.out.println("MC CHOICE");
+                item.setChecked(true);
+                return true;
+            case R.id.pd_choice:
+                System.out.println("PD CHOICE");
+                item.setChecked(true);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

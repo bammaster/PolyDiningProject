@@ -21,12 +21,12 @@ public class MealPresenter
         app = (PolyApplication) fragment.getActivity().getApplication();
     }
 
-    protected static void updateTotalAmount()
+    private static void updateTotalAmount()
     {
         totalAmount = MoneyTime.calcTotalMoney();
     }
 
-    protected void setSubtitle()
+    private void setSubtitle()
     {
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView) fragment.getActivity().findViewById(titleId);
@@ -39,6 +39,9 @@ public class MealPresenter
         {
             yourTextView.setTextColor(Color.WHITE);
         }
+        yourTextView.setAlpha(0);
+        yourTextView.animate().alpha(1.0f).setStartDelay(150).setDuration(500).start();
+        //for some reason, this must be here for the subtitle to display
         fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
     }
 
@@ -66,6 +69,5 @@ public class MealPresenter
             }
         }
         setSubtitle();
-        fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
     }
 }

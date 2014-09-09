@@ -130,7 +130,7 @@ public class CartFragment extends Fragment
     }
 
     protected void updateBalance() {
-        presenter.setSubtitle();
+        presenter.updateBalance();
     }
 
     protected class CartAdapter extends BaseAdapter implements View.OnClickListener {
