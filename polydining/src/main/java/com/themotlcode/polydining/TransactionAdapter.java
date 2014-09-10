@@ -51,7 +51,6 @@ public class TransactionAdapter extends BaseAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.row_item_trans, null);
         }
-        System.out.println(trans.get(position).toString());
 
         TextView tvVenue = (TextView) convertView.findViewById(R.id.tv_venue);
         tvVenue.setText(trans.get(position).getPlace());

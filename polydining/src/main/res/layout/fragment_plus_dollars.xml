@@ -1,6 +1,5 @@
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:autofit="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -10,47 +9,42 @@
                         android:layout_height="wrap_content">
             <me.grantland.widget.AutofitTextView
                     android:id="@+id/nameText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="John Doe"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="70sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
+                    android:textSize="45sp"
                     android:singleLine="true"
-                    autofit:minTextSize="8sp"/>
+                    android:gravity="center_vertical|center_horizontal"/>
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    style="@style/sectionHeader"
+                    style="?android:attr/listSeparatorTextViewStyle"
                     android:text="Campus Express"
                     android:id="@+id/expHeader"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_below="@+id/nameText"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true" />
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    style="@style/sectionHeader"
+                    style="?android:attr/listSeparatorTextViewStyle"
                     android:text="Plus Dollars"
                     android:id="@+id/plusHeader"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_below="@+id/expValue"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"/>
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    style="@style/sectionHeader"
+                    style="?android:attr/listSeparatorTextViewStyle"
                     android:text="Meals"
                     android:id="@+id/mealHeader"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_below="@+id/plusValue"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true" />
@@ -58,71 +52,64 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/expValue"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_below="@+id/expHeader"
                     android:layout_alignParentLeft="true"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/plusValue"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_below="@+id/plusHeader"
                     android:layout_alignParentLeft="true"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="0"
                     android:id="@+id/mealText"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                 android:layout_below="@+id/mealHeader"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="17dp" />
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    style="@style/sectionHeader"
+                    style="?android:attr/listSeparatorTextViewStyle"
                     android:text="Budget"
                     android:id="@+id/budgetHeader"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                 android:layout_below="@+id/mealText"
                 android:layout_alignParentLeft="true" />
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/budgetText1"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                 android:layout_below="@+id/budgetHeader"
                 android:layout_alignParentLeft="true" />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="$0"
                     android:id="@+id/budgetText2"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                 android:layout_below="@+id/budgetHeader"
                 android:layout_alignRight="@+id/budgetHeader" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/textWeeks"
                 android:text="@string/weeksleft"
                 android:layout_below="@+id/budgetText1"
-                android:layout_alignParentLeft="true" />
+                android:layout_alignParentLeft="true" android:paddingTop="8dp"/>
 
 
         </RelativeLayout>

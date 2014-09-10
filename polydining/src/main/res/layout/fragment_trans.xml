@@ -6,24 +6,20 @@
                     tools:context=".MainActivity" android:padding="8dp">
 
         <TextView
-                android:id="@+id/tvEditWorkout"
-                style="@style/sectionHeader"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_centerInParent="true"
+                style="?android:attr/listSeparatorTextViewStyle"
                 android:text="@string/trans"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="16dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"/>
+                android:id="@+id/expHeader"
+                android:textSize="20sp"
+                android:layout_alignParentLeft="true" />
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:id="@+id/listView"
-                android:layout_below="@+id/tvEditWorkout"
+                android:layout_below="@+id/expHeader"
                 android:smoothScrollbar="true"
-                android:layout_alignLeft="@+id/tvEditWorkout"
+                android:layout_alignLeft="@+id/expHeader"
                 android:layout_alignParentRight="true"
                 android:divider="@null"
                 android:dividerHeight="0dp"/>
