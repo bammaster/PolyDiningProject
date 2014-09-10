@@ -1,6 +1,5 @@
 package com.themotlcode.polydining.models;
 
-import com.themotlcode.polydining.*;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 import com.google.gson.Gson;
+import com.themotlcode.polydining.PolyApplication;
+import com.themotlcode.polydining.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;

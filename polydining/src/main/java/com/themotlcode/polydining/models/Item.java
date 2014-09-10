@@ -197,7 +197,7 @@ public class Item implements Parcelable, Comparable<Item>
                 this.description});
         dest.writeBooleanArray(new boolean[] {this.isPricePerOunce});
     }
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+    public static final Creator CREATOR = new Creator() {
         public Item createFromParcel(Parcel in) {
             return new Item(in);
         }

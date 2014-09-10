@@ -2,9 +2,7 @@ package com.themotlcode.polydining.models;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import com.themotlcode.polydining.R;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

@@ -1,7 +1,6 @@
 package com.themotlcode.polydining.models;
 
 import android.util.Log;
-
 import com.themotlcode.polydining.Exceptions.BudgetException;
 import com.themotlcode.polydining.PolyApplication;
 import org.jsoup.Connection;
