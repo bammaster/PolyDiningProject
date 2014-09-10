@@ -26,7 +26,7 @@ public class TransactionFragment extends Fragment
     {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View v = inflater.inflate(R.layout.activity_trans, container, false);
+        View v = inflater.inflate(R.layout.fragment_trans, container, false);
 
         mActivity = getActivity();
         mActionBar = getActivity().getActionBar();
@@ -36,6 +36,13 @@ public class TransactionFragment extends Fragment
         init(v);
 
         return v;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override

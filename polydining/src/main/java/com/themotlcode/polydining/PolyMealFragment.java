@@ -23,12 +23,8 @@ public class PolyMealFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_poly_meal, container, false);
 
         init(v);
-
-        presenter = new PolyMealPresenter(this, listAdapter);
+        presenter = new PolyMealPresenter(this);
         presenter.getData();
-
-        setupList();
-
         return v;
     }
 
@@ -47,7 +43,7 @@ public class PolyMealFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu,inflater);
         menu.clear();
-        inflater.inflate(R.menu.polymeal, menu);
+        inflater.inflate(R.menu.refresh, menu);
     }
 
     @Override
@@ -69,15 +65,18 @@ public class PolyMealFragment extends Fragment
         app = (PolyApplication) mActivity.getApplication();
 
         lv = (ListView) v.findViewById(R.id.listView);
-        listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, app.names);
+
 
         this.setHasOptionsMenu(true);
 
 
     }
 
-    private void setupList()
+    public void setupList()
     {
+        listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, app.names);
+        System.out.println(app.names);
+        presenter.setListAdapter(listAdapter);
         presenter.setupList(lv);
     }
 }

@@ -1,11 +1,13 @@
 package com.themotlcode.polydining;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.*;
+import com.astuetz.PagerSlidingTabStrip;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.MoneyTime;
 
@@ -14,7 +16,7 @@ import com.themotlcode.polydining.models.MoneyTime;
 public class VenueFragment extends Fragment
 {
     protected ViewPager vp;
-    protected PagerTabStrip myPagerTabStrip;
+    protected PagerSlidingTabStrip tabs;
 
     private VenuePresenter presenter;
     private PolyApplication app;
@@ -25,6 +27,7 @@ public class VenueFragment extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         System.out.println("onCreateView)");
         View v = inflater.inflate(R.layout.fragment_venue, container, false);
+
         ((MainActivity) getActivity()).viewDrawer(true);
 
         presenter = new VenuePresenter(this);
@@ -40,6 +43,7 @@ public class VenueFragment extends Fragment
     {
         super.onResume();
         presenter.updateBalance();
+        getActivity().invalidateOptionsMenu();
     }
 
     @Override
@@ -51,7 +55,6 @@ public class VenueFragment extends Fragment
         vp.getAdapter().notifyDataSetChanged();
         vp.invalidate();
         vp = null;
-        myPagerTabStrip = null;
     }
 
     @Override
@@ -106,11 +109,12 @@ public class VenueFragment extends Fragment
         app = (PolyApplication) getActivity().getApplication();
 
         vp = (ViewPager) v.findViewById(R.id.pager);
+        tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
         vp.setSaveEnabled(false);
 
-        myPagerTabStrip = (PagerTabStrip) v.findViewById(R.id.pager_title_strip);
-        myPagerTabStrip.setTabIndicatorColor(0xC6930A);
-        myPagerTabStrip.setSaveEnabled(false);
+        tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
+        vp = (ViewPager) v.findViewById(R.id.pager);
+
         getActivity().getActionBar().setTitle(app.activityTitle);
 
         presenter.updateBalance();
@@ -123,5 +127,11 @@ public class VenueFragment extends Fragment
 
         vp.setAdapter(presenter.adapterInit(this.getChildFragmentManager()));
         vp.getAdapter().notifyDataSetChanged();
+
+        tabs.setIndicatorColor(Color.parseColor(PolyApplication.ACCENT_COLOR));
+        tabs.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+        tabs.setDividerColor(Color.WHITE);
+        tabs.setTextColor(Color.WHITE);
+        tabs.setViewPager(vp);
     }
 }

@@ -106,6 +106,7 @@ public class MainPresenter extends Presenter
             InputStream is = dateCon.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             PolyApplication.APP_COLOR = "#" + br.readLine();
+            PolyApplication.ACCENT_COLOR = "#" + br.readLine();
         }
         private boolean checkDate(String[] dates) {
             if (dates.length != PolyApplication.DATE_ARRAY_SIZE) {

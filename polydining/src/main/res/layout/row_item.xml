@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_add" android:layout_alignParentRight="true"
                 android:layout_centerInParent="true" android:layout_marginLeft="4dp"
-                android:src="@drawable/btn_content_new"
+                android:src="@drawable/ic_action_new"
                 android:background="@null"/>
     </RelativeLayout>
 

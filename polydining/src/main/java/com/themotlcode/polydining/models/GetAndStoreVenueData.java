@@ -16,15 +16,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 /**
  * Handles getting and parsing all of the data for the app from the internet.
  * Can be used by constructing GetData and calling execute on it.
  */
-public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
+public class GetAndStoreVenueData
+{
 
-    private ArrayAdapter<String> list;
     private Activity mActivity;
     private SharedPreferences sp;
     private Database db;
@@ -33,35 +35,21 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
 
     /**
      * Builds a GetData object.
-     * @param list The list view to update with progress.
      * @param activity The activity to push progress to.
      * @param sp Shared preferences to the parsed store data to.
      */
-    public GetAndStoreVenueData(ArrayAdapter<String> list, Activity activity, SharedPreferences sp, PolyApplication app)
+    public GetAndStoreVenueData(Activity activity, SharedPreferences sp, PolyApplication app)
     {
         super();
-        this.list = list;
         this.sp = sp;
         mActivity= activity;
         this.app = app;
     }
 
-    @Override
-    protected void onPostExecute(Integer result)
+    public void getData()
     {
-        list.clear();
-        list.addAll(app.venues.keySet());
-        mActivity.setProgressBarIndeterminateVisibility(false);
-        sp.edit().putBoolean(PolyApplication.firstLaunch,false).apply();
-        int version = sp.getInt("DBVersion", 1);
-        db = new Database(mActivity, version++);
-        sp.edit().putInt("DBVersion", version).apply();
-        //storeData(db);
-    }
+        app.venues.clear();
 
-    @Override
-    protected Integer doInBackground(String... params)
-    {
         String venues = "";
         try
         {
@@ -83,34 +71,20 @@ public class GetAndStoreVenueData extends AsyncTask<String, String, Integer> {
         }
         try
         {
-            app.venues = new Gson().fromJson(venues.toString(), PolyApplication.gsonType);
+            app.venues = new Gson().fromJson(venues, PolyApplication.gsonType);
+            app.names = new ArrayList<String>();
+            app.names.addAll(app.venues.keySet());
+            Collections.sort(app.names);
         }
         catch(Exception e)
         {
             throwError(R.string.error_msg, R.string.error_title, new SendError().stackTraceToString(e));
         }
-        return 0;
-    }
 
-    @Override
-    protected void onProgressUpdate(String... values) {
-        super.onProgressUpdate(values);
-        if(listAdapterContains(values[0]))
-        {
-            list.add(values[0]);
-        }
-    }
-
-    private boolean listAdapterContains(String toCheck)
-    {
-        for(int i = 0; i < list.getCount(); i++)
-        {
-            if(list.getItem(i).equals(toCheck))
-            {
-                return true;
-            }
-        }
-        return false;
+        sp.edit().putBoolean(PolyApplication.firstLaunch,false).apply();
+        int version = sp.getInt("DBVersion", 1);
+        db = new Database(mActivity, version++);
+        sp.edit().putInt("DBVersion", version).apply();
     }
 
     private void storeData(Database db)

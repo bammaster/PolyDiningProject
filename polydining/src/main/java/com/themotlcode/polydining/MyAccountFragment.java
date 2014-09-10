@@ -1,31 +1,33 @@
 package com.themotlcode.polydining;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.astuetz.PagerSlidingTabStrip;
 
 public class MyAccountFragment extends Fragment
 {
-    private FragmentTabHost mTabHost;
+
+    private PagerSlidingTabStrip tabs;
+    private ViewPager pager;
+    private MyAccountPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        getActivity().setProgressBarIndeterminateVisibility(false);
         View v = inflater.inflate(R.layout.fragment_my_account, container, false);
-        ((MainActivity) getActivity()).viewDrawer(true);
+        setupActivity();
 
-        mTabHost = (FragmentTabHost) v.findViewById(android.R.id.tabhost);
-        mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.realtabcontent);
-
-        mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("MY ACCOUNT"),
-                PlusDollarsFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("TRANSACTIONS"),
-                TransactionFragment.class, null);
-        ((MainActivity) getActivity()).viewDrawer(true);
+        tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
+        pager = (ViewPager) v.findViewById(R.id.pager);
+        adapter = new MyAccountPagerAdapter(getChildFragmentManager());
+        pager.setAdapter(adapter);
 
         Boolean plus = true;
         if(getArguments() != null)
@@ -35,8 +37,55 @@ public class MyAccountFragment extends Fragment
 
         if(!plus)
         {
-            mTabHost.getTabWidget().getChildAt(1).performClick();
+            pager.setCurrentItem(1, true);
         }
+
+        tabs.setIndicatorColor(Color.parseColor(PolyApplication.ACCENT_COLOR));
+        tabs.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+        tabs.setDividerColor(Color.WHITE);
+        tabs.setTextColor(Color.WHITE);
+        tabs.setViewPager(pager);
+
+        ((MainActivity) getActivity()).viewDrawer(true);
         return v;
     }
+
+    private void setupActivity()
+    {
+        ((MainActivity) getActivity()).viewDrawer(true);
+    }
+
+    public class MyAccountPagerAdapter extends FragmentPagerAdapter
+    {
+
+        private final String[] TITLES = { "My Account", "Transactions"};
+
+        public MyAccountPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLES[position];
+        }
+
+        @Override
+        public int getCount() {
+            return TITLES.length;
+        }
+
+        @Override
+        public Fragment getItem(int position)
+        {
+            switch(position)
+            {
+                case 0:
+                    return new PlusDollarsFragment();
+                case 1:
+                    return new TransactionFragment();
+            }
+            return null;
+        }
+    }
+
 }

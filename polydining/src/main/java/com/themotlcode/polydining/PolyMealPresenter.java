@@ -25,37 +25,33 @@ public class PolyMealPresenter extends Presenter
     private ListAdapter listAdapter;
     private PolyApplication app;
 
-    public PolyMealPresenter(Fragment fragment, ListAdapter listAdapter) {
+    public PolyMealPresenter(Fragment fragment) {
         this.fragment = (PolyMealFragment) fragment;
         this.activity = (MainActivity) fragment.getActivity();
-        this.listAdapter = listAdapter;
-        
+
         app = (PolyApplication) activity.getApplication();
+
+        sp = activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE);
     }
 
     public void getData()
     {
-        sp = activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE);
-        if (sp.getBoolean(PolyApplication.firstLaunch, true))
-        {
-            getDataHelper();
-        } else if (app.venues == null)
-        {
-            new GetDataThread().execute();
-        }
+        new GetDataThread().execute();
     }
 
-    /*
-    Gets called on doInBackground so no UI manipulation can occur in this method.
-     */
-    private void getDataHelper()
+    public void setListAdapter(ListAdapter listAdapter)
     {
-        app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
-        new GetAndStoreVenueData(listAdapter, fragment.getActivity(), sp, app).execute();
+        this.listAdapter = listAdapter;
     }
 
     protected class GetDataThread extends AsyncTask<Void, Void, Boolean>
     {
+
+        @Override
+        protected void onPreExecute()
+        {
+            fragment.getActivity().setProgressBarIndeterminateVisibility(true);
+        }
 
         protected Boolean doInBackground(Void... args)
         {
@@ -63,14 +59,16 @@ public class PolyMealPresenter extends Presenter
             app.venues = new Gson().fromJson(gson, PolyApplication.gsonType);
             if (app.venues == null)
             {
-                getDataHelper();
+                app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
+                new GetAndStoreVenueData(fragment.getActivity(), sp, app).getData();
             }
             return true;
         }
 
         protected void onPostExecute(Boolean b)
         {
-            listAdapter.addAll(app.venues.keySet());
+            fragment.setupList();
+            fragment.getActivity().setProgressBarIndeterminateVisibility(false);
         }
     }
 

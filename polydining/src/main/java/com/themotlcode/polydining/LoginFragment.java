@@ -33,10 +33,23 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         presenter = new LoginPresenter(this);
-
+        setupActivity();
         init(v);
 
         return v;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        getActivity().invalidateOptionsMenu();
+    }
+
+
+    private void setupActivity()
+    {
+        ((MainActivity) getActivity()).viewDrawer(false);
     }
 
     @Override

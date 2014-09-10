@@ -47,6 +47,13 @@ public class PlusDollarsFragment extends Fragment
     }
 
     @Override
+    public void onResume()
+    {
+        super.onResume();
+        getActivity().invalidateOptionsMenu();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu,inflater);
@@ -99,7 +106,7 @@ public class PlusDollarsFragment extends Fragment
     {
         setAlphaToZero();
 
-        setTextSizeName(app.user.getName(), name);
+        //setTextSizeName(app.user.getName(), name);
 
         DateTime start = new DateTime(app.startOfQuarter[0], app.startOfQuarter[1], app.startOfQuarter[2], 0, 0, 0, 0);
         DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);

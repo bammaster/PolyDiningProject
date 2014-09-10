@@ -129,6 +129,14 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
 
     protected void viewDrawer(boolean b)
     {
+        if(b)
+        {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED );
+        }
+        else
+        {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
         // enable ActionBar app icon to behave as action to toggle nav drawer
         getActionBar().setDisplayHomeAsUpEnabled(b);
         getActionBar().setHomeButtonEnabled(b);

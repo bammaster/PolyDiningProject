@@ -34,6 +34,7 @@ public class PolyApplication extends Application
     public static final String JSA_LOGIN_URL = "https://services.jsatech.com/login.php?skey=";
     public static final String JSA_INDEX_URL = "https://services.jsatech.com/index.php?skey=";
     public static String APP_COLOR = "#036228";
+    public static String ACCENT_COLOR = "#036228";
     public static final int DATE_ARRAY_SIZE = 3;
 
     public int[] endOfQuarter;

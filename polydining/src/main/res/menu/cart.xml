@@ -4,6 +4,6 @@
           android:showAsAction="always|withText"/>
     <item android:id="@+id/clrCart"
           android:title="Clear Cart"
-          android:icon="@drawable/discard"
+          android:icon="@drawable/ic_action_discard"
           android:showAsAction="always"/>
 </menu>
