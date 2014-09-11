@@ -15,7 +15,7 @@ public class MyAccountFragment extends Fragment
 {
 
     private PagerSlidingTabStrip tabs;
-    private ViewPager pager;
+    protected ViewPager pager;
     private MyAccountPagerAdapter adapter;
 
     @Override

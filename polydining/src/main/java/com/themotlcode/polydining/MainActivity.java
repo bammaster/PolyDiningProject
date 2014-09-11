@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -92,6 +93,16 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
         return false;
     }
 
+    protected void logout(View v)
+    {
+        ((PolyApplication) getApplication()).user = null;
+        LoginFragment loginFragment = new LoginFragment();FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_layout, loginFragment);
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        transaction.commit();
+
+    }
+
     private void initActivity() {
         mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -167,27 +178,43 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
                         switch(position)
                         {
                             case 0:
-                                Bundle pData = new Bundle();
-                                pData.putBoolean("plus", true);
+                                Fragment inView = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
+                                if(inView instanceof MyAccountFragment)
+                                {
+                                    ((MyAccountFragment) inView).pager.setCurrentItem(0, true);
+                                }
+                                else
+                                {
+                                    Bundle pData = new Bundle();
+                                    pData.putBoolean("plus", true);
 
-                                MyAccountFragment plusFragment = new MyAccountFragment();
-                                plusFragment.setArguments(pData);
+                                    MyAccountFragment plusFragment = new MyAccountFragment();
+                                    plusFragment.setArguments(pData);
 
-                                FragmentTransaction pTransaction = getSupportFragmentManager().beginTransaction();
-                                pTransaction.replace(R.id.fragment_layout, plusFragment)
-                                        .addToBackStack(null);
-                                pTransaction.commit();
+                                    FragmentTransaction pTransaction = getSupportFragmentManager().beginTransaction();
+                                    pTransaction.replace(R.id.fragment_layout, plusFragment)
+                                            .addToBackStack(null);
+                                    pTransaction.commit();
+                                }
                                 break;
                             case 1:
-                                MyAccountFragment transFragment = new MyAccountFragment();
-                                Bundle tData = new Bundle();
-                                tData.putBoolean("plus", false);
-                                transFragment.setArguments(tData);
+                                Fragment inView2 = (Fragment) getSupportFragmentManager().findFragmentById(R.id.fragment_layout);
+                                if(inView2 instanceof MyAccountFragment)
+                                {
+                                    ((MyAccountFragment) inView2).pager.setCurrentItem(1, true);
+                                }
+                                else
+                                {
+                                    MyAccountFragment transFragment = new MyAccountFragment();
+                                    Bundle tData = new Bundle();
+                                    tData.putBoolean("plus", false);
+                                    transFragment.setArguments(tData);
 
-                                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                                transaction.replace(R.id.fragment_layout, transFragment)
-                                        .addToBackStack(null);
-                                transaction.commit();
+                                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.fragment_layout, transFragment)
+                                            .addToBackStack(null);
+                                    transaction.commit();
+                                }
                                 break;
                             case 2:
                                 PolyMealFragment venuesFragment = new PolyMealFragment();

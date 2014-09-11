@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,8 +103,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_LONG).show();
             MyAccountFragment maFragment = new MyAccountFragment();
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_layout, maFragment)
-                    .addToBackStack(null);
+            transaction.replace(R.id.fragment_layout, maFragment);
+            getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             transaction.commit();
         }
         else
