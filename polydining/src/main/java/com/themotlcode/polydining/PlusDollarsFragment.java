@@ -1,6 +1,8 @@
 package com.themotlcode.polydining;
 
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,7 +27,6 @@ public class PlusDollarsFragment extends Fragment
     private TextView budgetHeader;
     private TextView budget1;
     private TextView budget2;
-    private TextView weeksLeft;
     private Days d;
     private Weeks w;
 
@@ -74,6 +75,14 @@ public class PlusDollarsFragment extends Fragment
         }
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        System.out.println("onDestroyView");
+        getActivity().getActionBar().setSubtitle(null);
+    }
+
     private void init(View v)
     {
         this.setHasOptionsMenu(true);
@@ -112,12 +121,15 @@ public class PlusDollarsFragment extends Fragment
         DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
         d = Days.daysBetween(start, end);
         w = Weeks.weeksBetween(start, end);
+        int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+        TextView yourTextView = (TextView) getActivity().findViewById(titleId);
+        yourTextView.setTextColor(Color.WHITE);
         if(w.getWeeks() > 10)
         {
-            weeksLeft.setText(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
+            getActivity().getActionBar().setSubtitle(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
         }
         else {
-            weeksLeft.setText(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
+            getActivity().getActionBar().setSubtitle(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
         }
 
         login();
@@ -164,7 +176,6 @@ public class PlusDollarsFragment extends Fragment
         budgetHeader = (TextView) v.findViewById(R.id.budgetHeader);
         budget1 = (TextView) v.findViewById(R.id.budgetText1);
         budget2 = (TextView) v.findViewById(R.id.budgetText2);
-        weeksLeft = (TextView) v.findViewById(R.id.textWeeks);
     }
 
     /**

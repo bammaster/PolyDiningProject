@@ -50,6 +50,13 @@ public class MyAccountFragment extends Fragment
         return v;
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        getActivity().getActionBar().setSubtitle(null);
+    }
+
     private void setupActivity()
     {
         ((MainActivity) getActivity()).viewDrawer(true);

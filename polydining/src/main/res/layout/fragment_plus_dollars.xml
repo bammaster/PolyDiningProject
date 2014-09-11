@@ -102,7 +102,7 @@
                     android:textSize="25sp"
                 android:layout_below="@+id/budgetHeader"
                 android:layout_alignRight="@+id/budgetHeader" />
-
+            <!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +111,6 @@
                 android:layout_below="@+id/budgetText1"
                 android:layout_alignParentLeft="true" android:paddingTop="8dp"/>
 
-
+            -->
         </RelativeLayout>
     </ScrollView>
