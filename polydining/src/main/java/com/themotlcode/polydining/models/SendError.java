@@ -22,9 +22,8 @@ import java.util.List;
  */
 public class SendError
 {
-    public SendError()
-    {}
-    public void sendErrorToDeveloper(final String error, final Context mContext)
+    private SendError(){}
+    public static void sendErrorToDeveloper(final Exception error, final Context context)
     {
         new Thread(new Runnable() {
             @Override
@@ -35,20 +34,20 @@ public class SendError
                     ResponseHandler<String> res = new BasicResponseHandler();
                     HttpPost postMethod = new HttpPost("http://themotlcode.com/email.php");
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                    nameValuePairs.add(new BasicNameValuePair("stackTrace", error));
+                    nameValuePairs.add(new BasicNameValuePair("stackTrace", stackTraceToString(error)));
                     postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                     hc.execute(postMethod, res);
-                    Toast.makeText(mContext, R.string.send_success, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.send_success, Toast.LENGTH_SHORT).show();
                 }
                 catch (IOException io)
                 {
-                    Toast.makeText(mContext, R.string.send_error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.send_error, Toast.LENGTH_SHORT).show();
                 }
             }
         }).start();
     }
 
-    public String stackTraceToString(Exception e)
+    public static String stackTraceToString(Exception e)
     {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);

@@ -3,14 +3,17 @@ package com.themotlcode.polydining;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.widget.Button;
+
 import com.themotlcode.polydining.Exceptions.BudgetException;
 import com.themotlcode.polydining.models.Account;
-import com.themotlcode.polydining.models.GetDiningAccount;
+import com.themotlcode.polydining.models.DataCollector;
 
 public class LoginPresenter extends Presenter
 {
     private Fragment fragment;
     private PolyApplication app;
+    private Button loginButton;
     SharedPreferences sharedPrefs;
 
 
@@ -22,8 +25,9 @@ public class LoginPresenter extends Presenter
         sharedPrefs = fragment.getActivity().getSharedPreferences(PolyApplication.accSpKey, fragment.getActivity().MODE_PRIVATE);
     }
 
-    protected void login(String username, String password, Boolean remember)
+    protected void login(String username, String password, Boolean remember, Button loginButton)
     {
+        this.loginButton = loginButton;
         app.user = new Account(username, password, remember);
         loadData();
     }
@@ -49,14 +53,15 @@ public class LoginPresenter extends Presenter
 
         protected void onPreExecute()
         {
+            loginButton.setEnabled(false);
             fragment.getActivity().setProgressBarIndeterminateVisibility(true);
         }
 
         protected Boolean doInBackground(Void... args) {
-            GetDiningAccount getPlusData = new GetDiningAccount(app.user);
+            DataCollector getPlusData = new DataCollector(app.user);
 
             try {
-                app.user = getPlusData.getAccountInfo();
+                getPlusData.getAccountInfo();
             } catch (BudgetException e) {
                 loadBudget();
                 return false;
@@ -78,6 +83,7 @@ public class LoginPresenter extends Presenter
                 ((TransactionFragment) fragment).refresh();
             }
             fragment.getActivity().setProgressBarIndeterminateVisibility(false);
+            loginButton.setEnabled(true);
         }
     }
 

@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view)
     {
-        presenter.login(username.getText().toString(), password.getText().toString(), remember.isChecked());
+        presenter.login(username.getText().toString(), password.getText().toString(), remember.isChecked(), login);
     }
 
     private void init(View v)

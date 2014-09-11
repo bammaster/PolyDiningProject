@@ -11,7 +11,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.themotlcode.polydining.Sorting.VenueNameComparator;
 import com.themotlcode.polydining.models.Cart;
-import com.themotlcode.polydining.models.GetAndStoreVenueData;
+import com.themotlcode.polydining.models.DataCollector;
 import com.themotlcode.polydining.models.Venue;
 
 import java.util.TreeMap;
@@ -60,7 +60,7 @@ public class PolyMealPresenter extends Presenter
             if (app.venues == null)
             {
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
-                new GetAndStoreVenueData(fragment.getActivity(), sp, app).getData();
+                new DataCollector(fragment.getActivity(), sp, app).getData();
             }
             return true;
         }

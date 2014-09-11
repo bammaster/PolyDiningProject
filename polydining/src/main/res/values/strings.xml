@@ -6,6 +6,10 @@
     <string name="error_conn_msg">Please ensure you are connected to the internet and try again. If this error persists, send to developer.</string>
     <string name="error_title">An Unknown Error Occurred!</string>
     <string name="error_msg">If this error persists, please send to developer.</string>
+    <string name="login_error_title">Unable to Login!</string>
+    <string name="login_error_msg">Please check your username and password. If this error persists, please send to developer.</string>
+    <string name="password_error_title">Invalid Username or Password!</string>
+    <string name="password_error_msg">Please make sure you entered the correct username password and try again. If this error persists, please send to developer.</string>
     <string name="send_success">Sent To Developer!</string>
     <string name="send_error">Error Sending To Developer!</string>
     <string name="ok">Ok</string>
