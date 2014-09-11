@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 import com.themotlcode.polydining.MainActivity;
+import com.themotlcode.polydining.PolyApplication;
 
 import java.math.BigDecimal;
 
@@ -26,33 +27,37 @@ public class MoneyTime
         SharedPreferences defaultSP;
         defaultSP = PreferenceManager.getDefaultSharedPreferences(MainActivity.mActivity);
         manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
+        boolean plus = PolyApplication.plus;
 
-
-        if(manualTime==4)
+        if(!plus)
         {
-            today.setToNow();
-            int minutes = (today.hour*60)+today.minute;
-            if(minutes>=420&&minutes<=599)
+
+            if (manualTime == 4)
             {
-                money = mealWorth[0];
-            }
-            else if(minutes>=600&&minutes<=1019)
+                today.setToNow();
+                int minutes = (today.hour * 60) + today.minute;
+                if (minutes >= 420 && minutes <= 599)
+                {
+                    money = mealWorth[0];
+                } else if (minutes >= 600 && minutes <= 1019)
+                {
+                    money = mealWorth[1];
+                } else if (minutes >= 1020 && minutes <= 1214)
+                {
+                    money = mealWorth[2];
+                } else
+                {
+                    money = mealWorth[3];
+                }
+                return money.subtract(moneySpent).setScale(2);
+            } else
             {
-                money = mealWorth[1];
+                return mealWorth[manualTime].subtract(moneySpent).setScale(2);
             }
-            else if(minutes>=1020&&minutes<=1214)
-            {
-                money = mealWorth[2];
-            }
-            else
-            {
-                money = mealWorth[3];
-            }
-            return money.subtract(moneySpent).setScale(2);
         }
         else
         {
-            return mealWorth[manualTime].subtract(moneySpent).setScale(2);
+            return ((PolyApplication) MainActivity.mActivity.getApplication()).user.getPlusDollars().subtract(moneySpent);
         }
     }
     public static int calcRealTime()
