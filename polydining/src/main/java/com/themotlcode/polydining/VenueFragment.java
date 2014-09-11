@@ -50,6 +50,7 @@ public class VenueFragment extends Fragment
     public void onDestroyView()
     {
         super.onDestroyView();
+        System.out.println("onDestroyView");
         getActivity().getActionBar().setSubtitle(null);
         getActivity().getActionBar().setTitle("PolyMeal");
         vp.getAdapter().notifyDataSetChanged();
@@ -84,13 +85,11 @@ public class VenueFragment extends Fragment
                 }
                 return true;
             case R.id.mc_choice:
-                System.out.println("MC CHOICE");
                 item.setChecked(true);
                 PolyApplication.plus = false;
                 presenter.updateBalance();
                 return true;
             case R.id.pd_choice:
-                System.out.println("PD CHOICE");
                 item.setChecked(true);
                 PolyApplication.plus = true;
                 presenter.updateBalance();
@@ -120,6 +119,7 @@ public class VenueFragment extends Fragment
         vp.setSaveEnabled(false);
 
         tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
+        tabs.setSaveEnabled(false);
         vp = (ViewPager) v.findViewById(R.id.pager);
 
         getActivity().getActionBar().setTitle(app.activityTitle);

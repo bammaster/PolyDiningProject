@@ -28,11 +28,12 @@ public class MoneyTime
         defaultSP = PreferenceManager.getDefaultSharedPreferences(MainActivity.mActivity);
         manualTime = Integer.valueOf(defaultSP.getString("moneyMode", "4"));
         boolean plus = PolyApplication.plus;
+        PolyApplication app = ((PolyApplication) MainActivity.mActivity.getApplication());
 
         if(!plus)
         {
 
-            if (manualTime == 4)
+            if (manualTime == 4 && app.user.getMeals() > 0)
             {
                 today.setToNow();
                 int minutes = (today.hour * 60) + today.minute;
@@ -50,9 +51,13 @@ public class MoneyTime
                     money = mealWorth[3];
                 }
                 return money.subtract(moneySpent).setScale(2);
-            } else
+            } else if(app.user.getMeals() > 0)
             {
                 return mealWorth[manualTime].subtract(moneySpent).setScale(2);
+            }
+            else
+            {
+                return new BigDecimal(0.00).subtract(moneySpent).setScale(2);
             }
         }
         else

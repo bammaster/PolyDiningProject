@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
+
+import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.MoneyTime;
 
 import java.math.BigDecimal;
@@ -42,7 +44,18 @@ public class MealPresenter
         yourTextView.setAlpha(0);
         yourTextView.animate().alpha(1.0f).setStartDelay(150).setDuration(500).start();
         //for some reason, this must be here for the subtitle to display
-        fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
+        if(app.user.getMeals() > 0 || PolyApplication.plus)
+        {
+            fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
+        }
+        else if(app.user.getMeals() == 0 && Cart.size() == 0)
+        {
+            fragment.getActivity().getActionBar().setSubtitle("No Meals" + " Remaining");
+        }
+        else
+        {
+            fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
+        }
     }
 
     protected void updateBalance() {
