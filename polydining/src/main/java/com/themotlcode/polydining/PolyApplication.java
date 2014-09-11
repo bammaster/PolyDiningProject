@@ -36,6 +36,7 @@ public class PolyApplication extends Application
     public static String APP_COLOR = "#036228";
     public static String ACCENT_COLOR = "#036228";
     public static final int DATE_ARRAY_SIZE = 3;
+    public static boolean plus = false;
 
     public int[] endOfQuarter;
     public int[] startOfQuarter;

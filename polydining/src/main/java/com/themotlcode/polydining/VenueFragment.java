@@ -78,15 +78,22 @@ public class VenueFragment extends Fragment
                 transaction.commit();
                 return true;
             case R.id.sort:
-                //popupMenu.show();
+                if(PolyApplication.plus)
+                {
+                    item.getSubMenu().findItem(R.id.pd_choice).setChecked(true);
+                }
                 return true;
             case R.id.mc_choice:
                 System.out.println("MC CHOICE");
                 item.setChecked(true);
+                PolyApplication.plus = false;
+                presenter.updateBalance();
                 return true;
             case R.id.pd_choice:
                 System.out.println("PD CHOICE");
                 item.setChecked(true);
+                PolyApplication.plus = true;
+                presenter.updateBalance();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

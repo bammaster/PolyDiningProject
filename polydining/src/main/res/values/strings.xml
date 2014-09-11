@@ -41,25 +41,10 @@
     <string name="mealtimepreftitle">What\'s a meal worth?</string>
     <string name="mealtimemessage">Breakfast: $7.90 (7:00-10:00am)\nLunch: $9.00 (10:00am-5pm)\nDinner: $10.75 (5-8:14pm)\nLate Night: $8.75 (8:15pm-2am)\nMeals reset weekly on Saturday morning at 2:00am</string>
 
-    <string-array name="drawerItemsMeal">
-        <item>Home</item>
-        <item>Poly Meal</item>
-        <item>Plus Dollars</item>
-        <item>Meal Completeor</item>
-        <item>Transactions</item>
-        <item>Settings</item>
-    </string-array>
-    <string-array name="drawerItemsPlus">
-        <item>Home</item>
-        <item>Poly Meal</item>
-        <item>Plus Dollars</item>
-        <item>Transactions</item>
-        <item>Settings</item>
-    </string-array>
     <string-array name="drawerItems">
         <item>My Account</item>
         <item>Transactions</item>
-        <item>Venues</item>
+        <item>Where Can I Eat?</item>
         <item>Settings</item>
     </string-array>
     <string-array name="moneyMode">
