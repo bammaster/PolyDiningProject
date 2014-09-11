@@ -1,8 +1,13 @@
 package com.themotlcode.polydining;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
+import android.content.DialogInterface;
+
 import com.google.gson.reflect.TypeToken;
 import com.themotlcode.polydining.models.Account;
+import com.themotlcode.polydining.models.SendError;
 import com.themotlcode.polydining.models.Venue;
 
 import java.lang.reflect.Type;
@@ -48,5 +53,30 @@ public class PolyApplication extends Application
     public ArrayList<String> names = new ArrayList<String>();
     //not constant as it needs to be changed but should only be one of them.
     public String activityTitle = "";
+
+    public static void throwError(int message, int title, final Exception exception, final Activity activity)
+    {
+        final QustomDialogBuilder error = new QustomDialogBuilder(activity);
+        error.setTitle(title);
+        error.setMessage(message);
+        error.setDividerColor(APP_COLOR);
+        error.setTitleColor(APP_COLOR);
+        error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+
+            }
+        });
+        error.setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+                SendError.sendErrorToDeveloper(exception, activity);
+            }
+        });
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                error.show();
+            }
+        });
+    }
 
 }

@@ -281,6 +281,14 @@ public class DataCollector {
         }}, new SecureRandom());
         HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
     }
+
+    /**
+     * Gets the users cookie for their session ad attempts to login.
+     * @return The response of the server to the login attempt.
+     * @throws IOException If the connection failed.
+     * @throws PasswordException If the password or username entered was invalid.
+     * @throws LoginException if the login failed due to an empty cookie jar.
+     */
     private Connection.Response handleCookies() throws IOException, PasswordException, LoginException
     {
         // get the login page so we can get the required "lt" string

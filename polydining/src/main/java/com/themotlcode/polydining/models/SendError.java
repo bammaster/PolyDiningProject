@@ -1,5 +1,6 @@
 package com.themotlcode.polydining.models;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 import com.themotlcode.polydining.R;
@@ -23,7 +24,7 @@ import java.util.List;
 public class SendError
 {
     private SendError(){}
-    public static void sendErrorToDeveloper(final Exception error, final Context context)
+    public static void sendErrorToDeveloper(final Exception error,final Activity activity)
     {
         new Thread(new Runnable() {
             @Override
@@ -37,11 +38,21 @@ public class SendError
                     nameValuePairs.add(new BasicNameValuePair("stackTrace", stackTraceToString(error)));
                     postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                     hc.execute(postMethod, res);
-                    Toast.makeText(context, R.string.send_success, Toast.LENGTH_SHORT).show();
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, R.string.send_success, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 catch (IOException io)
                 {
-                    Toast.makeText(context, R.string.send_error, Toast.LENGTH_SHORT).show();
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, R.string.send_error, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         }).start();

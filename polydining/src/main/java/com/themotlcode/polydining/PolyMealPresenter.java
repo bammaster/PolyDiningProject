@@ -60,7 +60,13 @@ public class PolyMealPresenter extends Presenter
             if (app.venues == null)
             {
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
-                new DataCollector(fragment.getActivity(), sp, app).getData();
+                try {
+                    new DataCollector(fragment.getActivity(), sp, app).getData();
+                }
+                catch(Exception e)
+                {
+                    PolyApplication.throwError(R.string.login_error_msg, R.string.login_error_title, e, fragment.getActivity());
+                }
             }
             return true;
         }

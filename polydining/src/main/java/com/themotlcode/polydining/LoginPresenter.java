@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment;
 import android.widget.Button;
 
 import com.themotlcode.polydining.Exceptions.BudgetException;
+import com.themotlcode.polydining.Exceptions.PasswordException;
 import com.themotlcode.polydining.models.Account;
 import com.themotlcode.polydining.models.DataCollector;
+
+import javax.security.auth.login.LoginException;
 
 public class LoginPresenter extends Presenter
 {
@@ -62,9 +65,14 @@ public class LoginPresenter extends Presenter
 
             try {
                 getPlusData.getAccountInfo();
-            } catch (BudgetException e) {
-                loadBudget();
+                return true;
+            } catch (PasswordException e) {
+                PolyApplication.throwError(R.string.password_error_msg, R.string.password_error_title, e, fragment.getActivity());
                 return false;
+            } catch (LoginException e){
+                PolyApplication.throwError(R.string.login_error_msg, R.string.login_error_title, e, fragment.getActivity());
+            } catch (Exception e){
+                PolyApplication.throwError(R.string.error_msg, R.string.error_title, e, fragment.getActivity());
             }
             return true;
         }

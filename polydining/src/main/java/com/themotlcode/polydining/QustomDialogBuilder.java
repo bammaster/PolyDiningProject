@@ -3,6 +3,7 @@ package com.themotlcode.polydining;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class QustomDialogBuilder extends AlertDialog.Builder{
      * @param colorString for passing "#ffffff"
      */
     public QustomDialogBuilder setDividerColor(String colorString) {
+        Log.e("Blake", colorString);
         mDivider.setBackgroundColor(Color.parseColor(colorString));
         return this;
     }
