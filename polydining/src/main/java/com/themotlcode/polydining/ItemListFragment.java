@@ -45,17 +45,17 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
             public void onClick(DialogInterface dialog, int button) {
                 if(((presenter.items.getItem(fPos))).getIsPricePerOunce())
                 {
-                    AlertDialog.Builder onYes = new AlertDialog.Builder(getActivity());
-                    onYes.setTitle("How much?");
-                    onYes.setMessage("Estimated Number of Ounces: ");
-                    LayoutInflater inflater = LayoutInflater.from(getActivity());
-                    View DialogView = inflater.inflate(R.layout.number_picker, null);
+                    QustomDialogBuilder onYes = new QustomDialogBuilder(getActivity());
+                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);                    View DialogView = inflater.inflate(R.layout.number_picker, null);
                     final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
                     np.setMinValue(1);
                     np.setMaxValue(50);
                     np.setWrapSelectorWheel(false);
                     np.setValue(1);
-                    onYes.setView(DialogView);
+                    onYes.setCustomView(DialogView, getActivity());
+                    onYes.setDividerColor(PolyApplication.APP_COLOR);
+                    onYes.setTitleColor(PolyApplication.APP_COLOR);
+                    onYes.setTitle("How many ounces?");
                     onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
                             Cart.add(new Item(((presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
@@ -72,6 +72,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
                         public void onClick(DialogInterface dialog, int button) {
                         }
                     });
+                    onYes.create();
                     onYes.show();
                 }
                 else
@@ -113,19 +114,17 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
     {
         final int position = (Integer) view.getTag();
         if (items.get(position).getIsPricePerOunce()) {
-            QustomDialogBuilder onYes = new QustomDialogBuilder(fragment.getActivity());
-            onYes.setDividerColor(PolyApplication.APP_COLOR);
-            onYes.setTitleColor(PolyApplication.APP_COLOR);
-            onYes.setTitle("How much?");
-            onYes.setMessage("Estimated Number of Ounces: ");
-            LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
-            View DialogView = inflater.inflate(R.layout.number_picker, null);
+            QustomDialogBuilder onYes = new QustomDialogBuilder(getActivity());
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);                    View DialogView = inflater.inflate(R.layout.number_picker, null);
             final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
             np.setMinValue(1);
             np.setMaxValue(50);
             np.setWrapSelectorWheel(false);
             np.setValue(1);
-            onYes.setView(DialogView);
+            onYes.setCustomView(DialogView, getActivity());
+            onYes.setDividerColor(PolyApplication.APP_COLOR);
+            onYes.setTitleColor(PolyApplication.APP_COLOR);
+            onYes.setTitle("How many ounces?");
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
 
