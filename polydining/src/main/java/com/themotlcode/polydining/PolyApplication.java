@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 
 import com.google.gson.reflect.TypeToken;
 import com.themotlcode.polydining.models.Account;
+import com.themotlcode.polydining.models.Item;
+import com.themotlcode.polydining.models.ItemList;
 import com.themotlcode.polydining.models.SendError;
 import com.themotlcode.polydining.models.Venue;
 
@@ -77,6 +79,23 @@ public class PolyApplication extends Application
                 error.show();
             }
         });
+    }
+
+    public void printOunces()
+    {
+        for(Venue v : venues.values())
+        {
+            for(ItemList il : v.getVenueItemLists())
+            {
+                for(Item i : il.getItems())
+                {
+                    if(i.getIsPricePerOunce())
+                    {
+                        System.out.println(v.getName() + ": " + il.getTitle() + ": " + i.getName());
+                    }
+                }
+            }
+        }
     }
 
 }

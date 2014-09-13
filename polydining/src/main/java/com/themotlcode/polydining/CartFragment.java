@@ -6,6 +6,8 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.*;
@@ -69,10 +71,12 @@ public class CartFragment extends Fragment
     {
         switch (item.getItemId())
         {
-            /*case R.id.menuCom:
-                Intent intent = new Intent(this, CompleteorActivity.class);
-                startActivity(intent);
-                return true;*/
+            case R.id.menuCom:
+                MealCompleterFragment mcFragment = new MealCompleterFragment();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_layout, mcFragment).addToBackStack(null);
+                transaction.commit();
+                return true;
             case R.id.clrCart:
                 Cart.clear();
                 cartAdapter.clearCart();

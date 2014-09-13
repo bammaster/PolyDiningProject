@@ -7,15 +7,17 @@ import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
 import com.themotlcode.polydining.models.Cart;
+import com.themotlcode.polydining.models.ItemList;
 import com.themotlcode.polydining.models.MoneyTime;
 
 import java.math.BigDecimal;
 
 public class MealPresenter
 {
-    private static Fragment fragment;
+    protected static Fragment fragment;
     private static BigDecimal totalAmount;
     private PolyApplication app;
+    protected ItemList items;
 
     protected void setFragment(Fragment fragment)
     {
@@ -61,7 +63,7 @@ public class MealPresenter
     protected void updateBalance() {
         updateTotalAmount();
         //Alerts the user if they will exceed their plus dollars with whats in the cart.
-        if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
+        /*if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
         {
             if(app.user != null && totalAmount.multiply(new BigDecimal("-1")).compareTo(app.user.getPlusDollars()) > 0)
             {
@@ -80,7 +82,7 @@ public class MealPresenter
                 });
                 plusDollarsExceeded.show();
             }
-        }
+        }*/
         setSubtitle();
     }
 }

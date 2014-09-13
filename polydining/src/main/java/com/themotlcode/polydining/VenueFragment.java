@@ -34,7 +34,7 @@ public class VenueFragment extends Fragment
 
         presenter.loadFromCache(savedInstanceState);
         init(v);
-
+        app.printOunces();
         return v;
     }
 
@@ -120,7 +120,6 @@ public class VenueFragment extends Fragment
 
         tabs = (PagerSlidingTabStrip) v.findViewById(R.id.tabs);
         tabs.setSaveEnabled(false);
-        vp = (ViewPager) v.findViewById(R.id.pager);
 
         getActivity().getActionBar().setTitle(app.activityTitle);
 

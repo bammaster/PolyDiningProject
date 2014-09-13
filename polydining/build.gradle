@@ -34,7 +34,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.android.support:support-v4:20.0.+'
+    compile 'com.android.support:support-v4:19.0.+'
     compile 'com.google.code.gson:gson:1.7.2'
     compile 'joda-time:joda-time:2.4'
     compile 'org.jsoup:jsoup:1.7.3'

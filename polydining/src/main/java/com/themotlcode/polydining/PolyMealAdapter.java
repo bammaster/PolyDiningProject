@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<String> {
+public class PolyMealAdapter extends ArrayAdapter<String> {
 
     private Activity activity;
     private PolyApplication app;
 
-    public ListAdapter(Activity activity, int resource, List<String> items)
+    public PolyMealAdapter(Activity activity, int resource, List<String> items)
     {
         super(activity, resource, items);
         this.activity = activity;

@@ -9,7 +9,7 @@ import android.widget.ListView;
 public class PolyMealFragment extends Fragment
 {
     private ListView lv;
-    private ListAdapter listAdapter;
+    private PolyMealAdapter polyMealAdapter;
     private static Activity mActivity;
     private PolyApplication app;
 
@@ -32,9 +32,9 @@ public class PolyMealFragment extends Fragment
     public void onResume()
     {
         super.onResume();
-        if(listAdapter != null)
+        if(polyMealAdapter != null)
         {
-            listAdapter.notifyData();
+            polyMealAdapter.notifyData();
         }
     }
 
@@ -74,9 +74,9 @@ public class PolyMealFragment extends Fragment
 
     public void setupList()
     {
-        listAdapter = new ListAdapter(getActivity(), R.id.polymealListItem, app.names);
+        polyMealAdapter = new PolyMealAdapter(getActivity(), R.id.polymealListItem, app.names);
         System.out.println(app.names);
-        presenter.setListAdapter(listAdapter);
+        presenter.setListAdapter(polyMealAdapter);
         presenter.setupList(lv);
     }
 }

@@ -22,7 +22,7 @@ public class PolyMealPresenter extends Presenter
     private SharedPreferences sp;
     private PolyMealFragment fragment;
     private MainActivity activity;
-    private ListAdapter listAdapter;
+    private PolyMealAdapter polyMealAdapter;
     private PolyApplication app;
 
     public PolyMealPresenter(Fragment fragment) {
@@ -39,9 +39,9 @@ public class PolyMealPresenter extends Presenter
         new GetDataThread().execute();
     }
 
-    public void setListAdapter(ListAdapter listAdapter)
+    public void setListAdapter(PolyMealAdapter polyMealAdapter)
     {
-        this.listAdapter = listAdapter;
+        this.polyMealAdapter = polyMealAdapter;
     }
 
     protected class GetDataThread extends AsyncTask<Void, Void, Boolean>
@@ -80,16 +80,16 @@ public class PolyMealPresenter extends Presenter
 
     protected void refresh()
     {
-        listAdapter.clear();
+        polyMealAdapter.clear();
         app.venues = null;
         getData();
-        listAdapter.notifyData();
+        polyMealAdapter.notifyData();
     }
 
 
     protected void setupList(ListView lv)
     {
-        listAdapter.setNotifyOnChange(true);
+        polyMealAdapter.setNotifyOnChange(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -139,7 +139,7 @@ public class PolyMealPresenter extends Presenter
                 }
             }
         });
-        lv.setAdapter(listAdapter);
+        lv.setAdapter(polyMealAdapter);
     }
 
 }
