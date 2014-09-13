@@ -39,6 +39,7 @@
     <string name="weeksleft">weeks until the quarter ends</string>
     <string name="weeksstart">weeks until the quarter starts</string>
     <string name="mealtimepreftitle">What\'s a meal worth?</string>
+    <string name="emptycompleter">There are no more items that can complete your meal</string>
     <string name="mealtimemessage">Breakfast: $7.90 (7:00-10:00am)\nLunch: $9.00 (10:00am-5pm)\nDinner: $10.75 (5-8:14pm)\nLate Night: $8.75 (8:15pm-2am)\nMeals reset weekly on Saturday morning at 2:00am</string>
 
     <string-array name="drawerItems">

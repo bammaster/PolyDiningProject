@@ -31,7 +31,10 @@ public class VenueListFragment extends ItemListFragment
     public void onActivityCreated(Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new ItemListAdapter(this, presenter, presenter.items));
+        ItemListAdapter itemListAdapter = new ItemListAdapter(this);
+        itemListAdapter.setItems(presenter.items.getItems());
+        setListAdapter(itemListAdapter);
+
     }
 
     @Override

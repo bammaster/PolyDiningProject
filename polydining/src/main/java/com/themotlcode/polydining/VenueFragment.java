@@ -29,12 +29,10 @@ public class VenueFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_venue, container, false);
 
         ((MainActivity) getActivity()).viewDrawer(true);
-
         presenter = new VenuePresenter(this);
 
         presenter.loadFromCache(savedInstanceState);
         init(v);
-        app.printOunces();
         return v;
     }
 

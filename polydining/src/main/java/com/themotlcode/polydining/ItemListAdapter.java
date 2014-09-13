@@ -17,14 +17,16 @@ import java.util.ArrayList;
 
 public class ItemListAdapter extends BaseAdapter {
     private ItemListFragment fragment;
-    private MealPresenter presenter;
     private ArrayList<Item> items;
 
-    public ItemListAdapter(Fragment fragment, MealPresenter presenter, ItemList itemList)
+    public ItemListAdapter(Fragment fragment)
     {
         this.fragment = (ItemListFragment) fragment;
-        this.presenter = presenter;
-        this.items = itemList.getItems();
+    }
+
+    public void setItems(ArrayList<Item> items)
+    {
+        this.items = items;
     }
 
     public int getCount()

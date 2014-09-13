@@ -14,17 +14,33 @@ public class MealCompleterFragment extends ItemListFragment
 {
 
     private MealCompleterPresenter presenter;
+    private ItemListAdapter itemListAdapter;
+    private View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.fragment_venue_list, container, false);
+        v = inflater.inflate(R.layout.fragment_completer, container, false);
         setupActivity();
 
         presenter = new MealCompleterPresenter(this);
         presenter.calcPossibleItems();
-        setListAdapter(new ItemListAdapter(this, presenter, presenter.items));
+        setPresenter(this, presenter);
+
+        itemListAdapter = new ItemListAdapter(this);
+        itemListAdapter.setItems(presenter.items.getItems());
+        setListAdapter(itemListAdapter);
+        isCompleterEmpty();
         return v;
+    }
+
+    private void isCompleterEmpty()
+    {
+        if(itemListAdapter.getCount() <= 0)
+        {
+            v.findViewById(R.id.completer).setVisibility(View.GONE);
+            v.findViewById(R.id.emptyCompleter).setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupActivity()
@@ -34,7 +50,10 @@ public class MealCompleterFragment extends ItemListFragment
 
     public void updateList()
     {
+
+        ((ItemListAdapter) getListAdapter()).setItems(presenter.items.getItems());
         ((BaseAdapter) getListAdapter()).notifyDataSetChanged();
         presenter.updateBalance();
+        isCompleterEmpty();
     }
 }

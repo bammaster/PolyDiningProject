@@ -80,22 +80,4 @@ public class PolyApplication extends Application
             }
         });
     }
-
-    public void printOunces()
-    {
-        for(Venue v : venues.values())
-        {
-            for(ItemList il : v.getVenueItemLists())
-            {
-                for(Item i : il.getItems())
-                {
-                    if(i.getIsPricePerOunce())
-                    {
-                        System.out.println(v.getName() + ": " + il.getTitle() + ": " + i.getName());
-                    }
-                }
-            }
-        }
-    }
-
 }
