@@ -49,10 +49,10 @@ public class Database extends SQLiteOpenHelper
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        //db.execSQL("DROP TABLE IF EXISTS " + venueTable);
-        //db.execSQL("DROP TABLE IF EXISTS " + timesTable);
-        //db.execSQL("DROP TABLE IF EXISTS " + itemsetTable);
-        //db.execSQL("DROP TABLE IF EXISTS " + itemTable);
+        db.execSQL("DROP TABLE IF EXISTS " + venueTable);
+        db.execSQL("DROP TABLE IF EXISTS " + timesTable);
+        db.execSQL("DROP TABLE IF EXISTS " + itemsetTable);
+        db.execSQL("DROP TABLE IF EXISTS " + itemTable);
         onCreate(db);
     }
     public void updateVenues(Venue venue)
@@ -74,9 +74,9 @@ public class Database extends SQLiteOpenHelper
             {
                 cv.put(colClosed, t.getTimeInMinutes());
             }
+            cv.put(colTimeModifier, venue.getId());
+            db.insert(timesTable, colIdVenue, cv);
         }
-        cv.put(colTimeModifier, venue.getId());
-        db.insert(timesTable, colIdVenue, cv);
         cv = new ContentValues();
         int counter = 0;
         for(ItemList is : venue.getVenueItemLists())
@@ -90,10 +90,10 @@ public class Database extends SQLiteOpenHelper
                 cv2.put(colItemDesc, i.getDescription());
                 cv2.put(colItemOunces, i.getIsPricePerOunce());
                 cv2.put(colItemModifier, counter);
+                db.insert(itemTable, colIdVenue, cv2);
             }
-            db.insert(itemTable, colIdVenue, cv2);
             counter++;
+            db.insert(itemsetTable, colIdVenue, cv);
         }
-        db.insert(itemsetTable, colIdVenue, cv);
     }
 }
