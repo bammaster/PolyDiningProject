@@ -58,6 +58,13 @@ public class PolyMealFragment extends Fragment
         }
     }
 
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+        presenter.setDataCancelled();
+    }
+
     private void init(View v)
     {
         mActivity = getActivity();

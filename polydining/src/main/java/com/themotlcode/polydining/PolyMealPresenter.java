@@ -29,6 +29,7 @@ public class PolyMealPresenter extends Presenter
     private MainActivity activity;
     private PolyMealAdapter polyMealAdapter;
     private PolyApplication app;
+    private GetDataThread thread;
 
     public PolyMealPresenter(Fragment fragment) {
         this.fragment = (PolyMealFragment) fragment;
@@ -41,8 +42,15 @@ public class PolyMealPresenter extends Presenter
 
     public void getData()
     {
-        new GetDataThread().execute();
+        thread = new GetDataThread();
+        thread.execute();
     }
+
+    public void setDataCancelled()
+    {
+        thread.cancel(true);
+    }
+
 
     public void setListAdapter(PolyMealAdapter polyMealAdapter)
     {
@@ -66,7 +74,16 @@ public class PolyMealPresenter extends Presenter
             {
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
                 try {
+                    if(isCancelled())
+                    {
+                        return false;
+                    }
                     new DataCollector(fragment.getActivity(), sp, app).getData();
+                    if(isCancelled())
+                    {
+                        return false;
+                    }
+
                 }
                 catch(Exception e)
                 {
@@ -80,6 +97,13 @@ public class PolyMealPresenter extends Presenter
         {
             fragment.setupList();
             fragment.getActivity().setProgressBarIndeterminateVisibility(false);
+        }
+
+        @Override
+        protected void onCancelled()
+        {
+            super.onCancelled();
+            activity.setProgressBarIndeterminateVisibility(false);
         }
     }
 
