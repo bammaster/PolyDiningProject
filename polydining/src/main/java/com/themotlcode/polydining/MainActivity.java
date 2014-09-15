@@ -1,6 +1,7 @@
 package com.themotlcode.polydining;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -224,6 +225,8 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
                                 vTransaction.commit();
                                 break;
                             case 3:
+                                Thread.sleep(delay);
+                                startActivity(new Intent(mContext, SettingsActivity.class));
                                 break;
                         }
                     }

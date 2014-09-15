@@ -1,9 +1,13 @@
 package com.themotlcode.polydining;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,7 +63,15 @@ public class MainPresenter extends Presenter
                     if(!s.equals(greeting)) {
                         activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE).edit().putString(PolyApplication.GREETING_KEY, s).apply();
                     }
-                    lf.greeting.show();
+                    lf.greeting.create();
+                    Dialog d = lf.greeting.show();
+                    int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                    View divider = d.findViewById(dividerId);
+                    divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                    int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                    TextView tv = (TextView) d.findViewById(textViewId);
+                    tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.themotlcode.polydining;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
     private CheckBox remember;
     private Button login;
 
-    protected QustomDialogBuilder greeting;
+    protected AlertDialog.Builder greeting;
     private LoginPresenter presenter;
 
 
@@ -75,14 +76,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         login.setAlpha(0);
         fadeIn();
 
-        greeting = new QustomDialogBuilder(getActivity());
+        greeting = new AlertDialog.Builder(getActivity());
         greeting.setTitle("Greeting");
         greeting.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        greeting.setTitleColor(PolyApplication.APP_COLOR);
-        greeting.setDividerColor(PolyApplication.APP_COLOR);
         //greeting.show();
     }
 

@@ -8,20 +8,14 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="POLY MEAL" >
-        <ListPreference
+        <Preference
                 android:key="sortMode"
-                android:entries="@array/sortMode"
                 android:summary="@string/pref_sort_mode_summary"
-                android:entryValues="@array/sortModeValues"
-                android:title="@string/pref_sort_mode"
-                android:defaultValue="0"/>
-        <ListPreference
+                android:title="@string/pref_sort_mode"/>
+        <Preference
                 android:key="moneyMode"
-                android:entries="@array/moneyMode"
                 android:summary="@string/pref_money_mode_summary"
-                android:entryValues="@array/moneyModeValues"
-                android:title="@string/pref_money_mode"
-                android:defaultValue="4"/>
+                android:title="@string/pref_money_mode"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

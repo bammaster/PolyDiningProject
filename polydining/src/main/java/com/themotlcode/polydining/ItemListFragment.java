@@ -1,13 +1,16 @@
 package com.themotlcode.polydining;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.themotlcode.polydining.models.Cart;
@@ -36,25 +39,22 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
     public void onListItemClick(ListView l, View v, int position, long id)
     {
         final int fPos = position;
-        final QustomDialogBuilder onListClick = new QustomDialogBuilder(getActivity());
-        onListClick.setDividerColor(PolyApplication.APP_COLOR);
-        onListClick.setTitleColor(PolyApplication.APP_COLOR);
+        final AlertDialog.Builder onListClick = new AlertDialog.Builder(getActivity());
         onListClick.setTitle("Add to Cart?");
         onListClick.setMessage("Would you like to add " + ((presenter.items.getItem(fPos))).getName() + " to your cart? Price: " + "$" + ((presenter.items.getItem(fPos))).getPrice());
         onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int button) {
                 if(((presenter.items.getItem(fPos))).getIsPricePerOunce())
                 {
-                    QustomDialogBuilder onYes = new QustomDialogBuilder(getActivity());
-                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);                    View DialogView = inflater.inflate(R.layout.number_picker, null);
+                    AlertDialog.Builder onYes = new AlertDialog.Builder(getActivity());
+                    LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+                    View DialogView = inflater.inflate(R.layout.number_picker, null);
                     final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
                     np.setMinValue(1);
                     np.setMaxValue(50);
                     np.setWrapSelectorWheel(false);
                     np.setValue(1);
-                    onYes.setCustomView(DialogView, getActivity());
-                    onYes.setDividerColor(PolyApplication.APP_COLOR);
-                    onYes.setTitleColor(PolyApplication.APP_COLOR);
+                    onYes.setView(DialogView);
                     onYes.setTitle("How many ounces?");
                     onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
@@ -73,7 +73,14 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
                         }
                     });
                     onYes.create();
-                    onYes.show();
+                    Dialog d = onYes.show();
+                    int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                    View divider = d.findViewById(dividerId);
+                    divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                    int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                    TextView tv = (TextView) d.findViewById(textViewId);
+                    tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
                 }
                 else
                 {
@@ -93,9 +100,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
         });
         onListClick.setNeutralButton("Description", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int button) {
-                QustomDialogBuilder onDialogClick = new QustomDialogBuilder(getActivity());
-                onDialogClick.setTitleColor(PolyApplication.APP_COLOR);
-                onDialogClick.setDividerColor(PolyApplication.APP_COLOR);
+                AlertDialog.Builder onDialogClick = new AlertDialog.Builder(getActivity());
                 onDialogClick.setTitle("Description");
                 onDialogClick.setMessage((((presenter.items.getItem(fPos))).getDescription()));
                 onDialogClick.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -103,10 +108,27 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
 
                     }
                 });
-                onDialogClick.show();
+                onDialogClick.create();
+                Dialog d = onDialogClick.show();
+                int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                View divider = d.findViewById(dividerId);
+                divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                TextView tv = (TextView) d.findViewById(textViewId);
+                tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
             }
         });
-        onListClick.show();
+
+        onListClick.create();
+        Dialog d = onListClick.show();
+        int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+        View divider = d.findViewById(dividerId);
+        divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+        int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+        TextView tv = (TextView) d.findViewById(textViewId);
+        tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
     }
 
     @Override
@@ -114,16 +136,14 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
     {
         final int position = (Integer) view.getTag();
         if (items.get(position).getIsPricePerOunce()) {
-            QustomDialogBuilder onYes = new QustomDialogBuilder(getActivity());
+            AlertDialog.Builder onYes = new AlertDialog.Builder(getActivity());
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);                    View DialogView = inflater.inflate(R.layout.number_picker, null);
             final NumberPicker np = (NumberPicker) DialogView.findViewById(R.id.numberPicker);
             np.setMinValue(1);
             np.setMaxValue(50);
             np.setWrapSelectorWheel(false);
             np.setValue(1);
-            onYes.setCustomView(DialogView, getActivity());
-            onYes.setDividerColor(PolyApplication.APP_COLOR);
-            onYes.setTitleColor(PolyApplication.APP_COLOR);
+            onYes.setView(DialogView);
             onYes.setTitle("How many ounces?");
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
@@ -142,7 +162,15 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
                 public void onClick(DialogInterface dialog, int button) {
                 }
             });
-            onYes.show();
+            onYes.create();
+            Dialog d = onYes.show();
+            int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+            View divider = d.findViewById(dividerId);
+            divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+            int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+            TextView tv = (TextView) d.findViewById(textViewId);
+            tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
         }
         else
         {

@@ -1,13 +1,18 @@
 package com.themotlcode.polydining;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.themotlcode.polydining.Sorting.VenueNameComparator;
 import com.themotlcode.polydining.models.Cart;
@@ -99,9 +104,7 @@ public class PolyMealPresenter extends Presenter
 
                 app.activityTitle = app.names.get(index);
                 if(!app.lastVenue.equals(app.names.get(index)) && Cart.size() > 0) {
-                    final QustomDialogBuilder onListClick = new QustomDialogBuilder(fragment.getActivity());
-                    onListClick.setDividerColor(PolyApplication.APP_COLOR);
-                    onListClick.setTitleColor(PolyApplication.APP_COLOR);
+                    final AlertDialog.Builder onListClick = new AlertDialog.Builder(fragment.getActivity());
                     onListClick.setTitle("Clear Cart?");
                     onListClick.setMessage("Your cart has items that are not from this venue. " +
                             "Would you like to clear it now?");
@@ -124,7 +127,15 @@ public class PolyMealPresenter extends Presenter
                         public void onClick(DialogInterface dialog, int button) {
                         }
                     });
-                    onListClick.show();
+                    onListClick.create();
+                    Dialog d = onListClick.show();
+                    int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                    View divider = d.findViewById(dividerId);
+                    divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                    int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                    TextView tv = (TextView) d.findViewById(textViewId);
+                    tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
                 } else {
                     /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
                     app.lastVenue = app.names.get(index);

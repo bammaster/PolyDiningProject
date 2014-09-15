@@ -3,7 +3,11 @@ package com.themotlcode.polydining;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.themotlcode.polydining.models.Account;
@@ -58,11 +62,9 @@ public class PolyApplication extends Application
 
     public static void throwError(int message, int title, final Exception exception, final Activity activity)
     {
-        final QustomDialogBuilder error = new QustomDialogBuilder(activity);
+        final AlertDialog.Builder error = new AlertDialog.Builder(activity);
         error.setTitle(title);
         error.setMessage(message);
-        error.setDividerColor(APP_COLOR);
-        error.setTitleColor(APP_COLOR);
         error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int button) {
 
@@ -76,7 +78,15 @@ public class PolyApplication extends Application
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                error.show();
+                error.create();
+                Dialog d = error.show();
+                int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                View divider = d.findViewById(dividerId);
+                divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                TextView tv = (TextView) d.findViewById(textViewId);
+                tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
             }
         });
     }
