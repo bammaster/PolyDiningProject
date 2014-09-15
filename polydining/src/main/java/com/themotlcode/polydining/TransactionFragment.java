@@ -16,6 +16,7 @@ public class TransactionFragment extends Fragment
     protected static Activity mActivity;
     protected static ActionBar mActionBar;
     protected ListView lv;
+    protected View v;
     protected TransactionAdapter ta;
 
     private TransactionPresenter presenter;
@@ -26,7 +27,7 @@ public class TransactionFragment extends Fragment
     {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View v = inflater.inflate(R.layout.fragment_trans, container, false);
+        v = inflater.inflate(R.layout.fragment_trans, container, false);
 
         mActivity = getActivity();
         mActionBar = getActivity().getActionBar();
@@ -35,7 +36,18 @@ public class TransactionFragment extends Fragment
         app = (PolyApplication) getActivity().getApplication();
         init(v);
 
+        isTransactionsEmpty();
+
         return v;
+    }
+
+    private void isTransactionsEmpty()
+    {
+        if(app.user.getTransactions().size() == 0)
+        {
+            v.findViewById(R.id.transactions).setVisibility(View.GONE);
+            v.findViewById(R.id.emptyTransactions).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
