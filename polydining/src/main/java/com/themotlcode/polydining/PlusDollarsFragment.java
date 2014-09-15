@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import org.joda.time.DateTime;
@@ -121,17 +122,68 @@ public class PlusDollarsFragment extends Fragment
         DateTime end = new DateTime(app.endOfQuarter[0], app.endOfQuarter[1], app.endOfQuarter[2], 0, 0, 0, 0);
         d = Days.daysBetween(start, end);
         w = Weeks.weeksBetween(start, end);
+        int weeksUntilStart = Weeks.weeksBetween(DateTime.now(), start).getWeeks();
+        int weeksUntilEnd = Weeks.weeksBetween(DateTime.now(), end).getWeeks();
+        int daysUntilStart = Days.daysBetween(DateTime.now(), start).getDays();
+        int daysUntilEnd = Days.daysBetween(DateTime.now(), end).getDays();
         int titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
         TextView yourTextView = (TextView) getActivity().findViewById(titleId);
         yourTextView.setTextColor(Color.WHITE);
-        if(w.getWeeks() > 10)
+        //Figures out the appropriate message to show based on the time till end/start of the quarter.
+        if( weeksUntilStart == 1)
         {
-            getActivity().getActionBar().setSubtitle(Weeks.weeksBetween(DateTime.now(), start) + " " + getResources().getString(R.string.weeksstart));
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(weeksUntilStart + " " + getResources().getString(R.string.weeks_start_singular));
+            }
         }
-        else {
-            getActivity().getActionBar().setSubtitle(w.getWeeks() + " " + getResources().getString(R.string.weeksleft));
+        else if(weeksUntilStart > 0)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(weeksUntilStart + " " + getResources().getString(R.string.weeks_start));
+            }
         }
-
+        else if(daysUntilStart == 1)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(daysUntilStart + " " + getResources().getString(R.string.days_start_singular));
+            }
+        }
+        else if( weeksUntilStart == 0)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(daysUntilStart + " " + getResources().getString(R.string.days_start));
+            }
+        }
+        else if(weeksUntilEnd == 1)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(weeksUntilEnd + " " + getResources().getString(R.string.days_left_singular));
+            }
+        }
+        else if(weeksUntilEnd > 0)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(weeksUntilEnd + " " + getResources().getString(R.string.weeks_left));
+            }
+        }
+        else if(daysUntilEnd == 1)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(daysUntilEnd + " " + getResources().getString(R.string.days_left_singular));
+            }
+        }
+        else if(weeksUntilEnd == 0)
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(daysUntilEnd + " " + getResources().getString(R.string.days_left));
+            }
+        }
+        else
+        {
+            if(getActivity().getActionBar() != null) {
+                getActivity().getActionBar().setSubtitle(getResources().getString(R.string.quarter_over));
+            }
+        }
         login();
         fadeIn();
     }

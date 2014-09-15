@@ -12,6 +12,7 @@
     <string name="password_error_msg">Please check your username and password. If this error persists, please send to developer.</string>
     <string name="send_success">Sent To Developer!</string>
     <string name="send_error">Error Sending To Developer!</string>
+    <string name="quarter_over">Quarter is Over!</string>
     <string name="ok">Ok</string>
     <string name="send">Send to Developer</string>
     <string name="cancel">Cancel</string>
@@ -36,8 +37,14 @@
     <string name="login">Login</string>
     <string name="plusdollarsalert">Plus Dollars Alert!</string>
     <string name="plusdollarsalertmessage">This meal will exceed the number of plus dollars you have left.</string>
-    <string name="weeksleft">weeks until the quarter ends</string>
-    <string name="weeksstart">weeks until the quarter starts</string>
+    <string name="weeks_left">weeks until the quarter ends</string>
+    <string name="weeks_start">weeks until the quarter starts</string>
+    <string name="weeks_left_singular">week until the quarter ends</string>
+    <string name="weeks_start_singular">week until the quarter starts</string>
+    <string name="days_left">days until the quarter ends</string>
+    <string name="days_start">days until the quarter starts</string>
+    <string name="days_left_singular">day until the quarter ends</string>
+    <string name="days_start_singular">day until the quarter starts</string>
     <string name="mealtimepreftitle">What\'s a meal worth?</string>
     <string name="emptycompleter">There are no more items that can complete your meal</string>
     <string name="mealtimemessage">Breakfast: $7.90 (7:00-10:00am)\nLunch: $9.00 (10:00am-5pm)\nDinner: $10.75 (5-8:14pm)\nLate Night: $8.75 (8:15pm-2am)\nMeals reset weekly on Saturday morning at 2:00am</string>
