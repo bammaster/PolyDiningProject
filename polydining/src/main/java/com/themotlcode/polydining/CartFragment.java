@@ -1,6 +1,7 @@
 package com.themotlcode.polydining;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -106,17 +107,29 @@ public class CartFragment extends Fragment
                 System.out.println(pos);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
-                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " +  Cart.getCart().get(pos).getPriceString());
-                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int button) {
+                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " + Cart.getCart().get(pos).getPriceString());
+                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int button)
+                    {
                         removeFromCart(fPos);
                     }
                 });
-                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int button) {
+                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int button)
+                    {
                     }
                 });
-                onListClick.show();
+                onListClick.create();
+                Dialog d = onListClick.show();
+                int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+                View divider = d.findViewById(dividerId);
+                divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
+
+                int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
+                TextView tv = (TextView) d.findViewById(textViewId);
+                tv.setTextColor(Color.parseColor(PolyApplication.APP_COLOR));
             }
         });
     }

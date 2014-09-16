@@ -124,7 +124,7 @@ public class SettingsActivity extends PreferenceActivity {
                     Dialog d = builder.show();
                     int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
                     View divider = d.findViewById(dividerId);
-                    divider.setBackgroundColor(Color.parseColor(PolyApplication.ACCENT_COLOR));
+                    divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
 
                     int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
                     TextView tv = (TextView) d.findViewById(textViewId);
@@ -182,7 +182,7 @@ public class SettingsActivity extends PreferenceActivity {
                     Dialog d = builder.show();
                     int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");
                     View divider = d.findViewById(dividerId);
-                    divider.setBackgroundColor(Color.parseColor(PolyApplication.ACCENT_COLOR));
+                    divider.setBackgroundColor(Color.parseColor(PolyApplication.APP_COLOR));
 
                     int textViewId = d.getContext().getResources().getIdentifier("alertTitle", "id", "android");
                     TextView tv = (TextView) d.findViewById(textViewId);

@@ -59,6 +59,7 @@
 
     <style name="ActionbarWidgetCalpoly" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:spinnerStyle">@style/SpinnerCalpoly</item>
+        <item name="android:radioButtonStyle">@style/RadioButtonCalpoly</item>
     </style>
     <!-- Android Holo Colors -->
     <style name="AutoCompleteTextViewCalpoly" parent="android:Widget.Holo.Light.AutoCompleteTextView">
@@ -72,6 +73,10 @@
 
     <style name="ImageButtonCalpoly" parent="android:Widget.Holo.Light.ImageButton">
         <item name="android:background">@drawable/calpoly_btn_default_holo_light</item>
+    </style>
+
+    <style name="RadioButtonCalpoly" parent="android:Widget.Holo.Light.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/calpoly_btn_radio_holo_light</item>
     </style>
 
     <style name="SpinnerCalpoly" parent="android:Widget.Holo.Light.Spinner">
