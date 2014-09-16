@@ -219,7 +219,7 @@ public class Venue
      * Gets if the venue accepts meal credits or not.
      * @return Does the venue accept meal credits?
      */
-    private MealType getType()
+    public MealType getType()
     {
         if(mealType == MealType.meal)
         {

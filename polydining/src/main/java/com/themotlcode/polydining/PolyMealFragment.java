@@ -1,10 +1,24 @@
 package com.themotlcode.polydining;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.*;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PolyMealFragment extends Fragment
 {
@@ -14,6 +28,9 @@ public class PolyMealFragment extends Fragment
     private PolyApplication app;
 
     private PolyMealPresenter presenter;
+    private Menu mMenu;
+    protected boolean loading;
+    protected int spinnerChoice = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -24,6 +41,7 @@ public class PolyMealFragment extends Fragment
 
         init(v);
         presenter = new PolyMealPresenter(this);
+        presenter.setFilter(spinnerChoice);
         presenter.getData();
         return v;
     }
@@ -43,7 +61,22 @@ public class PolyMealFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu,inflater);
         menu.clear();
-        inflater.inflate(R.menu.refresh, menu);
+        inflater.inflate(R.menu.polymeal, menu);
+
+        mMenu = menu;
+
+        if(loading)
+        {
+            MenuItem refresh = mMenu.findItem(R.id.refresh);
+            System.out.println("refresh set to: " + !refresh.isVisible());
+            refresh.setVisible(!refresh.isVisible());
+
+            MenuItem dice = mMenu.findItem(R.id.dice);
+            System.out.println("dice set to: " + !dice.isVisible());
+            dice.setVisible(!dice.isVisible());
+            System.out.println("onCreateOptionsMenu()");
+        }
+
     }
 
     @Override
@@ -51,8 +84,53 @@ public class PolyMealFragment extends Fragment
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
+                loading = true;
+                getActivity().invalidateOptionsMenu();
+                ActionBar actionBar = getActivity().getActionBar();
+
+                actionBar.setDisplayShowTitleEnabled(true);
+                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                actionBar.setTitle(R.string.app_name);
                 presenter.refresh();
                 return true;
+            case R.id.dice:
+                final String venueName = presenter.pickVenue();
+
+                if(venueName == null)
+                {
+                    Toast.makeText(getActivity(), "No venues open!", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = (LayoutInflater) builder.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.dice_progress, null);
+                builder.setView(view);
+                builder.create();
+                final Dialog d = builder.show();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        d.cancel();
+                        try
+                        {
+                            Thread.sleep(500);
+
+                        }
+                        catch(InterruptedException e)
+                        {
+
+                        }
+                        app.lastVenue = venueName;
+                        app.activityTitle = venueName;
+                        VenueFragment venueFragment = new VenueFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_layout, venueFragment)
+                                .addToBackStack(null);
+                        transaction.commit();
+                    }
+                }, 1000);
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -63,6 +141,11 @@ public class PolyMealFragment extends Fragment
     {
         super.onDestroyView();
         presenter.setDataCancelled();
+        ActionBar actionBar = getActivity().getActionBar();
+
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setTitle(R.string.app_name);
     }
 
     private void init(View v)
@@ -79,11 +162,107 @@ public class PolyMealFragment extends Fragment
 
     }
 
-    public void setupList()
+    private void setupList()
     {
-        polyMealAdapter = new PolyMealAdapter(getActivity(), R.id.polymealListItem, app.names);
-        System.out.println(app.names);
+
+        polyMealAdapter = new PolyMealAdapter(getActivity(), R.id.polymealListItem, presenter.getFilteredList());
         presenter.setListAdapter(polyMealAdapter);
         presenter.setupList(lv);
+    }
+
+    public void updateUI()
+    {
+        setupList();
+
+        getActivity().supportInvalidateOptionsMenu();
+
+        setActionBarSpinner(true);
+    }
+
+    public void setActionBarSpinner(boolean visible)
+    {
+        ActionBar actionBar = getActivity().getActionBar();
+
+        if(visible)
+        {
+
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            String[] list = getResources().getStringArray(R.array.venueFilter);
+
+            actionBar.setListNavigationCallbacks(new NavigationSpinnerAdapter(getActivity(), list), new ActionBar.OnNavigationListener()
+            {
+
+                @Override
+                public boolean onNavigationItemSelected(int itemPosition, long itemId)
+                {
+                    spinnerChoice = itemPosition;
+                    presenter.setFilter(spinnerChoice);
+                    System.out.println(spinnerChoice);
+                    setupList();
+                    return false;
+                }
+            });
+            actionBar.setSelectedNavigationItem(spinnerChoice);
+        }
+        else
+        {
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setTitle(R.string.app_name);
+        }
+    }
+
+    public class NavigationSpinnerAdapter extends BaseAdapter
+    {
+
+        private TextView txtTitle;
+        private Context context;
+        private String[] items;
+
+        public NavigationSpinnerAdapter(Context context, String[] items) {
+            this.context=context;
+            this.items = items;
+        }
+
+        @Override
+        public int getCount() {
+            return items.length;
+        }
+
+        @Override
+        public Object getItem(int i)
+        {
+            return items[i];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView==null){
+                LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                convertView=layoutInflater.inflate(R.layout.actionbar_spinner,null);
+            }
+            txtTitle=(TextView) convertView.findViewById(R.id.txtActionBarSpinnerTitle);
+            txtTitle.setText(items[position]);
+            return convertView;
+
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            if (convertView==null){
+                LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                convertView=layoutInflater.inflate(R.layout.spinner_list,null);
+            }
+            txtTitle=(TextView) convertView.findViewById(R.id.txtSpinnerListTitle);
+            txtTitle.setText(items[position]);
+
+            return convertView;
+        }
     }
 }

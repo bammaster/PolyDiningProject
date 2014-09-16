@@ -13,12 +13,14 @@ public class PolyMealAdapter extends ArrayAdapter<String> {
 
     private Activity activity;
     private PolyApplication app;
+    private List<String> items;
 
     public PolyMealAdapter(Activity activity, int resource, List<String> items)
     {
         super(activity, resource, items);
         this.activity = activity;
         this.app = (PolyApplication) activity.getApplication();
+        this.items = items;
     }
 
     @Override
@@ -30,12 +32,12 @@ public class PolyMealAdapter extends ArrayAdapter<String> {
             convertView = inflater.inflate(R.layout.polymeal_list_item, parent, false);
         }
         TextView tt = (TextView) convertView.findViewById(R.id.polymealListItem);
-        tt.setText("  " + app.names.get(position));
-        if(app.venues.get(app.names.get(position)).closeSoon())
+        tt.setText("  " + items.get(position));
+        if(app.venues.get(items.get(position)).closeSoon())
         {
             tt.setCompoundDrawablesWithIntrinsicBounds(activity.getResources().getDrawable(R.drawable.soon_dot),null,null,null);
         }
-        else if(app.venues.get(app.names.get(position)).isOpen())
+        else if(app.venues.get(items.get(position)).isOpen())
         {
             tt.setCompoundDrawablesWithIntrinsicBounds(activity.getResources().getDrawable(R.drawable.open_dot),null,null,null);
         }

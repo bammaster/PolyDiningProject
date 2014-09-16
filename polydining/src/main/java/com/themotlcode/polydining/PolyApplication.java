@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.themotlcode.polydining.models.Account;
 import com.themotlcode.polydining.models.Item;
 import com.themotlcode.polydining.models.ItemList;
+import com.themotlcode.polydining.models.MealType;
 import com.themotlcode.polydining.models.SendError;
 import com.themotlcode.polydining.models.Venue;
 
@@ -65,19 +66,25 @@ public class PolyApplication extends Application
         final AlertDialog.Builder error = new AlertDialog.Builder(activity);
         error.setTitle(title);
         error.setMessage(message);
-        error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int button) {
+        error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int button)
+            {
 
             }
         });
-        error.setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int button) {
+        error.setPositiveButton(R.string.send, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int button)
+            {
                 SendError.sendErrorToDeveloper(exception, activity);
             }
         });
-        activity.runOnUiThread(new Runnable() {
+        activity.runOnUiThread(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 error.create();
                 Dialog d = error.show();
                 int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");

@@ -17,8 +17,10 @@ import com.google.gson.Gson;
 import com.themotlcode.polydining.Sorting.VenueNameComparator;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.DataCollector;
+import com.themotlcode.polydining.models.MealType;
 import com.themotlcode.polydining.models.Venue;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class PolyMealPresenter extends Presenter
@@ -30,6 +32,7 @@ public class PolyMealPresenter extends Presenter
     private PolyMealAdapter polyMealAdapter;
     private PolyApplication app;
     private GetDataThread thread;
+    private int filter;
 
     public PolyMealPresenter(Fragment fragment) {
         this.fragment = (PolyMealFragment) fragment;
@@ -63,6 +66,7 @@ public class PolyMealPresenter extends Presenter
         @Override
         protected void onPreExecute()
         {
+            fragment.loading = true;
             fragment.getActivity().setProgressBarIndeterminateVisibility(true);
         }
 
@@ -95,7 +99,8 @@ public class PolyMealPresenter extends Presenter
 
         protected void onPostExecute(Boolean b)
         {
-            fragment.setupList();
+            fragment.loading = false;
+            fragment.updateUI();
             fragment.getActivity().setProgressBarIndeterminateVisibility(false);
         }
 
@@ -112,7 +117,38 @@ public class PolyMealPresenter extends Presenter
         polyMealAdapter.clear();
         app.venues = null;
         getData();
-        polyMealAdapter.notifyData();
+    }
+
+    protected ArrayList<String> getFilteredList()
+    {
+        ArrayList<String> filteredList = new ArrayList<String>();
+        if(filter == 0)
+        {
+            return app.names;
+        }
+        for(Venue v : app.venues.values())
+        {
+            if(filter == 1)
+            {
+                if(MealType.meal == v.getType())
+                {
+                    filteredList.add(v.getName());
+                }
+            }
+            else if(filter == 2)
+            {
+                if(MealType.plus == v.getType())
+                {
+                    filteredList.add(v.getName());
+                }
+            }
+        }
+        return filteredList;
+    }
+
+    public void setFilter(int filter)
+    {
+        this.filter = filter;
     }
 
 
@@ -175,6 +211,23 @@ public class PolyMealPresenter extends Presenter
             }
         });
         lv.setAdapter(polyMealAdapter);
+    }
+
+    public String pickVenue()
+    {
+        ArrayList<Venue> openVenues = new ArrayList<Venue>();
+        for(String v : getFilteredList())
+        {
+            if(app.venues.get(v).isOpen() || app.venues.get(v).closeSoon())
+            {
+                openVenues.add(app.venues.get(v));
+            }
+        }
+        if(!openVenues.isEmpty())
+        {
+            return openVenues.get( ((Double) (Math.random() * openVenues.size())).intValue() ).getName();
+        }
+        return null;
     }
 
 }

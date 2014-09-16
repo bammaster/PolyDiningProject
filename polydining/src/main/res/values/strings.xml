@@ -62,6 +62,11 @@
         <item>Late Night</item>
         <item>Automatic</item>
     </string-array>
+    <string-array name="venueFilter">
+        <item>All Venues</item>
+        <item>Meal Credit Venues</item>
+        <item>Plus Dollars Venues</item>
+    </string-array>
     <string-array name="moneyModeValues">
         <item>0</item>
         <item>1</item>

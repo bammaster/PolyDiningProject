@@ -25,8 +25,9 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Calpoly</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Calpoly</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Calpoly</item>
-        <item name="android:actionDropDownStyle">@style/DropDownNav.Calpoly</item>
+        <item name="android:actionDropDownStyle">@style/SpinnerCalpoly</item>
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Calpoly</item>
+        <item name="android:actionBarWidgetTheme">@style/ActionbarWidgetCalpoly</item>
         <item name="android:actionModeBackground">@drawable/cab_background_top_calpoly</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_calpoly</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Calpoly</item>
@@ -54,6 +55,10 @@
         <item name="android:actionMenuTextColor">#FFFFFF</item>
         <item name="android:divider">#FFFFFF</item>
 
+    </style>
+
+    <style name="ActionbarWidgetCalpoly" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="android:spinnerStyle">@style/SpinnerCalpoly</item>
     </style>
     <!-- Android Holo Colors -->
     <style name="AutoCompleteTextViewCalpoly" parent="android:Widget.Holo.Light.AutoCompleteTextView">

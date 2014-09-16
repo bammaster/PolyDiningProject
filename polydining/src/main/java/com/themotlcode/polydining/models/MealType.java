@@ -9,6 +9,4 @@ public enum MealType
     plus,
     express,
     none;
-
-
 }

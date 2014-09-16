@@ -41,15 +41,6 @@ public class TransactionFragment extends Fragment
         return v;
     }
 
-    private void isTransactionsEmpty()
-    {
-        if(app.user.getTransactions().size() == 0)
-        {
-            v.findViewById(R.id.transactions).setVisibility(View.GONE);
-            v.findViewById(R.id.emptyTransactions).setVisibility(View.VISIBLE);
-        }
-    }
-
     @Override
     public void onResume()
     {
@@ -88,5 +79,14 @@ public class TransactionFragment extends Fragment
     protected void refresh()
     {
         ta.updateData(app.user.getTransactions());
+    }
+
+    private void isTransactionsEmpty()
+    {
+        if(app.user.getTransactions().size() == 0)
+        {
+            v.findViewById(R.id.transactions).setVisibility(View.GONE);
+            v.findViewById(R.id.emptyTransactions).setVisibility(View.VISIBLE);
+        }
     }
 }
