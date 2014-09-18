@@ -7,8 +7,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/completer"
-        >
+        android:id="@+id/completer">
         <ListView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@id/android:list"
             android:layout_width="fill_parent"
@@ -18,29 +17,30 @@
             android:divider="#00000000"/>
     </RelativeLayout>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/emptyCompleter"
-        android:visibility="gone">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true">
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView"
+                android:layout_centerInParent="true"
+                android:layout_toLeftOf="@+id/textView"
                 android:layout_marginRight="4dp"
-                android:src="@drawable/ic_action_warning"
-                android:layout_toLeftOf="@+id/textView"/>
+                android:src="@drawable/ic_action_warning"/>
             <TextView
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/emptycompleter"
                 android:id="@+id/textView"
+                android:text="@string/empty_completer"
+                android:layout_alignParentTop="false"
+                android:layout_centerInParent="true"
                 android:textSize="8pt"/>
             </LinearLayout>
-
     </RelativeLayout>
 
 </LinearLayout>
