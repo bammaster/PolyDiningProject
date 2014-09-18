@@ -82,6 +82,8 @@ public class Account
      */
     public String getName()
     {
+        String temp = null;
+        temp.toString();
         return name;
     }
 

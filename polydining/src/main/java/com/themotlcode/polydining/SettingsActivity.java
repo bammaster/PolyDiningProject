@@ -91,6 +91,15 @@ public class SettingsActivity extends PreferenceActivity {
 
         defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
 
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) {
+                SendError.sendErrorToDeveloper(ex, SettingsActivity.this);
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+
     }
 
 

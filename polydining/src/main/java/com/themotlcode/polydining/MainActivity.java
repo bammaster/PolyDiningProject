@@ -1,5 +1,6 @@
 package com.themotlcode.polydining;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -52,6 +54,14 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
 
         fm.beginTransaction()
                 .add(R.id.fragment_layout, new LoginFragment()).commit();
+       Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+           @Override
+           public void uncaughtException(Thread thread, Throwable ex) {
+               SendError.sendErrorToDeveloper(ex, mActivity);
+               android.os.Process.killProcess(android.os.Process.myPid());
+           }
+       });
     }
 
     @Override

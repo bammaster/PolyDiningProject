@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.themotlcode.polydining.models.Account;
-import com.themotlcode.polydining.models.Item;
-import com.themotlcode.polydining.models.ItemList;
-import com.themotlcode.polydining.models.MealType;
-import com.themotlcode.polydining.models.SendError;
 import com.themotlcode.polydining.models.Venue;
 
 import java.lang.reflect.Type;
@@ -61,7 +57,8 @@ public class PolyApplication extends Application
     //not constant as it needs to be changed but should only be one of them.
     public String activityTitle = "";
 
-    public static void throwError(int message, int title, final Exception exception, final Activity activity)
+
+    public static void throwError(int message, int title, final Throwable exception, final Activity activity)
     {
         final AlertDialog.Builder error = new AlertDialog.Builder(activity);
         error.setTitle(title);

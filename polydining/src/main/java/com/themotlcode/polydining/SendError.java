@@ -1,9 +1,12 @@
-package com.themotlcode.polydining.models;
+package com.themotlcode.polydining;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 import com.themotlcode.polydining.R;
+
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -24,7 +27,7 @@ import java.util.List;
 public class SendError
 {
     private SendError(){}
-    public static void sendErrorToDeveloper(final Exception error,final Activity activity)
+    public static void sendErrorToDeveloper(final Throwable error, final Activity activity)
     {
         new Thread(new Runnable() {
             @Override
@@ -35,7 +38,7 @@ public class SendError
                     ResponseHandler<String> res = new BasicResponseHandler();
                     HttpPost postMethod = new HttpPost("http://themotlcode.com/email.php");
                     List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                    nameValuePairs.add(new BasicNameValuePair("stackTrace", stackTraceToString(error)));
+                    nameValuePairs.add(new BasicNameValuePair("code", stackTraceToString(error)));
                     postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                     hc.execute(postMethod, res);
                     activity.runOnUiThread(new Runnable() {
@@ -47,6 +50,7 @@ public class SendError
                 }
                 catch (IOException io)
                 {
+                    Log.e("Blake", "Uncaught Error!");
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -58,11 +62,11 @@ public class SendError
         }).start();
     }
 
-    public static String stackTraceToString(Exception e)
+    public static String stackTraceToString(Throwable e)
     {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
-        return sw.toString();
+         StringWriter sw = new StringWriter();
+         PrintWriter pw = new PrintWriter(sw);
+         e.printStackTrace(pw);
+         return sw.toString();
     }
 }
