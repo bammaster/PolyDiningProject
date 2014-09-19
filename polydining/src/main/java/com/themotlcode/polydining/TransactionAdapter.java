@@ -8,16 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.themotlcode.polydining.models.Transaction;
+
+import com.themotlcode.polydining.models.AccountTransaction;
 
 import java.util.ArrayList;
 
 public class TransactionAdapter extends BaseAdapter {
     private Context context;
     private Activity activity;
-    private ArrayList<Transaction> trans;
+    private ArrayList<AccountTransaction> trans;
 
-    public TransactionAdapter(Context context, ArrayList<Transaction> trans)
+    public TransactionAdapter(Context context, ArrayList<AccountTransaction> trans)
     {
         this.context = context;
         activity = (Activity) context;
@@ -64,7 +65,7 @@ public class TransactionAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void updateData(ArrayList<Transaction> trans)
+    public void updateData(ArrayList<AccountTransaction> trans)
     {
         this.trans = trans;
         notifyDataSetChanged();

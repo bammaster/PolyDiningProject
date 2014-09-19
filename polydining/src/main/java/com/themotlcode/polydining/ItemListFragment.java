@@ -27,12 +27,14 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
     private Fragment fragment;
     private MealPresenter presenter;
     private ArrayList<Item> items;
+    private PolyApplication app;
 
-    public void setPresenter(Fragment fragment, MealPresenter presenter)
+    public void setPresenter(Fragment fragment, MealPresenter presenter, PolyApplication app)
     {
         this.presenter = presenter;
         this.fragment = fragment;
         this.items = presenter.items.getItems();
+        this.app = app;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
                     onYes.setTitle("How many ounces?");
                     onYes.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
-                            Cart.add(new Item(((presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
+                            app.cart.add(new Item(((presenter.items.getItem(fPos))), ((presenter.items.getItem(fPos))).getPrice().multiply(new BigDecimal(np.getValue()))));
                             presenter.updateBalance();
                             if(presenter instanceof MealCompleterPresenter)
                             {
@@ -84,7 +86,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
                 }
                 else
                 {
-                    Cart.add(((presenter.items.getItem(fPos))));
+                    app.cart.add(((presenter.items.getItem(fPos))));
                     presenter.updateBalance();
                     if(presenter instanceof MealCompleterPresenter)
                     {
@@ -148,7 +150,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
             onYes.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int button) {
 
-                    Cart.add(new Item(items.get(position), items.get(position).getPrice().multiply(new BigDecimal(np.getValue()))));
+                    app.cart.add(new Item(items.get(position), items.get(position).getPrice().multiply(new BigDecimal(np.getValue()))));
                     Toast.makeText(fragment.getActivity(), items.get(position).getName() + " added to Cart!", Toast.LENGTH_SHORT).show();
                     presenter.updateBalance();
                     if(presenter instanceof MealCompleterPresenter)
@@ -174,7 +176,7 @@ public class ItemListFragment extends ListFragment implements View.OnClickListen
         }
         else
         {
-            Cart.add(items.get(position));
+            app.cart.add(items.get(position));
             presenter.updateBalance();
             if(presenter instanceof MealCompleterPresenter)
             {

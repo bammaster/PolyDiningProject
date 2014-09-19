@@ -13,17 +13,17 @@ public class VenueListFragment extends ItemListFragment
     public int position;
     private VenueListPresenter presenter;
 
-    public VenueListFragment(int position, VenueListPresenter presenter)
+    public VenueListFragment(int position, VenueListPresenter presenter, PolyApplication app)
     {
         this.position = position;
         this.presenter = presenter;
-        setPresenter(this, presenter);
+        setPresenter(presenter.fragment, presenter, app);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        presenter.setFragment(this);
+        presenter.setFragment(presenter.fragment);
         return inflater.inflate(R.layout.fragment_venue_list, container, false);
     }
 

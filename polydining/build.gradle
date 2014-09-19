@@ -41,5 +41,5 @@ dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'me.grantland:autofittextview:0.2.+'
     compile 'com.jpardogo.googleprogressbar:library:1.1.0'
-
+    compile 'com.github.satyan:sugar:1.3'
 }

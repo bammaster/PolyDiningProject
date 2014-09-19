@@ -25,7 +25,7 @@ public class MealCompleterFragment extends ItemListFragment
 
         presenter = new MealCompleterPresenter(this);
         presenter.calcPossibleItems();
-        setPresenter(this, presenter);
+        setPresenter(this, presenter, ((PolyApplication) getActivity().getApplication()));
 
         itemListAdapter = new ItemListAdapter(this);
         itemListAdapter.setItems(presenter.items.getItems());

@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,6 +23,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.themotlcode.polydining.models.Account;
+import com.themotlcode.polydining.models.AccountTransaction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +54,6 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
 
         fm = getSupportFragmentManager();
         MainPresenter presenter = new MainPresenter(this);
-        presenter.getConfigFromWeb();
 
         fm.beginTransaction()
                 .add(R.id.fragment_layout, new LoginFragment()).commit();
@@ -107,7 +110,12 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
     protected void logout(View v)
     {
         ((PolyApplication) getApplication()).user = null;
-        LoginFragment loginFragment = new LoginFragment();FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        Account.deleteAll(Account.class);
+        AccountTransaction.deleteAll(AccountTransaction.class);
+
+        LoginFragment loginFragment = new LoginFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_layout, loginFragment);
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         transaction.commit();
@@ -147,6 +155,8 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        ((PolyApplication) getApplication()).defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     protected void viewDrawer(boolean b)
@@ -167,7 +177,6 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
     protected void setColor()
     {
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
-
     }
 
     /* The click listner for ListView in the navigation drawer */

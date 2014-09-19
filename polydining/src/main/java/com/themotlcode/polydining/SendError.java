@@ -21,9 +21,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Blake on 8/16/2014.
- */
 public class SendError
 {
     private SendError(){}

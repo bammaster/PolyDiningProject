@@ -17,16 +17,20 @@ import com.google.gson.Gson;
 import com.themotlcode.polydining.Sorting.VenueNameComparator;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.DataCollector;
+import com.themotlcode.polydining.models.Item;
 import com.themotlcode.polydining.models.MealType;
+import com.themotlcode.polydining.models.MoneyTime;
 import com.themotlcode.polydining.models.Venue;
+import com.themotlcode.polydining.models.VenuesString;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 public class PolyMealPresenter extends Presenter
 {
 
-    private SharedPreferences sp;
     private PolyMealFragment fragment;
     private MainActivity activity;
     private PolyMealAdapter polyMealAdapter;
@@ -37,21 +41,26 @@ public class PolyMealPresenter extends Presenter
     public PolyMealPresenter(Fragment fragment) {
         this.fragment = (PolyMealFragment) fragment;
         this.activity = (MainActivity) fragment.getActivity();
-
         app = (PolyApplication) activity.getApplication();
-
-        sp = activity.getSharedPreferences(PolyApplication.spKey, activity.MODE_PRIVATE);
     }
 
     public void getData()
     {
+        if (app.venues != null && app.names != null)
+        {
+            fragment.updateUI();
+            return;
+        }
         thread = new GetDataThread();
         thread.execute();
     }
 
     public void setDataCancelled()
     {
-        thread.cancel(true);
+        if(thread != null)
+        {
+            thread.cancel(true);
+        }
     }
 
 
@@ -72,17 +81,18 @@ public class PolyMealPresenter extends Presenter
 
         protected Boolean doInBackground(Void... args)
         {
-            String gson = sp.getString(PolyApplication.speKey, "");
-            app.venues = new Gson().fromJson(gson, PolyApplication.gsonType);
-            if (app.venues == null)
+            checkDB();
+
+            if (app.venuesString == null)
             {
+                app.venuesString = new VenuesString();
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
                 try {
                     if(isCancelled())
                     {
                         return false;
                     }
-                    new DataCollector(fragment.getActivity(), sp, app).getData();
+                    new DataCollector(app).getData();
                     if(isCancelled())
                     {
                         return false;
@@ -95,6 +105,38 @@ public class PolyMealPresenter extends Presenter
                 }
             }
             return true;
+        }
+
+        protected void checkDB()
+        {
+            List<VenuesString> venuesStrings = VenuesString.listAll(VenuesString.class);
+            if(!venuesStrings.isEmpty() && venuesStrings.get(0).gson != null)
+            {
+                app.venuesString = venuesStrings.get(0);
+                app.lastVenue = app.venuesString.lastVenue;
+                app.venueCache.start();
+                try
+                {
+                    app.venueCache.join();
+                }
+                catch(Exception e)
+                {
+                    app.venuesString = null;
+                    app.lastVenue = null;
+                }
+
+            }
+            app.cart = new Cart();
+            List<Item> items = Item.listAll(Item.class);
+            ArrayList<Item> cart = new ArrayList<Item>();
+            for(Item item : items)
+            {
+                for(int i = 0; i < item.getNumInCart(); i++)
+                {
+                    cart.add(item);
+                }
+            }
+            app.cart.setCart(cart);
         }
 
         protected void onPostExecute(Boolean b)
@@ -116,6 +158,7 @@ public class PolyMealPresenter extends Presenter
     {
         polyMealAdapter.clear();
         app.venues = null;
+        app.venuesString = null;
         getData();
     }
 
@@ -151,7 +194,6 @@ public class PolyMealPresenter extends Presenter
         this.filter = filter;
     }
 
-
     protected void setupList(ListView lv)
     {
         polyMealAdapter.setNotifyOnChange(true);
@@ -163,19 +205,22 @@ public class PolyMealPresenter extends Presenter
                 final int fIndex = index;
 
                 app.activityTitle = app.names.get(index);
-                if(!app.lastVenue.equals(app.names.get(index)) && Cart.size() > 0) {
+                if(!app.lastVenue.equals(app.names.get(index)) && app.cart.size() > 0) {
                     final AlertDialog.Builder onListClick = new AlertDialog.Builder(fragment.getActivity());
                     onListClick.setTitle("Clear Cart?");
                     onListClick.setMessage("Your cart has items that are not from this venue. " +
                             "Would you like to clear it now?");
                     onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int button) {
-                            Cart.clear();
+                            app.cart.clear();
                             /*final Intent intentVenue = new Intent(mActivity, VenueActivity.class);
                             app.lastVenue= app.names.get(fIndex);
                             intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             mActivity.startActivity(intentVenue);*/
                             app.lastVenue = app.names.get(fIndex);
+                            app.venuesString.lastVenue = app.lastVenue;
+                            app.venuesString.save();
+
                             VenueFragment venueFragment = new VenueFragment();
                             FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_layout, venueFragment)
@@ -202,6 +247,9 @@ public class PolyMealPresenter extends Presenter
                     intentVenue.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mActivity.startActivity(intentVenue);*/
                     app.lastVenue = app.names.get(fIndex);
+                    app.venuesString.lastVenue = app.lastVenue;
+                    app.venuesString.save();
+
                     VenueFragment venueFragment = new VenueFragment();
                     FragmentTransaction transaction = fragment.getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_layout, venueFragment)

@@ -1,15 +1,10 @@
 package com.themotlcode.polydining.models;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.themotlcode.polydining.Exceptions.PasswordException;
 import com.themotlcode.polydining.PolyApplication;
-import com.themotlcode.polydining.R;
 
 import org.apache.http.auth.AuthenticationException;
 import org.jsoup.Connection;
@@ -30,8 +25,6 @@ import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
 import java.util.Scanner;
 
 import javax.net.ssl.HostnameVerifier;
@@ -47,9 +40,8 @@ public class DataCollector {
     {
         this.account = account;
     }
-    public DataCollector(Activity activity, SharedPreferences sp, PolyApplication app){
-        this.activity = activity;
-        this.sp = sp;
+    public DataCollector(PolyApplication app)
+    {
         this.app = app;
     }
 
@@ -188,7 +180,7 @@ public class DataCollector {
     private void handleTransactions(Elements transactionsTables)
     {
         account.clearTransactions();
-        ArrayList<Transaction> tempTrans = new ArrayList<Transaction>();
+        ArrayList<AccountTransaction> tempTrans = new ArrayList<AccountTransaction>();
         //Iterates over all the transaction data from the html.
         for(int i = 0; i < transactionsTables.size(); i++)
         {
@@ -209,12 +201,14 @@ public class DataCollector {
                         ammount = element.getElementsByClass("tablecolnum").get(0).text();
                     }
                     if (!time.isEmpty() && !location.isEmpty() && !ammount.isEmpty()) {
-                        tempTrans.add(new Transaction(i, time, location, ammount));
+                        AccountTransaction trans = new AccountTransaction(i, location, time, ammount);
+                        trans.save();
+                        tempTrans.add(trans);
                     }
                 }
             }
         }
-        account.setTransactions(tempTrans);
+        account.setAccountTransactions(tempTrans);
     }
 
     /**
@@ -336,10 +330,6 @@ public class DataCollector {
     }
 
     //Venue fields.
-    private Activity activity;
-    private SharedPreferences sp;
-    private Database db;
-    private AlertDialog.Builder error;
     private PolyApplication app;
 
     /**
@@ -360,26 +350,10 @@ public class DataCollector {
         {
             sb.append(line);
         }
-        String venues = sb.toString();
-        app.venues = new Gson().fromJson(venues, PolyApplication.gsonType);
+        app.venuesString.gson = sb.toString();
+        app.venuesString.save();
+        app.venues = new Gson().fromJson(app.venuesString.gson, PolyApplication.gsonType);
         app.names = new ArrayList<String>();
         app.names.addAll(app.venues.keySet());
     }
-
-    /**
-     * Stores all the venue and account data to a sqlite database
-     * @param db The database to store to.
-     */
-    public void storeData(Database db)
-    {
-        sp.edit().putBoolean(PolyApplication.firstLaunch,false).apply();
-        int version = sp.getInt("DBVersion", 1);
-        db = new Database(activity, version++);
-        sp.edit().putInt("DBVersion", version).apply();
-        for(Map.Entry<String, Venue> entry : app.venues.entrySet())
-        {
-            db.updateVenues(entry.getValue());
-        }
-    }
-
 }

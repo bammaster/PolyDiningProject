@@ -14,6 +14,7 @@ import com.themotlcode.polydining.models.MoneyTime;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 //VenuePresenter communicates with models to update the ActionBar subtitle and hold the ArrayList<ItemSet> for the current venue
 
@@ -30,28 +31,16 @@ public class VenuePresenter extends MealPresenter
         this.fragment = (VenueFragment) fragment;
         this.itemLists = app.venues.get(app.activityTitle).getVenueItemLists();
         setFragment(fragment);
+        updateBalance();
         updateSettings();
 
     }
 
-    protected boolean loadFromCache(Bundle savedInstanceState)
-    {
-        if(savedInstanceState != null)
-        {
-            MoneyTime.setMoneySpent(new BigDecimal(savedInstanceState.getString("moneySpent")));
-            Cart.setCart(savedInstanceState.getParcelableArrayList("cart"));
-            app.lastVenue = savedInstanceState.getString("lastVenue");
-            return true;
-        }
-        return false;
-    }
-
     protected void updateSettings()
     {
-        SharedPreferences defaultSP;
         int sortMode;
-        defaultSP = PreferenceManager.getDefaultSharedPreferences(fragment.getActivity());
-        sortMode = Integer.valueOf(defaultSP.getString("sortMode", "0"));
+        app.defaultSP = PreferenceManager.getDefaultSharedPreferences(fragment.getActivity());
+        sortMode = Integer.valueOf(app.defaultSP.getString("sortMode", "0"));
 
 
         for(ItemList itemList : itemLists)
@@ -102,7 +91,7 @@ public class VenuePresenter extends MealPresenter
         @Override
         public Fragment getItem(int i)
         {
-            return new VenueListFragment(i, new VenueListPresenter(fragment, itemLists.get(i)));
+            return new VenueListFragment(i, new VenueListPresenter(fragment, itemLists.get(i)), app);
         }
 
         @Override

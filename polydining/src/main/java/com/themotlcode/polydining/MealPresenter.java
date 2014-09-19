@@ -1,12 +1,10 @@
 package com.themotlcode.polydining;
 
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
-import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.ItemList;
 import com.themotlcode.polydining.models.MoneyTime;
 
@@ -50,7 +48,7 @@ public class MealPresenter
         {
             fragment.getActivity().getActionBar().setSubtitle("$" + totalAmount + " Remaining");
         }
-        else if(app.user.getMeals() == 0 && Cart.size() == 0)
+        else if(app.user.getMeals() == 0 && app.cart.size() == 0)
         {
             fragment.getActivity().getActionBar().setSubtitle("No Meals" + " Remaining");
         }
@@ -62,27 +60,6 @@ public class MealPresenter
 
     protected void updateBalance() {
         updateTotalAmount();
-        //Alerts the user if they will exceed their plus dollars with whats in the cart.
-        /*if(totalAmount.compareTo(new BigDecimal("0.00")) < 0)
-        {
-            if(app.user != null && totalAmount.multiply(new BigDecimal("-1")).compareTo(app.user.getPlusDollars()) > 0)
-            {
-                QustomDialogBuilder plusDollarsExceeded = new QustomDialogBuilder(fragment.getActivity());
-                plusDollarsExceeded.setDividerColor(PolyApplication.APP_COLOR);
-                plusDollarsExceeded.setTitleColor(PolyApplication.APP_COLOR);
-                plusDollarsExceeded.setTitle(R.string.plusdollarsalert);
-                plusDollarsExceeded.setMessage(R.string.plusdollarsalertmessage);
-                plusDollarsExceeded.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
-                });
-                plusDollarsExceeded.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
-                });
-                plusDollarsExceeded.show();
-            }
-        }*/
         setSubtitle();
     }
 }

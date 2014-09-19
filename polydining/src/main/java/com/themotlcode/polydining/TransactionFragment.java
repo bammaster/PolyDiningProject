@@ -19,7 +19,7 @@ public class TransactionFragment extends Fragment
     protected View v;
     protected TransactionAdapter ta;
 
-    private TransactionPresenter presenter;
+    private MyAccountPresenter presenter;
     private PolyApplication app;
 
     @Override
@@ -32,7 +32,7 @@ public class TransactionFragment extends Fragment
         mActivity = getActivity();
         mActionBar = getActivity().getActionBar();
 
-        presenter = new TransactionPresenter(this);
+        presenter = new MyAccountPresenter(this);
         app = (PolyApplication) getActivity().getApplication();
         init(v);
 
@@ -73,17 +73,17 @@ public class TransactionFragment extends Fragment
         this.setHasOptionsMenu(true);
 
         lv = (ListView) v.findViewById(R.id.listView);
-        lv.setAdapter(ta = new TransactionAdapter(getActivity(), app.user.getTransactions()));
+        lv.setAdapter(ta = new TransactionAdapter(getActivity(), app.user.getAccountTransactions()));
     }
 
     protected void refresh()
     {
-        ta.updateData(app.user.getTransactions());
+        ta.updateData(app.user.getAccountTransactions());
     }
 
     private void isTransactionsEmpty()
     {
-        if(app.user.getTransactions().size() == 0)
+        if(app.user.getAccountTransactions().size() == 0)
         {
             v.findViewById(R.id.transactions).setVisibility(View.GONE);
             v.findViewById(R.id.emptyTransactions).setVisibility(View.VISIBLE);

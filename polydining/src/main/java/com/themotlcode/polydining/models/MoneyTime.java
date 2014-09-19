@@ -8,9 +8,6 @@ import com.themotlcode.polydining.PolyApplication;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Blake on 8/7/13.
- */
 public class MoneyTime
 {
     protected static BigDecimal[] mealWorth = {new BigDecimal("7.90"),new BigDecimal("9.00"),new BigDecimal("10.75"),new BigDecimal("8.75")};

@@ -37,7 +37,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         presenter = new LoginPresenter(this);
         setupActivity();
         init(v);
-
+        presenter.checkLogin(login);
         return v;
     }
 
@@ -82,7 +82,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener
             public void onClick(DialogInterface dialog, int id) {
             }
         });
-        //greeting.show();
     }
 
     private void fadeIn()
@@ -95,21 +94,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         login.animate().alpha(1.0f).setStartDelay(2 * duration + duration/2+delay).setDuration(duration).start();
     }
 
-    protected void returnThread(boolean b)
+    protected void returnThread()
     {
-        if(b)
-        {
-            Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_LONG).show();
-            MyAccountFragment maFragment = new MyAccountFragment();
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_layout, maFragment);
-            getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            transaction.commit();
-        }
-        else
-        {
-            Toast.makeText(getActivity(), "Unable to login. Please try again.", Toast.LENGTH_LONG).show();
-        }
-
+        Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_LONG).show();
+        MyAccountFragment maFragment = new MyAccountFragment();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_layout, maFragment);
+        getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        transaction.commit();
     }
 }

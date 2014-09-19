@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
 import org.joda.time.DateTime;
@@ -32,7 +31,7 @@ public class PlusDollarsFragment extends Fragment
     private Weeks w;
 
     private PolyApplication app;
-    private PlusDollarsPresenter presenter;
+    private MyAccountPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -41,7 +40,7 @@ public class PlusDollarsFragment extends Fragment
 
         View v = inflater.inflate(R.layout.fragment_plus_dollars, container, false);
         app = (PolyApplication) getActivity().getApplication();
-        presenter = new PlusDollarsPresenter(this);
+        presenter = new MyAccountPresenter(this);
         init(v);
         handleMusic();
 
@@ -69,6 +68,7 @@ public class PlusDollarsFragment extends Fragment
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
+
                 presenter.refresh();
                 return true;
             default:
@@ -80,7 +80,6 @@ public class PlusDollarsFragment extends Fragment
     public void onDestroyView()
     {
         super.onDestroyView();
-        System.out.println("onDestroyView");
         getActivity().getActionBar().setSubtitle(null);
     }
 

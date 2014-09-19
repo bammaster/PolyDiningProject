@@ -2,23 +2,27 @@ package com.themotlcode.polydining;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orm.SugarApp;
 import com.themotlcode.polydining.models.Account;
+import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.Venue;
+import com.themotlcode.polydining.models.VenuesString;
 
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class PolyApplication extends Application
+public class PolyApplication extends SugarApp
 {
     public static final NumberFormat currency = NumberFormat.getCurrencyInstance();
     public static final Type gsonType = new TypeToken<TreeMap<String, Venue>>() {}.getType();
@@ -28,10 +32,11 @@ public class PolyApplication extends Application
     public static final String MESSAGE_URL = "http://107.170.238.171/message.txt";
     public static final String COLOR_URL = "http://107.170.238.171/color.txt";
     public static final String GREETING_KEY = "Greeting";
-    public static final String spKey = "Poly Dining";
-    public static final String accSpKey = "Account";
-    public static final String speKey = "Cache";
-    public static final String firstLaunch = "firstLaunch";
+    public static final String START_OF_QUARTER_KEY = "startOfQuarter_";
+    public static final String END_QUARTER_KEY = "endOfQuarter_";
+    public static final String APP_COLOR_KEY = "APP_COLOR";
+    public static final String ACCENT_COLOR_KEY = "ACCENT_COLOR";
+
     //Conversion for hours to minutes
     public static final int HOURS_TO_MINUTES = 60;
     public static final int ELEVEN_O_CLOCK_MINUTES = 1379;
@@ -50,13 +55,28 @@ public class PolyApplication extends Application
     public int[] startOfQuarter;
     public Account user;
     public String lastVenue = "";
+
     //Main data structure. Contains all venue data.
     public TreeMap<String, Venue> venues;
+
     //Stores the venue names for the PolyMEalActivity list view.
     public ArrayList<String> names = new ArrayList<String>();
+
     //not constant as it needs to be changed but should only be one of them.
     public String activityTitle = "";
 
+    public VenuesString venuesString;
+    public Cart cart;
+    public SharedPreferences defaultSP;
+
+    Thread venueCache = new Thread() {
+        public void run()
+        {
+            venues = new Gson().fromJson(venuesString.gson, PolyApplication.gsonType);
+            names = new ArrayList<String>();
+            names.addAll(venues.keySet());
+        }
+    };
 
     public static void throwError(int message, int title, final Throwable exception, final Activity activity)
     {

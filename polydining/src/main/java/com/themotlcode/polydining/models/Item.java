@@ -2,6 +2,8 @@ package com.themotlcode.polydining.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.orm.SugarRecord;
 import com.themotlcode.polydining.PolyApplication;
 
 import java.math.BigDecimal;
@@ -9,19 +11,22 @@ import java.math.BigDecimal;
 /**
  * This class represents a Item on a menu at a restaurant on campus.
  */
-public class Item implements Parcelable, Comparable<Item>
+public class Item extends SugarRecord<Item>
 {
     /**The name of the item.*/
     private String name;
 
     /**The price of the item.*/
-    private BigDecimal price;
+    private String price;
 
     /**The description of the item if it exists.*/
     private String description;
 
     /**Whether or not this item is priced per ounce.*/
     private boolean isPricePerOunce;
+
+    /**Number of times this item appears in the current Cart*/
+    protected int numInCart = 0;
 
     /**
      * Builds a new Item with all of its properties.
@@ -32,7 +37,7 @@ public class Item implements Parcelable, Comparable<Item>
     public Item(String name, BigDecimal price, String description)
     {
         this.name = name;
-        this.price = price;
+        this.price = price.toString();
         this.description = description;
     }
 
@@ -46,7 +51,7 @@ public class Item implements Parcelable, Comparable<Item>
 
         in.readStringArray(strData);
         this.name = strData[0];
-        this.price = new BigDecimal(strData[1]);
+        this.price = strData[1];
         this.description = strData[2];
         in.readBooleanArray(boolData);
         this.isPricePerOunce = boolData[0];
@@ -59,7 +64,7 @@ public class Item implements Parcelable, Comparable<Item>
     public Item(Item item)
     {
         this.name = item.name;
-        this.price = new BigDecimal(item.price.toString());
+        this.price = item.price;
         this.description = item.description;
         this.isPricePerOunce = item.isPricePerOunce;
     }
@@ -71,7 +76,7 @@ public class Item implements Parcelable, Comparable<Item>
      */
     public Item(Item item, BigDecimal price) {
         this.name = item.name;
-        this.price = new BigDecimal(price.toString());
+        this.price = price.toString();
         this.description = item.description;
     }
 
@@ -79,6 +84,15 @@ public class Item implements Parcelable, Comparable<Item>
      * The default constructor.
      */
     public Item(){}
+
+    /**
+     * Get the number of times this Item appears in the Cart
+     * @return number of times this Item appears in the Cart
+     */
+    public int getNumInCart()
+    {
+        return numInCart;
+    }
 
     /**
      * Sets the name of the Item.
@@ -136,7 +150,7 @@ public class Item implements Parcelable, Comparable<Item>
      */
     public void setPrice(BigDecimal price)
     {
-        this.price = new BigDecimal(price.toString());
+        this.price = price.toString();
     }
 
     /**
@@ -181,40 +195,8 @@ public class Item implements Parcelable, Comparable<Item>
      */
     private BigDecimal format()
     {
-        String priceString = price.toString();
+        String priceString = price;
         priceString = PolyApplication.currency.format(Double.valueOf(priceString));
         return new BigDecimal(priceString.replace("$",""));
-    }
-
-    public int describeContents(){
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {this.name,
-                this.price.toString(),
-                this.description});
-        dest.writeBooleanArray(new boolean[] {this.isPricePerOunce});
-    }
-    public static final Creator CREATOR = new Creator() {
-        public Item createFromParcel(Parcel in) {
-            return new Item(in);
-        }
-
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
-
-    /**
-     * Compares two items by name and returns the result.
-     * @param other The other Item to compare to this Item.
-     * @return See compareTo documentation.
-     */
-    @Override
-    public int compareTo(Item other)
-    {
-        return this.name.compareTo(other.name);
     }
 }

@@ -25,13 +25,12 @@ public class VenueFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-        System.out.println("onCreateView)");
         View v = inflater.inflate(R.layout.fragment_venue, container, false);
 
         ((MainActivity) getActivity()).viewDrawer(true);
         presenter = new VenuePresenter(this);
 
-        presenter.loadFromCache(savedInstanceState);
+        //presenter.loadFromCache(savedInstanceState);
         init(v);
         return v;
     }
@@ -48,7 +47,6 @@ public class VenueFragment extends Fragment
     public void onDestroyView()
     {
         super.onDestroyView();
-        System.out.println("onDestroyView");
         getActivity().getActionBar().setSubtitle(null);
         getActivity().getActionBar().setTitle("PolyMeal");
         vp.getAdapter().notifyDataSetChanged();
@@ -96,16 +94,6 @@ public class VenueFragment extends Fragment
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        // This gets called by the system when it's about to kill your app
-        // Put all your data in the outState bundle
-        outState.putParcelableArrayList("cart", Cart.getCart());
-        outState.putString("moneySpent", MoneyTime.getMoneySpent().toString());
-        outState.putString("lastVenue", app.lastVenue);
-    }
-    //Handles chaning the view based upon user input
 
     private void init(View v)
     {

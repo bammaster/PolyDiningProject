@@ -1,57 +1,5 @@
 package com.themotlcode.polydining;
 
-
-/*import android.app.Activity;
-import android.os.Bundle;
-import android.preference.Preference;
-
-import net.saik0.android.unifiedpreference.UnifiedPreferenceActivity;
-import net.saik0.android.unifiedpreference.UnifiedPreferenceFragment;
-
-public class SettingsActivity extends UnifiedPreferenceActivity
-{
-
-    private String[] mealTimes = {"Breakfast","Lunch","Dinner","Late Night","Automatic"};
-    public Preference timePref;
-    private Activity mActivity;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.settings);
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
-        mActivity = this;
-        timePref = findPreference("currentTime");
-        timePref.setTitle(mealTimes[MoneyTime.calcRealTime()]);
-        Preference myPref = findPreference("currentTime");
-        myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                QustomDialogBuilder builder = new QustomDialogBuilder(mActivity);
-                builder
-                        .setTitle(R.string.mealtimepreftitle)
-                        .setMessage(R.string.mealtimemessage)
-                        .setNeutralButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                builder.create().show();
-                return true;
-            }
-        });
-    }
-
-    public static class GeneralPreferenceFragment extends UnifiedPreferenceFragment
-    {}
-
-    public static class NotificationPreferenceFragment extends UnifiedPreferenceFragment {}
-
-    public static class DataSyncPreferenceFragment extends UnifiedPreferenceFragment {}
-
-}*/
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -79,7 +27,7 @@ import java.util.List;
 
 public class SettingsActivity extends PreferenceActivity {
 
-    protected SharedPreferences defaultSP;
+    private static PolyApplication app;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -88,8 +36,6 @@ public class SettingsActivity extends PreferenceActivity {
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(PolyApplication.APP_COLOR)));
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MyPreferenceFragment()).commit();
-
-        defaultSP = PreferenceManager.getDefaultSharedPreferences(this);
 
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
@@ -100,6 +46,7 @@ public class SettingsActivity extends PreferenceActivity {
             }
         });
 
+        app = (PolyApplication) getApplication();
     }
 
 
@@ -148,13 +95,13 @@ public class SettingsActivity extends PreferenceActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     final String[] sortingOptions = getResources().getStringArray(R.array.sortMode);
                     builder.setTitle(R.string.pref_sort_mode);
-                    int sortMode = Integer.valueOf(((SettingsActivity) getActivity()).defaultSP.getString("sortMode", "0"));
+                    int sortMode = Integer.valueOf(app.defaultSP.getString("sortMode", "0"));
                     builder.setSingleChoiceItems(sortingOptions, sortMode,
                             new DialogInterface.OnClickListener()
                             {
                                 public void onClick(DialogInterface dialog, int item)
                                 {
-                                    ((SettingsActivity) getActivity()).defaultSP.edit().putString("sortMode", String.valueOf(item)).commit();
+                                    app.defaultSP.edit().putString("sortMode", String.valueOf(item)).commit();
                                     dialog.cancel();
                                 }
                             });
@@ -177,13 +124,13 @@ public class SettingsActivity extends PreferenceActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     final String[] moneyOptions = getResources().getStringArray(R.array.moneyMode);
                     builder.setTitle(R.string.pref_money_mode);
-                    int moneyMode = Integer.valueOf(((SettingsActivity) getActivity()).defaultSP.getString("moneyMode", "4"));
+                    int moneyMode = Integer.valueOf(app.defaultSP.getString("moneyMode", "4"));
                     builder.setSingleChoiceItems(moneyOptions, moneyMode,
                             new DialogInterface.OnClickListener()
                             {
                                 public void onClick(DialogInterface dialog, int item)
                                 {
-                                    ((SettingsActivity) getActivity()).defaultSP.edit().putString("moneyMode", String.valueOf(item)).commit();
+                                    app.defaultSP.edit().putString("moneyMode", String.valueOf(item)).commit();
                                     dialog.cancel();
                                 }
                             });

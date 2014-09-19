@@ -18,7 +18,6 @@ import com.themotlcode.polydining.models.Cart;
 public class CartFragment extends Fragment
 {
     private ListView lv;
-    private CartAdapter cartAdapter;
     private View v;
     private CartPresenter presenter;
 
@@ -31,12 +30,10 @@ public class CartFragment extends Fragment
 
         ((MainActivity) getActivity()).viewDrawer(false);
 
-        init();
-
         presenter = new CartPresenter(this);
+        presenter.updateBalance();
 
-        updateBalance();
-
+        init();
         isCartEmpty();
 
         return v;
@@ -47,8 +44,7 @@ public class CartFragment extends Fragment
     {
         super.onResume();
         isCartEmpty();
-        cartAdapter.updateCart();
-        updateBalance();
+        presenter.updateCart();
         presenter.updateSettings();
         getActivity().invalidateOptionsMenu();
     }
@@ -79,11 +75,8 @@ public class CartFragment extends Fragment
                 transaction.commit();
                 return true;
             case R.id.clrCart:
-                Cart.clear();
-                cartAdapter.clearCart();
-                cartAdapter.notifyDataSetChanged();
+                presenter.clearCart();
                 isCartEmpty();
-                updateBalance();
                 Toast.makeText(getActivity(), "Cart Cleared!", Toast.LENGTH_SHORT).show();
                 return true;
             default:
@@ -93,26 +86,23 @@ public class CartFragment extends Fragment
 
     private void init()
     {
-        cartAdapter = new CartAdapter();
-
         this.setHasOptionsMenu(true);
 
         lv = (ListView) v.findViewById(R.id.listView);
-        lv.setAdapter(cartAdapter);
+        lv.setAdapter(presenter.getAdapter());
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
                 final AlertDialog.Builder onListClick= new AlertDialog.Builder(getActivity());
-                System.out.println(pos);
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
-                onListClick.setMessage("Would you like to remove " + Cart.getCart().get(pos).getName() + " to your cart? \nPrice: " + Cart.getCart().get(pos).getPriceString());
+                onListClick.setMessage("Would you like to remove " + presenter.get(pos).getName() + " to your cart? \nPrice: " + presenter.get(pos).getPriceString());
                 onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int button)
                     {
-                        removeFromCart(fPos);
+                        presenter.removeFromCart(fPos);
                     }
                 });
                 onListClick.setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -134,85 +124,12 @@ public class CartFragment extends Fragment
         });
     }
 
-    private void isCartEmpty()
+    protected void isCartEmpty()
     {
         if(lv.getAdapter().getCount() <= 0)
         {
             v.findViewById(R.id.cart).setVisibility(View.GONE);
             v.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void removeFromCart(int position) {
-        Cart.remove(position);
-        updateBalance();
-        isCartEmpty();
-        cartAdapter.notifyDataSetChanged();
-    }
-
-    protected void updateBalance() {
-        presenter.updateBalance();
-    }
-
-    protected class CartAdapter extends BaseAdapter implements View.OnClickListener {
-
-        public void updateCart()
-        {
-            notifyDataSetChanged();
-        }
-
-        public void clearCart()
-        {
-            Cart.clear();
-        }
-
-        public int getCount()
-        {
-            return Cart.getCart().size();
-        }
-
-        public Object getItem(int position)
-        {
-            return Cart.get(position);
-        }
-
-        public long getItemId(int position)
-        {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup viewGroup)
-        {
-            Integer entry = position;
-            if (convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(getActivity());
-                convertView = inflater.inflate(R.layout.row_item_cart, null);
-            }
-            TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(Cart.get(position).getName().replace("@#$",""));
-
-            TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
-            tvPrice.setText("$" + Cart.get(position).getPrice());
-
-
-            //Set the onClick Listener on this button
-            ImageButton btnRemove = (ImageButton) convertView.findViewById(R.id.btn_rmv);
-            btnRemove.setFocusableInTouchMode(false);
-            btnRemove.setFocusable(false);
-            btnRemove.setOnClickListener(this);
-            btnRemove.setTag(entry);
-
-            return convertView;
-        }
-
-        @Override
-        public void onClick(View view)
-        {
-            Integer entry = (Integer) view.getTag();
-            Cart.remove(entry);
-            updateBalance();
-            isCartEmpty();
-            notifyDataSetChanged();
         }
     }
 }

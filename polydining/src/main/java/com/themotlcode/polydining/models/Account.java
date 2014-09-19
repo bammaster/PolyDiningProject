@@ -1,5 +1,7 @@
 package com.themotlcode.polydining.models;
 
+import com.orm.SugarRecord;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ import java.util.ArrayList;
  * Stores and handles all information associated with the users
  * my cal poly account used to get dining information.
  */
-public class Account
+public class Account extends SugarRecord<Account>
 {
     /**The default value for Campus Express and Plus Dollars if no value is found.*/
     private static final String DEFAULT_MONEY = "$0.00";
@@ -28,13 +30,13 @@ public class Account
     private int meals;
 
     /**The Campus Express balance for the user.*/
-    private BigDecimal campusExpress;
+    private String campusExpress;
 
     /**The Plus Dollars balance for the user*/
-    private BigDecimal plusDollars;
+    private String plusDollars;
 
     /**A recent list of all the things the user has bought throughout campus dining.*/
-    private ArrayList<Transaction> transactions;
+    private ArrayList<AccountTransaction> accountTransactions;
 
     /**
      * Creates a new Account for the user as specified when they login.
@@ -47,7 +49,7 @@ public class Account
         this.username = username;
         this.password = password;
         this.remember = remember;
-        transactions = new ArrayList<Transaction>();
+        accountTransactions = new ArrayList<AccountTransaction>();
     }
 
     /**
@@ -138,7 +140,7 @@ public class Account
      */
     public void setCampusExpress(BigDecimal campusExpress)
     {
-        this.campusExpress = new BigDecimal(campusExpress.toString());
+        this.campusExpress = campusExpress.toString();
     }
 
     /**
@@ -147,7 +149,7 @@ public class Account
      */
     public void setCampusExpress(String campusExpress)
     {
-        this.campusExpress = new BigDecimal(campusExpress);
+        this.campusExpress = campusExpress;
     }
 
     /**
@@ -165,7 +167,7 @@ public class Account
      */
     public void setPlusDollars(BigDecimal plusDollars)
     {
-        this.plusDollars = new BigDecimal(plusDollars.toString());
+        this.plusDollars = plusDollars.toString();
     }
 
     /**
@@ -174,7 +176,7 @@ public class Account
      */
     public void setPlusDollars(String plusDollars)
     {
-        this.plusDollars = new BigDecimal(plusDollars);
+        this.plusDollars = plusDollars;
     }
 
     /**
@@ -190,25 +192,29 @@ public class Account
      * Gets a deep copy of this users transaction history.
      * @return The transaction history.
      */
-    public ArrayList<Transaction> getTransactions()
+    public ArrayList<AccountTransaction> getAccountTransactions()
     {
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-        for(Transaction t : this.transactions)
+        ArrayList<AccountTransaction> accountTransactions = new ArrayList<AccountTransaction>();
+        for(AccountTransaction t : this.accountTransactions)
         {
-            transactions.add(new Transaction(t));
+            accountTransactions.add(new AccountTransaction(t));
         }
-        return transactions;
+        return accountTransactions;
     }
 
     /**
      * Sets this users transaction history.
-     * @param transactions The transaction history.
+     * @param newAccountTransactions The transaction history.
      */
-    public void setTransactions(ArrayList<Transaction> transactions)
+    public void setAccountTransactions(ArrayList<AccountTransaction> newAccountTransactions)
     {
-        for(Transaction t : transactions)
+        if(accountTransactions == null)
         {
-            this.transactions.add(new Transaction(t));
+            accountTransactions = new ArrayList<AccountTransaction>();
+        }
+        for(AccountTransaction t : newAccountTransactions)
+        {
+            accountTransactions.add(new AccountTransaction(t));
         }
     }
 
@@ -249,6 +255,6 @@ public class Account
      */
     public void clearTransactions()
     {
-        transactions.clear();
+        accountTransactions.clear();
     }
 }

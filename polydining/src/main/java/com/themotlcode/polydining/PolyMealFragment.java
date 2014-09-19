@@ -41,6 +41,7 @@ public class PolyMealFragment extends Fragment
 
         init(v);
         presenter = new PolyMealPresenter(this);
+
         presenter.setFilter(spinnerChoice);
         presenter.getData();
         return v;
@@ -68,13 +69,10 @@ public class PolyMealFragment extends Fragment
         if(loading)
         {
             MenuItem refresh = mMenu.findItem(R.id.refresh);
-            System.out.println("refresh set to: " + !refresh.isVisible());
             refresh.setVisible(!refresh.isVisible());
 
             MenuItem dice = mMenu.findItem(R.id.dice);
-            System.out.println("dice set to: " + !dice.isVisible());
             dice.setVisible(!dice.isVisible());
-            System.out.println("onCreateOptionsMenu()");
         }
 
     }
@@ -140,12 +138,18 @@ public class PolyMealFragment extends Fragment
     public void onDestroyView()
     {
         super.onDestroyView();
-        presenter.setDataCancelled();
         ActionBar actionBar = getActivity().getActionBar();
 
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
+    }
+
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+        presenter.setDataCancelled();
     }
 
     private void init(View v)
@@ -198,7 +202,6 @@ public class PolyMealFragment extends Fragment
                 {
                     spinnerChoice = itemPosition;
                     presenter.setFilter(spinnerChoice);
-                    System.out.println(spinnerChoice);
                     setupList();
                     return false;
                 }

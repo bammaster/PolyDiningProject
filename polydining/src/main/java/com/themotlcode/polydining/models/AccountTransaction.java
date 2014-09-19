@@ -1,9 +1,11 @@
 package com.themotlcode.polydining.models;
 
+import com.orm.SugarRecord;
+
 /**
  * Stores data regarding a purchase or deposit using Plus Dollars, Campus Express, or Meals.
  */
-public class Transaction
+public class AccountTransaction extends SugarRecord<AccountTransaction>
 {
     /**The type, meal or dollar, of the purchase made.*/
     private MealType type;
@@ -18,13 +20,18 @@ public class Transaction
     private String amount;
 
     /**
+     * Default Constructor required by SugarRecord
+     */
+    public AccountTransaction() {}
+
+    /**
      * Builds a new transaction with all of its necessary parameters.
      * @param type The type, meal or dollar, of the transaction made.
      * @param place The place the transaction was made.
      * @param date The date the transaction was made.
      * @param amount The amount of the transaction.
      */
-    public Transaction(int type, String place, String date, String amount) {
+    public AccountTransaction(int type, String place, String date, String amount) {
         if(type == 0)
         {
             this.type = MealType.meal;
@@ -50,7 +57,7 @@ public class Transaction
      * Creates a new transaction for another transaction.
      * @param t The transaction to copy.
      */
-    public Transaction(Transaction t) {
+    public AccountTransaction(AccountTransaction t) {
         this.type = t.type;
         this.place = t.place;
         this.date = t.date;
