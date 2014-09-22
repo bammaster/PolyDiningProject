@@ -1,0 +1,131 @@
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fadeScrollbars="false" android:paddingLeft="16dp" android:paddingRight="16dp">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+            <me.grantland.widget.AutofitTextView
+                    android:id="@+id/nameText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="45sp"
+                    android:singleLine="true"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="Campus Express"
+                    android:id="@+id/expHeader"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/nameText"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" />
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="Plus Dollars"
+                    android:id="@+id/plusHeader"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/expValue"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"/>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="Meals"
+                    android:id="@+id/mealHeader"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/plusValue"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+                    android:id="@+id/expValue"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/expHeader"
+                    android:layout_alignParentLeft="true"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+                    android:id="@+id/plusValue"
+                    android:textSize="25sp"
+                    android:layout_below="@+id/plusHeader"
+                    android:layout_alignParentLeft="true"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/mealText"
+                    android:textSize="25sp"
+                android:layout_below="@+id/mealHeader"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="17dp"
+                android:layout_marginBottom="8dp" />
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="Budget"
+                    android:id="@+id/budgetHeader"
+                    android:textSize="20sp"
+                android:layout_below="@+id/mealText"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+                    android:id="@+id/budgetText1"
+                    android:textSize="25sp"
+                android:layout_below="@+id/budgetHeader"
+                android:layout_alignParentLeft="true" />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0"
+                    android:id="@+id/budgetText2"
+                    android:textSize="25sp"
+                android:layout_below="@+id/budgetHeader"
+                android:layout_alignRight="@+id/budgetHeader" />
+
+            <Button
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:id="@+id/button"
+                android:layout_below="@+id/budgetText2"
+                android:onClick="logout"
+                android:layout_centerHorizontal="true"
+                android:enabled="true"
+                android:layout_marginTop="32dp"
+                android:gravity="center" />
+            <!--
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textWeeks"
+                android:text="@string/weeksleft"
+                android:layout_below="@+id/budgetText1"
+                android:layout_alignParentLeft="true" android:paddingTop="8dp"/>
+
+            -->
+        </RelativeLayout>
+    </ScrollView>

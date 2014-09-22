@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="CURRENT MEAL TIME" >
+        <Preference
+                android:key="currentTime"
+                android:summary="What's a meal worth?"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="POLY MEAL" >
+        <Preference
+                android:key="sortMode"
+                android:summary="@string/pref_sort_mode_summary"
+                android:title="@string/pref_sort_mode"/>
+        <Preference
+                android:key="moneyMode"
+                android:summary="@string/pref_money_mode_summary"
+                android:title="@string/pref_money_mode"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
