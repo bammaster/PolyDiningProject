@@ -1,9 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menuCom"
-          android:title="Meal Completer"
-          android:showAsAction="always|withText"/>
-    <item android:id="@+id/clrCart"
-          android:title="Clear Cart"
-          android:icon="@drawable/discard"
-          android:showAsAction="always"/>
-</menu>
