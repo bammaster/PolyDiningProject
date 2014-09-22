@@ -57,14 +57,14 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
 
         fm.beginTransaction()
                 .add(R.id.fragment_layout, new LoginFragment()).commit();
-       Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
-           @Override
-           public void uncaughtException(Thread thread, Throwable ex) {
-               SendError.sendErrorToDeveloper(ex, mActivity);
-               android.os.Process.killProcess(android.os.Process.myPid());
-           }
-       });
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) {
+                SendError.sendErrorToDeveloper(ex, mActivity);
+                finish();
+            }
+        });
     }
 
     @Override

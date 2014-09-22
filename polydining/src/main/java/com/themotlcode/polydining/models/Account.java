@@ -84,8 +84,6 @@ public class Account extends SugarRecord<Account>
      */
     public String getName()
     {
-        String temp = null;
-        temp.toString();
         return name;
     }
 
