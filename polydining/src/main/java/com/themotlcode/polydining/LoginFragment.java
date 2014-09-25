@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-public class LoginFragment extends Fragment implements View.OnClickListener
-{
+public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private TextView welcome;
     private EditText username;
@@ -26,8 +25,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         ((MainActivity) getActivity()).viewDrawer(false);
@@ -42,26 +40,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         getActivity().invalidateOptionsMenu();
     }
 
 
-    private void setupActivity()
-    {
+    private void setupActivity() {
         ((MainActivity) getActivity()).viewDrawer(false);
     }
 
     @Override
-    public void onClick(View view)
-    {
+    public void onClick(View view) {
         presenter.login(username.getText().toString(), password.getText().toString(), remember.isChecked(), login);
     }
 
-    private void init(View v)
-    {
+    private void init(View v) {
         welcome = (TextView) v.findViewById(R.id.welcomeText);
         username = (EditText) v.findViewById(R.id.username);
         password = (EditText) v.findViewById(R.id.password);
@@ -84,18 +78,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener
         });
     }
 
-    private void fadeIn()
-    {
+    private void fadeIn() {
         final int duration = 300;
         final int delay = 100;
         welcome.animate().alpha(1.0f).setStartDelay(delay).setDuration(duration).start();
-        username.animate().alpha(1.0f).setStartDelay(duration/2+delay).setDuration(duration).start();
-        password.animate().alpha(1.0f).setStartDelay(duration + duration/2+delay).setDuration(duration).start();
-        login.animate().alpha(1.0f).setStartDelay(2 * duration + duration/2+delay).setDuration(duration).start();
+        username.animate().alpha(1.0f).setStartDelay(duration / 2 + delay).setDuration(duration).start();
+        password.animate().alpha(1.0f).setStartDelay(duration + duration / 2 + delay).setDuration(duration).start();
+        login.animate().alpha(1.0f).setStartDelay(2 * duration + duration / 2 + delay).setDuration(duration).start();
     }
 
-    protected void returnThread()
-    {
+    protected void returnThread() {
         Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_LONG).show();
         MyAccountFragment maFragment = new MyAccountFragment();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

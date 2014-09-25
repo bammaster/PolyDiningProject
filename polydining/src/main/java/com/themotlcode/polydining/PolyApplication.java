@@ -22,10 +22,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-public class PolyApplication extends SugarApp
-{
+public class PolyApplication extends SugarApp {
     public static final NumberFormat currency = NumberFormat.getCurrencyInstance();
-    public static final Type gsonType = new TypeToken<TreeMap<String, Venue>>() {}.getType();
+    public static final Type gsonType = new TypeToken<TreeMap<String, Venue>>() {
+    }.getType();
     public static final String DEFAULT_PRICE = "0.00";
     public static final String URL = "http://107.170.238.171/java/venues.json";
     public static final String DATE_URL = "http://107.170.238.171/dates.txt";
@@ -70,38 +70,30 @@ public class PolyApplication extends SugarApp
     public SharedPreferences defaultSP;
 
     Thread venueCache = new Thread() {
-        public void run()
-        {
+        public void run() {
             venues = new Gson().fromJson(venuesString.gson, PolyApplication.gsonType);
             names = new ArrayList<String>();
             names.addAll(venues.keySet());
         }
     };
 
-    public static void throwError(int message, int title, final Throwable exception, final Activity activity)
-    {
+    public static void throwError(int message, int title, final Throwable exception, final Activity activity) {
         final AlertDialog.Builder error = new AlertDialog.Builder(activity);
         error.setTitle(title);
         error.setMessage(message);
-        error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int button)
-            {
+        error.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
 
             }
         });
-        error.setPositiveButton(R.string.send, new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int button)
-            {
-                SendError.sendErrorToDeveloper(exception, activity);
+        error.setPositiveButton(R.string.send, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int button) {
+                ErrorSender.sendErrorToDeveloper(exception, activity);
             }
         });
-        activity.runOnUiThread(new Runnable()
-        {
+        activity.runOnUiThread(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 error.create();
                 Dialog d = error.show();
                 int dividerId = d.getContext().getResources().getIdentifier("titleDivider", "id", "android");

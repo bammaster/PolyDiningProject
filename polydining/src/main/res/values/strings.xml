@@ -11,6 +11,7 @@
     <string name="password_error_msg">Please check your username and password. If this error persists, please send to developer.</string>
     <string name="send_success">Sent To Developer!</string>
     <string name="send_error">Error Sending To Developer!</string>
+    <string name="send_exists">The Developer is Already Aware of this Error!</string>
     <string name="unknown_error_message">Sorry about that. Clicking OK will send the error to the developer. Please restart the application.</string>
     <string name="unknown_error_title">An Unknown Error Ocurred!</string>
     <string name="quarter_over">Quarter is Over!</string>

@@ -28,8 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-public class PolyMealPresenter extends Presenter
-{
+public class PolyMealPresenter extends Presenter {
 
     private PolyMealFragment fragment;
     private MainActivity activity;
@@ -44,10 +43,8 @@ public class PolyMealPresenter extends Presenter
         app = (PolyApplication) activity.getApplication();
     }
 
-    public void getData()
-    {
-        if (app.venues != null && app.names != null)
-        {
+    public void getData() {
+        if (app.venues != null && app.names != null) {
             fragment.updateUI();
             return;
         }
@@ -55,72 +52,56 @@ public class PolyMealPresenter extends Presenter
         thread.execute();
     }
 
-    public void setDataCancelled()
-    {
-        if(thread != null)
-        {
+    public void setDataCancelled() {
+        if (thread != null) {
             thread.cancel(true);
         }
     }
 
 
-    public void setListAdapter(PolyMealAdapter polyMealAdapter)
-    {
+    public void setListAdapter(PolyMealAdapter polyMealAdapter) {
         this.polyMealAdapter = polyMealAdapter;
     }
 
-    protected class GetDataThread extends AsyncTask<Void, Void, Boolean>
-    {
+    protected class GetDataThread extends AsyncTask<Void, Void, Boolean> {
 
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             fragment.loading = true;
             fragment.getActivity().setProgressBarIndeterminateVisibility(true);
         }
 
-        protected Boolean doInBackground(Void... args)
-        {
+        protected Boolean doInBackground(Void... args) {
             checkDB();
 
-            if (app.venuesString == null)
-            {
+            if (app.venuesString == null) {
                 app.venuesString = new VenuesString();
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());
                 try {
-                    if(isCancelled())
-                    {
+                    if (isCancelled()) {
                         return false;
                     }
                     new DataCollector(app).getData();
-                    if(isCancelled())
-                    {
+                    if (isCancelled()) {
                         return false;
                     }
 
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     PolyApplication.throwError(R.string.login_error_msg, R.string.login_error_title, e, fragment.getActivity());
                 }
             }
             return true;
         }
 
-        protected void checkDB()
-        {
+        protected void checkDB() {
             List<VenuesString> venuesStrings = VenuesString.listAll(VenuesString.class);
-            if(!venuesStrings.isEmpty() && venuesStrings.get(0).gson != null)
-            {
+            if (!venuesStrings.isEmpty() && venuesStrings.get(0).gson != null) {
                 app.venuesString = venuesStrings.get(0);
                 app.lastVenue = app.venuesString.lastVenue;
                 app.venueCache.start();
-                try
-                {
+                try {
                     app.venueCache.join();
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     app.venuesString = null;
                     app.lastVenue = null;
                 }
@@ -129,59 +110,46 @@ public class PolyMealPresenter extends Presenter
             app.cart = new Cart();
             List<Item> items = Item.listAll(Item.class);
             ArrayList<Item> cart = new ArrayList<Item>();
-            for(Item item : items)
-            {
-                for(int i = 0; i < item.getNumInCart(); i++)
-                {
+            for (Item item : items) {
+                for (int i = 0; i < item.getNumInCart(); i++) {
                     cart.add(item);
                 }
             }
             app.cart.setCart(cart);
         }
 
-        protected void onPostExecute(Boolean b)
-        {
+        protected void onPostExecute(Boolean b) {
             fragment.loading = false;
             fragment.updateUI();
             fragment.getActivity().setProgressBarIndeterminateVisibility(false);
         }
 
         @Override
-        protected void onCancelled()
-        {
+        protected void onCancelled() {
             super.onCancelled();
             activity.setProgressBarIndeterminateVisibility(false);
         }
     }
 
-    protected void refresh()
-    {
+    protected void refresh() {
         polyMealAdapter.clear();
         app.venues = null;
         app.venuesString = null;
         getData();
     }
 
-    protected ArrayList<String> getFilteredList()
-    {
+    protected ArrayList<String> getFilteredList() {
         ArrayList<String> filteredList = new ArrayList<String>();
-        if(filter == 0)
-        {
+        if (filter == 0) {
             return app.names;
         }
-        for(Venue v : app.venues.values())
-        {
-            if(filter == 1)
-            {
-                if(MealType.meal == v.getType())
-                {
+        for (Venue v : app.venues.values()) {
+            if (filter == 1) {
+                if (MealType.meal == v.getType()) {
                     filteredList.add(v.getName());
                 }
-            }
-            else if(filter == 2)
-            {
-                if(MealType.plus == v.getType())
-                {
+            } else if (filter == 2) {
+                if (MealType.plus == v.getType()) {
                     filteredList.add(v.getName());
                 }
             }
@@ -189,23 +157,19 @@ public class PolyMealPresenter extends Presenter
         return filteredList;
     }
 
-    public void setFilter(int filter)
-    {
+    public void setFilter(int filter) {
         this.filter = filter;
     }
 
-    protected void setupList(ListView lv)
-    {
+    protected void setupList(ListView lv) {
         polyMealAdapter.setNotifyOnChange(true);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> a, View v,int index, long id)
-            {
+            public void onItemClick(AdapterView<?> a, View v, int index, long id) {
                 final int fIndex = index;
 
                 app.activityTitle = app.names.get(index);
-                if(!app.lastVenue.equals(app.names.get(index)) && app.cart.size() > 0) {
+                if (!app.lastVenue.equals(app.names.get(index)) && app.cart.size() > 0) {
                     final AlertDialog.Builder onListClick = new AlertDialog.Builder(fragment.getActivity());
                     onListClick.setTitle("Clear Cart?");
                     onListClick.setMessage("Your cart has items that are not from this venue. " +
@@ -261,19 +225,15 @@ public class PolyMealPresenter extends Presenter
         lv.setAdapter(polyMealAdapter);
     }
 
-    public String pickVenue()
-    {
+    public String pickVenue() {
         ArrayList<Venue> openVenues = new ArrayList<Venue>();
-        for(String v : getFilteredList())
-        {
-            if(app.venues.get(v).isOpen() || app.venues.get(v).closeSoon())
-            {
+        for (String v : getFilteredList()) {
+            if (app.venues.get(v).isOpen() || app.venues.get(v).closeSoon()) {
                 openVenues.add(app.venues.get(v));
             }
         }
-        if(!openVenues.isEmpty())
-        {
-            return openVenues.get( ((Double) (Math.random() * openVenues.size())).intValue() ).getName();
+        if (!openVenues.isEmpty()) {
+            return openVenues.get(((Double) (Math.random() * openVenues.size())).intValue()).getName();
         }
         return null;
     }

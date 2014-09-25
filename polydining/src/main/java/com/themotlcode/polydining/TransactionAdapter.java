@@ -18,25 +18,21 @@ public class TransactionAdapter extends BaseAdapter {
     private Activity activity;
     private ArrayList<AccountTransaction> trans;
 
-    public TransactionAdapter(Context context, ArrayList<AccountTransaction> trans)
-    {
+    public TransactionAdapter(Context context, ArrayList<AccountTransaction> trans) {
         this.context = context;
         activity = (Activity) context;
         this.trans = trans;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return trans.size();
     }
 
-    public Object getItem(int position)
-    {
+    public Object getItem(int position) {
         return trans.get(position);
     }
 
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
@@ -45,8 +41,7 @@ public class TransactionAdapter extends BaseAdapter {
         return false;
     }
 
-    public View getView(int position, View convertView, ViewGroup viewGroup)
-    {
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -65,8 +60,7 @@ public class TransactionAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void updateData(ArrayList<AccountTransaction> trans)
-    {
+    public void updateData(ArrayList<AccountTransaction> trans) {
         this.trans = trans;
         notifyDataSetChanged();
     }

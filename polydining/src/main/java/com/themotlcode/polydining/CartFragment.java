@@ -13,17 +13,16 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.*;
 import android.widget.*;
+
 import com.themotlcode.polydining.models.Cart;
 
-public class CartFragment extends Fragment
-{
+public class CartFragment extends Fragment {
     private ListView lv;
     private View v;
     private CartPresenter presenter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         v = inflater.inflate(R.layout.fragment_cart, container, false);
@@ -40,8 +39,7 @@ public class CartFragment extends Fragment
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         isCartEmpty();
         presenter.updateCart();
@@ -50,9 +48,8 @@ public class CartFragment extends Fragment
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
-        super.onCreateOptionsMenu(menu,inflater);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.cart, menu);
     }
@@ -64,10 +61,8 @@ public class CartFragment extends Fragment
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menuCom:
                 MealCompleterFragment mcFragment = new MealCompleterFragment();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -84,8 +79,7 @@ public class CartFragment extends Fragment
         }
     }
 
-    private void init()
-    {
+    private void init() {
         this.setHasOptionsMenu(true);
 
         lv = (ListView) v.findViewById(R.id.listView);
@@ -94,21 +88,17 @@ public class CartFragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> list, View view, int pos, long id) {
                 final int fPos = pos;
-                final AlertDialog.Builder onListClick= new AlertDialog.Builder(getActivity());
+                final AlertDialog.Builder onListClick = new AlertDialog.Builder(getActivity());
                 onListClick.setCancelable(false);
                 onListClick.setTitle("Remove to Cart?");
                 onListClick.setMessage("Would you like to remove " + presenter.get(pos).getName() + " to your cart? \nPrice: " + presenter.get(pos).getPriceString());
-                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int button)
-                    {
+                onListClick.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
                         presenter.removeFromCart(fPos);
                     }
                 });
-                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int button)
-                    {
+                onListClick.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int button) {
                     }
                 });
                 onListClick.create();
@@ -124,10 +114,8 @@ public class CartFragment extends Fragment
         });
     }
 
-    protected void isCartEmpty()
-    {
-        if(lv.getAdapter().getCount() <= 0)
-        {
+    protected void isCartEmpty() {
+        if (lv.getAdapter().getCount() <= 0) {
             v.findViewById(R.id.cart).setVisibility(View.GONE);
             v.findViewById(R.id.emptyCart).setVisibility(View.VISIBLE);
         }

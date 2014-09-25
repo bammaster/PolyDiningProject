@@ -11,8 +11,7 @@ import java.util.Comparator;
  */
 public class TransactionDateComparator implements Comparator<AccountTransaction> {
     @Override
-    public int compare(AccountTransaction a, AccountTransaction b)
-    {
+    public int compare(AccountTransaction a, AccountTransaction b) {
         //Poor implementation. Needs to compare Date Times. Involves parsing String.
         return a.getDate().compareTo(b.getDate());
     }

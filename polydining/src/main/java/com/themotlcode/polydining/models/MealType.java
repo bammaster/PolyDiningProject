@@ -1,7 +1,6 @@
 package com.themotlcode.polydining.models;
 
-public enum MealType
-{
+public enum MealType {
     meal,
     plus,
     express,

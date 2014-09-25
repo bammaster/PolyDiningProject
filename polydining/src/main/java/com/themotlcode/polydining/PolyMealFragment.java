@@ -20,8 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PolyMealFragment extends Fragment
-{
+public class PolyMealFragment extends Fragment {
     private ListView lv;
     private PolyMealAdapter polyMealAdapter;
     private static Activity mActivity;
@@ -33,8 +32,7 @@ public class PolyMealFragment extends Fragment
     protected int spinnerChoice = 0;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_poly_meal, container, false);
@@ -48,26 +46,22 @@ public class PolyMealFragment extends Fragment
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
-        if(polyMealAdapter != null)
-        {
+        if (polyMealAdapter != null) {
             polyMealAdapter.notifyData();
         }
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
-        super.onCreateOptionsMenu(menu,inflater);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.polymeal, menu);
 
         mMenu = menu;
 
-        if(loading)
-        {
+        if (loading) {
             MenuItem refresh = mMenu.findItem(R.id.refresh);
             refresh.setVisible(!refresh.isVisible());
 
@@ -94,8 +88,7 @@ public class PolyMealFragment extends Fragment
             case R.id.dice:
                 final String venueName = presenter.pickVenue();
 
-                if(venueName == null)
-                {
+                if (venueName == null) {
                     Toast.makeText(getActivity(), "No venues open!", Toast.LENGTH_LONG).show();
                     return true;
                 }
@@ -110,13 +103,10 @@ public class PolyMealFragment extends Fragment
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         d.cancel();
-                        try
-                        {
+                        try {
                             Thread.sleep(500);
 
-                        }
-                        catch(InterruptedException e)
-                        {
+                        } catch (InterruptedException e) {
 
                         }
                         app.lastVenue = venueName;
@@ -135,8 +125,7 @@ public class PolyMealFragment extends Fragment
     }
 
     @Override
-    public void onDestroyView()
-    {
+    public void onDestroyView() {
         super.onDestroyView();
         ActionBar actionBar = getActivity().getActionBar();
 
@@ -146,14 +135,12 @@ public class PolyMealFragment extends Fragment
     }
 
     @Override
-    public void onDetach()
-    {
+    public void onDetach() {
         super.onDetach();
         presenter.setDataCancelled();
     }
 
-    private void init(View v)
-    {
+    private void init(View v) {
         mActivity = getActivity();
 
         app = (PolyApplication) mActivity.getApplication();
@@ -166,16 +153,14 @@ public class PolyMealFragment extends Fragment
 
     }
 
-    private void setupList()
-    {
+    private void setupList() {
 
         polyMealAdapter = new PolyMealAdapter(getActivity(), R.id.polymealListItem, presenter.getFilteredList());
         presenter.setListAdapter(polyMealAdapter);
         presenter.setupList(lv);
     }
 
-    public void updateUI()
-    {
+    public void updateUI() {
         setupList();
 
         getActivity().supportInvalidateOptionsMenu();
@@ -183,23 +168,19 @@ public class PolyMealFragment extends Fragment
         setActionBarSpinner(true);
     }
 
-    public void setActionBarSpinner(boolean visible)
-    {
+    public void setActionBarSpinner(boolean visible) {
         ActionBar actionBar = getActivity().getActionBar();
 
-        if(visible)
-        {
+        if (visible) {
 
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
             String[] list = getResources().getStringArray(R.array.venueFilter);
 
-            actionBar.setListNavigationCallbacks(new NavigationSpinnerAdapter(getActivity(), list), new ActionBar.OnNavigationListener()
-            {
+            actionBar.setListNavigationCallbacks(new NavigationSpinnerAdapter(getActivity(), list), new ActionBar.OnNavigationListener() {
 
                 @Override
-                public boolean onNavigationItemSelected(int itemPosition, long itemId)
-                {
+                public boolean onNavigationItemSelected(int itemPosition, long itemId) {
                     spinnerChoice = itemPosition;
                     presenter.setFilter(spinnerChoice);
                     setupList();
@@ -207,24 +188,21 @@ public class PolyMealFragment extends Fragment
                 }
             });
             actionBar.setSelectedNavigationItem(spinnerChoice);
-        }
-        else
-        {
+        } else {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             actionBar.setTitle(R.string.app_name);
         }
     }
 
-    public class NavigationSpinnerAdapter extends BaseAdapter
-    {
+    public class NavigationSpinnerAdapter extends BaseAdapter {
 
         private TextView txtTitle;
         private Context context;
         private String[] items;
 
         public NavigationSpinnerAdapter(Context context, String[] items) {
-            this.context=context;
+            this.context = context;
             this.items = items;
         }
 
@@ -234,8 +212,7 @@ public class PolyMealFragment extends Fragment
         }
 
         @Override
-        public Object getItem(int i)
-        {
+        public Object getItem(int i) {
             return items[i];
         }
 
@@ -246,11 +223,11 @@ public class PolyMealFragment extends Fragment
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView==null){
-                LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-                convertView=layoutInflater.inflate(R.layout.actionbar_spinner,null);
+            if (convertView == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.actionbar_spinner, null);
             }
-            txtTitle=(TextView) convertView.findViewById(R.id.txtActionBarSpinnerTitle);
+            txtTitle = (TextView) convertView.findViewById(R.id.txtActionBarSpinnerTitle);
             txtTitle.setText(items[position]);
             return convertView;
 
@@ -258,11 +235,11 @@ public class PolyMealFragment extends Fragment
 
         @Override
         public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            if (convertView==null){
-                LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-                convertView=layoutInflater.inflate(R.layout.spinner_list,null);
+            if (convertView == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.spinner_list, null);
             }
-            txtTitle=(TextView) convertView.findViewById(R.id.txtSpinnerListTitle);
+            txtTitle = (TextView) convertView.findViewById(R.id.txtSpinnerListTitle);
             txtTitle.setText(items[position]);
 
             return convertView;

@@ -14,14 +14,12 @@ import android.widget.TextView;
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.Item;
 
-public class CartPresenter extends MealPresenter
-{
+public class CartPresenter extends MealPresenter {
     private CartFragment fragment;
     private CartAdapter cartAdapter;
     private PolyApplication app;
 
-    public CartPresenter(Fragment fragment)
-    {
+    public CartPresenter(Fragment fragment) {
         this.fragment = (CartFragment) fragment;
         setFragment(fragment);
         app = ((PolyApplication) fragment.getActivity().getApplication());
@@ -35,16 +33,14 @@ public class CartPresenter extends MealPresenter
         app.cart.sort(sortMode);
     }
 
-    protected void clearCart()
-    {
+    protected void clearCart() {
         app.cart.clear();
         cartAdapter.clearCart();
         cartAdapter.notifyDataSetChanged();
         updateBalance();
     }
 
-    protected void updateCart()
-    {
+    protected void updateCart() {
         cartAdapter.updateCart();
         updateBalance();
     }
@@ -56,56 +52,47 @@ public class CartPresenter extends MealPresenter
         cartAdapter.notifyDataSetChanged();
     }
 
-    public CartAdapter getAdapter()
-    {
-        if(cartAdapter == null)
-        {
+    public CartAdapter getAdapter() {
+        if (cartAdapter == null) {
             cartAdapter = new CartAdapter();
         }
         return cartAdapter;
     }
 
-    public Item get(int pos)
-    {
+    public Item get(int pos) {
         return app.cart.get(pos);
     }
 
     protected class CartAdapter extends BaseAdapter implements View.OnClickListener {
 
-        public void updateCart()
-        {
+        public void updateCart() {
             notifyDataSetChanged();
         }
 
-        public void clearCart()
-        {
+        public void clearCart() {
             app.cart.clear();
         }
 
-        public int getCount()
-        {
+        public int getCount() {
             return app.cart.getCart().size();
         }
 
-        public Object getItem(int position)
-        {
+        public Object getItem(int position) {
             return app.cart.get(position);
         }
 
-        public long getItemId(int position)
-        {
+        public long getItemId(int position) {
             return position;
         }
 
-        public View getView(int position, View convertView, ViewGroup viewGroup)
-        {
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
             Integer entry = position;
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
                 convertView = inflater.inflate(R.layout.row_item_cart, null);
             }
             TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
-            tvName.setText(app.cart.get(position).getName().replace("@#$",""));
+            tvName.setText(app.cart.get(position).getName().replace("@#$", ""));
 
             TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             tvPrice.setText("$" + app.cart.get(position).getPrice());
@@ -122,8 +109,7 @@ public class CartPresenter extends MealPresenter
         }
 
         @Override
-        public void onClick(View view)
-        {
+        public void onClick(View view) {
             Integer entry = (Integer) view.getTag();
             app.cart.remove(entry);
             updateBalance();

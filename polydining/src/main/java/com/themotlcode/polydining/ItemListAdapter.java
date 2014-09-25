@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.Item;
 import com.themotlcode.polydining.models.ItemList;
@@ -19,33 +20,27 @@ public class ItemListAdapter extends BaseAdapter {
     private ItemListFragment fragment;
     private ArrayList<Item> items;
 
-    public ItemListAdapter(Fragment fragment)
-    {
+    public ItemListAdapter(Fragment fragment) {
         this.fragment = (ItemListFragment) fragment;
     }
 
-    public void setItems(ArrayList<Item> items)
-    {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
-    public int getCount()
-    {
+    public int getCount() {
         return items.size();
     }
 
-    public Object getItem(int position)
-    {
+    public Object getItem(int position) {
         return items.get(position);
     }
 
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup viewGroup)
-    {
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(fragment.getActivity());
             convertView = inflater.inflate(R.layout.row_item, null);

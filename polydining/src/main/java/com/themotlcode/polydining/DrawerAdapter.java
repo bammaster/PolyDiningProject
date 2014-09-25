@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DrawerAdapter extends ArrayAdapter<String>
-{
+public class DrawerAdapter extends ArrayAdapter<String> {
 
     Context context;
     ArrayList<String> strings;
@@ -27,11 +26,11 @@ public class DrawerAdapter extends ArrayAdapter<String>
     protected boolean callingClass(int position) {
         String parentClass = context.getClass().getSimpleName();
 
-        if(parentClass.equals("PolyMealActivity") && position == 1) {
+        if (parentClass.equals("PolyMealActivity") && position == 1) {
             return true;
-        } else if(parentClass.equals("PlusDollarsActivity") && position == 2) {
+        } else if (parentClass.equals("PlusDollarsActivity") && position == 2) {
             return true;
-        } else if(parentClass.equals("TransactionActivity") && position == 3) {
+        } else if (parentClass.equals("TransactionActivity") && position == 3) {
             return true;
         }
 
@@ -47,10 +46,9 @@ public class DrawerAdapter extends ArrayAdapter<String>
         TextView drawerItem = (TextView) convertView.findViewById(R.id.text1);
         drawerItem.setText(strings.get(position));
 
-        if(callingClass(position)) {
+        if (callingClass(position)) {
             drawerItem.setTypeface(font, Typeface.BOLD);
-        }
-        else {
+        } else {
             drawerItem.setTypeface(font);
         }
 

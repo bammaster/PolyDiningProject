@@ -76,9 +76,7 @@
                     android:id="@+id/mealText"
                     android:textSize="25sp"
                 android:layout_below="@+id/mealHeader"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="17dp"
-                android:layout_marginBottom="8dp" />
+                android:layout_alignRight="@+id/plusValue" />
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -110,7 +108,7 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:text="Log Out"
-                android:id="@+id/button"
+                android:id="@+id/logout"
                 android:layout_below="@+id/budgetText2"
                 android:onClick="logout"
                 android:layout_centerHorizontal="true"

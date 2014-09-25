@@ -9,18 +9,17 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.astuetz.PagerSlidingTabStrip;
 
-public class MyAccountFragment extends Fragment
-{
+public class MyAccountFragment extends Fragment {
 
     private PagerSlidingTabStrip tabs;
     protected ViewPager pager;
     private MyAccountPagerAdapter adapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_account, container, false);
         setupActivity();
 
@@ -30,13 +29,11 @@ public class MyAccountFragment extends Fragment
         pager.setAdapter(adapter);
 
         Boolean plus = true;
-        if(getArguments() != null)
-        {
+        if (getArguments() != null) {
             plus = getArguments().getBoolean("plus");
         }
 
-        if(!plus)
-        {
+        if (!plus) {
             pager.setCurrentItem(1, true);
         }
 
@@ -51,21 +48,18 @@ public class MyAccountFragment extends Fragment
     }
 
     @Override
-    public void onDestroyView()
-    {
+    public void onDestroyView() {
         super.onDestroyView();
         getActivity().getActionBar().setSubtitle(null);
     }
 
-    private void setupActivity()
-    {
+    private void setupActivity() {
         ((MainActivity) getActivity()).viewDrawer(true);
     }
 
-    public class MyAccountPagerAdapter extends FragmentPagerAdapter
-    {
+    public class MyAccountPagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] TITLES = { "My Account", "Transactions"};
+        private final String[] TITLES = {"My Account", "Transactions"};
 
         public MyAccountPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -82,10 +76,8 @@ public class MyAccountFragment extends Fragment
         }
 
         @Override
-        public Fragment getItem(int position)
-        {
-            switch(position)
-            {
+        public Fragment getItem(int position) {
+            switch (position) {
                 case 0:
                     return new PlusDollarsFragment();
                 case 1:

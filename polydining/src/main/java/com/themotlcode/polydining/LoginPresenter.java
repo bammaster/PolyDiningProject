@@ -25,16 +25,14 @@ import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
-public class LoginPresenter extends Presenter
-{
+public class LoginPresenter extends Presenter {
     private Fragment fragment;
     private PolyApplication app;
     private Button loginButton;
     private boolean loadingFromDb = false;
     private String greeting;
 
-    public LoginPresenter(Fragment fragment)
-    {
+    public LoginPresenter(Fragment fragment) {
         this.fragment = fragment;
 
         app = (PolyApplication) fragment.getActivity().getApplication();
@@ -43,25 +41,21 @@ public class LoginPresenter extends Presenter
     /*
      * Checks DB for account; sets loadingFromDb to true if so. If not, loads the config from web
      */
-    protected void checkLogin(Button loginButton)
-    {
+    protected void checkLogin(Button loginButton) {
         this.loginButton = loginButton;
         List<Account> accounts = Account.listAll(Account.class);
-        if(!accounts.isEmpty() && accounts.get(0).isRemembered())
-        {
+        if (!accounts.isEmpty() && accounts.get(0).isRemembered()) {
             loadingFromDb = true;
             loadData();
-        }
-        else
-        {
+        } else {
             getConfigFromWeb();
         }
     }
+
     /*
      * Login performed after user hits loginbutton
      */
-    protected void login(String username, String password, Boolean remember, Button loginButton)
-    {
+    protected void login(String username, String password, Boolean remember, Button loginButton) {
 
         this.loginButton = loginButton;
         app.user = new Account(username, password, remember);
@@ -75,13 +69,10 @@ public class LoginPresenter extends Presenter
         new ThreadTask().execute();
     }
 
-    protected class ThreadTask extends AsyncTask<Void, Void, Void>
-    {
+    protected class ThreadTask extends AsyncTask<Void, Void, Void> {
 
-        protected void onPreExecute()
-        {
-            if(fragment instanceof LoginFragment)
-            {
+        protected void onPreExecute() {
+            if (fragment instanceof LoginFragment) {
                 loginButton.setEnabled(false);
             }
             fragment.getActivity().setProgressBarIndeterminateVisibility(true);
@@ -92,55 +83,45 @@ public class LoginPresenter extends Presenter
 
             try {
                 List<Account> accounts = Account.listAll(Account.class);
-                if(accounts.isEmpty())
-                {
+                if (accounts.isEmpty()) {
                     getPlusData.getAccountInfo();
-                }
-                else
-                {
+                } else {
                     checkDB();
                 }
-                if(loadingFromDb)
-                {
-                    try
-                    {
+                if (loadingFromDb) {
+                    try {
                         getDates();
                         getColor();
                         greeting = getMessage();
-                    }
-                    catch(IOException e){
+                    } catch (IOException e) {
                         Log.e("Blake", "IOError: ", e);
                     }
                 }
             } catch (PasswordException e) {
                 PolyApplication.throwError(R.string.password_error_msg, R.string.password_error_title, e, fragment.getActivity());
-            } catch (LoginException e){
+            } catch (LoginException e) {
                 PolyApplication.throwError(R.string.login_error_msg, R.string.login_error_title, e, fragment.getActivity());
-            } catch (Exception e){
+            } catch (Exception e) {
                 PolyApplication.throwError(R.string.error_msg, R.string.error_title, e, fragment.getActivity());
             }
             return null;
         }
 
-        public void checkDB()
-        {
+        public void checkDB() {
             List<Account> accounts = Account.listAll(Account.class);
-            if(!accounts.isEmpty() && accounts.get(0).isRemembered())
-            {
+            if (!accounts.isEmpty() && accounts.get(0).isRemembered()) {
                 app.user = accounts.get(0);
                 app.user.setAccountTransactions(new ArrayList<AccountTransaction>(AccountTransaction.listAll(AccountTransaction.class)));
                 app.startOfQuarter = new int[3];
 
-                for(int i = 0; i < 3; i++)
-                {
+                for (int i = 0; i < 3; i++) {
 
                     app.startOfQuarter[i] = app.defaultSP.getInt(PolyApplication.START_OF_QUARTER_KEY + i, 0);
                 }
 
                 app.endOfQuarter = new int[3];
 
-                for(int i = 0; i < 3; i++)
-                {
+                for (int i = 0; i < 3; i++) {
 
                     app.endOfQuarter[i] = app.defaultSP.getInt(PolyApplication.END_QUARTER_KEY + i, 0);
                 }
@@ -151,25 +132,18 @@ public class LoginPresenter extends Presenter
 
         @Override
         protected void onPostExecute(Void a) {
-            if(fragment instanceof LoginFragment)
-            {
-                if(loadingFromDb)
-                {
+            if (fragment instanceof LoginFragment) {
+                if (loadingFromDb) {
                     setMessage(greeting);
                 }
                 ((LoginFragment) fragment).returnThread();
-            }
-            else if(fragment instanceof PlusDollarsFragment)
-            {
+            } else if (fragment instanceof PlusDollarsFragment) {
                 ((PlusDollarsFragment) fragment).loadData();
-            }
-            else if(fragment instanceof TransactionFragment)
-            {
+            } else if (fragment instanceof TransactionFragment) {
                 ((TransactionFragment) fragment).refresh();
             }
-            if(app.user.isRemembered())
-            {
-                app.user.save();                
+            if (app.user.isRemembered()) {
+                app.user.save();
             }
             app.defaultSP.edit().putString(PolyApplication.APP_COLOR_KEY, PolyApplication.APP_COLOR).apply();
             app.defaultSP.edit().putString(PolyApplication.ACCENT_COLOR_KEY, PolyApplication.ACCENT_COLOR).apply();
@@ -177,53 +151,43 @@ public class LoginPresenter extends Presenter
         }
     }
 
-    protected void getConfigFromWeb()
-    {
+    protected void getConfigFromWeb() {
         new GetConfigFromWeb().execute();
     }
 
-    protected class GetConfigFromWeb extends AsyncTask<Void, Void, String>
-    {
-        protected void onPreExecute()
-        {
-            if(!loadingFromDb)
-            {
+    protected class GetConfigFromWeb extends AsyncTask<Void, Void, String> {
+        protected void onPreExecute() {
+            if (!loadingFromDb) {
                 loginButton.setEnabled(false);
                 fragment.getActivity().setProgressBarIndeterminateVisibility(true);
             }
         }
 
         @Override
-        protected String doInBackground(Void... voids)
-        {
-            try
-            {
+        protected String doInBackground(Void... voids) {
+            try {
                 getDates();
                 getColor();
                 return getMessage();
-            }
-            catch(IOException e){
+            } catch (IOException e) {
                 Log.e("Blake", "IOError: ", e);
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String s)
-        {
+        protected void onPostExecute(String s) {
             MainActivity activity = ((MainActivity) fragment.getActivity());
             activity.setColor();
             setMessage(s);
-            if(!loadingFromDb)
-            {
+            if (!loadingFromDb) {
                 loginButton.setEnabled(true);
                 fragment.getActivity().setProgressBarIndeterminateVisibility(false);
             }
         }
     }
 
-    private void getDates() throws IOException
-    {
+    private void getDates() throws IOException {
         URL dateUrl = new URL(PolyApplication.DATE_URL);
         URLConnection dateCon = dateUrl.openConnection();
         InputStream is = dateCon.getInputStream();
@@ -231,46 +195,44 @@ public class LoginPresenter extends Presenter
         String start = br.readLine();
         String end = br.readLine();
         String[] temp = end.split("/");
-        if(checkDate(temp)) {
+        if (checkDate(temp)) {
             app.endOfQuarter = new int[3];
             app.endOfQuarter[0] = new Integer(temp[2]);
             app.endOfQuarter[1] = new Integer(temp[0]);
             app.endOfQuarter[2] = new Integer(temp[1]);
 
-            for(int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
 
                 app.defaultSP.edit().putInt(PolyApplication.END_QUARTER_KEY + i, app.endOfQuarter[i]).apply();
             }
         }
         temp = start.split("/");
-        if(checkDate(temp)) {
+        if (checkDate(temp)) {
             app.startOfQuarter = new int[3];
             app.startOfQuarter[0] = new Integer(temp[2]);
             app.startOfQuarter[1] = new Integer(temp[0]);
             app.startOfQuarter[2] = new Integer(temp[1]);
 
-            for(int i = 0; i < 3; i++)
-            {
+            for (int i = 0; i < 3; i++) {
 
                 app.defaultSP.edit().putInt(PolyApplication.START_OF_QUARTER_KEY + i, app.startOfQuarter[i]).apply();
             }
         }
     }
-    private String getMessage() throws IOException
-    {
+
+    private String getMessage() throws IOException {
         URL dateUrl = new URL(PolyApplication.MESSAGE_URL);
         URLConnection dateCon = dateUrl.openConnection();
         InputStream is = dateCon.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;
-        while((line = br.readLine()) != null)
+        while ((line = br.readLine()) != null)
             sb.append(line);
         return sb.toString();
     }
-    private void getColor() throws IOException
-    {
+
+    private void getColor() throws IOException {
         URL dateUrl = new URL(PolyApplication.COLOR_URL);
         URLConnection dateCon = dateUrl.openConnection();
         InputStream is = dateCon.getInputStream();
@@ -278,6 +240,7 @@ public class LoginPresenter extends Presenter
         PolyApplication.APP_COLOR = "#" + br.readLine();
         PolyApplication.ACCENT_COLOR = "#" + br.readLine();
     }
+
     private boolean checkDate(String[] dates) {
         if (dates.length != PolyApplication.DATE_ARRAY_SIZE) {
             return false;
@@ -294,15 +257,12 @@ public class LoginPresenter extends Presenter
         return true;
     }
 
-    private void setMessage(String message)
-    {
+    private void setMessage(String message) {
         MainActivity activity = ((MainActivity) fragment.getActivity());
         activity.setColor();
-        if(message != null)
-        {
+        if (message != null) {
             LoginFragment lf = (LoginFragment) fragment;
-            if(!app.defaultSP.getString(PolyApplication.GREETING_KEY, "").equals(message))
-            {
+            if (!app.defaultSP.getString(PolyApplication.GREETING_KEY, "").equals(message)) {
                 lf.greeting.setMessage(message);
                 lf.greeting.create();
                 Dialog d = lf.greeting.show();

@@ -9,62 +9,64 @@ import java.util.Iterator;
  * This class is used to categorize a set of items within a Venue's menu.
  * For example Sandwich Stop at VG's has a set of items associated with it.
  */
-public class ItemList
-{
-    /**The title of this set of items.*/
+public class ItemList {
+    /**
+     * The title of this set of items.
+     */
     private String title;
 
-    /**The actual set of items.*/
+    /**
+     * The actual set of items.
+     */
     private ArrayList<Item> items;
 
-    /** The default constructor.*/
-    public ItemList()
-    {
+    /**
+     * The default constructor.
+     */
+    public ItemList() {
         items = new ArrayList<Item>();
     }
 
     /**
      * Builds a new ItemSet with a title.
+     *
      * @param title The ItemSet title.
      */
-    public ItemList(String title)
-    {
+    public ItemList(String title) {
         this.title = title;
         items = new ArrayList<Item>();
     }
 
     /**
      * Builds a new ItemSet with another ItemSet.
+     *
      * @param itemList The ItemSet to deep copy.
      */
-    public ItemList(ItemList itemList)
-    {
+    public ItemList(ItemList itemList) {
         this.title = itemList.title;
         items = new ArrayList<Item>();
-        for(Item item : itemList.items)
-        {
+        for (Item item : itemList.items) {
             items.add(new Item(item));
         }
     }
 
     /**
      * Gets the title of this ItemSet.
+     *
      * @return The title of this ItemSet.
      */
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
     /**
      * Gets a deep copy of the ItemSet.
+     *
      * @return A deep copy of the ItemSet.
      */
-    public ArrayList<Item> getItems()
-    {
+    public ArrayList<Item> getItems() {
         ArrayList<Item> deepCopy = new ArrayList<Item>();
-        for(Item item : items)
-        {
+        for (Item item : items) {
             deepCopy.add(new Item(item));
         }
         return deepCopy;
@@ -72,37 +74,34 @@ public class ItemList
 
     /**
      * Gets the number of items on the menu for this ItemSet.
+     *
      * @return The number of items.
      */
-    public int numberOfItems()
-    {
+    public int numberOfItems() {
         return items.size();
     }
 
     /**
      * Add a deep copy of an Item to this ItemSet.
+     *
      * @param item The item to add.
      */
-    public void add(Item item)
-    {
+    public void add(Item item) {
         items.add(new Item(item));
     }
 
     /**
      * Gets the Item at the specified index.
+     *
      * @param index The index of the Item to get.
      * @return The Item at the index.
      */
-    public Item getItem(int index)
-    {
+    public Item getItem(int index) {
         Iterator<Item> itemIter = items.iterator();
-        for(int iter = 0; iter <= index; iter++)
-        {
-            if(itemIter.hasNext())
-            {
+        for (int iter = 0; iter <= index; iter++) {
+            if (itemIter.hasNext()) {
                 Item item = itemIter.next();
-                if (iter == index)
-                {
+                if (iter == index) {
                     return item;
                 }
             }
@@ -110,8 +109,7 @@ public class ItemList
         return null;
     }
 
-    public void sortItems(Comparator<Item> sorter)
-    {
+    public void sortItems(Comparator<Item> sorter) {
         Collections.sort(items, sorter);
     }
 }

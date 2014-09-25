@@ -5,11 +5,10 @@ import com.themotlcode.polydining.models.Item;
 
 import java.util.Comparator;
 
-public class ItemPriceComparator implements Comparator<Item>
-{
+public class ItemPriceComparator implements Comparator<Item> {
     Boolean reverse;
-    public ItemPriceComparator(boolean reverse)
-    {
+
+    public ItemPriceComparator(boolean reverse) {
         this.reverse = reverse;
     }
 

@@ -9,8 +9,7 @@ import java.util.Comparator;
  */
 public class TransactionTypeComparator implements Comparator<AccountTransaction> {
     @Override
-    public int compare(AccountTransaction a, AccountTransaction b)
-    {
+    public int compare(AccountTransaction a, AccountTransaction b) {
         return a.getType().compareTo(b.getType());
     }
 }

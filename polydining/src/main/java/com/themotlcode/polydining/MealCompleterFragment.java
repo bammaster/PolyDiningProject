@@ -10,16 +10,14 @@ import android.widget.BaseAdapter;
 /**
  * Created by jon on 9/12/14.
  */
-public class MealCompleterFragment extends ItemListFragment
-{
+public class MealCompleterFragment extends ItemListFragment {
 
     private MealCompleterPresenter presenter;
     private ItemListAdapter itemListAdapter;
     private View v;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_completer, container, false);
         setupActivity();
 
@@ -34,22 +32,18 @@ public class MealCompleterFragment extends ItemListFragment
         return v;
     }
 
-    private void isCompleterEmpty()
-    {
-        if(itemListAdapter.getCount() <= 0)
-        {
+    private void isCompleterEmpty() {
+        if (itemListAdapter.getCount() <= 0) {
             v.findViewById(R.id.completer).setVisibility(View.GONE);
             v.findViewById(R.id.emptyCompleter).setVisibility(View.VISIBLE);
         }
     }
 
-    private void setupActivity()
-    {
+    private void setupActivity() {
         ((MainActivity) getActivity()).viewDrawer(false);
     }
 
-    public void updateList()
-    {
+    public void updateList() {
 
         ((ItemListAdapter) getListAdapter()).setItems(presenter.items.getItems());
         ((BaseAdapter) getListAdapter()).notifyDataSetChanged();

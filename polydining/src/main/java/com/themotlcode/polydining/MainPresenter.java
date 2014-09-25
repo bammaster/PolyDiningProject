@@ -16,13 +16,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class MainPresenter extends Presenter
-{
+public class MainPresenter extends Presenter {
     private MainActivity activity;
     private PolyApplication app;
 
-    public MainPresenter(Activity a)
-    {
+    public MainPresenter(Activity a) {
         this.activity = (MainActivity) a;
         app = (PolyApplication) activity.getApplication();
     }
