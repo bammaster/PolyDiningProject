@@ -99,8 +99,19 @@ public class AccountTransaction extends SugarRecord<AccountTransaction> {
      *
      * @return
      */
-    public String getAmount() {
+    public String getAmount()
+    {
         return amount;
+    }
+    public String getAmountTextView() {
+        if(amount.charAt(0) == '-')
+        {
+            return amount;
+        }
+        else
+        {
+            return " " + amount;
+        }
     }
 
     /**

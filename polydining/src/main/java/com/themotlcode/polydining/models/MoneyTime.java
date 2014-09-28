@@ -27,7 +27,6 @@ public class MoneyTime {
         PolyApplication app = ((PolyApplication) MainActivity.mActivity.getApplication());
 
         if (!plus) {
-
             if (manualTime == 4 && app.user.getMeals() > 0) {
                 today.setToNow();
                 int minutes = (today.hour * 60) + today.minute;
@@ -41,7 +40,7 @@ public class MoneyTime {
                     money = mealWorth[3];
                 }
                 return money.subtract(moneySpent).setScale(2);
-            } else if (app.user.getMeals() > 0) {
+            } else if (manualTime != 4) {
                 return mealWorth[manualTime].subtract(moneySpent).setScale(2);
             } else {
                 return new BigDecimal(0.00).subtract(moneySpent).setScale(2);
@@ -64,6 +63,11 @@ public class MoneyTime {
             realTime = 3;
         }
         return realTime;
+    }
+
+    public static boolean isOverriden()
+    {
+        return manualTime != 4;
     }
 
     public static void setMoneySpent(BigDecimal newMoneySpent) {
