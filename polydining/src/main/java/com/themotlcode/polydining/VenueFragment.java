@@ -31,14 +31,17 @@ public class VenueFragment extends Fragment {
 
         //presenter.loadFromCache(savedInstanceState);
         init(v);
+        System.out.println("VenueFragment: onCreate");
         return v;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        updateSettings();
         presenter.updateBalance();
         getActivity().invalidateOptionsMenu();
+        System.out.println("VenueFragment: onResume");
     }
 
     @Override
@@ -100,9 +103,6 @@ public class VenueFragment extends Fragment {
         tabs.setSaveEnabled(false);
 
         getActivity().getActionBar().setTitle(app.activityTitle);
-
-        presenter.updateBalance();
-        updateSettings();
     }
 
     public void updateSettings() {

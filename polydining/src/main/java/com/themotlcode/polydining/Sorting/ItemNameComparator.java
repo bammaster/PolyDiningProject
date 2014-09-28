@@ -14,7 +14,7 @@ public class ItemNameComparator implements Comparator<Item> {
 
     @Override
     public int compare(Item a, Item b) {
-        return reverse ? a.getName().compareTo(b.getName()) : a.getName().compareTo(b.getName());
+        return reverse ? b.getName().compareTo(a.getName()) : a.getName().compareTo(b.getName());
     }
 
 }

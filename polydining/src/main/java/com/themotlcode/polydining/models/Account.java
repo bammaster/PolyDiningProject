@@ -4,6 +4,7 @@ import com.orm.SugarRecord;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Stores and handles all information associated with the users
@@ -234,6 +235,7 @@ public class Account extends SugarRecord<Account> {
         for (AccountTransaction t : newAccountTransactions) {
             accountTransactions.add(new AccountTransaction(t));
         }
+        Collections.reverse(accountTransactions);
     }
 
     /**

@@ -55,7 +55,7 @@ public class TransactionAdapter extends BaseAdapter {
         tvDate.setText(trans.get(position).getDate());
 
         TextView tvAmount = (TextView) convertView.findViewById(R.id.tv_amount);
-        tvAmount.setText(trans.get(position).getAmount());
+        tvAmount.setText(trans.get(position).getAmountTextView());
 
         return convertView;
     }
