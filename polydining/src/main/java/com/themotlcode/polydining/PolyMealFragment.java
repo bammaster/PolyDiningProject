@@ -17,6 +17,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,14 +81,15 @@ public class PolyMealFragment extends Fragment {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                loading = true;
+                /*loading = true;
                 getActivity().invalidateOptionsMenu();
                 ActionBar actionBar = getActivity().getActionBar();
 
                 actionBar.setDisplayShowTitleEnabled(true);
                 actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 actionBar.setTitle(R.string.app_name);
-                presenter.refresh();
+                presenter.refresh();*/
+                Toast.makeText(mActivity, "Feature Currently Disabled Due To Crashing.", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.dice:
                 final String venueName = presenter.pickVenue();
@@ -150,7 +156,12 @@ public class PolyMealFragment extends Fragment {
 
         this.setHasOptionsMenu(true);
 
+        /*DateTime refDate = new Gson().fromJson(app.defaultSP.getString(app.REFRESH_DATE_KEY, new Gson().toJson(DateTime.now())), app.gsonTypeDate);
+        DateTime today = DateTime.now();
+        if(today.getDayOfWeek() < DateTimeConstants.SATURDAY && refDate.getWeekOfWeekyear() < today.getWeekOfWeekyear())
+        {
 
+        }*/
     }
 
     private void setupList() {

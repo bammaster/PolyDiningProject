@@ -17,6 +17,8 @@ import com.themotlcode.polydining.models.Cart;
 import com.themotlcode.polydining.models.Venue;
 import com.themotlcode.polydining.models.VenuesString;
 
+import org.joda.time.DateTime;
+
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import java.util.TreeMap;
 public class PolyApplication extends SugarApp {
     public static final NumberFormat currency = NumberFormat.getCurrencyInstance();
     public static final Type gsonType = new TypeToken<TreeMap<String, Venue>>() {
+    }.getType();
+    public static final Type gsonTypeDate = new TypeToken<DateTime>() {
     }.getType();
     public static final String DEFAULT_PRICE = "0.00";
     public static final String URL = "http://107.170.238.171/java/venues.json";
@@ -36,6 +40,7 @@ public class PolyApplication extends SugarApp {
     public static final String END_QUARTER_KEY = "endOfQuarter_";
     public static final String APP_COLOR_KEY = "APP_COLOR";
     public static final String ACCENT_COLOR_KEY = "ACCENT_COLOR";
+    public static final String REFRESH_DATE_KEY = "REFRESH_DATE";
 
     //Conversion for hours to minutes
     public static final int HOURS_TO_MINUTES = 60;

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class LoginPresenter extends Presenter {
         List<Account> accounts = Account.listAll(Account.class);
         if (!accounts.isEmpty() && accounts.get(0).isRemembered()) {
             loadingFromDb = true;
-            loadData();
+            loadData(null);
         } else {
             getConfigFromWeb();
         }
@@ -59,18 +60,24 @@ public class LoginPresenter extends Presenter {
 
         this.loginButton = loginButton;
         app.user = new Account(username, password, remember);
-        loadData();
+        loadData(null);
     }
 
     /*
      * Loads Account data; will perform getConfigFromWeb if loading from database
      */
-    protected void loadData() {
-        new ThreadTask().execute();
+    protected void loadData(MenuItem item) {
+        new ThreadTask(item).execute();
     }
 
     protected class ThreadTask extends AsyncTask<Void, Void, Void> {
 
+        MenuItem item;
+        public ThreadTask(){}
+        public ThreadTask(MenuItem item)
+        {
+            this.item = item;
+        }
         protected void onPreExecute() {
             if (fragment instanceof LoginFragment) {
                 loginButton.setEnabled(false);
@@ -98,10 +105,13 @@ public class LoginPresenter extends Presenter {
                     }
                 }
             } catch (PasswordException e) {
+                app.user = new Account();
                 PolyApplication.throwError(R.string.password_error_msg, R.string.password_error_title, e, fragment.getActivity());
             } catch (LoginException e) {
+                app.user = new Account();
                 PolyApplication.throwError(R.string.login_error_msg, R.string.login_error_title, e, fragment.getActivity());
             } catch (Exception e) {
+                app.user = new Account();
                 PolyApplication.throwError(R.string.error_msg, R.string.error_title, e, fragment.getActivity());
             }
             return null;
@@ -148,6 +158,10 @@ public class LoginPresenter extends Presenter {
             app.defaultSP.edit().putString(PolyApplication.APP_COLOR_KEY, PolyApplication.APP_COLOR).apply();
             app.defaultSP.edit().putString(PolyApplication.ACCENT_COLOR_KEY, PolyApplication.ACCENT_COLOR).apply();
             fragment.getActivity().setProgressBarIndeterminateVisibility(false);
+            if(item != null)
+            {
+                item.setEnabled(true);
+            }
         }
     }
 

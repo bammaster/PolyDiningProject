@@ -108,7 +108,7 @@ public class MainActivity extends FragmentActivity implements FragmentManager.On
         return false;
     }
 
-    protected void logout(View v) {
+    public void logout(View v) {
         ((PolyApplication) getApplication()).user = null;
 
         Account.deleteAll(Account.class);

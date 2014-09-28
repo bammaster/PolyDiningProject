@@ -82,7 +82,7 @@ public class VenuePresenter extends MealPresenter {
 
         @Override
         public Fragment getItem(int i) {
-            return new VenueListFragment(i, new VenueListPresenter(fragment, itemLists.get(i)), app);
+            return new VenueListFragment().init(i, new VenueListPresenter(fragment, itemLists.get(i)), app);
         }
 
         @Override

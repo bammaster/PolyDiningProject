@@ -13,10 +13,13 @@ public class VenueListFragment extends ItemListFragment {
     private VenueListPresenter presenter;
 
     public VenueListFragment(){}
-    public VenueListFragment(int position, VenueListPresenter presenter, PolyApplication app) {
+
+    public VenueListFragment init(int position, VenueListPresenter presenter, PolyApplication app)
+    {
         this.position = position;
         this.presenter = presenter;
         setPresenter(presenter.fragment, presenter, app);
+        return this;
     }
 
     @Override

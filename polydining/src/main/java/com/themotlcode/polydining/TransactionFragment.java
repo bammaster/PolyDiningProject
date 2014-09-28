@@ -57,7 +57,8 @@ public class TransactionFragment extends Fragment {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                presenter.refresh();
+                item.setEnabled(false);
+                presenter.refresh(item);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -66,8 +66,8 @@ public class PlusDollarsFragment extends Fragment {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-
-                presenter.refresh();
+                item.setEnabled(false);
+                presenter.refresh(item);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -150,20 +150,22 @@ public class PlusDollarsFragment extends Fragment {
     }
 
     private void login() {
-        String plusDollars = app.user.getPlusDollars().toString();
-        name.setText(app.user.getName());
-        plus.setText(app.user.plusAsMoney());
-        express.setText(app.user.expressAsMoney());
-        meal.setText(app.user.getMeals() + "");
-        try{
-            budget1.setText("$" + new BigDecimal(plusDollars).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
-        }catch(ArithmeticException e) {
-            budget1.setText(app.user.plusAsMoney()+"/day");
-        }
-        try{
-            budget2.setText("$" + new BigDecimal(plusDollars).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
-        }catch(ArithmeticException e){
-            budget2.setText(app.user.plusAsMoney() + "/week");
+        if(app.user != null) {
+            String plusDollars = app.user.getPlusDollars().toString();
+            name.setText(app.user.getName());
+            plus.setText(app.user.plusAsMoney());
+            express.setText(app.user.expressAsMoney());
+            meal.setText(app.user.getMeals() + "");
+            try {
+                budget1.setText("$" + new BigDecimal(plusDollars).divide(new BigDecimal(d.getDays()), 2, BigDecimal.ROUND_HALF_DOWN) + "/day");
+            } catch (ArithmeticException e) {
+                budget1.setText(app.user.plusAsMoney() + "/day");
+            }
+            try {
+                budget2.setText("$" + new BigDecimal(plusDollars).divide(new BigDecimal(w.getWeeks()), 2, BigDecimal.ROUND_HALF_DOWN) + "/week");
+            } catch (ArithmeticException e) {
+                budget2.setText(app.user.plusAsMoney() + "/week");
+            }
         }
     }
 

@@ -23,6 +23,8 @@ import com.themotlcode.polydining.models.MoneyTime;
 import com.themotlcode.polydining.models.Venue;
 import com.themotlcode.polydining.models.VenuesString;
 
+import org.joda.time.DateTime;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,6 @@ public class PolyMealPresenter extends Presenter {
     }
 
     protected class GetDataThread extends AsyncTask<Void, Void, Boolean> {
-
         @Override
         protected void onPreExecute() {
             fragment.loading = true;
@@ -73,7 +74,7 @@ public class PolyMealPresenter extends Presenter {
 
         protected Boolean doInBackground(Void... args) {
             checkDB();
-
+            app.defaultSP.edit().putString(app.REFRESH_DATE_KEY, new Gson().toJson(DateTime.now())).apply();
             if (app.venuesString == null) {
                 app.venuesString = new VenuesString();
                 app.venues = new TreeMap<String, Venue>(new VenueNameComparator());

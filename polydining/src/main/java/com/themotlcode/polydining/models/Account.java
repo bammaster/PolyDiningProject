@@ -14,6 +14,10 @@ public class Account extends SugarRecord<Account> {
      * The default value for Campus Express and Plus Dollars if no value is found.
      */
     private static final String DEFAULT_MONEY = "$0.00";
+    /**
+     * The default value for Campus Express and Plus Dollars if no value is found that's parseable.
+     */
+    private static final String DEFAULT_MONEY_STRING= "0.00";
 
     /**
      * The username of the user for logging in to My Cal Poly.
@@ -73,7 +77,10 @@ public class Account extends SugarRecord<Account> {
      * The default constructor.
      */
     public Account() {
-
+        this.plusDollars = DEFAULT_MONEY_STRING;
+        this.campusExpress = DEFAULT_MONEY_STRING;
+        this.name = "John Doe";
+        accountTransactions = new ArrayList<AccountTransaction>();
     }
 
     /**
@@ -199,7 +206,7 @@ public class Account extends SugarRecord<Account> {
      * @return The accounts Plus Dollars.
      */
     public BigDecimal getPlusDollars() {
-        return new BigDecimal(plusDollars.toString());
+        return new BigDecimal(plusDollars);
     }
 
     /**
