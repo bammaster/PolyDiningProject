@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Poly Dining Demo</string>
+    <string name="app_name">Poly Dining</string>
     <string name="error_conn_title">Error Connecting to Server</string>
     <string name="error_conn_msg">Please ensure you are connected to the internet and try again. If this error persists, send to developer.</string>
     <string name="error_title">An Unknown Error Occurred!</string>

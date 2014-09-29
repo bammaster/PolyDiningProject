@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="?android:attr/listPreferredItemHeight">
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight">
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/bg_card">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bg_card">
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tv_name" android:layout_alignParentLeft="true" android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/tv_price"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/tv_name"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/tv_price" />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tv_price" android:layout_centerInParent="true" android:layout_toLeftOf="@+id/divider"
-                android:layout_marginRight="9dp"/>
-        <ImageView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:src="@android:drawable/divider_horizontal_dark"
-                android:layout_width="1dp"
-                android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingBottom="2dp"
-                android:paddingTop="2dp"
-                android:id="@+id/divider" android:layout_toLeftOf="@+id/btn_add"
-                android:background="#e2e2e2"
-                android:layout_weight="1"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/tv_price"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/divider"
+            android:layout_marginRight="9dp" />
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:src="@android:drawable/divider_horizontal_dark"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:id="@+id/divider"
+            android:layout_toLeftOf="@+id/btn_add"
+            android:background="#e2e2e2"
+            android:layout_weight="1" />
+
         <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_add" android:layout_alignParentRight="true"
-                android:layout_centerInParent="true" android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_action_new"
-                android:background="@null"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_action_new"
+            android:background="@null" />
     </RelativeLayout>
 
 </FrameLayout>

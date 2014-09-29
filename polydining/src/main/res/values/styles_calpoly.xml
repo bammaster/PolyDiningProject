@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- File created by the Android Action Bar Style Generator
+<?xml version="1.0" encoding="utf-8"?><!-- File created by the Android Action Bar Style Generator
 
      Copyright (C) 2011 The Android Open Source Project
      Copyright (C) 2012 readyState Software Ltd
@@ -29,7 +28,8 @@
         <item name="android:actionBarStyle">@style/ActionBar.Solid.Calpoly</item>
         <item name="android:actionBarWidgetTheme">@style/ActionbarWidgetCalpoly</item>
         <item name="android:actionModeBackground">@drawable/cab_background_top_calpoly</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_calpoly</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_calpoly
+        </item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Calpoly</item>
 
         <!-- Android Holo Colors -->
@@ -39,15 +39,20 @@
         <item name="android:textSelectHandleRight">@drawable/calpoly_text_select_handle_right</item>
         <item name="android:textSelectHandle">@drawable/calpoly_text_select_handle_middle</item>
         <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewCalpoly</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/calpoly_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/calpoly_btn_check_holo_light
+        </item>
         <item name="android:listChoiceIndicatorSingle">@drawable/calpoly_btn_radio_holo_light</item>
         <item name="android:buttonStyle">@style/ButtonCalpoly</item>
         <item name="android:imageButtonStyle">@style/ImageButtonCalpoly</item>
         <item name="android:dropDownSpinnerStyle">@style/SpinnerCalpoly</item>
         <item name="android:progressBarStyleHorizontal">@style/ProgressBarCalpoly</item>
         <item name="android:buttonStyleToggle">@style/ToggleCalpoly</item>
-        <item name="android:listChoiceBackgroundIndicator">@drawable/calpoly_list_selector_holo_light</item>
-        <item name="android:activatedBackgroundIndicator">@drawable/calpoly_activated_background_holo_light</item>
+        <item name="android:listChoiceBackgroundIndicator">
+            @drawable/calpoly_list_selector_holo_light
+        </item>
+        <item name="android:activatedBackgroundIndicator">
+            @drawable/calpoly_activated_background_holo_light
+        </item>
         <item name="android:fastScrollThumbDrawable">@drawable/calpoly_fastscroll_thumb_holo</item>
 
         <!-- Stackoverflow -->
@@ -105,8 +110,11 @@
     </style>
 
     <style name="ProgressBarCalpoly" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/calpoly_progress_horizontal_holo_light</item>
-        <item name="android:indeterminateDrawable">@drawable/calpoly_progress_indeterminate_horizontal_holo_light</item>
+        <item name="android:progressDrawable">@drawable/calpoly_progress_horizontal_holo_light
+        </item>
+        <item name="android:indeterminateDrawable">
+            @drawable/calpoly_progress_indeterminate_horizontal_holo_light
+        </item>
     </style>
 
     <style name="ToggleCalpoly" parent="android:Widget.Holo.Light.Button.Toggle">
@@ -128,7 +136,7 @@
     </style>
 
     <style name="PopupMenu.Calpoly" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_calpoly</item>	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_calpoly</item>
     </style>
 
     <style name="DropDownListView.Calpoly" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -144,11 +152,11 @@
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_calpoly</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_calpoly</item>
     </style>
-    
+
     <style name="ProgressBar.Calpoly" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_calpoly</item>
     </style>
-    
+
     <style name="ActionButton.CloseMode.Calpoly" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_calpoly</item>
     </style>

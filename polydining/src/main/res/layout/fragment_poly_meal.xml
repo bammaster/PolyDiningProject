@@ -1,22 +1,26 @@
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity" android:padding="8dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="8dp">
 
-        <TextView
-                android:id="@+id/tvEditWorkout"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/welcome"
-                android:textSize="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
-        <ListView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/listView" android:layout_below="@+id/tvEditWorkout" android:layout_centerHorizontal="true"
-                android:smoothScrollbar="true" />
+    <TextView
+        android:id="@+id/tvEditWorkout"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
-    </RelativeLayout>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/listView"
+        android:layout_below="@+id/tvEditWorkout"
+        android:layout_centerHorizontal="true"
+        android:smoothScrollbar="true" />
+
+</RelativeLayout>

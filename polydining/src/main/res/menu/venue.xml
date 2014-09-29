@@ -6,19 +6,28 @@
         <item android:id="@+id/pd_choice" android:title="Plus Dollars"  android:showAsAction="never"/>
     </group>
     -->
-    <item android:id="@+id/sort"
-          android:icon="@drawable/ic_action_sort_by_size"
-          android:showAsAction="always">
+    <item
+        android:id="@+id/sort"
+        android:icon="@drawable/ic_action_sort_by_size"
+        android:showAsAction="always">
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/mc_choice" android:title="Meal Credit"  android:showAsAction="never" android:checked="true"/>
-                <item android:id="@+id/pd_choice" android:title="Plus Dollars"  android:showAsAction="never"/>
+                <item
+                    android:id="@+id/mc_choice"
+                    android:title="Meal Credit"
+                    android:showAsAction="never"
+                    android:checked="true" />
+                <item
+                    android:id="@+id/pd_choice"
+                    android:title="Plus Dollars"
+                    android:showAsAction="never" />
             </group>
         </menu>
 
-          </item>
+    </item>
 
-    <item android:id="@+id/cart"
-          android:icon="@drawable/ic_cart"
-          android:showAsAction="always"/>
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_cart"
+        android:showAsAction="always" />
 </menu>
